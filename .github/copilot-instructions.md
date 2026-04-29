@@ -1,0 +1,82 @@
+# Copilot Instructions for pix-galaxy
+
+## Project overview
+
+pix-galaxy is a zero-runtime-dependency vanilla JavaScript Web Components monorepo managed with pnpm workspaces.
+
+## Core rules
+
+- Use **pnpm** only. Do not use npm, yarn, bun, lerna, nx, turbo, or rush.
+- Do **not** introduce runtime dependencies unless explicitly requested and well-documented.
+- Do **not** introduce frameworks (React, Vue, Svelte, Lit, Stencil, Angular, etc.).
+- Do **not** convert JavaScript source files to TypeScript.
+- Keep source files **readable and unbundled** — source lives in `src/`, build output in `dist/`.
+- Use `// @ts-check` at the top of every JavaScript source file.
+- Use **JSDoc** for all public classes, methods, events, attributes, typedefs, and options.
+- Use **TypeScript only** for type checking (`--noEmit`) and `.d.ts` declaration generation via `emitDeclarationOnly`.
+- Use **`node:test`** for tests. Do not use Jest, Vitest, Mocha, Chai, or Testing Library.
+- Use **esbuild** only through `scripts/build-package.mjs`. Do not use Rollup, Vite, Webpack, Babel, or PostCSS.
+- CSS must be **native CSS** only. Use `@layer`, custom properties, nesting where useful, and component-local selectors.
+- Avoid global CSS leakage. Use Shadow DOM and `:host` selectors.
+- Documentation is static HTML pages. Package docs live in `packages/<name>/docs/`.
+- Docs are aggregated into `site/<package-folder-name>/` via `scripts/build-docs.mjs`.
+
+## File authoring conventions
+
+Every JS source file must start with `// @ts-check`.
+
+Example JSDoc style:
+```js
+// @ts-check
+
+/**
+ * @typedef {"primary" | "secondary"} Variant
+ */
+
+/**
+ * Normalize a variant value.
+ * @param {string | null | undefined} value
+ * @returns {Variant}
+ */
+export function normalizeVariant(value) { ... }
+```
+
+## Component structure
+
+Each component package must:
+- live in `packages/<component-name>/`
+- have `src/`, `test/`, `docs/`, `package.json`, `tsconfig.types.json`, `README.md`
+- expose only ESM
+- have zero runtime dependencies
+- have scripts: `build`, `test`, `typecheck`, `validate`, `docs:build`
+- document all attributes, events, CSS custom properties, parts, and slots
+
+## Accessibility requirements
+
+Every component must:
+- use semantic HTML inside Shadow DOM
+- preserve keyboard interactions
+- use native `<button>` for buttons, native `<a>` for links
+- not hide focus outlines without an accessible replacement
+- support forced colors (`@media (forced-colors: active)`)
+- support reduced motion (`@media (prefers-reduced-motion: reduce)`)
+
+## Creating a new package
+
+```sh
+pnpm package:create pix-badge
+```
+
+## Building
+
+```sh
+pnpm build                              # build all packages
+pnpm --filter @pix-galaxy/pix-button build  # build one package
+```
+
+## Testing
+
+```sh
+pnpm test                               # test all packages
+pnpm --filter @pix-galaxy/pix-button test  # test one package
+```
