@@ -7,3 +7,6 @@ coverage/
 *.tsbuildinfo
 .pnpm-store
 .npm
+
+*lock*.*
+.tokensave
