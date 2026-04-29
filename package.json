@@ -1,0 +1,23 @@
+{
+  "name": "pix-galaxy",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Monorepo for the PixGalaxy ecosystem of zero-runtime-dependency vanilla JS Web Components",
+  "type": "module",
+  "packageManager": "pnpm@9.15.4",
+  "scripts": {
+    "clean": "node scripts/clean.mjs",
+    "build": "pnpm -r --if-present run build",
+    "test": "pnpm -r --if-present run test",
+    "typecheck": "pnpm -r --if-present run typecheck",
+    "validate": "pnpm -r --if-present run validate",
+    "docs:build": "node scripts/build-docs.mjs",
+    "package:list": "node scripts/list-packages.mjs",
+    "package:create": "node scripts/create-package.mjs",
+    "release": "pnpm -r publish --access public"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.3",
+    "typescript": "^5.8.3"
+  }
+}
