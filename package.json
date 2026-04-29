@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "description": "Monorepo for the PixGalaxy ecosystem of zero-runtime-dependency vanilla JS Web Components",
   "type": "module",
-  "packageManager": "pnpm@9.15.4",
+  "packageManager": "pnpm@10.33.2",
   "scripts": {
     "clean": "node scripts/clean.mjs",
     "build": "pnpm -r --if-present run build",
@@ -17,7 +17,7 @@
     "release": "pnpm -r publish --access public"
   },
   "devDependencies": {
-    "esbuild": "^0.25.3",
-    "typescript": "^5.8.3"
+    "esbuild": "0.28.0",
+    "typescript": "6.0.3"
   }
 }
