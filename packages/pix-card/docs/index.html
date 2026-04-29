@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@pix-galaxy/pix-card docs</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <script type="module" src="./dist/index.js"></script>
+  </head>
+  <body>
+    <main>
+      <h1>&lt;pix-card&gt;</h1>
+      <p>Accessible card Web Component. Zero runtime dependencies.</p>
+
+      <h2>Installation</h2>
+      <pre><code>pnpm add @pix-galaxy/pix-card</code></pre>
+
+      <h2>Usage</h2>
+      <pre><code>import "@pix-galaxy/pix-card";
+import "@pix-galaxy/pix-card/css";</code></pre>
+
+      <pre><code>&lt;pix-card&gt;Card content&lt;/pix-card&gt;</code></pre>
+
+      <h2>Examples</h2>
+      <div class="demo" style="flex-direction: column; align-items: stretch; gap: 1rem;">
+        <pix-card>
+          <span slot="header">Default Card Header</span>
+          Default card body content
+          <span slot="footer">Footer</span>
+        </pix-card>
+
+        <pix-card variant="outlined">
+          <span slot="header">Outlined Card</span>
+          Outlined card body
+        </pix-card>
+
+        <pix-card variant="elevated">
+          <span slot="header">Elevated Card</span>
+          Elevated card body
+        </pix-card>
+
+        <pix-card href="#example-link">
+          <span slot="header">Link Card</span>
+          This card is a link — try keyboard navigation
+        </pix-card>
+      </div>
+
+      <h2>Keyboard Interaction</h2>
+      <p>When <code>href</code> is set, the card renders as an <code>&lt;a&gt;</code> element and supports standard link keyboard navigation (<kbd>Enter</kbd> to activate, <kbd>Tab</kbd> to focus).</p>
+
+      <h2>Attributes</h2>
+      <table>
+        <thead><tr><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td>variant</td><td>"default" | "outlined" | "elevated"</td><td>"default"</td><td>Visual variant</td></tr>
+          <tr><td>href</td><td>string</td><td>—</td><td>When set, card renders as a link</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Slots</h2>
+      <table>
+        <thead><tr><th>Slot</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td>(default)</td><td>Card body content</td></tr>
+          <tr><td>header</td><td>Card header content</td></tr>
+          <tr><td>footer</td><td>Card footer content</td></tr>
+        </tbody>
+      </table>
+
+      <h2>CSS Custom Properties</h2>
+      <table>
+        <thead><tr><th>Property</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td>--pix-card-background</td><td>Card background color</td></tr>
+          <tr><td>--pix-card-color</td><td>Card text color</td></tr>
+          <tr><td>--pix-card-border-color</td><td>Card border color</td></tr>
+          <tr><td>--pix-card-radius</td><td>Card border radius</td></tr>
+          <tr><td>--pix-card-shadow</td><td>Card box shadow</td></tr>
+          <tr><td>--pix-card-padding</td><td>Card padding</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Parts</h2>
+      <table>
+        <thead><tr><th>Part</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td>card</td><td>The outer card element</td></tr>
+          <tr><td>header</td><td>The header container</td></tr>
+          <tr><td>body</td><td>The body container</td></tr>
+          <tr><td>footer</td><td>The footer container</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Accessibility</h2>
+      <ul>
+        <li>When <code>href</code> is set, the card uses a native <code>&lt;a&gt;</code> element</li>
+        <li>Focus outline preserved via <code>:focus-visible</code></li>
+        <li>Supports forced colors (high contrast)</li>
+        <li>Semantic slot structure for header, body, and footer</li>
+      </ul>
+    </main>
+  </body>
+</html>
