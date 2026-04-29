@@ -1,0 +1,58 @@
+@layer component {
+  :host {
+    --pix-button-background: CanvasText;
+    --pix-button-color: Canvas;
+    --pix-button-border-color: CanvasText;
+    --pix-button-radius: 0.5rem;
+    --pix-button-padding-block: 0.625rem;
+    --pix-button-padding-inline: 1rem;
+
+    display: inline-block;
+  }
+
+  button {
+    border: 1px solid var(--pix-button-border-color);
+    border-radius: var(--pix-button-radius);
+    padding: var(--pix-button-padding-block) var(--pix-button-padding-inline);
+    background: var(--pix-button-background);
+    color: var(--pix-button-color);
+    font: inherit;
+    cursor: pointer;
+  }
+
+  button:focus-visible {
+    outline: 2px solid var(--pix-button-border-color);
+    outline-offset: 2px;
+  }
+
+  :host([variant="secondary"]) button {
+    background: transparent;
+    color: CanvasText;
+    border-color: CanvasText;
+  }
+
+  :host([variant="ghost"]) button {
+    background: transparent;
+    color: CanvasText;
+    border-color: transparent;
+  }
+
+  :host([disabled]) button,
+  :host([disabled]) button:hover {
+    opacity: 0.55;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  @media (forced-colors: active) {
+    button {
+      border: 2px solid ButtonText;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    button {
+      transition: none;
+    }
+  }
+}
