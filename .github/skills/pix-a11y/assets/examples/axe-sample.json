@@ -1,0 +1,31 @@
+{
+  "testEngine": {
+    "name": "axe-core",
+    "version": "4.10.0"
+  },
+  "testEnvironment": {
+    "userAgent": "sample",
+    "windowWidth": 1440,
+    "windowHeight": 900
+  },
+  "timestamp": "2026-04-30T00:00:00.000Z",
+  "url": "http://localhost:4173",
+  "violations": [
+    {
+      "id": "color-contrast",
+      "impact": "serious",
+      "description": "Ensures the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+      "help": "Elements must meet minimum color contrast ratio thresholds",
+      "helpUrl": "https://dequeuniversity.com/rules/axe/4.10/color-contrast",
+      "nodes": [
+        {
+          "target": [
+            "button.primary"
+          ],
+          "html": "<button class=\"primary\">Submit</button>",
+          "failureSummary": "Fix foreground/background colors to pass AA contrast ratio."
+        }
+      ]
+    }
+  ]
+}
