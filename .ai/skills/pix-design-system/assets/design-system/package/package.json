@@ -1,0 +1,22 @@
+{
+  "name": "__PACKAGE_NAME__",
+  "private": false,
+  "version": "0.1.0",
+  "description": "Reusable native CSS design system for __BRAND_NAME__.",
+  "type": "module",
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "exports": {
+    ".": "./src/index.css",
+    "./css": "./src/index.css"
+  },
+  "files": [
+    "src",
+    "docs",
+    "README.md"
+  ],
+  "scripts": {
+    "test": "node --test test/*.test.mjs"
+  }
+}
