@@ -15,21 +15,32 @@ Layer responsibilities:
 - `components`: component aliases and low-level UI defaults.
 - `helpers`: one-purpose utility helpers.
 
+The `foundations` layer uses sub-layers declared in `foundations/index.css`:
+
+```css
+@import "./_colors.css" layer(colors);
+@import "./_typography.css" layer(typography);
+@import "./_spacings.css" layer(spacings);
+@import "./_radii.css" layer(radii);
+@import "./_elevations.css" layer(elevations);
+```
+
 ## File Layout
 
 App mode installs:
 
 ```text
 src/styles/index.css
-src/styles/reset.css
-src/styles/foundations/colors.css
-src/styles/foundations/typography.css
-src/styles/foundations/spacing.css
-src/styles/foundations/radii.css
-src/styles/foundations/elevations.css
-src/styles/layout.css
-src/styles/components.css
-src/styles/helpers.css
+src/styles/_reset.css
+src/styles/foundations/index.css
+src/styles/foundations/_colors.css
+src/styles/foundations/_typography.css
+src/styles/foundations/_spacings.css
+src/styles/foundations/_radii.css
+src/styles/foundations/_elevations.css
+src/styles/_layout.css
+src/styles/_components.css
+src/styles/_helpers.css
 docs/design-system.md
 ```
 
