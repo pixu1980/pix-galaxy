@@ -130,6 +130,13 @@ describe('TemplateEngine - Core Functionality', () => {
     const renderMessage = engine.html`<p>{{ message }}</p>`;
 
     assert.strictEqual(renderMessage({ message: 'Alias works' }), '<p>Alias works</p>');
+
+    const renderFooter = engine.html`<main>{{ title }}</main>${(data) => `<footer>${data.year}</footer>`}`;
+
+    assert.strictEqual(
+      renderFooter({ title: 'Dynamic fragment', year: 2026 }),
+      '<main>Dynamic fragment</main><footer>2026</footer>'
+    );
   });
 
   test('should handle template rendering errors', () => {

@@ -1,6 +1,6 @@
 // @ts-check
 
-import { cp, mkdir, readFile, writeFile } from 'node:fs/promises';
+import { cp, mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -38,6 +38,42 @@ const fileExists = async (filePath) => {
 };
 
 /**
+ * @param {string} fromFile
+ * @param {string} toFile
+ * @returns {string}
+ */
+const toImportSpecifier = (fromFile, toFile) => {
+  let specifier = path.relative(path.dirname(fromFile), toFile).split(path.sep).join('/');
+  if (!specifier.startsWith('.')) specifier = `./${specifier}`;
+  return specifier;
+};
+
+/**
+ * @param {string} examplesDir
+ * @param {string} engineDir
+ * @returns {Promise<void>}
+ */
+const updateExampleImports = async (examplesDir, engineDir) => {
+  const entries = await readdir(examplesDir, { withFileTypes: true });
+
+  for (const entry of entries) {
+    const entryPath = path.join(examplesDir, entry.name);
+
+    if (entry.isDirectory()) {
+      await updateExampleImports(entryPath, engineDir);
+      continue;
+    }
+
+    if (!entry.isFile() || !entry.name.endsWith('.mjs')) continue;
+
+    const engineImport = toImportSpecifier(entryPath, path.join(engineDir, 'index.js'));
+    const content = await readFile(entryPath, 'utf8');
+    const updated = content.replaceAll('../../template-engine/index.js', engineImport);
+    await writeFile(entryPath, updated, 'utf8');
+  }
+};
+
+/**
  * @returns {Promise<void>}
  */
 const main = async () => {
@@ -58,6 +94,7 @@ const main = async () => {
   if (withExamples) {
     await mkdir(targetExamplesDir, { recursive: true });
     await cp(sourceExamplesDir, targetExamplesDir, { recursive: true, force: true });
+    await updateExampleImports(targetExamplesDir, targetEngineDir);
   }
 
   const packageJsonPath = path.resolve(target, 'package.json');
@@ -70,6 +107,7 @@ const main = async () => {
 
     packageJson.devDependencies ??= {};
     packageJson.devDependencies.jsdom ??= '^26.1.0';
+    packageJson.devDependencies.marked ??= '^17.0.5';
 
     await writeFile(packageJsonPath, `${JSON.stringify(packageJson, null, 2)}\n`, 'utf8');
   }
