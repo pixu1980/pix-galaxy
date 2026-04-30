@@ -19,15 +19,6 @@ It shows:
 - importing `__PACKAGE_NAME__/css`
 - keeping consumer CSS thin
 
-## web-component-theme
-
-Use `assets/examples/web-component-theme` when custom elements need to consume global design tokens.
-
-It shows:
-- a vanilla custom element
-- Shadow DOM styles using host-accessible custom properties
-- component-local CSS without framework dependencies
-
 ## docs-site
 
 Use `assets/examples/docs-site` when a static token overview page is useful.
@@ -41,5 +32,4 @@ It shows:
 
 - Choose `app-basic` for local app integration.
 - Choose `package-basic` for workspace package integration.
-- Choose `web-component-theme` for Shadow DOM theming.
 - Choose `docs-site` for stakeholder-facing docs or token overview pages.

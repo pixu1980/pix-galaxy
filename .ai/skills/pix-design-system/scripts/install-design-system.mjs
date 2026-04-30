@@ -6,14 +6,14 @@ import { fileURLToPath } from 'node:url';
 
 const DEFAULTS = {
   mode: 'app',
-  brandName: 'pix Design System',
+  brandName: 'Pix Design System',
   accent: '#3f6df6',
   font: 'Aptos, "Avenir Next", "Helvetica Neue", sans-serif',
   radius: 'comfortable',
   density: 'comfortable',
   packageName: '@pix-galaxy/pix-design-system',
-  packageDest: 'packages/pix-design-system',
-  docsSiteDest: 'docs/design-system-site',
+  packageDest: 'packages/design-system',
+  docsSiteDest: 'docs/design-system',
 };
 
 const RADIUS_VALUES = {

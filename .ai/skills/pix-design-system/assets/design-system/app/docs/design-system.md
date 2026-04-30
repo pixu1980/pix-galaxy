@@ -20,15 +20,15 @@ The CSS entrypoint declares `@layer reset, foundations, layout, components, help
 
 ## Foundations
 
-- Typography lives in `src/styles/foundations/typography.css`.
-- Spacing lives in `src/styles/foundations/spacing.css`.
-- Radii live in `src/styles/foundations/radii.css`.
-- Elevations live in `src/styles/foundations/elevations.css`.
-- Colors live in `src/styles/foundations/colors.css`.
+- Typography lives in `src/styles/foundations/_typography.css`.
+- Spacing lives in `src/styles/foundations/_spacings.css`.
+- Radii live in `src/styles/foundations/_radii.css`.
+- Elevations live in `src/styles/foundations/_elevations.css`.
+- Colors live in `src/styles/foundations/_colors.css`.
 
 ## Extras
 
-- Reset styles live in `src/styles/reset.css`.
-- Layout primitives live in `src/styles/layout.css`.
-- Component aliases live in `src/styles/components.css`.
-- Helpers live in `src/styles/helpers.css`.
+- Reset styles live in `src/styles/_reset.css`.
+- Layout primitives live in `src/styles/_layout.css`.
+- Component aliases live in `src/styles/_components.css`.
+- Helpers live in `src/styles/_helpers.css`.

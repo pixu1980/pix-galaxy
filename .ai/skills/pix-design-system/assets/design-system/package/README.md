@@ -13,7 +13,8 @@ Import the package CSS from `__PACKAGE_NAME__/css`.
 ## Contents
 
 - `src/index.css` declares stable cascade layers.
-- `src/foundations/` contains typography, spacing, radii, elevations, and colors.
-- `src/layout.css` contains layout primitives.
-- `src/components.css` contains component aliases.
-- `src/helpers.css` contains reusable helpers.
+- `src/_reset.css` contains reset styles.
+- `src/foundations/index.css` contains typography, spacing, radii, elevations, and colors.
+- `src/_layout.css` contains layout primitives.
+- `src/_components.css` contains component aliases.
+- `src/_helpers.css` contains reusable helpers.

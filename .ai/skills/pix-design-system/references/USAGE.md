@@ -10,11 +10,16 @@ node ./.github/skills/pix-design-system/scripts/install-design-system.mjs --targ
 
 App mode writes:
 - `src/styles/index.css`
-- `src/styles/reset.css`
-- `src/styles/foundations/*.css`
-- `src/styles/layout.css`
-- `src/styles/components.css`
-- `src/styles/helpers.css`
+- `src/styles/_reset.css`
+- `src/styles/foundations/index.css`
+- `src/styles/foundations/_colors.css`
+- `src/styles/foundations/_typography.css`
+- `src/styles/foundations/_spacings.css`
+- `src/styles/foundations/_radii.css`
+- `src/styles/foundations/_elevations.css`
+- `src/styles/_layout.css`
+- `src/styles/_components.css`
+- `src/styles/_helpers.css`
 - `docs/design-system.md`
 
 ## Package Mode
@@ -27,7 +32,7 @@ node ./.github/skills/pix-design-system/scripts/install-design-system.mjs --targ
 
 Package defaults:
 - package name: `@pix-galaxy/pix-design-system`
-- destination: `packages/pix-design-system`
+- destination: `packages/design-system`
 
 Override them when needed:
 
