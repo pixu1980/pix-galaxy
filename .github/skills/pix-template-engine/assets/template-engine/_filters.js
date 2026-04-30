@@ -1,8 +1,14 @@
 // Template Engine - Built-in Filters
 import { marked } from 'marked';
-import { createMarkedOptions } from '../cms/_marked-syntax.js';
 
 // Small internal helpers (kept outside filters to keep per-filter complexity low)
+function createMarkedOptions() {
+  return {
+    gfm: true,
+    breaks: false,
+  };
+}
+
 function utilSlug(value) {
   return String(value)
     .toLowerCase()

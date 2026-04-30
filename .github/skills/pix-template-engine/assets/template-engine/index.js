@@ -26,12 +26,61 @@ export class TemplateEngine {
   }
 
   /**
+   * Compile an inline template into a reusable render function.
+   * Use as a tagged template literal:
+   * const renderCard = engine.template`<article>{{ title }}</article>`;
+   * renderCard({ title: 'Hello' });
+   *
+   * Interpolated JavaScript values are inserted before engine rendering.
+   * If an interpolated value is a function, it receives the render data.
+   * @param {TemplateStringsArray} strings - Tagged template strings
+   * @param {...unknown} values - Tagged template interpolations
+   * @returns {(data?: object, options?: object) => string} Render function
+   */
+  template(strings, ...values) {
+    if (!Array.isArray(strings) || !Object.prototype.hasOwnProperty.call(strings, 'raw')) {
+      throw new TypeError('TemplateEngine.template must be used as a tagged template literal');
+    }
+
+    return (data = {}, options = {}) => {
+      const templateString = this.createTemplateLiteralSource(strings, values, data);
+      return this.renderer.renderString(templateString, data, options);
+    };
+  }
+
+  /**
+   * Alias for template tagged literal usage.
+   * @param {TemplateStringsArray} strings - Tagged template strings
+   * @param {...unknown} values - Tagged template interpolations
+   * @returns {(data?: object, options?: object) => string} Render function
+   */
+  html(strings, ...values) {
+    return this.template(strings, ...values);
+  }
+
+  /**
    * Register a custom filter
    * @param {string} name - Filter name
    * @param {function} fn - Filter function
    */
   registerFilter(name, fn) {
     this.renderer.registerFilter(name, fn);
+  }
+
+  createTemplateLiteralSource(strings, values, data) {
+    let source = '';
+
+    for (let index = 0; index < strings.length; index++) {
+      source += strings[index];
+
+      if (index < values.length) {
+        const value = values[index];
+        const resolvedValue = typeof value === 'function' ? value(data) : value;
+        source += resolvedValue == null ? '' : String(resolvedValue);
+      }
+    }
+
+    return source;
   }
 }
 
