@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Create a repo-local PIX skill named `pix-design-system` that helps agents install, document, and maintain a reusable design system in target projects. The skill builds on `pix-styleguides`, keeps all content in English, and gives agents both procedural guidance and deterministic Node scripts.
+Create a repo-local pix skill named `pix-design-system` that helps agents install, document, and maintain a reusable design system in target projects. The skill builds on `pix-styleguides`, keeps all content in English, and gives agents both procedural guidance and deterministic Node scripts.
 
 ## Scope
 
@@ -13,7 +13,7 @@ The work includes:
 - Node scripts that copy and customize starter files into a target project.
 - Consultable, documented examples for common design system use cases.
 - Prompt and instruction files for easy invocation.
-- PIX Galaxy orchestrator updates.
+- pix Galaxy orchestrator updates.
 - Router and installer tests.
 
 The work does not introduce runtime dependencies, frontend frameworks, CSS preprocessors, or external build tools.
@@ -146,10 +146,10 @@ The task is complete when:
 
 - `pix-design-system` exists and can be used by future agents without extra context.
 - The installer creates app and package design system baselines.
-- The generated CSS follows PIX styleguide rules.
+- The generated CSS follows pix styleguide rules.
 - The generated docs are in English and explain foundations, extras, and usage.
 - Examples are present, documented, and useful as references.
 - Prompts and instructions make the skill easy to invoke.
-- PIX Galaxy routes design system requests correctly.
+- pix Galaxy routes design system requests correctly.
 - All added tests pass.
 
