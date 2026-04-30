@@ -1,11 +1,7 @@
 @layer reset, foundations, layout, components, helpers;
 
-@import "./reset.css" layer(reset);
-@import "./foundations/colors.css" layer(foundations);
-@import "./foundations/typography.css" layer(foundations);
-@import "./foundations/spacing.css" layer(foundations);
-@import "./foundations/radii.css" layer(foundations);
-@import "./foundations/elevations.css" layer(foundations);
-@import "./layout.css" layer(layout);
-@import "./components.css" layer(components);
-@import "./helpers.css" layer(helpers);
+@import "./_reset.css" layer(reset);
+@import "./foundations/index.css" layer(foundations);
+@import "./_layout.css" layer(layout);
+@import "./_components.css" layer(components);
+@import "./_helpers.css" layer(helpers);

@@ -14,7 +14,7 @@ The baseline includes:
 - extras for reset, layout primitives, component aliases, and helpers
 - docs in English
 - reusable app and package starters
-- examples for app, package, web component theming, and docs-site usage
+- examples for app, package, and docs-site usage
 
 ## When to use
 Use this skill when a user or orchestrator asks to:
