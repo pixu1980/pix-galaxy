@@ -1,0 +1,5 @@
+@import "__PACKAGE_NAME__/css";
+
+main {
+  padding-block: var(--space-layout);
+}
