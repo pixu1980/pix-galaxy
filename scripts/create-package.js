@@ -10,8 +10,8 @@ const rootDir = resolve(__dirname, "..");
 const packageName = process.argv[2];
 
 if (!packageName) {
-  console.error("usage: node scripts/create-package.mjs <package-name>");
-  console.error("example: node scripts/create-package.mjs pix-badge");
+  console.error("usage: node scripts/create-package.js <package-name>");
+  console.error("example: node scripts/create-package.js pix-badge");
   process.exit(1);
 }
 
@@ -71,12 +71,12 @@ writeFileSync(
         "./package.json": "./package.json",
       },
       scripts: {
-        clean: `node ../../scripts/clean.mjs ${packageName}`,
-        build: `node ../../scripts/build-package.mjs ${packageName}`,
+        clean: `node ../../scripts/clean.js ${packageName}`,
+        build: `node ../../scripts/build-package.js ${packageName}`,
         test: "node --test test/*.test.js",
         typecheck: "pnpm exec tsc -p tsconfig.types.json --noEmit",
-        validate: `node ../../scripts/validate-package.mjs ${packageName}`,
-        "docs:build": `node ../../scripts/build-docs.mjs ${packageName}`,
+        validate: `node ../../scripts/validate-package.js ${packageName}`,
+        "docs:build": `node ../../scripts/build-docs.js ${packageName}`,
       },
       dependencies: {},
     },

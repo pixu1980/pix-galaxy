@@ -6,14 +6,14 @@
   "type": "module",
   "packageManager": "pnpm@10.33.2",
   "scripts": {
-    "clean": "node scripts/clean.mjs",
+    "clean": "node scripts/clean.js",
     "build": "pnpm -r --if-present run build",
     "test": "pnpm -r --if-present run test",
     "typecheck": "pnpm -r --if-present run typecheck",
     "validate": "pnpm -r --if-present run validate",
-    "docs:build": "node scripts/build-docs.mjs",
-    "package:list": "node scripts/list-packages.mjs",
-    "package:create": "node scripts/create-package.mjs",
+    "docs:build": "node scripts/build-docs.js",
+    "package:list": "node scripts/list-packages.js",
+    "package:create": "node scripts/create-package.js",
     "release": "pnpm -r publish --access public"
   },
   "devDependencies": {

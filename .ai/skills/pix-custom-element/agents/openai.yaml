@@ -1,0 +1,4 @@
+interface:
+  display_name: "Pix Custom Element"
+  short_description: "Scaffold a Custom Elements v1 component with code splitting."
+  default_prompt: "Use $pix-custom-element to scaffold a new pix Custom Element with consts, utils, attributes, events, template, and icon files."

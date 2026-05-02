@@ -121,12 +121,12 @@ pix-galaxy/
 │   └── pix-card/            # @pix-galaxy/pix-card
 │       └── ...
 ├── scripts/
-│   ├── build-package.mjs    # esbuild bundler + tsc declarations
-│   ├── build-docs.mjs       # Aggregate docs into site/
-│   ├── clean.mjs            # Remove dist/ and site/
-│   ├── create-package.mjs   # Scaffold a new package
-│   ├── list-packages.mjs    # List all packages
-│   └── validate-package.mjs # Validate package structure
+│   ├── build-package.js    # esbuild bundler + tsc declarations
+│   ├── build-docs.js       # Aggregate docs into site/
+│   ├── clean.js            # Remove dist/ and site/
+│   ├── create-package.js   # Scaffold a new package
+│   ├── list-packages.js    # List all packages
+│   └── validate-package.js # Validate package structure
 ├── site/                    # Generated documentation site
 ├── .github/
 │   ├── copilot-instructions.md

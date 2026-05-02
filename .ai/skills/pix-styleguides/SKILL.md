@@ -128,6 +128,15 @@ Use these local files as canonical style references during execution:
 - Avoid dangerous constructs (`eval`, implicit globals, fragile coercion).
 - For custom elements, keep lifecycle-safe listener setup/cleanup.
 - Add comments only for non-obvious logic.
+- **Code splitting for components** (see `pix-custom-element`):
+  - Move all named constants to `ComponentName.consts.js`.
+  - Move pure helper functions to `ComponentName.utils.js`.
+  - Move `TemplateEngine` instantiation and all `engine.html` render functions to `ComponentName.template.js`.
+  - Attribute handlers live in `ComponentName.attributes.js` (always present, even when empty).
+  - DOM event handlers live in `ComponentName.events.js`.
+  - SVG icons belong in `icons/<name>.svg` files imported via `bundle-text:./icons/<name>.svg`.
+  - `ComponentName.js` contains only the class body, `static` declarations, and lifecycle hooks. It never imports `TemplateEngine` directly.
+  - Do not inline SVG markup as template literals in JS files.
 
 ### JSON checklist
 - Ensure valid JSON (double quotes, no trailing commas).

@@ -135,6 +135,60 @@ test('routes to pix-design-system for design system foundations requests', async
   assert.equal(result.slashCommandUsed, true);
 });
 
+test('routes to pix-custom-element for scaffolding a customized built-in element', async () => {
+  const registry = await loadRegistry();
+  const result = selectSkill(
+    registry,
+    '/pix-galaxy scaffold a new custom element PixDetails extending HTMLDetailsElement with adoptedStyleSheets and componentDecorator',
+    ['src/components/PixDetails/pix-details.js'],
+    'scaffold'
+  );
+
+  assert.equal(result.selectedSkill, 'pix-custom-element');
+  assert.equal(result.fallbackUsed, false);
+  assert.equal(result.slashCommandUsed, true);
+});
+
+test('routes to pix-custom-element for autonomous web component requests', async () => {
+  const registry = await loadRegistry();
+  const result = selectSkill(
+    registry,
+    '/pix-galaxy create a new web component pix-card that extends HTMLElement and registers in customElements.define',
+    ['src/components/PixCard/pix-card.js'],
+    'create'
+  );
+
+  assert.equal(result.selectedSkill, 'pix-custom-element');
+  assert.equal(result.fallbackUsed, false);
+});
+
+test('routes to pix-color-scheme-switcher for persisted theme controls', async () => {
+  const registry = await loadRegistry();
+  const result = selectSkill(
+    registry,
+    '/pix-galaxy add a light dark system color scheme switcher with persisted preference and prefers-color-scheme fallback',
+    ['src/components/ColorSchemeSwitcher/pix-color-scheme-switcher.js'],
+    'add'
+  );
+
+  assert.equal(result.selectedSkill, 'pix-color-scheme-switcher');
+  assert.equal(result.fallbackUsed, false);
+  assert.equal(result.slashCommandUsed, true);
+});
+
+test('routes data-color-scheme theme toggle work to pix-color-scheme-switcher', async () => {
+  const registry = await loadRegistry();
+  const result = selectSkill(
+    registry,
+    'Create a theme toggle that updates data-color-scheme and meta color-scheme',
+    ['src/styles/theme.css', 'src/main.js'],
+    'create'
+  );
+
+  assert.equal(result.selectedSkill, 'pix-color-scheme-switcher');
+  assert.equal(result.fallbackUsed, false);
+});
+
 test('keeps generic CSS styleguide cleanup on pix-styleguides', async () => {
   const registry = await loadRegistry();
   const result = selectSkill(

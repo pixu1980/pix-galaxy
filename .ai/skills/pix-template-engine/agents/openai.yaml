@@ -1,0 +1,4 @@
+interface:
+  display_name: "Pix Template Engine"
+  short_description: "Install and use the DOM-based pix template engine."
+  default_prompt: "Use $pix-template-engine to install the template engine and set up engine.html render functions for this project."
