@@ -22,6 +22,8 @@ App mode writes:
 - `src/styles/_helpers.css`
 - `docs/design-system.md`
 
+These files are materialized from `assets/design-system/shared/`, even though the skill keeps app-mode wrappers for structure and examples.
+
 ## Package Mode
 
 Use package mode when the target project needs a reusable workspace package:
@@ -32,12 +34,12 @@ node ./.github/skills/pix-design-system/scripts/install-design-system.mjs --targ
 
 Package defaults:
 - package name: `@pix-galaxy/pix-design-system`
-- destination: `packages/design-system`
+- destination: `packages/pix-design-system`
 
 Override them when needed:
 
 ```bash
-node ./.github/skills/pix-design-system/scripts/install-design-system.mjs --target "<project-root>" --mode package --package-name "@example/design-system" --dest "packages/design-system"
+node ./.github/skills/pix-design-system/scripts/install-design-system.mjs --target "<project-root>" --mode package --package-name "@example/design-system" --dest "vendor/design-system"
 ```
 
 ## CLI Options
@@ -47,12 +49,22 @@ node ./.github/skills/pix-design-system/scripts/install-design-system.mjs --targ
 - `--brand-name`: docs and example title.
 - `--accent`: accent color token.
 - `--font`: sans font stack token.
-- `--radius subtle|comfortable|round`: control shape.
-- `--density compact|comfortable|spacious`: spacing scale multiplier.
+- `--radius subtle|comfortable|round`: base value for `--ds--radii--base`.
+- `--density compact|comfortable|spacious`: multiplier applied to `--ds--spacings--base`.
 - `--package-name`: package name for package mode.
 - `--dest`: package destination for package mode.
 - `--docs-site`: copy optional static docs-site scaffold.
 - `--force`: overwrite existing output files.
+
+## Proportional Foundations
+
+Generated typography, spacing, and radii files use CSS `pow()` with namespaced base and ratio tokens.
+
+- Typography starts from `--ds--typography--font-size--base` and `--ds--typography--ratio`.
+- Spacing starts from `--ds--spacings--base`, `--ds--spacings--ratio`, and `--ds--spacings--density`.
+- Radii start from `--ds--radii--base` and `--ds--radii--ratio`.
+
+If the target needs older browser support, add build-time fallbacks or precomputed alias tokens in the consuming project.
 
 ## Conflict Handling
 
@@ -75,3 +87,5 @@ Run router tests after orchestration edits:
 ```bash
 node --test ./.github/skills/pix-galaxy/scripts/select-skill.test.mjs
 ```
+
+Check generated `_components.css` before completion: it should contain commented placeholder examples only, not concrete component selectors shipped by default.

@@ -12,7 +12,7 @@ Layer responsibilities:
 - `reset`: safe defaults and focus visibility.
 - `foundations`: tokens and basic text defaults.
 - `layout`: containers, grids, stacks, clusters, and sections.
-- `components`: component aliases and low-level UI defaults.
+- `components`: component contracts and commented placeholders only.
 - `helpers`: one-purpose utility helpers.
 
 The `foundations` layer uses sub-layers declared in `foundations/index.css`:
@@ -25,7 +25,20 @@ The `foundations` layer uses sub-layers declared in `foundations/index.css`:
 @import "./_elevations.css" layer(elevations);
 ```
 
-## File Layout
+## Skill Source Of Truth
+
+Inside the skill, shared assets are the only source of truth for starter CSS and starter docs:
+
+```text
+assets/design-system/shared/styles/
+assets/design-system/shared/docs/design-system.md
+```
+
+The `app/` and `package/` starter trees keep their public structure, but their duplicated CSS and docs files are thin wrappers that point back to `shared/` through relative imports or include directives.
+
+The installer resolves those wrappers and materializes normal output files in the target project.
+
+## Installed File Layout
 
 App mode installs:
 
@@ -44,7 +57,7 @@ src/styles/_helpers.css
 docs/design-system.md
 ```
 
-Package mode installs the same CSS structure under `src/` inside a package folder.
+Package mode installs the same CSS structure under `src/` inside a package folder, plus package-specific metadata files.
 
 ## Token Levels
 
@@ -53,7 +66,12 @@ Use three token levels:
 - Semantic tokens describe meaning, for example `--color-surface`.
 - Component aliases expose UI contracts, for example `--card-border-radius`.
 
-This hierarchy keeps product identity, system meaning, and component implementation separate.
+Typography, spacing, and radii primitives should start from namespaced base tokens and ratio tokens:
+- `--ds--typography--font-size--base` + `--ds--typography--ratio`
+- `--ds--spacings--base` + `--ds--spacings--ratio`
+- `--ds--radii--base` + `--ds--radii--ratio`
+
+Use CSS `pow()` to derive the proportional scale before mapping semantic aliases.
 
 ## Selector Strategy
 
@@ -71,12 +89,13 @@ Avoid id selectors for reusable systems.
 - Use CSS nesting only where it improves scoping and stays shallow.
 - Avoid `!important` except for helpers such as `[hidden]`.
 - Keep global rules in reset and foundations.
-- Keep component-level contracts in component aliases.
+- Keep component-level contracts in aliases and commented placeholders, not in shipped component implementations.
 
 ## Maintenance Checklist
 
 - Keep docs and examples in English.
 - Update docs when token names change.
+- Update `shared/` first, then keep wrappers thin.
 - Run installer tests after editing script or assets.
 - Run router tests after editing `pix-galaxy`.
 - Keep starter files small and split by responsibility.

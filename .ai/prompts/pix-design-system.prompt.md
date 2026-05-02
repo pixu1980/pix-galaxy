@@ -1,6 +1,6 @@
 ---
 name: "pix Design System Create"
-description: "Create a native CSS design system baseline with foundations, reset, layout, helpers, docs, examples, and optional package mode."
+description: "Create a native CSS design system baseline with shared-source templates, proportional typography/spacing/radii scales, reset, layout, helpers, docs, examples, and optional package mode."
 argument-hint: "Design system task, e.g. 'create app mode with brand name Nova UI and accent #ff5500'"
 agent: "agent"
 ---
@@ -23,6 +23,9 @@ Hard rules:
 - Native CSS only.
 - Use `@layer reset, foundations, layout, components, helpers;`.
 - Use primitive, semantic, and component alias tokens.
+- Keep `assets/design-system/shared/` as the single source of truth for duplicated starter CSS and docs.
+- Use `--ds--typography--ratio`, `--ds--spacings--ratio`, and `--ds--radii--ratio` with CSS `pow()` and matching base tokens.
+- Keep the `components` layer as commented placeholder guidance only. Do not ship concrete component implementations from the starter files.
 - Keep generated docs in English.
 - Do not overwrite existing files unless user approved `--force`.
 
