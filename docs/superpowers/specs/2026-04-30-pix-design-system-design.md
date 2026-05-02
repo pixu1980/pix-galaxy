@@ -30,8 +30,8 @@ The skill will use progressive disclosure:
 - `assets/design-system/app/` contains the app-mode starter.
 - `assets/design-system/package/` contains the package-mode starter.
 - `assets/examples/app-basic/`, `package-basic/`, `web-component-theme/`, and `docs-site/` contain consultable examples.
-- `scripts/install-design-system.mjs` installs the selected starter into a target project.
-- `scripts/install-design-system.test.mjs` validates installer behavior.
+- `scripts/install-design-system.js` installs the selected starter into a target project.
+- `scripts/install-design-system.test.js` validates installer behavior.
 
 ## Design System Output
 
@@ -136,8 +136,8 @@ Add tests for:
 Validation commands:
 
 ```bash
-node --test ./.github/skills/pix-galaxy/scripts/select-skill.test.mjs
-node --test ./.github/skills/pix-design-system/scripts/install-design-system.test.mjs
+node --test ./.github/skills/pix-galaxy/scripts/select-skill.test.js
+node --test ./.github/skills/pix-design-system/scripts/install-design-system.test.js
 ```
 
 ## Acceptance Criteria

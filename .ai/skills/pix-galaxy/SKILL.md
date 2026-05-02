@@ -14,6 +14,8 @@ Current orchestration target:
 - `pix-a11y`
 - `pix-template-engine`
 - `pix-design-system`
+- `pix-custom-element`
+- `pix-color-scheme-switcher`
 
 This skill is designed to scale as more skills are added to the registry.
 
@@ -47,6 +49,8 @@ Explicit slash trigger:
 - Current routed skill: [../pix-a11y/SKILL.md](../pix-a11y/SKILL.md)
 - Current routed skill: [../pix-template-engine/SKILL.md](../pix-template-engine/SKILL.md)
 - Current routed skill: [../pix-design-system/SKILL.md](../pix-design-system/SKILL.md)
+- Current routed skill: [../pix-custom-element/SKILL.md](../pix-custom-element/SKILL.md)
+- Current routed skill: [../pix-color-scheme-switcher/SKILL.md](../pix-color-scheme-switcher/SKILL.md)
 
 ## Decision flow
 1. If the user explicitly names a skill and it exists in the registry, select it.

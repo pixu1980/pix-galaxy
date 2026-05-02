@@ -1,0 +1,4 @@
+interface:
+  display_name: "Pix Design System"
+  short_description: "Create or extend a pix-native design system with tokens and foundations."
+  default_prompt: "Use $pix-design-system to set up design tokens, CSS foundations, and a theme baseline for this project."

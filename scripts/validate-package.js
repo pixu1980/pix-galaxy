@@ -9,7 +9,7 @@ const rootDir = resolve(__dirname, "..");
 const targetPackage = process.argv[2];
 
 if (!targetPackage) {
-  console.error("usage: node scripts/validate-package.mjs <package-folder-name>");
+  console.error("usage: node scripts/validate-package.js <package-folder-name>");
   process.exit(1);
 }
 

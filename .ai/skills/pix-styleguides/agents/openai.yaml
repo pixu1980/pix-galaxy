@@ -1,0 +1,4 @@
+interface:
+  display_name: "Pix Styleguides"
+  short_description: "Enforce HTML, CSS, JS, JSON, and Markdown styleguides."
+  default_prompt: "Use $pix-styleguides to review and fix style violations in these files."
