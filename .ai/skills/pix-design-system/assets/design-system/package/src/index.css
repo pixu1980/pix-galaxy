@@ -1,7 +1,1 @@
-@layer reset, foundations, layout, components, helpers;
-
-@import "./_reset.css" layer(reset);
-@import "./foundations/index.css" layer(foundations);
-@import "./_layout.css" layer(layout);
-@import "./_components.css" layer(components);
-@import "./_helpers.css" layer(helpers);
+@import "../../shared/styles/index.css";

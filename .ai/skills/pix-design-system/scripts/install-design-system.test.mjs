@@ -44,13 +44,17 @@ test('installs app design system by default', async () => {
   assert.equal(result.status, 0, result.stderr);
 
   const indexCss = await readTargetFile(target, 'src/styles/index.css');
-  const colorsCss = await readTargetFile(target, 'src/styles/foundations/colors.css');
+  const colorsCss = await readTargetFile(target, 'src/styles/foundations/_colors.css');
+  const componentsCss = await readTargetFile(target, 'src/styles/_components.css');
   const docs = await readTargetFile(target, 'docs/design-system.md');
 
   assert.match(indexCss, /@layer reset, foundations, layout, components, helpers;/);
-  assert.match(indexCss, /@import "\.\/reset\.css" layer\(reset\);/);
+  assert.match(indexCss, /@import "\.\/_reset\.css" layer\(reset\);/);
   assert.match(colorsCss, /--color-primitive-accent-500: #3f6df6;/);
-  assert.match(docs, /# pix Design System/);
+  assert.match(componentsCss, /Example placeholder only:/);
+  assert.match(componentsCss, /^\/\*[\s\S]*\*\/\s*$/);
+  assert.match(docs, /# Pix Design System/);
+  assert.match(docs, /shared CSS and docs live under `assets\/design-system\/shared\//);
 });
 
 test('installs package design system with default package name and destination', async () => {
@@ -126,17 +130,20 @@ test('applies brand, accent, font, radius, and density overrides', async () => {
 
   assert.equal(result.status, 0, result.stderr);
 
-  const typographyCss = await readTargetFile(target, 'src/styles/foundations/typography.css');
-  const colorsCss = await readTargetFile(target, 'src/styles/foundations/colors.css');
-  const radiiCss = await readTargetFile(target, 'src/styles/foundations/radii.css');
-  const spacingCss = await readTargetFile(target, 'src/styles/foundations/spacing.css');
+  const typographyCss = await readTargetFile(target, 'src/styles/foundations/_typography.css');
+  const colorsCss = await readTargetFile(target, 'src/styles/foundations/_colors.css');
+  const radiiCss = await readTargetFile(target, 'src/styles/foundations/_radii.css');
+  const spacingCss = await readTargetFile(target, 'src/styles/foundations/_spacings.css');
   const docs = await readTargetFile(target, 'docs/design-system.md');
 
-  assert.match(typographyCss, /--font-family-sans: Fraunces, serif;/);
+  assert.match(typographyCss, /--ds--typography--font-family--sans: Fraunces, serif;/);
+  assert.match(typographyCss, /pow\(var\(--ds--typography--ratio\), 6\)/);
   assert.match(colorsCss, /--color-primitive-accent-500: #ff5500;/);
-  assert.match(radiiCss, /--radius-control: 1\.6rem;/);
-  assert.match(spacingCss, /--density-scale: 0\.875;/);
+  assert.match(radiiCss, /--ds--radii--base: 1\.6rem;/);
+  assert.match(spacingCss, /--ds--spacings--density: 0\.875;/);
+  assert.match(spacingCss, /pow\(var\(--ds--spacings--ratio\), 15\)/);
   assert.match(docs, /# Nova UI/);
+  assert.match(docs, /CSS `pow\(\)`/);
 });
 
 test('copies optional docs site when requested', async () => {
@@ -146,5 +153,5 @@ test('copies optional docs site when requested', async () => {
   assert.equal(result.status, 0, result.stderr);
 
   const docsSite = await readTargetFile(target, 'docs/design-system-site/index.html');
-  assert.match(docsSite, /pix Design System/);
+  assert.match(docsSite, /Pix Design System/);
 });

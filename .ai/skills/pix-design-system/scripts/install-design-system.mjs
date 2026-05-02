@@ -12,8 +12,8 @@ const DEFAULTS = {
   radius: 'comfortable',
   density: 'comfortable',
   packageName: '@pix-galaxy/pix-design-system',
-  packageDest: 'packages/design-system',
-  docsSiteDest: 'docs/design-system',
+  packageDest: 'packages/pix-design-system',
+  docsSiteDest: 'docs/design-system-site',
 };
 
 const RADIUS_VALUES = {
@@ -27,6 +27,8 @@ const DENSITY_VALUES = {
   comfortable: '1',
   spacious: '1.125',
 };
+
+const MAX_TEMPLATE_REDIRECTS = 8;
 
 /**
  * @param {string[]} argv
@@ -144,11 +146,45 @@ const applyReplacements = (content, options) => {
     __RADIUS__: RADIUS_VALUES[options.radius],
     __DENSITY__: DENSITY_VALUES[options.density],
     __PACKAGE_NAME__: options.packageName,
+    __STYLE_ROOT__: options.mode === 'package' ? 'src' : 'src/styles',
+    __INSTALL_LINE__: options.mode === 'package'
+      ? `Import the design system CSS from \`${options.packageName}/css\`.`
+      : 'Import `src/styles/index.css` from the application entrypoint.',
   };
 
   return Object.entries(replacements).reduce((nextContent, [token, value]) => {
     return nextContent.replaceAll(token, value);
   }, content);
+};
+
+/**
+ * @param {string} sourcePath
+ * @param {Set<string>} [visited]
+ * @returns {Promise<string>}
+ */
+const readTemplateContent = async (sourcePath, visited = new Set()) => {
+  const normalizedPath = path.resolve(sourcePath);
+
+  if (visited.has(normalizedPath) || visited.size > MAX_TEMPLATE_REDIRECTS) {
+    throw new Error(`Template indirection loop detected at ${normalizedPath}`);
+  }
+
+  visited.add(normalizedPath);
+  const content = await readFile(normalizedPath, 'utf8');
+  const cssImportMatch = content.match(/^\s*@import\s+["']([^"']+)["'];\s*$/);
+  const markdownIncludeMatch = content.match(/^\s*<!--\s*@include\s+"([^"]+)"\s*-->\s*$/);
+
+  if (cssImportMatch) {
+    const nextPath = path.resolve(path.dirname(normalizedPath), cssImportMatch[1]);
+    return readTemplateContent(nextPath, visited);
+  }
+
+  if (markdownIncludeMatch) {
+    const nextPath = path.resolve(path.dirname(normalizedPath), markdownIncludeMatch[1]);
+    return readTemplateContent(nextPath, visited);
+  }
+
+  return content;
 };
 
 /**
@@ -183,7 +219,7 @@ const writeTemplateFiles = async (files, options) => {
   const written = [];
 
   for (const file of files) {
-    const content = await readFile(file.sourcePath, 'utf8');
+    const content = await readTemplateContent(file.sourcePath);
     const rendered = applyReplacements(content, options);
     await mkdir(path.dirname(file.targetPath), { recursive: true });
     await writeFile(file.targetPath, rendered, 'utf8');

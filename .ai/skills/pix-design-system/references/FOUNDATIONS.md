@@ -2,35 +2,37 @@
 
 ## Typography
 
-Typography tokens define font family, type scale, line height, weight, tracking, and readable measure.
+Typography starts from `--ds--typography--font-size--base` and `--ds--typography--ratio`.
 
-Use primitive tokens for raw type values and semantic tokens for usage decisions. Keep component aliases stable so components can change internals without breaking consumers.
+Use CSS `pow()` to derive the proportional scale, then map semantic aliases such as `--font-size-0` and `--font-size-1` from the namespaced source tokens.
 
 Core checks:
-- `--font-family-sans` exists and reflects project identity.
-- `--font-size-0` remains readable as default body text.
-- Heading line height is tighter than body line height.
+- `--ds--typography--font-family--sans` exists and reflects project identity.
+- `--ds--typography--font-size--base` remains readable as default body text.
+- Heading steps derive from `pow(var(--ds--typography--ratio), n)` rather than hard-coded one-off values.
 - Paragraph measure prevents overly long lines.
 
 ## Spacing
 
-Spacing tokens define density-aware rhythm for components and layouts.
+Spacing starts from `--ds--spacings--base`, `--ds--spacings--ratio`, and `--ds--spacings--density`.
 
-Use `--density-scale` to tune compact, comfortable, or spacious interfaces without renaming every token.
+Treat density as the multiplier that changes the base value. Derive the rest of the scale from the base with `pow()` so the whole system stays proportional.
 
 Core checks:
-- Spacing scale progresses predictably.
+- Spacing scale progresses predictably from the base token.
+- `--space-*` aliases map to the namespaced proportional scale.
 - Layout spacing uses semantic tokens such as `--space-layout`.
-- Component spacing uses aliases such as `--stack-gap`.
+- Component spacing guidance uses aliases such as `--stack-gap`.
 
 ## Radii
 
-Radii tokens define shape language.
+Radii start from `--ds--radii--base` and `--ds--radii--ratio`.
 
-Keep primitive values for raw shape options and semantic aliases for controls, panels, cards, and special cases.
+Keep semantic aliases such as `--radius-control` and `--radius-panel`, but derive their backing values from the namespaced proportional scale.
 
 Core checks:
-- `--radius-control` maps to the selected radius mode.
+- `--radius-control` maps to the selected radius base.
+- Supporting radius steps derive from `pow(var(--ds--radii--ratio), n)`.
 - Components consume aliases such as `--card-border-radius`.
 - Pill and circle tokens exist only for shapes that require them.
 
@@ -61,5 +63,7 @@ Core checks:
 - Primitive tokens hold raw values.
 - Semantic tokens express intent.
 - Component aliases express stable component styling contracts.
+- The `components` layer documents hooks with commented placeholders only; it does not ship concrete component implementations.
+- App and package starter duplicates point back to `shared/` as the single source of truth inside the skill.
 - Token names stay readable and do not use BEM, SMACSS, OOCSS, ITCSS, CUBE CSS, or similar methodology naming.
 - Accessibility-sensitive tokens cover focus, contrast, reduced motion, and readable spacing.
