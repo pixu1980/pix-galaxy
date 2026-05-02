@@ -4,19 +4,28 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>__BRAND_NAME__ App Example</title>
-    <link rel="stylesheet" href="./src/styles/index.css">
+    <link rel="stylesheet" href="./index.css">
   </head>
   <body>
     <main data-layout="stack">
       <section data-helper="flow">
         <h1>__BRAND_NAME__</h1>
-        <p>App-mode design system baseline with foundations, layout, components, and helpers.</p>
-        <button type="button">Primary action</button>
+        <p>App-mode design system baseline with proportional foundations, layout primitives, helper attributes, and component hooks left as placeholders.</p>
       </section>
-      <article data-component="card">
-        <h2>Token-driven card</h2>
-        <p>Component aliases make theme changes safe.</p>
-      </article>
+      <section data-layout="grid" aria-label="Token overview">
+        <article>
+          <h2>Typography ratio</h2>
+          <p>Heading and body sizes derive from a base font size and a ratio token through `pow()`.</p>
+        </article>
+        <article>
+          <h2>Spacing ratio</h2>
+          <p>Layout gaps derive from a base spacing value, a spacing ratio, and an optional density multiplier.</p>
+        </article>
+        <article>
+          <h2>Component hooks</h2>
+          <p>The components layer documents selectors such as `data-component="button"` without shipping their implementations.</p>
+        </article>
+      </section>
     </main>
   </body>
 </html>

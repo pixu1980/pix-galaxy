@@ -1,0 +1,23 @@
+:root {
+  --ds--radii--ratio: 1.5;
+  --ds--radii--base: __RADIUS__;
+
+  --ds--radii--50: calc(var(--ds--radii--base) / pow(var(--ds--radii--ratio), 3));
+  --ds--radii--100: calc(var(--ds--radii--base) / pow(var(--ds--radii--ratio), 2));
+  --ds--radii--200: calc(var(--ds--radii--base) / var(--ds--radii--ratio));
+  --ds--radii--300: var(--ds--radii--base);
+  --ds--radii--400: calc(var(--ds--radii--base) * var(--ds--radii--ratio));
+  --ds--radii--500: calc(var(--ds--radii--base) * pow(var(--ds--radii--ratio), 2));
+  --ds--radii--600: calc(var(--ds--radii--base) * pow(var(--ds--radii--ratio), 3));
+
+  --radius-none: 0;
+  --radius-subtle: var(--ds--radii--100);
+  --radius-comfortable: var(--ds--radii--300);
+  --radius-round: var(--ds--radii--500);
+  --radius-pill: 999rem;
+  --radius-circle: 50%;
+
+  --radius-control: var(--ds--radii--base);
+  --radius-panel: var(--ds--radii--400);
+  --card-border-radius: var(--radius-control);
+}

@@ -1,0 +1,108 @@
+@layer reset, foundations, layout, components, helpers;
+
+@layer reset {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+  }
+}
+
+@layer foundations {
+  :root {
+    --color-canvas: #fbfaf7;
+    --color-surface: #ffffff;
+    --color-text: #17130f;
+    --color-border: #ded8cf;
+    --color-accent: __ACCENT__;
+    --ds--typography--ratio: 1.2;
+    --ds--typography--font-family--sans: __FONT__;
+    --ds--typography--font-size--base: 1.6rem;
+    --ds--typography--font-size--lg: calc(var(--ds--typography--font-size--base) * var(--ds--typography--ratio));
+    --ds--typography--font-size--2xl: calc(var(--ds--typography--font-size--base) * pow(var(--ds--typography--ratio), 3));
+    --ds--spacings--ratio: 1.25;
+    --ds--spacings--base: 1.6rem;
+    --ds--spacings--300: calc(var(--ds--spacings--base) / var(--ds--spacings--ratio));
+    --ds--spacings--400: var(--ds--spacings--base);
+    --ds--spacings--800: calc(var(--ds--spacings--base) * pow(var(--ds--spacings--ratio), 4));
+    --ds--radii--ratio: 1.5;
+    --ds--radii--base: __RADIUS__;
+    --ds--radii--panel: calc(var(--ds--radii--base) * var(--ds--radii--ratio));
+    --font-family-sans: var(--ds--typography--font-family--sans);
+    --font-size-0: var(--ds--typography--font-size--base);
+    --space-3: var(--ds--spacings--300);
+    --space-4: var(--ds--spacings--400);
+    --space-6: var(--ds--spacings--800);
+    --radius-panel: var(--ds--radii--panel);
+  }
+}
+
+@layer layout {
+  body {
+    color: var(--color-text);
+    background: var(--color-canvas);
+    font-family: var(--font-family-sans);
+    font-size: var(--font-size-0);
+  }
+
+  main {
+    display: grid;
+    gap: var(--space-6);
+    inline-size: min(100% - var(--space-4), 96rem);
+    padding-block: var(--space-6);
+    margin-inline: auto;
+  }
+
+  [data-layout="grid"] {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(22rem, 100%), 1fr));
+    gap: var(--space-4);
+  }
+
+  [data-layout="grid"] > article {
+    padding: var(--space-4);
+    border: 0.1rem solid var(--color-border);
+    border-radius: var(--radius-panel);
+    background: var(--color-surface);
+  }
+
+  h1 {
+    font-size: var(--ds--typography--font-size--2xl);
+    margin: 0;
+  }
+
+  h2,
+  h3,
+  p {
+    margin: 0;
+  }
+}
+
+@layer components {
+  /*
+  Example placeholder only:
+
+  [data-component="button"] {
+    color: var(--color-surface);
+    background: var(--color-accent);
+    padding: var(--space-3) var(--space-4);
+    border-radius: var(--ds--radii--base);
+  }
+
+  [data-component="card"] {
+    padding: var(--space-4);
+    border-radius: var(--radius-panel);
+    background: var(--color-surface);
+  }
+  */
+}
+
+@layer helpers {
+  [data-helper="flow"] > * + * {
+    margin-block-start: var(--space-3);
+  }
+}
