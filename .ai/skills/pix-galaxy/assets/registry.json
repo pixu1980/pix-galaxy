@@ -163,6 +163,119 @@
       }
     },
     {
+      "name": "pix-custom-element",
+      "priority": 93,
+      "description": "Build Custom Elements v1 in light DOM with adoptedStyleSheets and a metadata-driven decorator (componentDecorator) inside a static initialization block. Includes a CLI to scaffold new components.",
+      "triggers": {
+        "keywords": [
+          "custom element",
+          "custom elements",
+          "web component",
+          "web components",
+          "componentDecorator",
+          "scaffold component",
+          "create component",
+          "new component",
+          "is attribute",
+          "customized built-in",
+          "customized built-ins",
+          "static initialization block",
+          "adoptedStyleSheets",
+          "HTMLElement",
+          "HTMLDetailsElement",
+          "lifecycle callback",
+          "connectedCallback",
+          "attributeChangedCallback",
+          "shadow dom",
+          "shadowdom"
+        ],
+        "regex": [
+          "\\bcustomElements\\.define\\b",
+          "\\bextends\\s+HTML\\w*Element\\b",
+          "<\\w+\\s+is=\"[\\w-]+\"",
+          "\\bweb(?:\\s|-)?component\\b",
+          "\\bcustom(?:\\s|-)?element\\b",
+          "\\b(?:scaffold|create|generate|new)\\b.*\\bcomponent\\b",
+          "\\badoptedStyleSheets\\b",
+          "\\bstatic\\s*\\{"
+        ],
+        "fileExtensions": [
+          ".js",
+          ".mjs",
+          ".css",
+          ".html"
+        ],
+        "operations": [
+          "scaffold",
+          "create",
+          "generate",
+          "build"
+        ],
+        "intents": [
+          "custom element",
+          "web component",
+          "component",
+          "widget",
+          "lifecycle",
+          "shadow dom",
+          "is attribute"
+        ]
+      }
+    },
+    {
+      "name": "pix-color-scheme-switcher",
+      "priority": 99,
+      "description": "Add a Pix light/dark/system color-scheme switcher custom element with persisted preference, `data-color-scheme`, color-scheme meta, and system fallback.",
+      "triggers": {
+        "keywords": [
+          "pix-color-scheme-switcher",
+          "color scheme switcher",
+          "color-scheme switcher",
+          "theme switcher",
+          "theme toggle",
+          "theme mode",
+          "dark mode",
+          "light mode",
+          "system mode",
+          "prefers-color-scheme",
+          "data-color-scheme",
+          "meta color-scheme",
+          "color scheme meta"
+        ],
+        "regex": [
+          "\\b(?:add|create|build|install|scaffold|integrate)\\b.*\\b(?:color(?:\\s|-)?scheme|theme|dark mode|light mode)\\b.*\\b(?:switcher|toggle|control|selector)\\b",
+          "\\bprefers-color-scheme\\b",
+          "\\bdata-color-scheme\\b",
+          "\\bmeta\\[name=[\"']color-scheme[\"']\\]"
+        ],
+        "fileExtensions": [
+          ".html",
+          ".js",
+          ".mjs",
+          ".css"
+        ],
+        "operations": [
+          "add",
+          "create",
+          "scaffold",
+          "install",
+          "integrate",
+          "build",
+          "generate"
+        ],
+        "intents": [
+          "theme switching",
+          "theme control",
+          "color scheme",
+          "dark mode",
+          "light mode",
+          "system mode",
+          "persisted theme",
+          "prefers-color-scheme"
+        ]
+      }
+    },
+    {
       "name": "pix-a11y",
       "priority": 95,
       "description": "Integrate and run accessibility checks with axe-core and WCAG 2.2 AA guidance.",

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Pix Accessibility"
+  short_description: "Run axe-core a11y audits and WCAG 2.2 AA checks."
+  default_prompt: "Use $pix-a11y to audit this component for accessibility issues and generate a WCAG 2.2 AA compliance report."

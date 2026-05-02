@@ -12,7 +12,7 @@ const rootDir = resolve(__dirname, "..");
 const packageName = process.argv[2];
 
 if (!packageName) {
-  console.error("usage: node scripts/build-package.mjs <package-folder-name>");
+  console.error("usage: node scripts/build-package.js <package-folder-name>");
   process.exit(1);
 }
 

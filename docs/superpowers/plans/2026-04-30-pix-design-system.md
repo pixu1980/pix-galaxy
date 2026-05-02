@@ -17,8 +17,8 @@
 - Create `.github/skills/pix-design-system/references/ARCHITECTURE.md`: CSS layers, token hierarchy, file layout, and maintenance rules.
 - Create `.github/skills/pix-design-system/references/USAGE.md`: installer CLI usage and workflows.
 - Create `.github/skills/pix-design-system/references/EXAMPLES.md`: guide to bundled examples.
-- Create `.github/skills/pix-design-system/scripts/install-design-system.mjs`: fail-safe installer.
-- Create `.github/skills/pix-design-system/scripts/install-design-system.test.mjs`: installer tests.
+- Create `.github/skills/pix-design-system/scripts/install-design-system.js`: fail-safe installer.
+- Create `.github/skills/pix-design-system/scripts/install-design-system.test.js`: installer tests.
 - Create `.github/skills/pix-design-system/assets/design-system/app/**`: app-mode starter files copied to target root.
 - Create `.github/skills/pix-design-system/assets/design-system/package/**`: package-mode starter files copied to package destination.
 - Create `.github/skills/pix-design-system/assets/examples/app-basic/**`: app installation example.
@@ -29,7 +29,7 @@
 - Create `.github/instructions/pix-design-system.instructions.md`: GitHub instructions entrypoint.
 - Modify `.github/skills/pix-galaxy/SKILL.md`: add the routed skill to resources and targets.
 - Modify `.github/skills/pix-galaxy/assets/registry.json`: add registry object for `pix-design-system`.
-- Modify `.github/skills/pix-galaxy/scripts/select-skill.test.mjs`: add routing tests.
+- Modify `.github/skills/pix-galaxy/scripts/select-skill.test.js`: add routing tests.
 
 ## Shared Defaults
 
@@ -65,12 +65,12 @@ __PACKAGE_NAME__
 ### Task 1: Installer Test Coverage
 
 **Files:**
-- Create: `.github/skills/pix-design-system/scripts/install-design-system.test.mjs`
-- Create later: `.github/skills/pix-design-system/scripts/install-design-system.mjs`
+- Create: `.github/skills/pix-design-system/scripts/install-design-system.test.js`
+- Create later: `.github/skills/pix-design-system/scripts/install-design-system.js`
 
 - [ ] **Step 1: Write failing installer tests**
 
-Create `.github/skills/pix-design-system/scripts/install-design-system.test.mjs` with this test coverage:
+Create `.github/skills/pix-design-system/scripts/install-design-system.test.js` with this test coverage:
 
 ```js
 // @ts-check
@@ -85,7 +85,7 @@ import { fileURLToPath } from 'node:url';
 
 const currentFile = fileURLToPath(import.meta.url);
 const skillRoot = path.resolve(path.dirname(currentFile), '..');
-const scriptPath = path.join(skillRoot, 'scripts', 'install-design-system.mjs');
+const scriptPath = path.join(skillRoot, 'scripts', 'install-design-system.js');
 
 const createTarget = async () => {
   return mkdtemp(path.join(os.tmpdir(), 'pix-design-system-'));
@@ -220,22 +220,22 @@ test('copies optional docs site when requested', async () => {
 Run:
 
 ```bash
-node --test ./.github/skills/pix-design-system/scripts/install-design-system.test.mjs
+node --test ./.github/skills/pix-design-system/scripts/install-design-system.test.js
 ```
 
-Expected: FAIL because `.github/skills/pix-design-system/scripts/install-design-system.mjs` does not exist yet.
+Expected: FAIL because `.github/skills/pix-design-system/scripts/install-design-system.js` does not exist yet.
 
 ---
 
 ### Task 2: Installer Script
 
 **Files:**
-- Create: `.github/skills/pix-design-system/scripts/install-design-system.mjs`
-- Test: `.github/skills/pix-design-system/scripts/install-design-system.test.mjs`
+- Create: `.github/skills/pix-design-system/scripts/install-design-system.js`
+- Test: `.github/skills/pix-design-system/scripts/install-design-system.test.js`
 
 - [ ] **Step 1: Create installer implementation**
 
-Create `.github/skills/pix-design-system/scripts/install-design-system.mjs` with these exported helpers and CLI behavior:
+Create `.github/skills/pix-design-system/scripts/install-design-system.js` with these exported helpers and CLI behavior:
 
 ```js
 // @ts-check
@@ -451,7 +451,7 @@ if (invokedFile === currentFile) {
 Run:
 
 ```bash
-node --test ./.github/skills/pix-design-system/scripts/install-design-system.test.mjs
+node --test ./.github/skills/pix-design-system/scripts/install-design-system.test.js
 ```
 
 Expected: FAIL because asset templates do not exist yet.
@@ -472,7 +472,7 @@ Expected: FAIL because asset templates do not exist yet.
 - Create: `.github/skills/pix-design-system/assets/design-system/app/src/styles/components.css`
 - Create: `.github/skills/pix-design-system/assets/design-system/app/src/styles/helpers.css`
 - Create: `.github/skills/pix-design-system/assets/design-system/app/docs/design-system.md`
-- Test: `.github/skills/pix-design-system/scripts/install-design-system.test.mjs`
+- Test: `.github/skills/pix-design-system/scripts/install-design-system.test.js`
 
 - [ ] **Step 1: Create app CSS entrypoint**
 
@@ -745,7 +745,7 @@ The CSS entrypoint declares `@layer reset, foundations, layout, components, help
 Run:
 
 ```bash
-node --test ./.github/skills/pix-design-system/scripts/install-design-system.test.mjs
+node --test ./.github/skills/pix-design-system/scripts/install-design-system.test.js
 ```
 
 Expected: package-mode tests still fail because package starter assets do not exist.
@@ -768,8 +768,8 @@ Expected: package-mode tests still fail because package starter assets do not ex
 - Create: `.github/skills/pix-design-system/assets/design-system/package/src/components.css`
 - Create: `.github/skills/pix-design-system/assets/design-system/package/src/helpers.css`
 - Create: `.github/skills/pix-design-system/assets/design-system/package/docs/design-system.md`
-- Create: `.github/skills/pix-design-system/assets/design-system/package/test/design-system.test.mjs`
-- Test: `.github/skills/pix-design-system/scripts/install-design-system.test.mjs`
+- Create: `.github/skills/pix-design-system/assets/design-system/package/test/design-system.test.js`
+- Test: `.github/skills/pix-design-system/scripts/install-design-system.test.js`
 
 - [ ] **Step 1: Create package metadata**
 
@@ -795,7 +795,7 @@ Create package metadata with replacement tokens:
     "README.md"
   ],
   "scripts": {
-    "test": "node --test test/*.test.mjs"
+    "test": "node --test test/*.test.js"
   }
 }
 ```
@@ -830,7 +830,7 @@ Create `README.md` and `docs/design-system.md` with install usage:
 Import the design system CSS from `__PACKAGE_NAME__/css`.
 ```
 
-Create `.github/skills/pix-design-system/assets/design-system/package/test/design-system.test.mjs`:
+Create `.github/skills/pix-design-system/assets/design-system/package/test/design-system.test.js`:
 
 ```js
 // @ts-check
@@ -850,7 +850,7 @@ test('package CSS declares stable layers', async () => {
 Run:
 
 ```bash
-node --test ./.github/skills/pix-design-system/scripts/install-design-system.test.mjs
+node --test ./.github/skills/pix-design-system/scripts/install-design-system.test.js
 ```
 
 Expected: docs-site test still fails because docs-site assets do not exist.
@@ -869,7 +869,7 @@ Expected: docs-site test still fails because docs-site assets do not exist.
 - Create: `.github/skills/pix-design-system/assets/examples/web-component-theme/pix-theme-card.css`
 - Create: `.github/skills/pix-design-system/assets/examples/docs-site/index.html`
 - Create: `.github/skills/pix-design-system/assets/examples/docs-site/styles.css`
-- Test: `.github/skills/pix-design-system/scripts/install-design-system.test.mjs`
+- Test: `.github/skills/pix-design-system/scripts/install-design-system.test.js`
 
 - [ ] **Step 1: Create app-basic example**
 
@@ -965,7 +965,7 @@ Required HTML heading:
 Run:
 
 ```bash
-node --test ./.github/skills/pix-design-system/scripts/install-design-system.test.mjs
+node --test ./.github/skills/pix-design-system/scripts/install-design-system.test.js
 ```
 
 Expected: PASS.
@@ -1008,7 +1008,7 @@ Use this skill for design system setup, token foundations, theme baselines, reus
 5. Whether to include the docs-site scaffold.
 
 ## Resources
-- Installer: [./scripts/install-design-system.mjs](./scripts/install-design-system.mjs)
+- Installer: [./scripts/install-design-system.js](./scripts/install-design-system.js)
 - Foundations reference: [./references/FOUNDATIONS.md](./references/FOUNDATIONS.md)
 - Architecture reference: [./references/ARCHITECTURE.md](./references/ARCHITECTURE.md)
 - Usage reference: [./references/USAGE.md](./references/USAGE.md)
@@ -1118,10 +1118,10 @@ Mandatory references:
 - [examples reference](../skills/pix-design-system/references/EXAMPLES.md)
 
 Default command:
-- `node ./.github/skills/pix-design-system/scripts/install-design-system.mjs --target "<project-root>"`
+- `node ./.github/skills/pix-design-system/scripts/install-design-system.js --target "<project-root>"`
 
 Package command:
-- `node ./.github/skills/pix-design-system/scripts/install-design-system.mjs --target "<project-root>" --mode package --package-name "@pix-galaxy/pix-design-system" --dest "packages/pix-design-system"`
+- `node ./.github/skills/pix-design-system/scripts/install-design-system.js --target "<project-root>" --mode package --package-name "@pix-galaxy/pix-design-system" --dest "packages/pix-design-system"`
 
 Hard rules:
 - Native CSS only.
@@ -1145,7 +1145,7 @@ Create `.github/instructions/pix-design-system.instructions.md`:
 ---
 description: "Use when creating or editing design system CSS, tokens, foundations, layout primitives, helpers, docs, examples, or reusable design-system packages."
 name: "pix Design System"
-applyTo: "**/*.{css,html,js,mjs,json,md}"
+applyTo: "**/*.{css,html,js,js,json,md}"
 ---
 # pix Design System Instructions
 
@@ -1177,11 +1177,11 @@ Expected: no matches.
 **Files:**
 - Modify: `.github/skills/pix-galaxy/SKILL.md`
 - Modify: `.github/skills/pix-galaxy/assets/registry.json`
-- Modify: `.github/skills/pix-galaxy/scripts/select-skill.test.mjs`
+- Modify: `.github/skills/pix-galaxy/scripts/select-skill.test.js`
 
 - [ ] **Step 1: Add failing router tests**
 
-Append tests to `.github/skills/pix-galaxy/scripts/select-skill.test.mjs`:
+Append tests to `.github/skills/pix-galaxy/scripts/select-skill.test.js`:
 
 ```js
 test('routes to pix-design-system for design system foundations requests', async () => {
@@ -1217,7 +1217,7 @@ test('keeps generic CSS styleguide cleanup on pix-styleguides', async () => {
 Run:
 
 ```bash
-node --test ./.github/skills/pix-galaxy/scripts/select-skill.test.mjs
+node --test ./.github/skills/pix-galaxy/scripts/select-skill.test.js
 ```
 
 Expected: first new test FAILS because registry does not include `pix-design-system`.
@@ -1259,7 +1259,7 @@ Add a skill object to `.github/skills/pix-galaxy/assets/registry.json`:
       ".html",
       ".md",
       ".json",
-      ".mjs"
+      ".js"
     ],
     "operations": [
       "create",
@@ -1307,7 +1307,7 @@ Add resource:
 Run:
 
 ```bash
-node --test ./.github/skills/pix-galaxy/scripts/select-skill.test.mjs
+node --test ./.github/skills/pix-galaxy/scripts/select-skill.test.js
 ```
 
 Expected: PASS.
@@ -1324,7 +1324,7 @@ Expected: PASS.
 Run:
 
 ```bash
-node --test ./.github/skills/pix-design-system/scripts/install-design-system.test.mjs
+node --test ./.github/skills/pix-design-system/scripts/install-design-system.test.js
 ```
 
 Expected: PASS.
@@ -1334,7 +1334,7 @@ Expected: PASS.
 Run:
 
 ```bash
-node --test ./.github/skills/pix-galaxy/scripts/select-skill.test.mjs
+node --test ./.github/skills/pix-galaxy/scripts/select-skill.test.js
 ```
 
 Expected: PASS.
