@@ -2,6 +2,8 @@
 
 ## TypeScript
 
+Highlight TypeScript helpers in-place with the customized built-in `pre[is="pix-highlighter"]` element.
+
 ```ts
 type ThemeName = 'default' | 'ember' | 'paper';
 
@@ -12,14 +14,17 @@ export function pickTheme(name: ThemeName) {
 
 ## HTML
 
+Use the highlighter directly in docs pages or component demos to enhance raw code samples.
+
 ```html
-<section class="hero">
-  <h1>pix-galaxy</h1>
-  <button type="button">Launch</button>
-</section>
+<pre is="pix-highlighter" data-lang="html">
+  <code><section class="hero">\n  <h1>pix-galaxy</h1>\n</section></code>
+</pre>
 ```
 
 ## CSS
+
+Theme-aware token colors also apply to stylesheets rendered inside the component.
 
 ```css
 .hero {
@@ -30,12 +35,12 @@ export function pickTheme(name: ThemeName) {
 }
 ```
 
-## JSON
+## Programmatic Theme
 
-```json
-{
-  "suite": "pix-galaxy",
-  "component": "pix-highlighter",
-  "release": true
-}
+Apply one of the exported built-in themes when you want every enhanced block on the page to switch together.
+
+```js
+import { PixHighlighter } from '@pix-galaxy/pix-highlighter';
+
+PixHighlighter.applyTheme('atlas');
 ```

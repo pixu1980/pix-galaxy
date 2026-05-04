@@ -1,0 +1,483 @@
+@layer pix-galaxy {
+  @layer pix-highlighter {
+    :root {
+      --pix-highlighter--toolbar-surface: color-mix(in srgb, var(--pix-highlighter--bg) 58%, var(--pix-ds-surface-elevated) 42%);
+      --pix-highlighter--toolbar-border: color-mix(in srgb, var(--pix-highlighter--fg) 40%, transparent);
+      --pix-highlighter--toolbar-color: var(--pix-highlighter--fg);
+      --pix-highlighter--toolbar-field-bg: color-mix(in srgb, var(--pix-highlighter--fg) 18%, var(--pix-highlighter--bg) 82%);
+      --pix-highlighter--toolbar-field-hover-bg: color-mix(in srgb, var(--pix-highlighter--fg) 28%, var(--pix-highlighter--bg) 72%);
+      --pix-highlighter--toolbar-shadow: var(--pix-ds-elevation-2);
+      --pix-highlighter--toolbar-menu-bg: color-mix(
+        in srgb,
+        var(--pix-highlighter--bg) 52%,
+        var(--pix-ds-surface-elevated) 48%
+      );
+      --pix-highlighter--toolbar-menu-accent: color-mix(in srgb, var(--pix-highlighter--fg) 32%, var(--pix-highlighter--bg) 68%);
+      --pix-highlighter--anchor-offset: var(--pix-ds-space-2);
+    }
+
+    ::highlight(pix-kw),
+    pre[is="pix-highlighter"] .pix-token--kw {
+      color: var(--pix-highlighter--kw);
+    }
+
+    ::highlight(pix-str),
+    pre[is="pix-highlighter"] .pix-token--str {
+      color: var(--pix-highlighter--str);
+    }
+
+    ::highlight(pix-num),
+    pre[is="pix-highlighter"] .pix-token--num {
+      color: var(--pix-highlighter--num);
+    }
+
+    ::highlight(pix-com),
+    pre[is="pix-highlighter"] .pix-token--com {
+      color: var(--pix-highlighter--com);
+    }
+
+    ::highlight(pix-id),
+    pre[is="pix-highlighter"] .pix-token--id {
+      color: var(--pix-highlighter--id);
+    }
+
+    ::highlight(pix-fn),
+    pre[is="pix-highlighter"] .pix-token--fn {
+      color: var(--pix-highlighter--fn);
+    }
+
+    ::highlight(pix-op),
+    pre[is="pix-highlighter"] .pix-token--op {
+      color: var(--pix-highlighter--op);
+    }
+
+    ::highlight(pix-tag),
+    pre[is="pix-highlighter"] .pix-token--tag {
+      color: var(--pix-highlighter--tag);
+    }
+
+    ::highlight(pix-attr),
+    pre[is="pix-highlighter"] .pix-token--attr {
+      color: var(--pix-highlighter--attr);
+    }
+
+    ::highlight(pix-key),
+    pre[is="pix-highlighter"] .pix-token--key {
+      color: var(--pix-highlighter--key);
+    }
+
+    ::highlight(pix-var),
+    pre[is="pix-highlighter"] .pix-token--var {
+      color: var(--pix-highlighter--var);
+    }
+
+    ::highlight(pix-mac),
+    pre[is="pix-highlighter"] .pix-token--mac {
+      color: var(--pix-highlighter--mac);
+    }
+
+    ::highlight(pix-pp),
+    pre[is="pix-highlighter"] .pix-token--pp {
+      color: var(--pix-highlighter--pp);
+    }
+
+    ::highlight(pix-prop),
+    pre[is="pix-highlighter"] .pix-token--prop {
+      color: var(--pix-highlighter--prop);
+    }
+
+    ::highlight(pix-type),
+    pre[is="pix-highlighter"] .pix-token--type {
+      color: var(--pix-highlighter--type);
+    }
+
+    ::highlight(pix-mdh),
+    pre[is="pix-highlighter"] .pix-token--mdh {
+      color: var(--pix-highlighter--mdh);
+    }
+
+    ::highlight(pix-mde),
+    pre[is="pix-highlighter"] .pix-token--mde {
+      color: var(--pix-highlighter--mde);
+    }
+
+    ::highlight(pix-mds),
+    pre[is="pix-highlighter"] .pix-token--mds {
+      color: var(--pix-highlighter--mds);
+    }
+
+    ::highlight(pix-mdc),
+    pre[is="pix-highlighter"] .pix-token--mdc {
+      color: var(--pix-highlighter--mdc);
+    }
+
+    ::highlight(pix-mdl),
+    pre[is="pix-highlighter"] .pix-token--mdl {
+      color: var(--pix-highlighter--mdl);
+    }
+
+    ::highlight(pix-mdbq),
+    pre[is="pix-highlighter"] .pix-token--mdbq {
+      color: var(--pix-highlighter--mdbq);
+    }
+
+    ::highlight(pix-mdli),
+    pre[is="pix-highlighter"] .pix-token--mdli {
+      color: var(--pix-highlighter--mdli);
+    }
+
+    ::highlight(pix-mdhr),
+    pre[is="pix-highlighter"] .pix-token--mdhr {
+      color: var(--pix-highlighter--mdhr);
+    }
+
+    ::highlight(pix-mdimg),
+    pre[is="pix-highlighter"] .pix-token--mdimg {
+      color: var(--pix-highlighter--mdimg);
+    }
+
+    pre[is="pix-highlighter"] {
+      position: relative;
+      display: block;
+      overflow: auto;
+      white-space: pre;
+      word-spacing: normal;
+      word-break: normal;
+      word-wrap: normal;
+      hyphens: none;
+      padding: calc(var(--pix-ds-space-8) + var(--pix-ds-space-1)) var(--pix-ds-space-4) var(--pix-ds-space-4);
+      border: 1px solid color-mix(in srgb, var(--pix-highlighter--fg) 10%, transparent);
+      border-radius: var(--pix-ds-radius-lg);
+      background-color: var(--pix-highlighter--bg);
+      color: var(--pix-highlighter--fg);
+      font-family: var(--pix-highlighter--font-family, var(--pix-ds-font-mono));
+      font-size: var(--pix-ds-text-md);
+      line-height: var(--pix-highlighter--line-height, var(--pix-ds-leading-normal));
+      tab-size: var(--pix-highlighter--tab-size, 2);
+      text-shadow: var(--pix-highlighter--text-shadow, none);
+      box-shadow: var(--pix-ds-elevation-1);
+      scrollbar-color: color-mix(in srgb, var(--pix-highlighter--fg) 26%, transparent) transparent;
+      color-scheme: inherit;
+    }
+
+    pre[is="pix-highlighter"] code {
+      display: block;
+      color: inherit;
+      background: transparent;
+    }
+
+    pre[is="pix-highlighter"] .pix-highlighter__sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    pre[is="pix-highlighter"] [data-pix-highlighter-toolbar] {
+      position: absolute;
+      inset-block-start: var(--pix-ds-space-3);
+      inset-inline: var(--pix-ds-space-3);
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--pix-ds-space-3);
+      white-space: normal;
+      font-family: var(--pix-ds-font-sans);
+    }
+
+    pre[is="pix-highlighter"] details[data-pix-highlighter-theme-picker] {
+      position: relative;
+      margin: 0;
+      z-index: 3;
+    }
+
+    pre[is="pix-highlighter"] details[data-pix-highlighter-theme-picker] > summary::-webkit-details-marker {
+      display: none;
+    }
+
+    pre[is="pix-highlighter"] details[data-pix-highlighter-theme-picker] > summary,
+    pre[is="pix-highlighter"] button[data-pix-highlighter-copy] {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--pix-ds-space-2);
+      min-height: 2.75rem;
+      min-width: 2.75rem;
+      padding: 0.55rem 0.95rem;
+      border: 1px solid var(--pix-highlighter--toolbar-border);
+      border-radius: var(--pix-ds-radius-pill);
+      background:
+        linear-gradient(
+          180deg,
+          color-mix(in srgb, var(--pix-highlighter--toolbar-surface) 64%, white 36%),
+          var(--pix-highlighter--toolbar-surface)
+        );
+      box-shadow:
+        inset 0 1px 0 color-mix(in srgb, var(--pix-highlighter--fg) 14%, white 86%),
+        var(--pix-highlighter--toolbar-shadow);
+      color: var(--pix-highlighter--toolbar-color);
+      font: inherit;
+      font-weight: 600;
+      outline: 2px solid transparent;
+      outline-offset: 2px;
+      cursor: pointer;
+      touch-action: manipulation;
+      transition:
+        background-color var(--pix-ds-duration-base) var(--pix-ds-ease-standard),
+        border-color var(--pix-ds-duration-base) var(--pix-ds-ease-standard),
+        color var(--pix-ds-duration-base) var(--pix-ds-ease-standard),
+        transform var(--pix-ds-duration-fast) var(--pix-ds-ease-emphasized),
+        box-shadow var(--pix-ds-duration-fast) var(--pix-ds-ease-standard);
+    }
+
+    pre[is="pix-highlighter"] details[data-pix-highlighter-theme-picker] > summary {
+      appearance: none;
+      list-style: none;
+      user-select: none;
+      position: relative;
+    }
+
+    pre[is="pix-highlighter"] details[data-pix-highlighter-theme-picker][open] {
+      z-index: 4;
+    }
+
+    pre[is="pix-highlighter"] [data-pix-highlighter-theme-value] {
+      font-size: var(--pix-ds-text-sm);
+      font-weight: 600;
+      line-height: 1;
+    }
+
+    pre[is="pix-highlighter"] details[data-pix-highlighter-theme-picker] > summary svg,
+    pre[is="pix-highlighter"] button[data-pix-highlighter-copy] svg {
+      width: 1rem;
+      height: 1rem;
+      flex: 0 0 1rem;
+    }
+
+    pre[is="pix-highlighter"] [data-pix-highlighter-theme-chevron] {
+      display: inline-flex;
+      margin-inline-start: 0.1rem;
+      transition: transform var(--pix-ds-duration-fast) var(--pix-ds-ease-emphasized);
+    }
+
+    pre[is="pix-highlighter"] details[data-pix-highlighter-theme-picker][open] [data-pix-highlighter-theme-chevron] {
+      transform: rotate(180deg);
+    }
+
+    pre[is="pix-highlighter"] details[data-pix-highlighter-theme-picker] > summary:hover,
+    pre[is="pix-highlighter"] button[data-pix-highlighter-copy]:hover:not(:disabled) {
+      border-color: color-mix(in srgb, var(--pix-highlighter--toolbar-color) 46%, transparent);
+      background:
+        linear-gradient(
+          180deg,
+          color-mix(in srgb, var(--pix-highlighter--toolbar-field-hover-bg) 72%, white 28%),
+          var(--pix-highlighter--toolbar-field-hover-bg)
+        );
+      transform: translateY(var(--pix-ds-lift-hover));
+    }
+
+    pre[is="pix-highlighter"] details[data-pix-highlighter-theme-picker][open] > summary {
+      border-color: color-mix(in srgb, var(--pix-highlighter--toolbar-color) 52%, transparent);
+      background:
+        linear-gradient(
+          180deg,
+          color-mix(in srgb, var(--pix-highlighter--toolbar-field-hover-bg) 68%, white 32%),
+          var(--pix-highlighter--toolbar-field-bg)
+        );
+    }
+
+    pre[is="pix-highlighter"] details[data-pix-highlighter-theme-picker] > summary:active,
+    pre[is="pix-highlighter"] button[data-pix-highlighter-copy]:active:not(:disabled) {
+      transform: scale(var(--pix-ds-scale-press));
+    }
+
+    pre[is="pix-highlighter"] details[data-pix-highlighter-theme-picker] > summary:focus-visible,
+    pre[is="pix-highlighter"] button[data-pix-highlighter-copy]:focus-visible,
+    button[data-pix-highlighter-theme-option]:focus-visible {
+      outline-color: var(--pix-ds-focus);
+      border-color: color-mix(in srgb, var(--pix-ds-focus) 70%, var(--pix-highlighter--toolbar-color) 30%);
+      box-shadow: var(--pix-ds-focus-ring), var(--pix-highlighter--toolbar-shadow);
+    }
+
+    [data-pix-highlighter-floating-layer] {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 2147483600;
+      isolation: isolate;
+    }
+
+    [data-pix-highlighter-theme-list] {
+      position: fixed;
+      inset: auto;
+      z-index: 1;
+      pointer-events: auto;
+      display: block;
+      min-width: 14rem;
+      max-width: min(22rem, calc(100vw - 1.5rem));
+      overflow: auto;
+      scrollbar-gutter: stable;
+      padding: var(--pix-ds-space-2);
+      margin: 0;
+      border: 1px solid var(--pix-highlighter--toolbar-border);
+      border-radius: var(--pix-ds-radius-lg);
+      background:
+        linear-gradient(
+          180deg,
+          color-mix(in srgb, var(--pix-highlighter--toolbar-menu-bg) 66%, white 34%),
+          var(--pix-highlighter--toolbar-menu-bg)
+        );
+      box-shadow:
+        inset 0 1px 0 color-mix(in srgb, var(--pix-highlighter--fg) 12%, white 88%),
+        var(--pix-highlighter--toolbar-shadow);
+      color: var(--pix-highlighter--toolbar-color, var(--pix-ds-text-strong));
+      font-family: var(--pix-ds-font-sans);
+    }
+
+    [data-pix-highlighter-theme-list]:focus-within {
+      box-shadow: var(--pix-ds-focus-ring), var(--pix-highlighter--toolbar-shadow);
+    }
+
+    [data-pix-highlighter-theme-list] menu {
+      display: grid;
+      gap: var(--pix-ds-space-1);
+      padding: 0;
+      margin: 0;
+      background: transparent;
+      border: 0;
+      list-style: none;
+    }
+
+    [data-pix-highlighter-theme-list][hidden] {
+      display: none;
+    }
+
+    @supports (anchor-name: --pix-highlighter--anchor) and (position-anchor: --pix-highlighter--anchor) {
+      [data-pix-highlighter-theme-list] {
+        left: anchor(left);
+        top: calc(anchor(bottom) + var(--pix-highlighter--anchor-offset));
+        min-width: max(14rem, anchor-size(width));
+        max-height: min(22rem, calc(100vh - 1.5rem));
+        position-try-fallbacks: flip-block, flip-inline;
+      }
+    }
+
+    button[data-pix-highlighter-theme-option] {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      width: 100%;
+      gap: var(--pix-ds-space-3);
+      min-height: 2.75rem;
+      padding: 0.55rem 0.75rem;
+      border: 1px solid transparent;
+      border-radius: var(--pix-ds-radius-md);
+      background:
+        linear-gradient(
+          180deg,
+          color-mix(in srgb, var(--pix-highlighter--toolbar-menu-bg) 76%, white 24%),
+          color-mix(in srgb, var(--pix-highlighter--toolbar-menu-bg) 90%, black 10%)
+        );
+      color: var(--pix-highlighter--toolbar-color);
+      font: inherit;
+      font-size: var(--pix-ds-text-sm);
+      font-weight: 600;
+      text-align: left;
+      outline: 2px solid transparent;
+      outline-offset: 2px;
+      cursor: pointer;
+      touch-action: manipulation;
+      transition:
+        background-color var(--pix-ds-duration-fast) var(--pix-ds-ease-standard),
+        border-color var(--pix-ds-duration-fast) var(--pix-ds-ease-standard),
+        color var(--pix-ds-duration-fast) var(--pix-ds-ease-standard),
+        transform var(--pix-ds-duration-fast) var(--pix-ds-ease-emphasized);
+    }
+
+    button[data-pix-highlighter-theme-option] span:last-child {
+      opacity: 0.56;
+      font-size: 0.72rem;
+      letter-spacing: var(--pix-ds-tracking-wide);
+      text-transform: uppercase;
+    }
+
+    button[data-pix-highlighter-theme-option]:hover,
+    button[data-pix-highlighter-theme-option][data-selected] {
+      border-color: var(--pix-highlighter--toolbar-border);
+      background:
+        linear-gradient(
+          180deg,
+          color-mix(in srgb, var(--pix-highlighter--toolbar-menu-accent) 72%, white 28%),
+          var(--pix-highlighter--toolbar-menu-accent)
+        );
+      box-shadow: inset 0 1px 0 color-mix(in srgb, var(--pix-highlighter--fg) 10%, white 90%);
+      transform: translateY(var(--pix-ds-lift-hover));
+    }
+
+    pre[is="pix-highlighter"] button[data-pix-highlighter-copy] {
+      width: 2.75rem;
+      min-width: 2.75rem;
+      padding-inline: 0;
+    }
+
+    pre[is="pix-highlighter"] button[data-pix-highlighter-copy][data-copy-state="copied"] {
+      color: color-mix(in srgb, var(--pix-highlighter--fg) 92%, #7dffca 8%);
+    }
+
+    pre[is="pix-highlighter"] button[data-pix-highlighter-copy][data-copy-state="error"] {
+      color: color-mix(in srgb, var(--pix-highlighter--fg) 84%, #ff7f7f 16%);
+    }
+
+    pre[is="pix-highlighter"] button[data-pix-highlighter-copy]:disabled {
+      cursor: not-allowed;
+      opacity: 0.6;
+    }
+
+    @media (max-width: 40rem) {
+      pre[is="pix-highlighter"] {
+        padding-top: calc(var(--pix-ds-space-8) + var(--pix-ds-space-7));
+      }
+
+      pre[is="pix-highlighter"] [data-pix-highlighter-toolbar] {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      pre[is="pix-highlighter"] details[data-pix-highlighter-theme-picker] > summary,
+      pre[is="pix-highlighter"] button[data-pix-highlighter-copy] {
+        width: 100%;
+      }
+
+      pre[is="pix-highlighter"] button[data-pix-highlighter-copy] {
+        min-width: 100%;
+      }
+
+      [data-pix-highlighter-theme-list] {
+        max-width: calc(100vw - 1.5rem);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      pre[is="pix-highlighter"] details[data-pix-highlighter-theme-picker] > summary,
+      pre[is="pix-highlighter"] button[data-pix-highlighter-copy],
+      button[data-pix-highlighter-theme-option] {
+        transition: none;
+      }
+
+      pre[is="pix-highlighter"] details[data-pix-highlighter-theme-picker] > summary:hover,
+      pre[is="pix-highlighter"] button[data-pix-highlighter-copy]:hover:not(:disabled),
+      button[data-pix-highlighter-theme-option]:hover,
+      button[data-pix-highlighter-theme-option][data-selected],
+      pre[is="pix-highlighter"] details[data-pix-highlighter-theme-picker] > summary:active,
+      pre[is="pix-highlighter"] button[data-pix-highlighter-copy]:active:not(:disabled) {
+        transform: none;
+      }
+    }
+  }
+}

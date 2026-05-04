@@ -1,2 +1,2 @@
-export { PixHighlighter, normalizeVariant } from "./components/PixHighlighter/pix-highlighter.js";
+export * from "./components/index.js";
 //# sourceMappingURL=index.d.ts.map

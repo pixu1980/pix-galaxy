@@ -1,7 +1,7 @@
 {
   "name": "@pix-galaxy/pix-highlighter",
   "version": "0.0.1",
-  "description": "Syntax-highlighting Web Component scaffold for the pix-galaxy monorepo.",
+  "description": "Syntax-highlighting Web Component for the pix-galaxy suite.",
   "type": "module",
   "files": [
     "dist",
@@ -21,7 +21,7 @@
   "scripts": {
     "clean": "node ../../scripts/_clean.js pix-highlighter",
     "build": "node ../../scripts/_build-package.js pix-highlighter",
-    "test": "node --test tests/index.js",
+    "test": "pnpm docs:build && node --test --import ./tests/_register-loader.mjs tests/index.js",
     "typecheck": "pnpm exec tsc -p tsconfig.types.json --noEmit",
     "validate": "node ../../scripts/_validate-package.js pix-highlighter",
     "docs:build": "node ../../scripts/_build-docs.js pix-highlighter",
