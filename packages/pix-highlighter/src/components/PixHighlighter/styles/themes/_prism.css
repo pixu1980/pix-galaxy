@@ -1,0 +1,39 @@
+@layer pix-galaxy {
+  @layer pix-highlighter {
+    @layer themes {
+      :root[data-pix-highlighter-theme="prism"] pre[is="pix-highlighter"] {
+        --pix-highlighter--bg: light-dark(#f5f2f0, #16181d);
+        --pix-highlighter--fg: light-dark(#111111, #f3f4f6);
+        --pix-highlighter--kw: light-dark(#0077aa, #7dd3fc);
+        --pix-highlighter--str: light-dark(#669900, #a3e635);
+        --pix-highlighter--num: light-dark(#990055, #f472b6);
+        --pix-highlighter--com: light-dark(#708090, #94a3b8);
+        --pix-highlighter--id: light-dark(#0f766e, #67e8f9);
+        --pix-highlighter--fn: light-dark(#dd4a68, #fb7185);
+        --pix-highlighter--op: light-dark(#9a6e3a, #fde68a);
+        --pix-highlighter--tag: light-dark(#990055, #f472b6);
+        --pix-highlighter--attr: light-dark(#669900, #a3e635);
+        --pix-highlighter--key: light-dark(#990055, #c084fc);
+        --pix-highlighter--var: light-dark(#0f766e, #67e8f9);
+        --pix-highlighter--mac: light-dark(#dd4a68, #fb7185);
+        --pix-highlighter--pp: light-dark(#708090, #94a3b8);
+        --pix-highlighter--prop: light-dark(#0f766e, #67e8f9);
+        --pix-highlighter--type: light-dark(#dd4a68, #fb7185);
+        --pix-highlighter--mdh: light-dark(#0077aa, #7dd3fc);
+        --pix-highlighter--mde: light-dark(#dd4a68, #fb7185);
+        --pix-highlighter--mds: light-dark(#111111, #f3f4f6);
+        --pix-highlighter--mdc: light-dark(#669900, #a3e635);
+        --pix-highlighter--mdl: light-dark(#0077aa, #7dd3fc);
+        --pix-highlighter--mdbq: light-dark(#708090, #94a3b8);
+        --pix-highlighter--mdli: light-dark(#990055, #c084fc);
+        --pix-highlighter--mdhr: light-dark(#999999, #475569);
+        --pix-highlighter--mdimg: light-dark(#ee9900, #fbbf24);
+        --pix-highlighter--tab-size: 2;
+        --pix-highlighter--font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
+        --pix-highlighter--line-height: 1.5;
+        --pix-highlighter--text-shadow: light-dark(0 1px white, none);
+        color-scheme: light dark;
+      }
+    }
+  }
+}

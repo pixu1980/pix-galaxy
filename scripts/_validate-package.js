@@ -16,6 +16,18 @@ export const REQUIRED_SCRIPTS = Object.freeze([
   'docs:serve',
 ]);
 
+export const REQUIRED_PACKAGE_FILES = Object.freeze([
+  'package.json',
+  'src/index.js',
+  'README.md',
+  'docs/content/getting-started.md',
+  'docs/content/examples.md',
+  'docs/content/api.md',
+  'docs/content/releasing.md',
+  'tsconfig.types.json',
+  'tests/index.js',
+]);
+
 /**
  * @param {Record<string, any>} pkg
  * @returns {{ ok: boolean; errors: string[] }}
@@ -60,17 +72,8 @@ export function validatePackage(targetPackage) {
 
   logTitle(`Validating ${targetPackage}`);
 
-  const requiredFiles = [
-    'package.json',
-    'src/index.js',
-    'README.md',
-    'docs/index.html',
-    'tsconfig.types.json',
-    'tests/index.js',
-  ];
-
   let hasErrors = false;
-  for (const relativePath of requiredFiles) {
+  for (const relativePath of REQUIRED_PACKAGE_FILES) {
     const full = join(packageDir, relativePath);
     if (!existsSync(full)) {
       log('error', `Missing ${relativePath}`);

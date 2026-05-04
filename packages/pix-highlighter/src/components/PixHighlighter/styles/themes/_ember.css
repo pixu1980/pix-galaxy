@@ -1,0 +1,38 @@
+@layer pix-galaxy {
+  @layer pix-highlighter {
+    @layer themes {
+      :root[data-pix-highlighter-theme="ember"] pre[is="pix-highlighter"] {
+        --pix-highlighter--bg: light-dark(#fff7f1, #1b1410);
+        --pix-highlighter--fg: light-dark(#3b2217, #f7ede2);
+        --pix-highlighter--kw: light-dark(#dc2626, #ff7b72);
+        --pix-highlighter--str: light-dark(#b45309, #ffd166);
+        --pix-highlighter--num: light-dark(#ea580c, #ff9f1c);
+        --pix-highlighter--com: light-dark(#8d7462, #8d7462);
+        --pix-highlighter--id: light-dark(#0284c7, #67e8f9);
+        --pix-highlighter--fn: light-dark(#0284c7, #67e8f9);
+        --pix-highlighter--op: light-dark(#ca8a04, #fbbf24);
+        --pix-highlighter--tag: light-dark(#ea580c, #f97316);
+        --pix-highlighter--attr: light-dark(#0891b2, #22d3ee);
+        --pix-highlighter--key: light-dark(#e11d48, #fb7185);
+        --pix-highlighter--var: light-dark(#0284c7, #67e8f9);
+        --pix-highlighter--mac: light-dark(#db2777, #f472b6);
+        --pix-highlighter--pp: light-dark(#ca8a04, #fde68a);
+        --pix-highlighter--prop: light-dark(#e11d48, #fca5a5);
+        --pix-highlighter--type: light-dark(#0f766e, #5eead4);
+        --pix-highlighter--mdh: light-dark(#dc2626, #ff7b72);
+        --pix-highlighter--mde: light-dark(#ea580c, #f97316);
+        --pix-highlighter--mds: light-dark(#b45309, #ffd166);
+        --pix-highlighter--mdc: light-dark(#0284c7, #67e8f9);
+        --pix-highlighter--mdl: light-dark(#0891b2, #22d3ee);
+        --pix-highlighter--mdbq: light-dark(#8d7462, #baa08f);
+        --pix-highlighter--mdli: light-dark(#0284c7, #67e8f9);
+        --pix-highlighter--mdhr: light-dark(#edd4c0, #5f4538);
+        --pix-highlighter--mdimg: light-dark(#e11d48, #fb7185);
+        --pix-highlighter--tab-size: 2;
+        --pix-highlighter--line-height: 1.55;
+        --pix-highlighter--text-shadow: light-dark(none, 0 0 20px rgba(255, 123, 114, 0.08));
+        color-scheme: light dark;
+      }
+    }
+  }
+}

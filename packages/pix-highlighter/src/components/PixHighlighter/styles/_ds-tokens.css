@@ -1,0 +1,112 @@
+@layer pix-galaxy {
+  @layer design-system {
+    :root {
+      color-scheme: light dark;
+
+      --pix-ds-color-ink-950: oklch(0.21 0.015 60);
+      --pix-ds-color-ink-800: oklch(0.32 0.017 60);
+      --pix-ds-color-ink-600: oklch(0.5 0.014 62);
+      --pix-ds-color-ink-100: oklch(0.89 0.012 70);
+      --pix-ds-color-ink-050: oklch(0.96 0.01 75);
+      --pix-ds-color-night-950: oklch(0.2 0.02 255);
+      --pix-ds-color-night-900: oklch(0.24 0.024 252);
+      --pix-ds-color-night-800: oklch(0.31 0.028 250);
+      --pix-ds-color-night-600: oklch(0.56 0.022 248);
+      --pix-ds-color-sand-50: oklch(0.985 0.01 85);
+      --pix-ds-color-sand-100: oklch(0.965 0.012 85);
+      --pix-ds-color-sand-200: oklch(0.925 0.016 85);
+      --pix-ds-color-sky-400: oklch(0.78 0.11 228);
+      --pix-ds-color-sky-500: oklch(0.71 0.13 228);
+      --pix-ds-color-sky-300: oklch(0.85 0.08 228);
+      --pix-ds-color-mint-400: oklch(0.84 0.1 170);
+      --pix-ds-color-mint-500: oklch(0.76 0.11 170);
+      --pix-ds-color-coral-400: oklch(0.72 0.13 34);
+      --pix-ds-color-coral-300: oklch(0.81 0.09 34);
+      --pix-ds-color-violet-400: oklch(0.7 0.12 312);
+      --pix-ds-color-violet-300: oklch(0.79 0.085 306);
+      --pix-ds-color-gold-300: oklch(0.88 0.085 95);
+
+      --pix-ds-surface-page: light-dark(var(--pix-ds-color-sand-100), var(--pix-ds-color-night-950));
+      --pix-ds-surface-panel: light-dark(
+        color-mix(in srgb, var(--pix-ds-color-sand-50) 82%, white 18%),
+        color-mix(in srgb, var(--pix-ds-color-night-900) 88%, black 12%)
+      );
+      --pix-ds-surface-elevated: light-dark(
+        color-mix(in srgb, var(--pix-ds-color-sand-50) 92%, white 8%),
+        color-mix(in srgb, var(--pix-ds-color-night-800) 90%, black 10%)
+      );
+      --pix-ds-line-soft: light-dark(
+        color-mix(in srgb, var(--pix-ds-color-ink-950) 12%, white 88%),
+        color-mix(in srgb, var(--pix-ds-color-ink-050) 14%, transparent)
+      );
+      --pix-ds-line-strong: light-dark(
+        color-mix(in srgb, var(--pix-ds-color-ink-950) 24%, white 76%),
+        color-mix(in srgb, var(--pix-ds-color-ink-050) 28%, transparent)
+      );
+      --pix-ds-text-strong: light-dark(var(--pix-ds-color-ink-950), var(--pix-ds-color-ink-050));
+      --pix-ds-text-muted: light-dark(var(--pix-ds-color-ink-600), var(--pix-ds-color-ink-100));
+      --pix-ds-focus: light-dark(
+        color-mix(in srgb, var(--pix-ds-color-sky-500) 54%, white 46%),
+        color-mix(in srgb, var(--pix-ds-color-sky-300) 72%, white 28%)
+      );
+      --pix-ds-accent-primary: light-dark(var(--pix-ds-color-sky-500), var(--pix-ds-color-sky-300));
+      --pix-ds-accent-secondary: light-dark(
+        var(--pix-ds-color-coral-400),
+        var(--pix-ds-color-coral-300)
+      );
+      --pix-ds-accent-tertiary: light-dark(var(--pix-ds-color-mint-500), var(--pix-ds-color-mint-400));
+
+      --pix-ds-font-sans: 'Space Grotesk', 'Avenir Next', 'Segoe UI', sans-serif;
+      --pix-ds-font-display: 'Fraunces', 'Iowan Old Style', Georgia, serif;
+      --pix-ds-font-mono: 'IBM Plex Mono', 'SFMono-Regular', Menlo, Consolas, monospace;
+
+      --pix-ds-text-xs: 0.75rem;
+      --pix-ds-text-sm: 0.875rem;
+      --pix-ds-text-md: 1rem;
+      --pix-ds-text-lg: 1.125rem;
+      --pix-ds-text-xl: 1.25rem;
+      --pix-ds-leading-tight: 1.1;
+      --pix-ds-leading-normal: 1.6;
+      --pix-ds-leading-relaxed: 1.72;
+      --pix-ds-tracking-wide: 0.14em;
+
+      --pix-ds-space-1: 0.25rem;
+      --pix-ds-space-2: 0.5rem;
+      --pix-ds-space-3: 0.75rem;
+      --pix-ds-space-4: 1rem;
+      --pix-ds-space-5: 1.5rem;
+      --pix-ds-space-6: 2rem;
+      --pix-ds-space-7: 2.5rem;
+      --pix-ds-space-8: 3rem;
+      --pix-ds-space-9: 4rem;
+
+      --pix-ds-radius-sm: 0.5rem;
+      --pix-ds-radius-md: 0.85rem;
+      --pix-ds-radius-lg: 1.25rem;
+      --pix-ds-radius-xl: 1.6rem;
+      --pix-ds-radius-pill: 999px;
+
+      --pix-ds-elevation-1: light-dark(
+        0 12px 28px rgba(54, 39, 22, 0.08),
+        0 16px 34px rgba(0, 0, 0, 0.34)
+      );
+      --pix-ds-elevation-2: light-dark(
+        0 18px 42px rgba(54, 39, 22, 0.12),
+        0 22px 48px rgba(0, 0, 0, 0.42)
+      );
+      --pix-ds-elevation-3: light-dark(
+        0 24px 56px rgba(54, 39, 22, 0.16),
+        0 26px 64px rgba(0, 0, 0, 0.5)
+      );
+
+      --pix-ds-duration-fast: 140ms;
+      --pix-ds-duration-base: 180ms;
+      --pix-ds-duration-slow: 280ms;
+      --pix-ds-ease-standard: cubic-bezier(0.2, 0.8, 0.2, 1);
+      --pix-ds-ease-emphasized: cubic-bezier(0.16, 1, 0.3, 1);
+      --pix-ds-lift-hover: -1px;
+      --pix-ds-scale-press: 0.985;
+      --pix-ds-focus-ring: 0 0 0 3px var(--pix-ds-focus);
+    }
+  }
+}

@@ -2,39 +2,18 @@
 
 ## Main exports
 
-- `PixHighlighter`
-- `PIX_HIGHLIGHTER_THEME_OPTIONS`
-- `enhancePixHighlighters(root?)`
-- `normalizeLang(value?)`
-- `tokenizeSource(language, source)`
+- `PixBaseline`
+- `normalizeVariant(value?)`
 
-## Example
+## Attributes
 
-```js
-import {
-  PIX_HIGHLIGHTER_THEME_OPTIONS,
-  PixHighlighter,
-  enhancePixHighlighters,
-  tokenizeSource,
-} from '@pix-galaxy/pix-highlighter';
+- `variant`: `default | outlined`
 
-enhancePixHighlighters(document);
-PixHighlighter.applyTheme('tide');
+## Properties
 
-const tokens = tokenizeSource('js', 'const theme = getTheme();');
-console.log(tokens, PIX_HIGHLIGHTER_THEME_OPTIONS.length);
-```
+- `variant`
 
-## Semantic token groups
+## Parts
 
-Themes ship consistent colors for:
-
-- keywords
-- variables
-- methods and functions
-- values and numbers
-- strings
-- properties
-- types
-- comments
-- markdown tokens
+- `root`
+- `content`

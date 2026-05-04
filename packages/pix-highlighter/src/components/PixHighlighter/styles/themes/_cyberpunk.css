@@ -1,0 +1,38 @@
+@layer pix-galaxy {
+  @layer pix-highlighter {
+    @layer themes {
+      :root[data-pix-highlighter-theme="cyberpunk"] pre[is="pix-highlighter"] {
+        --pix-highlighter--bg: light-dark(#fff4fd, #090412);
+        --pix-highlighter--fg: light-dark(#2f1140, #f9f7ff);
+        --pix-highlighter--kw: light-dark(#c026d3, #ff4fd8);
+        --pix-highlighter--str: light-dark(#ca8a04, #ffe45e);
+        --pix-highlighter--num: light-dark(#0891b2, #62f3ff);
+        --pix-highlighter--com: light-dark(#8b7aa8, #8b7aa8);
+        --pix-highlighter--id: light-dark(#0f9f7f, #7ef7c9);
+        --pix-highlighter--fn: light-dark(#00a896, #00f5d4);
+        --pix-highlighter--op: light-dark(#ea580c, #ff8b39);
+        --pix-highlighter--tag: light-dark(#db2777, #ff4fd8);
+        --pix-highlighter--attr: light-dark(#0284c7, #4cc9f0);
+        --pix-highlighter--key: light-dark(#0891b2, #62f3ff);
+        --pix-highlighter--var: light-dark(#0f9f7f, #7ef7c9);
+        --pix-highlighter--mac: light-dark(#db2777, #ff6ad5);
+        --pix-highlighter--pp: light-dark(#ea580c, #ff9f1c);
+        --pix-highlighter--prop: light-dark(#7c3aed, #9d7dff);
+        --pix-highlighter--type: light-dark(#0284c7, #4cc9f0);
+        --pix-highlighter--mdh: light-dark(#c026d3, #ff4fd8);
+        --pix-highlighter--mde: light-dark(#ea580c, #ff8b39);
+        --pix-highlighter--mds: light-dark(#ca8a04, #ffe45e);
+        --pix-highlighter--mdc: light-dark(#0891b2, #62f3ff);
+        --pix-highlighter--mdl: light-dark(#0f9f7f, #7ef7c9);
+        --pix-highlighter--mdbq: light-dark(#8b7aa8, #a59ac7);
+        --pix-highlighter--mdli: light-dark(#ea580c, #ff9f1c);
+        --pix-highlighter--mdhr: light-dark(#eadcf8, #453363);
+        --pix-highlighter--mdimg: light-dark(#0284c7, #4cc9f0);
+        --pix-highlighter--tab-size: 2;
+        --pix-highlighter--line-height: 1.55;
+        --pix-highlighter--text-shadow: light-dark(none, 0 0 18px rgba(255, 79, 216, 0.18));
+        color-scheme: light dark;
+      }
+    }
+  }
+}

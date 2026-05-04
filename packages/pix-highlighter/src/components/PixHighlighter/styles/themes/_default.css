@@ -1,0 +1,39 @@
+@layer pix-galaxy {
+  @layer pix-highlighter {
+    @layer themes {
+      :root:not([data-pix-highlighter-theme]) pre[is="pix-highlighter"],
+      :root[data-pix-highlighter-theme="default"] pre[is="pix-highlighter"] {
+        --pix-highlighter--bg: light-dark(#f5f7fb, #0b0d10);
+        --pix-highlighter--fg: light-dark(#182131, #e6e6e6);
+        --pix-highlighter--kw: light-dark(#6d28d9, #c792ea);
+        --pix-highlighter--str: light-dark(#a45a00, #ecc48d);
+        --pix-highlighter--num: light-dark(#c05621, #f78c6c);
+        --pix-highlighter--com: light-dark(#66758a, #697098);
+        --pix-highlighter--id: light-dark(#2563eb, #82aaff);
+        --pix-highlighter--fn: light-dark(#0f766e, #80cbc4);
+        --pix-highlighter--op: light-dark(#3f7a14, #c3e88d);
+        --pix-highlighter--tag: light-dark(#0f766e, #5ad4e6);
+        --pix-highlighter--attr: light-dark(#b45309, #f2ae49);
+        --pix-highlighter--key: light-dark(#6d28d9, #ffcc66);
+        --pix-highlighter--var: light-dark(#2563eb, #82aaff);
+        --pix-highlighter--mac: light-dark(#be185d, #ff9dd9);
+        --pix-highlighter--pp: light-dark(#66758a, #8bd5ff);
+        --pix-highlighter--prop: light-dark(#2563eb, #9cdcfe);
+        --pix-highlighter--type: light-dark(#0f766e, #7fd5a3);
+        --pix-highlighter--mdh: light-dark(#0f766e, #5ad4e6);
+        --pix-highlighter--mde: light-dark(#6d28d9, #f2ae49);
+        --pix-highlighter--mds: light-dark(#182131, #ffd166);
+        --pix-highlighter--mdc: light-dark(#3f7a14, #c3e88d);
+        --pix-highlighter--mdl: light-dark(#2563eb, #80cbc4);
+        --pix-highlighter--mdbq: light-dark(#66758a, #a0a7bd);
+        --pix-highlighter--mdli: light-dark(#2563eb, #b3e5fc);
+        --pix-highlighter--mdhr: light-dark(#cbd5e1, #6c7a89);
+        --pix-highlighter--mdimg: light-dark(#be185d, #90caf9);
+        --pix-highlighter--tab-size: 2;
+        --pix-highlighter--line-height: 1.5;
+        --pix-highlighter--text-shadow: none;
+        color-scheme: light dark;
+      }
+    }
+  }
+}

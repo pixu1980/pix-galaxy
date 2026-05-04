@@ -1,0 +1,39 @@
+@layer pix-galaxy {
+  @layer pix-highlighter {
+    @layer themes {
+      :root[data-pix-highlighter-theme="paper"] pre[is="pix-highlighter"] {
+        --pix-highlighter--bg: light-dark(#fcfbf7, #1f1d1b);
+        --pix-highlighter--fg: light-dark(#2b2a28, #f6f0e8);
+        --pix-highlighter--kw: light-dark(#8f2d56, #f2a7c4);
+        --pix-highlighter--str: light-dark(#166534, #8de0b4);
+        --pix-highlighter--num: light-dark(#c2410c, #f6a97a);
+        --pix-highlighter--com: light-dark(#7a7a73, #b2aba0);
+        --pix-highlighter--id: light-dark(#2563eb, #93c5fd);
+        --pix-highlighter--fn: light-dark(#0f766e, #7dd3c7);
+        --pix-highlighter--op: light-dark(#5b21b6, #c4b5fd);
+        --pix-highlighter--tag: light-dark(#9a3412, #fdba74);
+        --pix-highlighter--attr: light-dark(#0369a1, #7dd3fc);
+        --pix-highlighter--key: light-dark(#7c3aed, #c4b5fd);
+        --pix-highlighter--var: light-dark(#2563eb, #93c5fd);
+        --pix-highlighter--mac: light-dark(#be185d, #f9a8d4);
+        --pix-highlighter--pp: light-dark(#6b7280, #b2aba0);
+        --pix-highlighter--prop: light-dark(#2563eb, #93c5fd);
+        --pix-highlighter--type: light-dark(#047857, #86efac);
+        --pix-highlighter--mdh: light-dark(#8f2d56, #f2a7c4);
+        --pix-highlighter--mde: light-dark(#5b21b6, #c4b5fd);
+        --pix-highlighter--mds: light-dark(#2b2a28, #f6f0e8);
+        --pix-highlighter--mdc: light-dark(#166534, #8de0b4);
+        --pix-highlighter--mdl: light-dark(#0369a1, #7dd3fc);
+        --pix-highlighter--mdbq: light-dark(#7a7a73, #b2aba0);
+        --pix-highlighter--mdli: light-dark(#2563eb, #93c5fd);
+        --pix-highlighter--mdhr: light-dark(#d6d3d1, #4b4741);
+        --pix-highlighter--mdimg: light-dark(#be185d, #f9a8d4);
+        --pix-highlighter--tab-size: 2;
+        --pix-highlighter--font-family: "IBM Plex Mono", "SFMono-Regular", Menlo, Consolas, monospace;
+        --pix-highlighter--line-height: 1.6;
+        --pix-highlighter--text-shadow: none;
+        color-scheme: light dark;
+      }
+    }
+  }
+}

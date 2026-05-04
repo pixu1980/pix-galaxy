@@ -1,10 +1,19 @@
 // @ts-check
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { REQUIRED_SCRIPTS, validatePackageManifest } from '../_validate-package.js';
+import {
+  REQUIRED_PACKAGE_FILES,
+  REQUIRED_SCRIPTS,
+  validatePackageManifest,
+} from '../_validate-package.js';
 
 test('REQUIRED_SCRIPTS includes docs:serve', () => {
   assert.equal(REQUIRED_SCRIPTS.includes('docs:serve'), true);
+});
+
+test('REQUIRED_PACKAGE_FILES tracks markdown docs sources instead of package-local docs shell files', () => {
+  assert.equal(REQUIRED_PACKAGE_FILES.includes('docs/content/getting-started.md'), true);
+  assert.equal(REQUIRED_PACKAGE_FILES.includes('docs/index.html'), false);
 });
 
 test('validatePackageManifest reports missing scripts', () => {

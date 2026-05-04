@@ -1,41 +1,21 @@
 # Examples
 
-## TypeScript
+## Default Variant
 
-```ts
-type ThemeName = 'default' | 'ember' | 'paper';
-
-export function pickTheme(name: ThemeName) {
-  return name === 'paper' ? 'paper' : 'default';
-}
-```
-
-## HTML
+Use the default surface when the baseline block should merge into the surrounding layout.
 
 ```html
-<section class="hero">
-  <h1>pix-galaxy</h1>
-  <button type="button">Launch</button>
-</section>
+<pix-baseline>
+  Default baseline content
+</pix-baseline>
 ```
 
-## CSS
+## Outlined Variant
 
-```css
-.hero {
-  display: grid;
-  gap: 1rem;
-  padding: 2rem;
-  background: linear-gradient(135deg, #081523, #12344d);
-}
-```
+Switch to the outlined variant when you need a lightweight container boundary.
 
-## JSON
-
-```json
-{
-  "suite": "pix-galaxy",
-  "component": "pix-highlighter",
-  "release": true
-}
+```html
+<pix-baseline variant="outlined">
+  Outlined baseline content
+</pix-baseline>
 ```
