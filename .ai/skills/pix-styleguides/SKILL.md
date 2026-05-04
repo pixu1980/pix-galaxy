@@ -79,6 +79,7 @@ Use these local files as canonical style references during execution:
 ## Procedure
 1. Analyze task scope and list target files.
 2. Build a per-file checklist from relevant sections (HTML/CSS/JS/JSON/Markdown).
+3. Apply repository naming conventions for runtime folders before polishing implementation details.
 3. For CSS and HTML, enforce semantic/a11y-first structure before visual refinements.
 4. Implement changes with minimal disruption to existing behavior.
 5. Run project validation where available (tests, typecheck, lint, build).
@@ -86,6 +87,12 @@ Use these local files as canonical style references during execution:
    - what was fixed
    - what could not be fixed
    - residual risks and follow-up actions
+
+## Repository structure checklist
+- Use `src/index.*`, `scripts/index.js`, and `tests/index.js` as barrels or entrypoints.
+- Prefix other runtime files in `src/`, `scripts/`, and `tests/` with `_`.
+- Use `tests/` for package tests; avoid `test/` in package scaffolds.
+- For root scripts, keep tests in `scripts/tests/` with one underscore-prefixed test file per script.
 
 ## Per-language checklist
 
@@ -128,6 +135,7 @@ Use these local files as canonical style references during execution:
 - Avoid dangerous constructs (`eval`, implicit globals, fragile coercion).
 - For custom elements, keep lifecycle-safe listener setup/cleanup.
 - Add comments only for non-obvious logic.
+- In runtime folders, keep `index` files thin and move implementation into underscore-prefixed siblings.
 - **Code splitting for components** (see `pix-custom-element`):
   - Move all named constants to `ComponentName.consts.js`.
   - Move pure helper functions to `ComponentName.utils.js`.

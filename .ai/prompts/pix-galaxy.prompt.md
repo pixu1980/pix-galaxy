@@ -9,7 +9,7 @@ Route the user task with the pix Galaxy orchestrator.
 Input:
 - User prompt (preferably with `/pix-galaxy` prefix)
 - Optional target files
-- Optional operation (`review`, `refactor`, `format`, `lint`, `fix`, `generate`, `audit`, `install`, `report`, `create`, `scaffold`, `setup`, `build`)
+- Optional operation (`review`, `refactor`, `format`, `lint`, `fix`, `generate`, `audit`, `install`, `report`, `create`, `scaffold`, `setup`, `build`, `release`)
 - Available skills: `pix-a11y`, `pix-custom-element`, `pix-color-scheme-switcher`, `pix-design-system`, `pix-styleguides`, `pix-template-engine`
 
 Execute in order:
@@ -23,7 +23,8 @@ Execute in order:
    - `reason`
    - `fallbackUsed`
    - `recommendedSkills`
-4. If an orchestrator update is requested, modify registry with a minimal patch and validate with:
+4. Repository governance and community-health files such as `CHANGELOG.md`, `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, `GOVERNANCE.md`, `SECURITY.md`, `SUPPORT.md`, `.github/CODEOWNERS`, `.github/FUNDING.yml`, and `.github/ISSUE_TEMPLATE/*` should default to `pix-styleguides` unless the prompt clearly targets a different registered skill.
+5. If an orchestrator update is requested, modify registry with a minimal patch and validate with:
    - `node --test ./.github/skills/pix-galaxy/scripts/select-skill.test.mjs`
 
 Hard rules:

@@ -244,11 +244,17 @@ export const installDesignSystem = async (options) => {
   const currentFile = fileURLToPath(import.meta.url);
   const skillRoot = path.resolve(path.dirname(currentFile), '..');
   const starterRoot = path.join(skillRoot, 'assets', 'design-system', options.mode);
+  const sharedStylesRoot = path.join(skillRoot, 'assets', 'design-system', 'shared', 'styles');
   const targetRoot = options.mode === 'package'
     ? path.join(options.target, options.dest)
     : options.target;
+  const materializedStylesTargetRoot = path.join(targetRoot, options.mode === 'package' ? 'src' : 'src/styles');
 
-  const files = await collectTemplateFiles(starterRoot, targetRoot);
+  const files = (await collectTemplateFiles(starterRoot, targetRoot)).filter((file) => {
+    return file.sourcePath !== path.join(starterRoot, 'src', 'index.css')
+      && file.sourcePath !== path.join(starterRoot, 'src', 'styles', 'index.css');
+  });
+  const sharedStyleFiles = await collectTemplateFiles(sharedStylesRoot, materializedStylesTargetRoot);
   const docsSiteFiles = options.docsSite
     ? await collectTemplateFiles(
       path.join(skillRoot, 'assets', 'examples', 'docs-site'),
@@ -256,7 +262,7 @@ export const installDesignSystem = async (options) => {
     )
     : [];
 
-  const allFiles = [...files, ...docsSiteFiles];
+  const allFiles = [...files, ...sharedStyleFiles, ...docsSiteFiles];
   await assertNoConflicts(allFiles, options.force);
   const writtenFiles = await writeTemplateFiles(allFiles, options);
 

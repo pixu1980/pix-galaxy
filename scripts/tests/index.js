@@ -1,0 +1,11 @@
+// @ts-check
+import './_cli.test.js';
+import './_build-docs.test.js';
+import './_build-package.test.js';
+import './_clean.test.js';
+import './_create-package.test.js';
+import './_generate-changelog.test.js';
+import './_list-packages.test.js';
+import './_release.test.js';
+import './_serve-docs.test.js';
+import './_validate-package.test.js';

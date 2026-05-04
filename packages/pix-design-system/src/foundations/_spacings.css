@@ -1,0 +1,38 @@
+:root {
+  --ds--spacings--ratio: 1.25;
+  --ds--spacings--density: 1;
+  --ds--spacings--base: calc(1.6rem * var(--ds--spacings--density));
+
+  --ds--spacings--50: calc(var(--ds--spacings--base) / pow(var(--ds--spacings--ratio), 4));
+  --ds--spacings--100: calc(var(--ds--spacings--base) / pow(var(--ds--spacings--ratio), 3));
+  --ds--spacings--200: calc(var(--ds--spacings--base) / pow(var(--ds--spacings--ratio), 2));
+  --ds--spacings--300: calc(var(--ds--spacings--base) / var(--ds--spacings--ratio));
+  --ds--spacings--400: var(--ds--spacings--base);
+  --ds--spacings--500: calc(var(--ds--spacings--base) * var(--ds--spacings--ratio));
+  --ds--spacings--600: calc(var(--ds--spacings--base) * pow(var(--ds--spacings--ratio), 2));
+  --ds--spacings--700: calc(var(--ds--spacings--base) * pow(var(--ds--spacings--ratio), 3));
+  --ds--spacings--800: calc(var(--ds--spacings--base) * pow(var(--ds--spacings--ratio), 4));
+  --ds--spacings--900: calc(var(--ds--spacings--base) * pow(var(--ds--spacings--ratio), 5));
+  --ds--spacings--1000: calc(var(--ds--spacings--base) * pow(var(--ds--spacings--ratio), 6));
+  --ds--spacings--1100: calc(var(--ds--spacings--base) * pow(var(--ds--spacings--ratio), 7));
+  --ds--spacings--1200: calc(var(--ds--spacings--base) * pow(var(--ds--spacings--ratio), 8));
+  --ds--spacings--1300: calc(var(--ds--spacings--base) * pow(var(--ds--spacings--ratio), 9));
+  --ds--spacings--1400: calc(var(--ds--spacings--base) * pow(var(--ds--spacings--ratio), 10));
+  --ds--spacings--1500: calc(var(--ds--spacings--base) * pow(var(--ds--spacings--ratio), 11));
+  --ds--spacings--1600: calc(var(--ds--spacings--base) * pow(var(--ds--spacings--ratio), 12));
+  --ds--spacings--1700: calc(var(--ds--spacings--base) * pow(var(--ds--spacings--ratio), 13));
+  --ds--spacings--1800: calc(var(--ds--spacings--base) * pow(var(--ds--spacings--ratio), 14));
+  --ds--spacings--1900: calc(var(--ds--spacings--base) * pow(var(--ds--spacings--ratio), 15));
+
+  --density-scale: var(--ds--spacings--density);
+  --space-1: var(--ds--spacings--100);
+  --space-2: var(--ds--spacings--200);
+  --space-3: var(--ds--spacings--300);
+  --space-4: var(--ds--spacings--400);
+  --space-5: var(--ds--spacings--600);
+  --space-6: var(--ds--spacings--800);
+  --space-7: var(--ds--spacings--1000);
+  --space-layout: var(--ds--spacings--800);
+  --section-gap: var(--ds--spacings--1000);
+  --stack-gap: var(--ds--spacings--400);
+}

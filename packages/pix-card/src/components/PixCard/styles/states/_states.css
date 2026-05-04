@@ -1,0 +1,24 @@
+pix-card[variant='outlined'] > [data-part='card'] {
+  border-color: var(--pix-card-border-color);
+}
+
+pix-card[variant='elevated'] > [data-part='card'] {
+  --pix-card-shadow: 0 2px 8px rgb(0 0 0 / 0.12);
+  border-color: transparent;
+}
+
+pix-card[href] > [data-part='card'] {
+  cursor: pointer;
+  text-decoration: none;
+}
+
+pix-card[href] > a[data-part='card']:focus-visible {
+  outline: 2px solid CanvasText;
+  outline-offset: 2px;
+}
+
+@media (forced-colors: active) {
+  pix-card > [data-part='card'] {
+    border: 1px solid ButtonText;
+  }
+}

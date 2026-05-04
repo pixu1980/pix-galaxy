@@ -12,7 +12,6 @@ pnpm add @pix-galaxy/pix-button
 
 ```js
 import "@pix-galaxy/pix-button";
-import "@pix-galaxy/pix-button/css";
 ```
 
 ```html
@@ -61,7 +60,7 @@ import "@pix-galaxy/pix-button/css";
 
 ## Accessibility
 
-- Uses a native `<button>` inside Shadow DOM — full keyboard support
+- Uses a native `<button>` in light DOM — full keyboard support
 - `disabled` state communicated via `aria-disabled`
 - Focus outline preserved via `:focus-visible`
 - Supports forced colors (high contrast)

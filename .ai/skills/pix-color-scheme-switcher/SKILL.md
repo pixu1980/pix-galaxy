@@ -77,7 +77,7 @@ ColorSchemeSwitcher/
 - Keep the element autonomous: `PixColorSchemeSwitcher extends HTMLElement`.
 - Keep light DOM only. Do not add Shadow DOM.
 - Do not use `<template>` elements.
-- Keep `componentDecorator(this)` as the only static registration site.
+- Declare `static styles = styles;` and keep `componentDecorator(this)` as the only static registration site.
 - Declare `static attributes` from `ComponentName.attributes.js`.
 - Register native DOM events through `static events` from `ComponentName.events.js`.
 - Keep `MediaQueryList` listener cleanup in private fields, because it is outside the component DOM event map.
@@ -85,7 +85,7 @@ ColorSchemeSwitcher/
 - Expose behavior through `applyColorScheme(scheme)`, `currentScheme`, and `resolvedScheme`.
 
 ## Template Rules
-- Use `new TemplateEngine({ rootDir: "/" })` for browser-safe tagged literal rendering.
+- Use `new TemplateEngine()` for browser-safe tagged literal rendering.
 - Compile render functions once at module load with `engine.html`.
 - Import SVG icons as raw text strings via `bundle-text:./icons/<name>.svg` — do not inline SVG markup directly in the JS file.
 - Insert imported SVG strings through template interpolation, not by constructing markup from runtime user data.

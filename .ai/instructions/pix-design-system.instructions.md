@@ -13,7 +13,8 @@ applyTo: "**/*.{css,html,js,mjs,json,md}"
 - Use CSS `pow()` to derive proportional scales from `--ds--typography--font-size--base`, `--ds--spacings--base`, and `--ds--radii--base`.
 - Keep foundation files split by typography, spacing, radii, elevations, and colors.
 - Include reset, layout, component aliases, and helpers.
-- Keep duplicated starter CSS and docs pointed at `assets/design-system/shared/` as the single source of truth inside the skill.
+- Keep `assets/design-system/shared/` as the only authoring source inside the skill, but always materialize the full CSS tree into installed app/package outputs. Generated targets must not import back into `.github/`, `.ai/`, or other skill-relative paths.
+- When the design system is packaged inside a repo, use `src/index.*` and `tests/index.js` as barrels and keep sibling runtime files underscore-prefixed.
 - The `components` layer may document hooks and aliases, but starter CSS must not ship concrete component implementations; use commented placeholders instead.
 - Prefer element and attribute selectors. Use class selectors only when no safer selector exists.
 - Keep docs and generated examples in English.

@@ -21,11 +21,11 @@ Customized built-in command:
 - `node ./.github/skills/pix-custom-element/scripts/scaffold-component.mjs --name "PixDetails" --extends "details" --attributes "open" --target "<project-root>"`
 
 First-run command (no shared library yet) — installs `decorator/` and `events/` once:
-- `node ./.github/skills/pix-custom-element/scripts/scaffold-component.mjs --name "PixCard" --install-shared --shared-dir "src/lib/custom-element" --target "<project-root>"`
+- `node ./.github/skills/pix-custom-element/scripts/scaffold-component.mjs --name "PixCard" --install-shared --shared-dir "packages/shared" --target "<project-root>"`
 
 Hard rules:
 - No Shadow DOM. No `<template>` elements.
-- `static {}` block calling `componentDecorator(this)` is the only registration site.
+- Declare `static styles = styles;` and keep the `static {}` block calling `componentDecorator(this)` as the only registration site.
 - CSS adopted via `document.adoptedStyleSheets`. Never inject `<style>` tags at runtime.
 - `decorator/` and `events/` are project singletons. Detect an existing installation before copying anything.
 - Component folder: `PascalCase`. File names inside: `kebab-case` (match the tag).

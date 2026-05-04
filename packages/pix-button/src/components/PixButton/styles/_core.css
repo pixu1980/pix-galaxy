@@ -1,0 +1,27 @@
+:root {
+  --pix-button-background: CanvasText;
+  --pix-button-color: Canvas;
+  --pix-button-border-color: CanvasText;
+  --pix-button-radius: 0.5rem;
+  --pix-button-padding-block: 0.625rem;
+  --pix-button-padding-inline: 1rem;
+}
+
+pix-button {
+  display: inline-block;
+}
+
+pix-button > [data-part='button'] {
+  border: 1px solid var(--pix-button-border-color);
+  border-radius: var(--pix-button-radius);
+  padding: var(--pix-button-padding-block) var(--pix-button-padding-inline);
+  background: var(--pix-button-background);
+  color: var(--pix-button-color);
+  font: inherit;
+  cursor: pointer;
+}
+
+pix-button > [data-part='button']:focus-visible {
+  outline: 2px solid var(--pix-button-border-color);
+  outline-offset: 2px;
+}

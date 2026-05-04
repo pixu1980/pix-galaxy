@@ -1,0 +1,26 @@
+// @ts-check
+
+import { normalizeVariant } from './pix-button.utils.js';
+
+/**
+ * Attribute handlers for PixButton.
+ */
+export default {
+  /**
+   * @this {HTMLElement}
+   * @param {string | null} _oldValue
+   * @param {string | null} newValue
+   */
+  variant(_oldValue, newValue) {
+    this.setAttribute('data-variant', normalizeVariant(newValue));
+  },
+
+  /**
+   * @this {HTMLElement}
+   * @param {string | null} _oldValue
+   * @param {string | null} newValue
+   */
+  disabled(_oldValue, newValue) {
+    this.setAttribute('aria-disabled', String(newValue !== null));
+  },
+};
