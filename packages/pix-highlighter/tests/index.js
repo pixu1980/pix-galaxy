@@ -1,3 +1,3 @@
 // @ts-check
-import './_normalize-variant.test.js';
-import './_template.test.js';
+import './_components.test.js';
+import './_design-system.test.js';

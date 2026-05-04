@@ -39,6 +39,8 @@ test('buildPackageFiles creates shared-runtime component package structure', () 
   assert.ok(files['docs/content/examples.md']);
   assert.ok(files['docs/content/api.md']);
   assert.ok(files['docs/content/releasing.md']);
+  assert.equal(files['docs/index.html'], undefined);
+  assert.equal(files['docs/styles.css'], undefined);
   assert.equal(files['src/index.css'], undefined);
 
   assert.match(files['src/index.js'], /components\/PixBaseline\/pix-baseline\.js/);
@@ -52,7 +54,7 @@ test('buildPackageFiles creates shared-runtime component package structure', () 
   assert.match(files['src/components/PixBaseline/pix-baseline.template.js'], /new TemplateEngine\(/);
   assert.match(files['src/components/PixBaseline/pix-baseline.template.js'], /from '@pix-galaxy\/shared\/template-engine\/index\.js'/);
   assert.match(files['src/components/PixBaseline/pix-baseline.template.js'], /engine\.html`/);
-  assert.match(files['docs/index.html'], /Seeded docs source/);
-  assert.match(files['docs/index.html'], /\.\/content\/getting-started\.md/);
+  assert.match(files['docs/content/getting-started.md'], /shared docs template/u);
+  assert.match(files['docs/content/examples.md'], /<pix-baseline>/u);
   assert.doesNotMatch(files['../shared/template-engine/index.js'], /node:|jsdom|marked/);
 });
