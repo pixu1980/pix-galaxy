@@ -1,0 +1,16 @@
+:root {
+  --pix-baseline--padding: var(--space-4);
+  --pix-baseline--color: var(--color-text);
+  --pix-baseline--background-color: var(--color-surface);
+  --pix-baseline--border-color: var(--color-border);
+  --pix-baseline--border-radius: var(--radius-control);
+}
+
+pix-baseline {
+  display: block;
+  padding: var(--pix-baseline--padding);
+  color: var(--pix-baseline--color);
+  background-color: var(--pix-baseline--background-color);
+  border: 0.1rem solid var(--pix-baseline--border-color);
+  border-radius: var(--pix-baseline--border-radius);
+}

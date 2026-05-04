@@ -78,7 +78,7 @@ Trigger phrases:
 4. If project identity is known, pass brand override flags during install.
 5. If identity is unknown, install pix defaults first and document follow-up token decisions.
 6. Use `pix-styleguides` rules for every generated CSS and docs edit.
-7. Update `assets/design-system/shared/` first when changing starter CSS or docs. Keep `app/` and `package/` as thin wrappers pointing back to shared templates.
+7. Update `assets/design-system/shared/` first when changing starter CSS or docs. Keep the skill assets as the single source of truth, but materialize the full CSS tree into generated `app/` and `package/` targets.
 
 ## Procedure
 1. Inspect the target project structure.
@@ -98,7 +98,7 @@ Trigger phrases:
 1. Generated CSS declares `@layer reset, foundations, layout, components, helpers;`.
 2. Foundations cover typography, spacing, radii, elevations, and colors.
 3. Typography, spacing, and radii derive from base tokens plus ratio tokens using CSS `pow()`.
-4. App and package starter duplicates resolve back to `shared/` as the single source of truth.
+4. The skill keeps a single source of truth under `shared/`, while generated app/package outputs contain a self-contained CSS tree with no links back to skill-relative paths.
 5. The `components` layer contains commented placeholder examples only.
 6. Extras cover reset, layout, component aliases, and helpers.
 7. Token hierarchy includes primitive, semantic, and component alias levels.

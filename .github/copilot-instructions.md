@@ -15,15 +15,20 @@ pix-galaxy is a zero-runtime-dependency vanilla JavaScript Web Components monore
 - Use **JSDoc** for all public classes, methods, events, attributes, typedefs, and options.
 - Use **TypeScript only** for type checking (`--noEmit`) and `.d.ts` declaration generation via `emitDeclarationOnly`.
 - Use **`node:test`** for tests. Do not use Jest, Vitest, Mocha, Chai, or Testing Library.
-- Use **esbuild** only through `scripts/build-package.mjs`. Do not use Rollup, Vite, Webpack, Babel, or PostCSS.
+- Use **esbuild** only through `scripts/_build-package.js`. Do not use Rollup, Vite, Webpack, Babel, or PostCSS.
 - CSS must be **native CSS** only. Use `@layer`, custom properties, nesting where useful, and component-local selectors.
-- Avoid global CSS leakage. Use Shadow DOM and `:host` selectors.
+- Avoid unintended global CSS leakage. Use `document.adoptedStyleSheets`, component-scoped selectors, and light-DOM-safe selectors.
 - Documentation is static HTML pages. Package docs live in `packages/<name>/docs/`.
-- Docs are aggregated into `site/<package-folder-name>/` via `scripts/build-docs.mjs`.
+- Docs are aggregated into `site/<package-folder-name>/` via `scripts/_build-docs.js`.
 
 ## File authoring conventions
 
 Every JS source file must start with `// @ts-check`.
+
+Runtime folder structure rules:
+- In `src/`, `scripts/`, and `tests/`, keep `index.*` as the barrel or entrypoint.
+- All non-index runtime files in `src/`, `scripts/`, and `tests/` must be underscore-prefixed, for example `_pix-button.js`, `_build-package.js`, or `_template.test.js`.
+- Root script coverage lives in `scripts/tests/`, with one underscore-prefixed test file per script and `scripts/tests/index.js` as the test barrel.
 
 Example JSDoc style:
 ```js
@@ -45,16 +50,17 @@ export function normalizeVariant(value) { ... }
 
 Each component package must:
 - live in `packages/<component-name>/`
-- have `src/`, `test/`, `docs/`, `package.json`, `tsconfig.types.json`, `README.md`
+- have `src/`, `tests/`, `docs/`, `package.json`, `tsconfig.types.json`, `README.md`
+- use `src/index.js` as the package barrel, plus `tests/index.js` as the package test barrel
 - expose only ESM
 - have zero runtime dependencies
-- have scripts: `build`, `test`, `typecheck`, `validate`, `docs:build`
+- have scripts: `build`, `test`, `typecheck`, `validate`, `docs:build`, `docs:serve`
 - document all attributes, events, CSS custom properties, parts, and slots
 
 ## Accessibility requirements
 
 Every component must:
-- use semantic HTML inside Shadow DOM
+- use semantic HTML in light DOM
 - preserve keyboard interactions
 - use native `<button>` for buttons, native `<a>` for links
 - not hide focus outlines without an accessible replacement

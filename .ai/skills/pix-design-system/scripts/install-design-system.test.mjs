@@ -65,10 +65,15 @@ test('installs package design system with default package name and destination',
 
   const packageJson = JSON.parse(await readTargetFile(target, 'packages/pix-design-system/package.json'));
   const indexCss = await readTargetFile(target, 'packages/pix-design-system/src/index.css');
+  const resetCss = await readTargetFile(target, 'packages/pix-design-system/src/_reset.css');
+  const colorsCss = await readTargetFile(target, 'packages/pix-design-system/src/foundations/_colors.css');
 
   assert.equal(packageJson.name, '@pix-galaxy/pix-design-system');
   assert.equal(packageJson.sideEffects.includes('**/*.css'), true);
   assert.match(indexCss, /@layer reset, foundations, layout, components, helpers;/);
+  assert.doesNotMatch(indexCss, /shared\/styles|\.\.\/\.\./);
+  assert.match(resetCss, /box-sizing: border-box/);
+  assert.match(colorsCss, /--color-primitive-accent-500: #3f6df6;/);
 });
 
 test('accepts package name and destination overrides', async () => {

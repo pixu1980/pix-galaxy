@@ -7,7 +7,7 @@
 // The decorator accepts either a CSS string, a CSSStyleSheet, or an array of either.
 import styles from 'bundle-text:./styles/pix-details.css';
 
-import TemplateEngine from '../../../pix-template-engine/assets/template-engine/index.js';
+import TemplateEngine from '../../../pix-template-engine/assets/tagged-runtime/index.js';
 
 import { componentDecorator } from '../decorator/index.js';
 import { strings } from '../decorator/_utils.js';
@@ -27,7 +27,7 @@ const renderChevron = engine.html`<i class="pix-icon-chevron-down" aria-hidden="
  * Render function for the content wrapper. The original children are appended
  * after rendering — the template only sets the structural shell.
  */
-const renderContent = engine.html`<section content id="{{ contentId }}"></section>`;
+const renderContent = engine.html`<section content id="${({ contentId }) => contentId}"></section>`;
 
 /**
  * `<details is="pix-details">` — accessible disclosure built on top of the

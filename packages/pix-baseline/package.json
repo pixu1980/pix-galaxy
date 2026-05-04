@@ -1,0 +1,34 @@
+{
+  "name": "@pix-galaxy/pix-baseline",
+  "version": "0.0.1",
+  "description": "Baseline UI Web Component scaffold for the pix-galaxy monorepo.",
+  "type": "module",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "clean": "node ../../scripts/_clean.js pix-baseline",
+    "build": "node ../../scripts/_build-package.js pix-baseline",
+    "test": "node --test tests/index.js",
+    "typecheck": "pnpm exec tsc -p tsconfig.types.json --noEmit",
+    "validate": "node ../../scripts/_validate-package.js pix-baseline",
+    "docs:build": "node ../../scripts/_build-docs.js pix-baseline",
+    "docs:serve": "node ../../scripts/_serve-docs.js pix-baseline"
+  },
+  "devDependencies": {
+    "@pix-galaxy/shared": "workspace:*"
+  },
+  "dependencies": {}
+}

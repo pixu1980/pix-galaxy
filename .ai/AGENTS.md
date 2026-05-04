@@ -4,6 +4,8 @@ This project follows the rules and conventions defined in `.ai/instructions/`.
 
 <!-- Instructions -->
 - @pix-a11y.instructions: see `.ai/instructions/pix-a11y.instructions.md`
+- @pix-color-scheme-switcher.instructions: see `.ai/instructions/pix-color-scheme-switcher.instructions.md`
+- @pix-custom-element.instructions: see `.ai/instructions/pix-custom-element.instructions.md`
 - @pix-design-system.instructions: see `.ai/instructions/pix-design-system.instructions.md`
 - @pix-galaxy.instructions: see `.ai/instructions/pix-galaxy.instructions.md`
 - @pix-styleguides.instructions: see `.ai/instructions/pix-styleguides.instructions.md`

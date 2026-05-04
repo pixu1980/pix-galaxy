@@ -6,18 +6,41 @@ import { fileURLToPath } from 'node:url';
 
 const SKILL_ROOT = path.dirname(fileURLToPath(import.meta.url));
 const SHARED_SOURCE_ROOT = SKILL_ROOT; // contains decorator/ and events/ subfolders
+const SHARED_PACKAGE_NAME = '@pix-galaxy/shared';
 
 const DEFAULTS = {
   target: process.cwd(),
   componentsDir: 'src/components',
-  sharedDir: 'src/lib/custom-element',
+  sharedDir: 'packages/shared',
   installShared: false,
   force: false,
   dryRun: false,
 };
 
-const SHARED_FOLDERS = ['decorator', 'events'];
+const SHARED_SOURCES = [
+  { sourceRoot: path.join(SKILL_ROOT, 'decorator'), targetFolder: 'decorator', skipEntries: [] },
+  { sourceRoot: path.join(SKILL_ROOT, 'events'), targetFolder: 'events', skipEntries: [] },
+  {
+    sourceRoot: path.resolve(SKILL_ROOT, '..', '..', 'pix-template-engine', 'assets', 'tagged-runtime'),
+    targetFolder: 'template-engine',
+    skipEntries: [],
+  },
+];
 const DECORATOR_MARKER = 'export function componentDecorator';
+
+const SHARED_PACKAGE_FILES = Object.freeze({
+  'package.json': `${JSON.stringify({
+    name: SHARED_PACKAGE_NAME,
+    private: true,
+    type: 'module',
+    exports: {
+      './decorator/index.js': './decorator/index.js',
+      './events/index.js': './events/index.js',
+      './template-engine/index.js': './template-engine/index.js',
+    },
+  }, null, 2)}\n`,
+  'README.md': '# @pix-galaxy/shared\n\nShared runtime helpers for pix-galaxy component packages.\n',
+});
 
 /**
  * @typedef {{
@@ -214,9 +237,10 @@ const findExistingDecorator = async (root) => {
  * @param {string} sourceRoot
  * @param {string} targetRoot
  * @param {boolean} force
+ * @param {string[]} [skipEntries=[]]
  * @returns {Promise<string[]>} list of files written
  */
-const copyTree = async (sourceRoot, targetRoot, force) => {
+const copyTree = async (sourceRoot, targetRoot, force, skipEntries = []) => {
   /** @type {string[]} */
   const written = [];
 
@@ -228,6 +252,8 @@ const copyTree = async (sourceRoot, targetRoot, force) => {
     const entries = await readdir(src, { withFileTypes: true });
 
     for (const entry of entries) {
+      if (skipEntries.includes(entry.name)) continue;
+
       const srcPath = path.join(src, entry.name);
       const destPath = path.join(dest, entry.name);
 
@@ -291,16 +317,17 @@ const buildComponentFiles = (options, sharedImportPath) => {
 
   const componentJs = `// @ts-check
 
-// CSS is loaded as a string by the bundler. Pick the import form for your bundler:
-//   Parcel:  import styles from 'bundle-text:./styles/${tag}.css';
-//   Vite:    import styles from './styles/${tag}.css?raw';
-//   esbuild: configure a \`loader: { '.css': 'text' }\` rule for the file.
-import styles from 'bundle-text:./styles/${tag}.css';
+// CSS is loaded as a string by the bundler. Configure the bundler to treat
+// component CSS imports as raw text (for esbuild: \`loader: { '.css': 'text' }\`).
+import styles from './styles/${tag}.css';
 
-import { componentDecorator } from '${sharedImportPath}/decorator/index.js';
+import { componentDecorator } from '${SHARED_PACKAGE_NAME}/decorator/index.js';
 
 ${attributesImport}
 ${eventsImport}
+import { renderRoot } from './${tag}.template.js';
+import { CONTENT_PART } from './${tag}.consts.js';
+import { filterRenderableNodes, normalizeVariant } from './${tag}.utils.js';
 
 export class ${name} extends ${baseClass} {
 ${extendsLine}  static attributes = attributes;
@@ -315,13 +342,52 @@ ${extendsLine}  static attributes = attributes;
     super();
   }
 
-  // optional hooks — uncomment what you need
-  // onRender() {}
-  // onConnected() {}
-  // onDisconnected() {}
-  // onAttributeChanged(name, oldValue, newValue) {}
+  /**
+   * @returns {'default' | 'outlined'}
+   */
+  get variant() {
+    return normalizeVariant(this.getAttribute('variant'));
+  }
+
+  /**
+   * @param {string | null | undefined} value
+   */
+  set variant(value) {
+    this.setAttribute('variant', normalizeVariant(value));
+  }
+
+  onRender() {
+    const existingRoot = this.querySelector(':scope > [data-part="root"]');
+
+    if (!existingRoot) {
+      const nodes = filterRenderableNodes(Array.from(this.childNodes));
+      this.innerHTML = renderRoot({});
+      this.querySelector(':scope > [data-part="content"]')?.append(...nodes);
+    }
+
+    this.#syncState();
+  }
+
+  /**
+   * @param {string} name
+   * @param {string | null} _oldValue
+   * @param {string | null} newValue
+   */
+  onAttributeChanged(name, _oldValue, newValue) {
+    if (name === 'variant') {
+      this.setAttribute('data-variant', normalizeVariant(newValue));
+    }
+  }
+
+  #syncState() {
+    const variant = this.variant;
+    this.setAttribute('variant', variant);
+    this.setAttribute('data-variant', variant);
+    this.querySelector(':scope > [data-part="' + CONTENT_PART + '"]')?.setAttribute('data-variant', variant);
+  }
 }
 
+export { normalizeVariant } from './${tag}.utils.js';
 export default ${name};
 `;
 
@@ -339,9 +405,17 @@ export default ${name};
 
   const attributesJs = `// @ts-check
 
-import { events } from '${sharedImportPath}/events/index.js';
+import { normalizeVariant } from './${tag}.utils.js';
 
 export default {
+  /**
+   * @this {HTMLElement}
+   * @param {string | null} _oldValue
+   * @param {string | null} newValue
+   */
+  variant(_oldValue, newValue) {
+    this.setAttribute('data-variant', normalizeVariant(newValue));
+  },
 ${attributeEntries.length > 0 ? attributeEntries.join('\n') + '\n' : ''}};
 `;
 
@@ -358,10 +432,51 @@ ${attributeEntries.length > 0 ? attributeEntries.join('\n') + '\n' : ''}};
 
   const eventsJs = `// @ts-check
 
-import { events as eventUtils } from '${sharedImportPath}/events/index.js';
-
 export default {
 ${eventEntries.length > 0 ? eventEntries.join('\n') + '\n' : ''}};
+`;
+
+  const constsJs = `// @ts-check
+
+export const DEFAULT_VARIANT = 'default';
+export const SUPPORTED_VARIANTS = ['default', 'outlined'];
+export const ROOT_PART = 'root';
+export const CONTENT_PART = 'content';
+`;
+
+  const utilsJs = `// @ts-check
+
+import { DEFAULT_VARIANT, SUPPORTED_VARIANTS } from './${tag}.consts.js';
+
+/**
+ * @param {string | null | undefined} value
+ * @returns {'default' | 'outlined'}
+ */
+export const normalizeVariant = (value) => {
+  return SUPPORTED_VARIANTS.includes(String(value)) ? /** @type {'default' | 'outlined'} */ (value) : DEFAULT_VARIANT;
+};
+
+/**
+ * @param {ChildNode[]} nodes
+ * @returns {ChildNode[]}
+ */
+export const filterRenderableNodes = (nodes) => {
+  return nodes.filter((node) => !(node.nodeType === Node.ELEMENT_NODE && node instanceof HTMLElement && node.getAttribute('data-part') === 'root'));
+};
+`;
+
+  const templateJs = `// @ts-check
+
+import TemplateEngine from '${SHARED_PACKAGE_NAME}/template-engine/index.js';
+import { CONTENT_PART, ROOT_PART } from './${tag}.consts.js';
+
+const engine = new TemplateEngine();
+
+export const renderRoot = engine.html\`
+  <div data-part="\${ROOT_PART}">
+    <div data-part="\${CONTENT_PART}"></div>
+  </div>
+\`;
 `;
 
   const cssEntry = `@import "./_core.css" layer(components.${tag});
@@ -395,6 +510,9 @@ ${selector} {
 
   return {
     [`${tag}.js`]: componentJs,
+    [`${tag}.template.js`]: templateJs,
+    [`${tag}.consts.js`]: constsJs,
+    [`${tag}.utils.js`]: utilsJs,
     [`${tag}.attributes.js`]: attributesJs,
     [`${tag}.events.js`]: eventsJs,
     [`styles/${tag}.css`]: cssEntry,
@@ -458,15 +576,25 @@ export const scaffoldComponent = async (options) => {
     sharedLibraryPath = path.join(targetRoot, options.sharedDir);
 
     if (!options.dryRun) {
-      for (const folder of SHARED_FOLDERS) {
-        const src = path.join(SHARED_SOURCE_ROOT, folder);
-        const dest = path.join(sharedLibraryPath, folder);
-        const written = await copyTree(src, dest, options.force);
+      for (const source of SHARED_SOURCES) {
+        const dest = path.join(sharedLibraryPath, source.targetFolder);
+        const written = await copyTree(source.sourceRoot, dest, options.force, source.skipEntries);
         sharedWritten.push(...written);
       }
+
+      for (const [relativePath, content] of Object.entries(SHARED_PACKAGE_FILES)) {
+        const targetPath = path.join(sharedLibraryPath, relativePath);
+        await mkdir(path.dirname(targetPath), { recursive: true });
+        await writeFile(targetPath, content, 'utf8');
+        sharedWritten.push(targetPath);
+      }
     } else {
-      for (const folder of SHARED_FOLDERS) {
-        sharedWritten.push(path.join(sharedLibraryPath, folder, '<copied>'));
+      for (const source of SHARED_SOURCES) {
+        sharedWritten.push(path.join(sharedLibraryPath, source.targetFolder, '<copied>'));
+      }
+
+      for (const relativePath of Object.keys(SHARED_PACKAGE_FILES)) {
+        sharedWritten.push(path.join(sharedLibraryPath, relativePath));
       }
     }
 
@@ -482,7 +610,7 @@ export const scaffoldComponent = async (options) => {
   }
 
   const componentEntryFile = path.join(componentDir, `${options.tag}.js`);
-  const sharedImportPath = relativeImport(componentEntryFile, sharedLibraryPath);
+  const sharedImportPath = SHARED_PACKAGE_NAME;
 
   // 2. build component files
   const files = buildComponentFiles(options, sharedImportPath);
@@ -524,7 +652,7 @@ export const scaffoldComponent = async (options) => {
     nextSteps: [
       `Import the component module from your app entry: import '${path.relative(targetRoot, componentEntryFile).split(path.sep).join('/')}';`,
       sharedLibraryInstalled
-        ? 'Confirm the bundler can resolve `bundle-text:` (Parcel) or `?raw` (Vite/webpack) for CSS imports.'
+        ? 'Confirm the bundler resolves component CSS imports as raw text (for esbuild use `loader: { ".css": "text", ".svg": "text" }`).'
         : 'Reusing existing shared library — no bundler change needed.',
       options.extendsElement
         ? `Customized built-ins (\`is="${options.tag}"\`) require the @ungap/custom-elements polyfill on Safari.`

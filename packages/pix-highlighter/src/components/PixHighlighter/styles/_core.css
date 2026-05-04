@@ -1,0 +1,16 @@
+:root {
+  --pix-highlighter--padding: var(--space-4);
+  --pix-highlighter--color: var(--color-text);
+  --pix-highlighter--background-color: var(--color-surface);
+  --pix-highlighter--border-color: var(--color-border);
+  --pix-highlighter--border-radius: var(--radius-control);
+}
+
+pix-highlighter {
+  display: block;
+  padding: var(--pix-highlighter--padding);
+  color: var(--pix-highlighter--color);
+  background-color: var(--pix-highlighter--background-color);
+  border: 0.1rem solid var(--pix-highlighter--border-color);
+  border-radius: var(--pix-highlighter--border-radius);
+}

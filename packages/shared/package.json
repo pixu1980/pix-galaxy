@@ -1,0 +1,10 @@
+{
+  "name": "@pix-galaxy/shared",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./decorator/index.js": "./decorator/index.js",
+    "./events/index.js": "./events/index.js",
+    "./template-engine/index.js": "./template-engine/index.js"
+  }
+}

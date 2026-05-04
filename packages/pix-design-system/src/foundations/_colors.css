@@ -1,0 +1,27 @@
+:root {
+  --color-primitive-cream-50: #fbfaf7;
+  --color-primitive-ink-900: #17130f;
+  --color-primitive-ink-600: #675f55;
+  --color-primitive-stone-200: #ded8cf;
+  --color-primitive-white: #ffffff;
+  --color-primitive-accent-500: #3f6df6;
+  --color-primitive-danger-500: #b42318;
+  --color-primitive-success-500: #157f3b;
+  --color-primitive-warning-500: #b26a00;
+
+  --color-canvas: var(--color-primitive-cream-50);
+  --color-surface: var(--color-primitive-white);
+  --color-text: var(--color-primitive-ink-900);
+  --color-text-muted: var(--color-primitive-ink-600);
+  --color-border: var(--color-primitive-stone-200);
+  --color-accent: var(--color-primitive-accent-500);
+  --color-danger: var(--color-primitive-danger-500);
+  --color-success: var(--color-primitive-success-500);
+  --color-warning: var(--color-primitive-warning-500);
+  --color-focus-ring: var(--color-primitive-accent-500);
+
+  --button-background-color: var(--color-accent);
+  --button-text-color: var(--color-primitive-white);
+  --card-background-color: var(--color-surface);
+  --card-border-color: var(--color-border);
+}

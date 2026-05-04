@@ -201,3 +201,17 @@ test('keeps generic CSS styleguide cleanup on pix-styleguides', async () => {
   assert.equal(result.selectedSkill, 'pix-styleguides');
   assert.equal(result.fallbackUsed, false);
 });
+
+test('routes repository governance and changelog work to pix-styleguides', async () => {
+  const registry = await loadRegistry();
+  const result = selectSkill(
+    registry,
+    '/pix-galaxy add contributing guide codeowners funding config and changelog generation from conventional commits',
+    ['CONTRIBUTING.md', '.github/CODEOWNERS', '.github/FUNDING.yml', 'CHANGELOG.md'],
+    'setup'
+  );
+
+  assert.equal(result.selectedSkill, 'pix-styleguides');
+  assert.equal(result.fallbackUsed, false);
+  assert.equal(result.slashCommandUsed, true);
+});

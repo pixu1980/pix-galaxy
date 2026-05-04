@@ -1,0 +1,59 @@
+name: Bug report
+description: Report a defect or regression in pix-galaxy
+title: "[Bug]: "
+labels:
+  - bug
+  - needs-triage
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting a bug. Please provide a minimal, reproducible description.
+
+  - type: input
+    id: summary
+    attributes:
+      label: Summary
+      description: One-line description of the problem.
+      placeholder: Release workflow publishes stale dist artifacts
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction
+      description: What steps reproduce the issue?
+      placeholder: |
+        1. Run a repository command or package workflow
+        2. Observe the broken behavior
+        3. Note the expected result
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      placeholder: The published package should match the tracked local dist build.
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Node.js, pnpm, OS, package version, browser, framework, or bundler.
+      placeholder: Node.js 24, pnpm 11, macOS, package version, browser version
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checks
+      options:
+        - label: I searched existing issues first
+          required: true
+        - label: I can reproduce this on the latest published version
+          required: false
