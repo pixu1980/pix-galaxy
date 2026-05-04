@@ -13,19 +13,19 @@ export const renderSwitcher = engine.html`
     <label data-part="option" data-scheme="light">
       <input type="radio" name="color-scheme" value="light" />
       ${svgLight}
-      <span data-helper="visually-hidden">Light</span>
+      <span sr-only>Light</span>
     </label>
 
     <label data-part="option" data-scheme="dark">
       <input type="radio" name="color-scheme" value="dark" />
       ${svgDark}
-      <span data-helper="visually-hidden">Dark</span>
+      <span sr-only>Dark</span>
     </label>
 
     <label data-part="option" data-scheme="system">
       <input type="radio" name="color-scheme" value="system" />
       ${svgSystem}
-      <span data-helper="visually-hidden">System</span>
+      <span sr-only>System</span>
     </label>
   </section>
 `;

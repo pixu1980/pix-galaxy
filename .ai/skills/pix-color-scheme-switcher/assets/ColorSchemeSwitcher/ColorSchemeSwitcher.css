@@ -82,7 +82,7 @@
     transform: scale(1.05);
   }
 
-  pix-color-scheme-switcher [data-helper="visually-hidden"] {
+  pix-color-scheme-switcher [sr-only] {
     position: absolute;
     inline-size: 1px;
     block-size: 1px;

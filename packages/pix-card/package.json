@@ -1,11 +1,8 @@
 {
   "name": "@pix-galaxy/pix-card",
-  "version": "0.1.0",
+  "version": "0.0.1",
   "description": "Accessible card Web Component. Zero runtime dependencies.",
   "type": "module",
-  "sideEffects": [
-    "./dist/index.css"
-  ],
   "files": [
     "dist",
     "README.md",
@@ -19,16 +16,19 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
     },
-    "./css": "./dist/index.css",
     "./package.json": "./package.json"
   },
   "scripts": {
-    "clean": "node ../../scripts/clean.js pix-card",
-    "build": "node ../../scripts/build-package.js pix-card",
-    "test": "node --test test/*.test.js",
+    "clean": "node ../../scripts/_clean.js pix-card",
+    "build": "node ../../scripts/_build-package.js pix-card",
+    "test": "node --test tests/index.js",
     "typecheck": "pnpm exec tsc -p tsconfig.types.json --noEmit",
-    "validate": "node ../../scripts/validate-package.js pix-card",
-    "docs:build": "node ../../scripts/build-docs.js pix-card"
+    "validate": "node ../../scripts/_validate-package.js pix-card",
+    "docs:build": "node ../../scripts/_build-docs.js pix-card",
+    "docs:serve": "node ../../scripts/_serve-docs.js pix-card"
+  },
+  "devDependencies": {
+    "@pix-galaxy/shared": "workspace:*"
   },
   "dependencies": {}
 }

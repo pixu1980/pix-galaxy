@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../src/index.js"],
+  "sourcesContent": ["// @ts-check\nexport const PIX_DESIGN_SYSTEM_PACKAGE = '@pix-galaxy/pix-design-system';\n"],
+  "mappings": ";AACO,IAAM,4BAA4B;",
+  "names": []
+}

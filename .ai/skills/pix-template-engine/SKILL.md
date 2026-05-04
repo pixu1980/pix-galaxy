@@ -7,11 +7,14 @@ argument-hint: 'Target request, e.g. "set up template engine for SSG pages"'
 # pix Template Engine
 
 ## Outcome
-Copy a ready-to-use template engine into the target project and use it for static HTML generation, SSG, or SSR workflows.
-It can also render inline templates through tagged template literals with `engine.template` or `engine.html`.
+Copy the right pix-template-engine runtime into the target project.
+
+- Use the full DOM-based engine for static HTML generation, SSG, or SSR workflows.
+- Use the browser-safe tagged runtime for inline `engine.template` or `engine.html` usage inside browser runtime modules and custom elements.
 
 This skill bundles:
 - engine source files
+- browser-safe tagged runtime source
 - test suite
 - usage examples for static HTML, SSG, SSR, and tagged template literals
 
@@ -65,20 +68,22 @@ Trigger phrases:
    - ssg: many pages generated at build time
    - ssr: runtime rendering on request
    - tagged-template-literal: inline reusable render functions with `engine.template` or `engine.html`
-4. Validate the engine by running bundled tests in the target project.
+4. Validate the engine by running bundled tests in the target project, or by verifying bundle/build integration for the browser-safe tagged runtime.
 5. Add or adapt example implementation for the selected mode.
 
 ## Procedure
 1. Install engine in target project:
    - `node ./.github/skills/pix-template-engine/scripts/install-template-engine.mjs --target "<project-root>" --dest "src/template-engine" --with-examples`
-2. Ensure `jsdom` and `marked` are available in target project (engine dependencies).
-3. Choose one example and adapt paths/data.
-4. Execute tests:
-   - `node --test ./src/template-engine/tests/*.test.js`
-5. Use `TemplateEngine` in build/runtime pipeline, or use the tagged literal API for inline templates.
+2. If the target is Node-side rendering, ensure `jsdom` and `marked` are available in the target project (engine dependencies).
+3. If the target is a browser runtime module or custom element, copy only [./assets/tagged-runtime/index.js](./assets/tagged-runtime/index.js) into the shared runtime folder.
+4. Choose one example and adapt paths/data.
+5. Execute tests for the full engine:
+  - `node --test ./src/template-engine/tests/*.test.js`
+6. Use `TemplateEngine` in build/runtime pipeline, or use the tagged literal API for inline templates.
 
 ## Tagged template literal usage
 Use `engine.template` or the shorter `engine.html` alias when a template is small, component-like, or created inside a build/runtime module.
+When the target is browser runtime code, use the browser-safe tagged runtime and keep the template to JavaScript `${...}` interpolations only.
 Use [./assets/examples/tagged-template-literal/render-inline.mjs](./assets/examples/tagged-template-literal/render-inline.mjs) for basic inline composition.
 Use [./assets/examples/tagged-template-literal/render-components.mjs](./assets/examples/tagged-template-literal/render-components.mjs) for component-like render functions with different data scopes.
 
@@ -99,7 +104,7 @@ const html = renderCard({
 });
 ```
 
-Prefer `{{ value }}` for data binding so filters and escaping behavior stay consistent with file templates. Use `${...}` only for static fragments, reusable render functions, or functions that derive markup from render data.
+Prefer `{{ value }}` for data binding only when using the full Node-side engine. Use `${...}` for static fragments, reusable render functions, or functions that derive markup from render data. In the browser-safe tagged runtime, `${...}` is the supported path.
 
 ```js
 const renderBadge = engine.html`<span>{{ label | upper }}</span>`;
@@ -126,12 +131,12 @@ Keep tagged literal behavior covered in [./assets/template-engine/tests/tagged-t
 ## Completion criteria
 A task is complete when:
 1. Source files are copied into the target project.
-2. Template-engine tests are runnable in target project.
-3. At least one concrete usage flow (static-html, ssg, or ssr) is implemented.
-   For tagged literal tasks, a reusable `engine.html` or `engine.template` render function is enough.
-4. Final report includes installed paths, test status, and usage entrypoint.
+2. Template-engine tests are runnable in target project when the full engine is installed.
+3. At least one concrete usage flow (static-html, ssg, or ssr) is implemented, or a reusable browser-safe tagged runtime render function is wired into the target runtime module.
+4. Final report includes installed paths, test/build status, and usage entrypoint.
 
 ## Notes
-- Prefer the bundled DOM renderer implementation for nested directives reliability.
+- Prefer the bundled DOM renderer implementation for nested directives reliability in Node-side workflows only.
+- Use the browser-safe tagged runtime for zero-runtime-dependency browser bundles and custom elements.
 - Keep copied source structure unchanged to simplify updates.
 - When updating engine behavior, update tests in the same change.

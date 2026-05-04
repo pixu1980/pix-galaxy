@@ -34,18 +34,34 @@
           "js conventions",
           "json formatting",
           "markdown standards",
-          "accessibility"
+          "accessibility",
+          "changelog",
+          "conventional commits",
+          "contributing",
+          "code of conduct",
+          "governance",
+          "security policy",
+          "support policy",
+          "community health",
+          "codeowners",
+          "funding",
+          "pull request template",
+          "issue template",
+          "dependabot"
         ],
         "regex": [
           "\\bstyle(?:\\s|-)?guide\\b",
-          "\\b(?:refactor|review|fix)\\b.*\\b(?:css|html|javascript|json|markdown)\\b"
+          "\\b(?:refactor|review|fix)\\b.*\\b(?:css|html|javascript|json|markdown)\\b",
+          "\\b(?:changelog|contributing|governance|security|support|codeowners|funding|issue template|pull request template|conventional commits?)\\b"
         ],
         "fileExtensions": [
           ".css",
           ".html",
           ".js",
           ".json",
-          ".md"
+          ".md",
+          ".yml",
+          ".yaml"
         ],
         "operations": [
           "review",
@@ -53,7 +69,9 @@
           "format",
           "lint",
           "fix",
-          "generate"
+          "generate",
+          "setup",
+          "release"
         ],
         "intents": [
           "semantics",
@@ -61,7 +79,10 @@
           "consistency",
           "readability",
           "standards",
-          "quality"
+          "quality",
+          "community",
+          "governance",
+          "release notes"
         ]
       }
     },

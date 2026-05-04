@@ -29,6 +29,11 @@ Hard HTML + A11y checklist:
 - valid heading hierarchy, only one `h1`
 - baseline WCAG 2.2 AA (contrast, focus, keyboard, spacing, labels/errors, reduced motion)
 
+Hard repository-docs checklist:
+- keep repository community-health docs at root when touching `CHANGELOG.md`, `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, `GOVERNANCE.md`, `SECURITY.md`, or `SUPPORT.md`
+- keep GitHub templates under `.github/` with issue forms in `.github/ISSUE_TEMPLATE/`
+- when release notes rely on Conventional Commits, keep `CHANGELOG.md` generated and document command used to regenerate it
+
 Mandatory final output:
 1. `Applied rules`
 2. `Files updated`

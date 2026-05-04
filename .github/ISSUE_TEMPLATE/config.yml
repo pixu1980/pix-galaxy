@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Security policy
+    url: https://github.com/pixu1980/pix-galaxy/security/policy
+    about: Please use private security reporting for vulnerabilities whenever possible.
+  - name: Support guide
+    url: https://github.com/pixu1980/pix-galaxy/blob/main/SUPPORT.md
+    about: Read the support policy before opening a public issue.

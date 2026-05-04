@@ -17,6 +17,8 @@ Current orchestration target:
 - `pix-custom-element`
 - `pix-color-scheme-switcher`
 
+Repository governance, community-health, and release-documentation tasks default to `pix-styleguides` unless the user explicitly names another skill.
+
 This skill is designed to scale as more skills are added to the registry.
 
 ## When to use
@@ -25,6 +27,7 @@ Use this skill when the user asks to:
 - route a request through a central orchestrator
 - keep the orchestration map updated over time
 - add new skills to a single dispatch point
+- route repository governance or release-meta tasks such as changelog generation, contributing guides, security policies, support docs, CODEOWNERS, funding metadata, and issue or pull-request templates
 
 Explicit slash trigger:
 - start prompt with `/pix-galaxy` to force orchestration mode.

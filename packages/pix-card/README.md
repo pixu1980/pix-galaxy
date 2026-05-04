@@ -12,7 +12,6 @@ pnpm add @pix-galaxy/pix-card
 
 ```js
 import "@pix-galaxy/pix-card";
-import "@pix-galaxy/pix-card/css";
 ```
 
 ```html

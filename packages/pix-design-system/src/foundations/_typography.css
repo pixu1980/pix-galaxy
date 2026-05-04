@@ -1,0 +1,81 @@
+:root {
+  --ds--typography--ratio: 1.2;
+  --ds--typography--font-family--sans: Aptos, "Avenir Next", "Helvetica Neue", sans-serif;
+  --ds--typography--font-size--base: 1.6rem;
+  --ds--typography--font-weight--regular: 400;
+  --ds--typography--font-weight--strong: 700;
+  --ds--typography--line-height--body: 1.6;
+  --ds--typography--line-height--heading: 1.15;
+  --ds--typography--tracking--tight: -0.02em;
+  --ds--typography--measure--readable: 68ch;
+
+  --ds--typography--font-size--xs: calc(var(--ds--typography--font-size--base) / pow(var(--ds--typography--ratio), 2));
+  --ds--typography--font-size--sm: calc(var(--ds--typography--font-size--base) / var(--ds--typography--ratio));
+  --ds--typography--font-size--md: var(--ds--typography--font-size--base);
+  --ds--typography--font-size--lg: calc(var(--ds--typography--font-size--base) * var(--ds--typography--ratio));
+  --ds--typography--font-size--xl: calc(var(--ds--typography--font-size--base) * pow(var(--ds--typography--ratio), 2));
+  --ds--typography--font-size--2xl: calc(var(--ds--typography--font-size--base) * pow(var(--ds--typography--ratio), 3));
+  --ds--typography--font-size--3xl: calc(var(--ds--typography--font-size--base) * pow(var(--ds--typography--ratio), 4));
+  --ds--typography--font-size--4xl: calc(var(--ds--typography--font-size--base) * pow(var(--ds--typography--ratio), 5));
+  --ds--typography--font-size--5xl: calc(var(--ds--typography--font-size--base) * pow(var(--ds--typography--ratio), 6));
+
+  --font-family-sans: var(--ds--typography--font-family--sans);
+  --font-size--2: var(--ds--typography--font-size--xs);
+  --font-size--1: var(--ds--typography--font-size--sm);
+  --font-size-0: var(--ds--typography--font-size--md);
+  --font-size-1: var(--ds--typography--font-size--lg);
+  --font-size-2: var(--ds--typography--font-size--xl);
+  --font-size-3: var(--ds--typography--font-size--2xl);
+  --font-weight-regular: var(--ds--typography--font-weight--regular);
+  --font-weight-strong: var(--ds--typography--font-weight--strong);
+  --line-height-body: var(--ds--typography--line-height--body);
+  --line-height-heading: var(--ds--typography--line-height--heading);
+  --tracking-tight: var(--ds--typography--tracking--tight);
+  --measure-readable: var(--ds--typography--measure--readable);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--color-text);
+  font-weight: var(--font-weight-strong);
+  line-height: var(--line-height-heading);
+  letter-spacing: var(--tracking-tight);
+  margin: 0;
+}
+
+h1 {
+  font-size: var(--ds--typography--font-size--5xl);
+}
+
+h2 {
+  font-size: var(--ds--typography--font-size--4xl);
+}
+
+h3 {
+  font-size: var(--ds--typography--font-size--3xl);
+}
+
+h4 {
+  font-size: var(--ds--typography--font-size--2xl);
+}
+
+h5 {
+  font-size: var(--ds--typography--font-size--xl);
+}
+
+h6 {
+  font-size: var(--ds--typography--font-size--lg);
+}
+
+small {
+  font-size: var(--ds--typography--font-size--sm);
+}
+
+p {
+  max-inline-size: var(--measure-readable);
+  margin: 0;
+}

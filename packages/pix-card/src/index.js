@@ -1,3 +1,6 @@
 // @ts-check
-export { PixCard } from "./pix-card.js";
-export { normalizeVariant } from "./normalize-variant.js";
+
+/**
+ * Public exports for the pix-card package.
+ */
+export { PixCard, normalizeVariant } from './components/PixCard/pix-card.js';

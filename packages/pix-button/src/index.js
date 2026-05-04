@@ -1,3 +1,6 @@
 // @ts-check
-export { PixButton } from "./pix-button.js";
-export { normalizeVariant } from "./normalize-variant.js";
+
+/**
+ * Public exports for the pix-button package.
+ */
+export { PixButton, normalizeVariant } from './components/PixButton/pix-button.js';

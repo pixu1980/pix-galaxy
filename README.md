@@ -1,31 +1,34 @@
 # pix-galaxy
 
-A monorepo of zero-runtime-dependency vanilla JavaScript Web Components.
+Zero-runtime-dependency vanilla JavaScript Web Components, packaged as a pnpm workspace monorepo.
 
 [![CI](https://github.com/pixu1980/pix-galaxy/actions/workflows/ci.yml/badge.svg)](https://github.com/pixu1980/pix-galaxy/actions/workflows/ci.yml)
 
 ## Packages
 
-| Package | Version | Description |
-|---------|---------|-------------|
-| [@pix-galaxy/pix-button](./packages/pix-button) | 0.1.0 | Accessible button Web Component |
-| [@pix-galaxy/pix-card](./packages/pix-card) | 0.1.0 | Accessible card Web Component |
+| Package | Description |
+|---------|-------------|
+| [@pix-galaxy/pix-baseline](./packages/pix-baseline) | Baseline component scaffold for the shared runtime |
+| [@pix-galaxy/pix-button](./packages/pix-button) | Accessible light-DOM button wrapper |
+| [@pix-galaxy/pix-card](./packages/pix-card) | Accessible light-DOM card container |
+| [@pix-galaxy/pix-design-system](./packages/pix-design-system) | Shared design-system package |
+| [@pix-galaxy/pix-highlighter](./packages/pix-highlighter) | Highlighter component scaffold for the shared runtime |
 
-## Philosophy
+## Principles
 
-- **Zero runtime dependencies** — no frameworks, no libraries, pure vanilla JS
-- **Web Standards first** — built on Custom Elements, Shadow DOM, and CSS Custom Properties
-- **Accessible by default** — semantic HTML, keyboard support, forced colors, reduced motion
-- **ESM only** — modern ES modules, tree-shakeable
-- **JSDoc typed** — full type safety via `// @ts-check` and TypeScript declaration generation
-- **Static docs** — documentation as plain HTML, no build step to view
+- Zero runtime dependencies.
+- Browser-native Custom Elements v1 in light DOM.
+- CSS delivered through adoptedStyleSheets and package `dist/` output.
+- JSDoc types plus TypeScript declaration generation.
+- Static documentation per package under `packages/<name>/docs/`.
+- pnpm-only developer workflow.
 
-## Getting started
+## Getting Started
 
 ### Prerequisites
 
-- [Node.js](https://nodejs.org/) ≥ 20
-- [pnpm](https://pnpm.io/) 9.15.4
+- Node.js 24
+- pnpm 11
 
 ### Install
 
@@ -33,132 +36,89 @@ A monorepo of zero-runtime-dependency vanilla JavaScript Web Components.
 pnpm install
 ```
 
-### Build all packages
-
-```sh
-pnpm build
-```
-
-### Test all packages
+### Repository commands
 
 ```sh
 pnpm test
-```
-
-### Typecheck all packages
-
-```sh
 pnpm typecheck
-
-```
-
-### Validate all packages
-
-```sh
+pnpm build
 pnpm validate
-```
-
-### Build documentation site
-
-```sh
 pnpm docs:build
-```
-
-Output goes to `site/`.
-
-### Clean build artifacts
-
-```sh
+pnpm docs:serve
 pnpm clean
 ```
 
-## Creating a new package
+`pnpm test` also runs the root CLI test suite in `scripts/tests/index.js`.
+
+### Per-package commands
 
 ```sh
-pnpm package:create pix-badge
-```
-
-This scaffolds a new package under `packages/pix-badge/` with all required files and scripts.
-
-## List packages
-
-```sh
-pnpm package:list
-```
-
-## Working with a single package
-
-```sh
-# Build
 pnpm --filter @pix-galaxy/pix-button build
-
-# Test
 pnpm --filter @pix-galaxy/pix-button test
-
-# Typecheck
 pnpm --filter @pix-galaxy/pix-button typecheck
-
-# Validate structure
 pnpm --filter @pix-galaxy/pix-button validate
-
-# Build docs
 pnpm --filter @pix-galaxy/pix-button docs:build
+pnpm --filter @pix-galaxy/pix-button docs:serve
 ```
 
-## Repository structure
+## Release Flow
 
+Local release preparation is conventional-commit driven:
+
+```sh
+pnpm rel:patch
+pnpm rel:minor
+pnpm rel:major
 ```
+
+Each helper:
+
+1. runs tests and typecheck
+2. regenerates `CHANGELOG.md` from Conventional Commits
+3. bumps the root version plus every publishable package version
+4. rebuilds tracked `packages/*/dist/` artifacts locally
+5. creates a release commit and local tag
+
+Push remains manual:
+
+```sh
+git push origin main --follow-tags
+```
+
+The release workflow verifies the committed `dist/` artifacts and publishes them without rebuilding packages in CI. That keeps the published npm payload aligned with the local release build.
+
+## Repository Structure
+
+```text
 pix-galaxy/
 ├── packages/
-│   ├── pix-button/          # @pix-galaxy/pix-button
-│   │   ├── src/             # Source files (JS + CSS)
-│   │   ├── test/            # Tests (node:test)
-│   │   ├── docs/            # Static HTML documentation
-│   │   ├── dist/            # Build output (generated)
-│   │   ├── package.json
-│   │   ├── tsconfig.types.json
-│   │   └── README.md
-│   └── pix-card/            # @pix-galaxy/pix-card
-│       └── ...
+│   ├── pix-button/
+│   ├── pix-card/
+│   ├── pix-baseline/
+│   ├── pix-design-system/
+│   ├── pix-highlighter/
+│   └── shared/
 ├── scripts/
-│   ├── build-package.js    # esbuild bundler + tsc declarations
-│   ├── build-docs.js       # Aggregate docs into site/
-│   ├── clean.js            # Remove dist/ and site/
-│   ├── create-package.js   # Scaffold a new package
-│   ├── list-packages.js    # List all packages
-│   └── validate-package.js # Validate package structure
-├── site/                    # Generated documentation site
+├── site/
+├── .ai/
 ├── .github/
-│   ├── copilot-instructions.md
-│   └── workflows/
-│       ├── ci.yml           # Test, typecheck, build on push/PR
-│       ├── pages.yml        # Deploy docs to GitHub Pages
-│       └── release.yml      # Publish to npm on tag
-├── package.json
-├── pnpm-workspace.yaml
-└── tsconfig.types.json      # Shared TS config for declaration generation
+├── CHANGELOG.md
+├── CONTRIBUTING.md
+├── CODE_OF_CONDUCT.md
+├── GOVERNANCE.md
+├── SECURITY.md
+└── SUPPORT.md
 ```
 
-## Component conventions
+## Community
 
-Every component package:
-
-- Lives in `packages/<name>/`
-- Has `src/`, `test/`, `docs/`, `package.json`, `tsconfig.types.json`, `README.md`
-- Exposes ESM only
-- Has zero runtime `dependencies`
-- Has scripts: `build`, `test`, `typecheck`, `validate`, `docs:build`
-- Uses `// @ts-check` in every source file
-- Uses JSDoc for all public APIs
-- Uses Shadow DOM with `:host` scoping
-- Supports `@media (forced-colors: active)` and `@media (prefers-reduced-motion: reduce)`
-
-## CI/CD
-
-- **CI** (`ci.yml`): Runs on every push to `main` and every pull request. Runs tests, typecheck, build, and docs build.
-- **Pages** (`pages.yml`): Deploys the `site/` directory to GitHub Pages on push to `main`.
-- **Release** (`release.yml`): Publishes packages to npm on push of a `v*` tag or manual trigger.
+- Contribution guide: see CONTRIBUTING.md
+- Code of conduct: see CODE_OF_CONDUCT.md
+- Governance: see GOVERNANCE.md
+- Security policy: see SECURITY.md
+- Support policy: see SUPPORT.md
+- Release notes: see CHANGELOG.md
 
 ## License
 
-MIT
+MIT, see LICENSE.

@@ -1,0 +1,40 @@
+:root {
+  --pix-card-background: Canvas;
+  --pix-card-color: CanvasText;
+  --pix-card-border-color: #ddd;
+  --pix-card-radius: 0.75rem;
+  --pix-card-shadow: none;
+  --pix-card-padding: 1.25rem;
+}
+
+pix-card {
+  display: block;
+}
+
+pix-card > [data-part='card'] {
+  display: block;
+  background: var(--pix-card-background);
+  color: var(--pix-card-color);
+  border: 1px solid transparent;
+  border-radius: var(--pix-card-radius);
+  box-shadow: var(--pix-card-shadow);
+  overflow: hidden;
+}
+
+pix-card > [data-part='card'][href] {
+  color: inherit;
+}
+
+pix-card > [data-part='card'] > [data-part='header'] {
+  padding: var(--pix-card-padding);
+  padding-block-end: 0;
+}
+
+pix-card > [data-part='card'] > [data-part='body'] {
+  padding: var(--pix-card-padding);
+}
+
+pix-card > [data-part='card'] > [data-part='footer'] {
+  padding: var(--pix-card-padding);
+  padding-block-start: 0;
+}

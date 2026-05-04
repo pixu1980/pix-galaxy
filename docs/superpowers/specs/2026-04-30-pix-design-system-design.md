@@ -44,6 +44,7 @@ Package mode defaults:
 
 - Package name: `@pix-galaxy/pix-design-system`
 - Destination: `packages/pix-design-system/`
+- Test directory: `tests/`
 
 Both modes use the same CSS architecture:
 
@@ -52,6 +53,12 @@ Both modes use the same CSS architecture:
 ```
 
 Files are split by responsibility. The entrypoint imports reset, foundation tokens, layout primitives, component aliases, and helpers in stable order.
+
+When the design system is installed as a repo package, runtime folders follow the repo convention:
+
+- `src/index.js` and `src/index.css` stay as barrels.
+- `tests/index.js` stays as the package test entrypoint.
+- Other runtime files in `src/`, `scripts/`, and `tests/` are underscore-prefixed.
 
 ## Token Architecture
 

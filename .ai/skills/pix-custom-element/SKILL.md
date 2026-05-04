@@ -1,15 +1,15 @@
 ---
 name: pix-custom-element
-description: Use when building Custom Elements v1 for vanilla JavaScript or pix-galaxy projects. Enforces light DOM, CSS adopted via `document.adoptedStyleSheets` registered in a `static {}` block, safe element definition, and a metadata-driven decorator (`componentDecorator`) that wires lifecycle, attribute handlers, and event handlers from `static attributes` and `static events`. The `decorator/` and `events/` helpers are installed once per project and reused by every component — never duplicated. Use whenever the task involves a reusable, encapsulated HTML/JS component, an `is="..."` customized built-in element (e.g. `<details is="pix-details">`), a web component, an interactive widget, a card, list item, badge, or any DOM element with its own state and style.
+description: Use when building Custom Elements v1 for vanilla JavaScript or pix-galaxy projects. Enforces light DOM, CSS adopted via `document.adoptedStyleSheets` registered in a `static {}` block, safe element definition, and a metadata-driven decorator (`componentDecorator`) that wires lifecycle, attribute handlers, and event handlers from `static attributes` and `static events`. In pix-galaxy monorepos, runtime helpers live in the shared workspace package `packages/shared/` and are imported from `@pix-galaxy/shared/...`. Use whenever the task involves a reusable, encapsulated HTML/JS component, an `is="..."` customized built-in element (e.g. `<details is="pix-details">`), a web component, an interactive widget, a card, list item, badge, or any DOM element with its own state and style.
 ---
 
 # pix Custom Element
 
 Build Custom Elements v1 in light DOM. CSS is adopted once via `document.adoptedStyleSheets` and lifecycle is wired by a metadata-driven decorator inside a `static {}` block.
 
-The `decorator/` and `events/` helpers are **shared across the whole project** — install them once, then every component imports from the same canonical path.
+In pix-galaxy monorepos, runtime helpers live once in `packages/shared/`. Component packages import them from `@pix-galaxy/shared/...`, and sibling packages must not keep private `src/shared/` copies.
 
-Follows pix-styleguides for HTML, CSS, and JavaScript. Uses pix-design-system tokens for visual decisions and pix-template-engine for client-side rendering.
+Follows pix-styleguides for HTML, CSS, and JavaScript. Uses pix-design-system tokens for visual decisions and the browser-safe pix-template-engine tagged runtime for client-side rendering.
 
 ## Hard constraints
 
@@ -19,8 +19,8 @@ Follows pix-styleguides for HTML, CSS, and JavaScript. Uses pix-design-system to
 | No `<template>` elements | The template engine returns strings; render via `innerHTML` or `insertAdjacentHTML` |
 | CSS via `adoptedStyleSheets` | One shared `CSSStyleSheet` per component class — never re-injected per instance |
 | `static {}` block as the only registration site | CSS adoption + element define + mixins run once at module load, safe for HMR |
-| Metadata-driven lifecycle | `static attributes`, `static events`, `static styles` declare intent — the decorator wires the plumbing |
-| `decorator/` and `events/` are project-shared | Centralised once; never copied into a component folder |
+| Metadata-driven lifecycle | `static attributes`, `static events`, and `static styles = styles` declare intent, while `componentDecorator(this)` wires CSS adoption and lifecycle plumbing |
+| `packages/shared/` is canonical in pix-galaxy | Keep `decorator/`, `events/`, and `template-engine/` in one shared workspace package for all component packages |
 
 Never inject `<style>` tags inside `render`/`onRender`/`connectedCallback`. CSS belongs to `adoptedStyleSheets` only.
 
@@ -43,11 +43,11 @@ node ./.github/skills/pix-custom-element/scripts/scaffold-component.mjs \
   --attributes "open" \
   --target "<project-root>"
 
-# first run in a brand-new project (also installs decorator/ + events/)
+# first run in a brand-new project or package target
 node ./.github/skills/pix-custom-element/scripts/scaffold-component.mjs \
   --name "PixCard" \
   --install-shared \
-  --shared-dir "src/lib/custom-element" \
+  --shared-dir "packages/shared" \
   --target "<project-root>"
 ```
 
@@ -55,7 +55,7 @@ The script:
 
 1. Walks the project for an existing `componentDecorator` (skipping `node_modules`, `dist`, `build`).
 2. Reuses that path when found. Otherwise installs the shared library at `--shared-dir` (only with `--install-shared`).
-3. Generates the component files, computing the relative import path to the shared library.
+3. Generates the component files, importing runtime helpers from `@pix-galaxy/shared/...`.
 4. Refuses to overwrite existing files unless `--force` is set.
 5. Outputs a JSON report: created files, shared-library path, computed import path, suggested next steps.
 
@@ -67,11 +67,11 @@ Flags:
 | `--tag` | derived | Override the kebab-case tag |
 | `--target` | `cwd` | Project root |
 | `--components-dir` | `src/components` | Where to put the component folder |
-| `--shared-dir` | `src/lib/custom-element` | Where to install helpers if missing |
+| `--shared-dir` | `packages/shared` | Where to install `decorator/`, `events/`, and the browser-safe tagged `template-engine/` if missing |
 | `--extends` | (none) | Built-in tag for customized built-ins (e.g. `details`) |
 | `--attributes` | (empty) | Comma list — becomes `static attributes` keys |
 | `--events` | (empty) | Comma list — becomes `static events` keys |
-| `--install-shared` | `false` | Copy `decorator/` + `events/` if missing |
+| `--install-shared` | `false` | Copy `decorator/`, `events/`, and the browser-safe tagged `template-engine/` if missing |
 | `--force` | `false` | Allow overwriting existing files |
 | `--dry-run` | `false` | Report what would be written without writing |
 
@@ -112,14 +112,14 @@ Run one of these from the project root before creating any new component:
 grep -rl "export function componentDecorator" --include="*.js" --include="*.mjs" \
   --exclude-dir=node_modules --exclude-dir=dist --exclude-dir=build .
 
-# Indirect: find a `decorator/index.js` likely to be the central entry
-find . -path "*/decorator/index.js" -not -path "*/node_modules/*" -not -path "*/dist/*"
+# Indirect: find a shared `decorator/index.js` likely to be the central entry
+find . -path "*/packages/shared/decorator/index.js" -not -path "*/node_modules/*" -not -path "*/dist/*"
 
 # Same idea for events
 find . -path "*/events/index.js" -not -path "*/node_modules/*" -not -path "*/dist/*"
 ```
 
-If a result is found: that path is the canonical location. Import from there using a relative path. **Do not** copy these folders into the component directory.
+If a result is found inside the shared workspace package: that path is the canonical location. Import from there using `@pix-galaxy/shared/...`. **Do not** recreate helpers across sibling packages.
 
 ### Step 2 — install once when missing
 
@@ -127,34 +127,44 @@ If nothing exists yet, install the helpers at a single project-shared location. 
 
 | Project shape | Recommended path |
 |---------------|------------------|
-| Single app, `src/` | `src/lib/custom-element/` |
-| Component library w/ `lib/` | `lib/custom-element/` |
-| Monorepo workspace | `packages/<pkg-name>/src/lib/custom-element/` |
-| Already has a "shared/utils" folder | Place `decorator/` and `events/` next to existing utilities |
+| Single app or package target | `src/shared/` |
+| pix-galaxy monorepo component package | `packages/shared/` |
+| Existing workspace shared package | Reuse that path and expose it through a stable import alias/package name |
+| Mixed setup with no clear convention | Confirm a single shared runtime location with the user |
 
-Copy the contents of `scripts/decorator/` and `scripts/events/` from this skill into that single location. Confirm the destination with the user when the project shape is ambiguous.
+Copy the contents of `scripts/decorator/`, `scripts/events/`, and the browser-safe tagged runtime from `pix-template-engine/assets/tagged-runtime/` into that single location. Confirm the destination with the user when the project shape is ambiguous.
 
 ### Step 3 — scaffold the component
 
 A component folder contains **only** files specific to that component.
 
-Naming convention: **folder name in PascalCase**, **file names in PascalCase** (matching the class name).
+Naming convention: **folder name in PascalCase**, **file names in kebab-case** (matching the custom element tag).
 
 ```
-components/
-  PixDetails/
-    PixDetails.js              # class + static decorator call
-    PixDetails.template.js     # TemplateEngine instance + compiled render functions
-    PixDetails.consts.js       # module-level constants (enums, maps, string keys, …)
-    PixDetails.utils.js        # pure helper functions with no DOM side-effects
-    PixDetails.attributes.js   # { attrName: handler } — empty object {} if no observed attrs
-    PixDetails.events.js       # { eventType: handler } — DOM event map
-    PixDetails.css             # entry point — only @import lines or full styles
-    icons/                     # optional — one .svg per icon, imported via bundle-text:
-      chevron.svg
+packages/
+  shared/
+    decorator/
+    events/
+    template-engine/
+      index.js
+  pix-details/
+    src/
+      components/
+        PixDetails/
+          pix-details.js
+          pix-details.template.js
+          pix-details.consts.js
+          pix-details.utils.js
+          pix-details.attributes.js
+          pix-details.events.js
+          styles/
+            pix-details.css
+            _core.css
+            states/
+              _states.css
 ```
 
-Folder name is `PascalCase` (matches the class). File names are `PascalCase` too. The component imports `componentDecorator` and `events` from the shared library path resolved in step 1 — never from a sibling component.
+Folder name is `PascalCase` (matches the class). File names are `kebab-case` (match the custom element tag). The component imports `componentDecorator`, `events`, and `TemplateEngine` from the shared runtime package resolved in step 1 — in pix-galaxy monorepos, `@pix-galaxy/shared/...`.
 
 ## Code-splitting rules
 
@@ -179,7 +189,7 @@ Anti-patterns:
 
 ## Anti-patterns
 
-- Copying `decorator/` or `events/` into every component folder.
+- Copying `decorator/` or `events/` into every component folder or component package.
 - Importing the decorator from a sibling component (`../OtherComponent/decorator/...`). Components must not depend on each other's internals.
 - Maintaining two installations of `decorator/` in the same project. Pick one canonical path; if migrating, delete the old copies in the same change.
 - Hard-coding the relative path `'../decorator/index.js'` everywhere when a path alias (`@lib/custom-element`) is configured. Prefer the alias when available.
@@ -231,7 +241,7 @@ The static block is the **only** site where the element is wired up.
 
 `componentDecorator(this)` runs four steps:
 
-1. **Adopt CSS** — when `static styles` is set, the CSS string (or `CSSStyleSheet`, or array of either) is added to `document.adoptedStyleSheets` exactly once per class (guarded with a `WeakSet`).
+1. **Adopt CSS** — the CSS string (or `CSSStyleSheet`, or array of either) stored on `static styles` is added to `document.adoptedStyleSheets` exactly once per class (guarded with a `WeakSet`).
 2. **Resolve tag** — `static isAttribute` wins; otherwise the class name is converted from PascalCase to kebab-case (e.g. `PixDetails` → `pix-details`).
 3. **Safe `customElements.define`** — skips when already defined; passes `{ extends }` when `static extendsElement` is set.
 4. **Apply mixins to the prototype**:

@@ -19,8 +19,10 @@
 - Create `.github/skills/pix-design-system/references/EXAMPLES.md`: guide to bundled examples.
 - Create `.github/skills/pix-design-system/scripts/install-design-system.js`: fail-safe installer.
 - Create `.github/skills/pix-design-system/scripts/install-design-system.test.js`: installer tests.
+- Keep repository scripts under `scripts/` with `scripts/index.js` as barrel and `scripts/tests/index.js` plus one underscore-prefixed test file per script.
 - Create `.github/skills/pix-design-system/assets/design-system/app/**`: app-mode starter files copied to target root.
 - Create `.github/skills/pix-design-system/assets/design-system/package/**`: package-mode starter files copied to package destination.
+- In package-mode starters, use `src/index.js`, `src/index.css`, and `tests/index.js` as entrypoints; prefix sibling runtime files with `_`.
 - Create `.github/skills/pix-design-system/assets/examples/app-basic/**`: app installation example.
 - Create `.github/skills/pix-design-system/assets/examples/package-basic/**`: package installation example.
 - Create `.github/skills/pix-design-system/assets/examples/web-component-theme/**`: custom element theming example.
@@ -675,7 +677,7 @@ article,
   display: none !important;
 }
 
-[data-helper="visually-hidden"] {
+[sr-only] {
   position: absolute;
   inline-size: 1px;
   block-size: 1px;

@@ -5,22 +5,21 @@ applyTo: "**/*.{html,js,mjs}"
 ---
 # pix Template Engine Instructions
 
-- Prefer the bundled DOM-based template engine implementation for nested directive reliability.
+- Use the full DOM-based template engine bundle only for Node-side static HTML generation, SSG, or SSR workflows.
+- For browser runtime modules and custom elements, use the browser-safe tagged runtime at `assets/tagged-runtime/index.js` only.
 - Keep source structure aligned with skill assets to simplify sync and updates.
-- Include engine sources, tests, and usage examples when integrating into a target project.
+- Include engine sources, tests, and usage examples when integrating the full Node-side engine into a target project.
 
 ## Integration workflow
 
-1. Install engine files into target project using skill installer flow.
-2. Ensure runtime dependency for DOM rendering (`jsdom`) is present.
-3. Select use mode:
-   - static HTML generation
-   - SSG build pipeline
-   - SSR request-time rendering
-4. Run template-engine tests after install.
-5. Adapt one concrete example flow in project (`static-html`, `ssg`, or `ssr`).
+1. Decide whether the target is Node-side rendering (`template-engine/`) or browser runtime tagged literals (`tagged-runtime/`).
+2. For Node-side rendering, install engine files into the target project using the skill installer flow.
+3. Ensure `jsdom` and `marked` are present only when using the full Node-side engine.
+4. For browser runtime tagged literals, copy only `assets/tagged-runtime/index.js` into the target shared runtime folder.
+5. Run template-engine tests after installing the full Node-side engine, or validate bundling/build when using the browser-safe tagged runtime.
 
 ## Template syntax constraints
 
-- Use project template tags for control flow and composition.
+- Use project template tags for control flow and composition only with the full Node-side engine.
+- In the browser-safe tagged runtime, use JavaScript `${...}` interpolations only. Do not rely on `{{ ... }}`, filters, or file directives there.
 - Do not introduce Liquid/Jekyll syntax in template files.

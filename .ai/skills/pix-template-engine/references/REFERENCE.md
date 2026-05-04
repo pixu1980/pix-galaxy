@@ -1,8 +1,9 @@
 # pix Template Engine reference
 
-The bundled engine includes:
+The bundled engine resources include:
 
-- `index.js`: main `TemplateEngine` class
+- `assets/template-engine/index.js`: main `TemplateEngine` class for Node-side rendering
+- `assets/tagged-runtime/index.js`: browser-safe tagged template runtime for custom elements and other browser bundles
 - `_renderer.js`: DOM-based renderer and directive handling
 - `_expression-parser.js`: expression parsing and evaluation
 - `_filters.js`: built-in filters and custom filter hooks
@@ -48,7 +49,7 @@ The bundled engine includes:
 
 ## Tagged template literal API
 
-Use `engine.template` or `engine.html` as a tagged template literal. Both return a render function that accepts the same data object used by file templates.
+Use `engine.template` or `engine.html` as a tagged template literal. The full engine supports `{{ ... }}` expressions and directives. The browser-safe tagged runtime supports JavaScript `${...}` interpolations only.
 
 ### Minimal inline template
 
@@ -129,4 +130,5 @@ Use file templates when markup is shared across pages, uses `include` or `extend
 
 ## Dependency note
 
-The bundled renderer uses `jsdom`, and Markdown filters use `marked`. Ensure target project has both available in dependencies or devDependencies.
+The full bundled renderer uses `jsdom`, and Markdown filters use `marked`. Ensure target project has both available in dependencies or devDependencies when using `assets/template-engine/`.
+The browser-safe tagged runtime in `assets/tagged-runtime/` has no Node-only runtime dependencies and is the correct choice for custom-element/browser bundles.

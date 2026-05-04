@@ -31,7 +31,7 @@ Execute in order:
 
 Hard rules:
 - Autonomous element only (`PixColorSchemeSwitcher extends HTMLElement`). No Shadow DOM.
-- `componentDecorator(this)` in `static {}` is the only registration site.
+- Declare `static styles = styles;` and keep `componentDecorator(this)` in `static {}` as the only registration site.
 - SVG icons imported as raw strings — never inlined in JS.
 - `TemplateEngine` instantiated once in `ColorSchemeSwitcher.template.js`, not in the class file.
 - Do not overwrite existing files unless user approved `--force`.

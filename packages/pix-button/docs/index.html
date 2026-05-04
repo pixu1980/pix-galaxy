@@ -5,87 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@pix-galaxy/pix-button docs</title>
     <link rel="stylesheet" href="./styles.css" />
-    <script type="module" src="./dist/index.js"></script>
   </head>
   <body>
     <main>
       <h1>&lt;pix-button&gt;</h1>
-      <p>Accessible button Web Component. Zero runtime dependencies.</p>
-
-      <h2>Installation</h2>
+      <p>Accessible button component for the shared pix-galaxy runtime.</p>
       <pre><code>pnpm add @pix-galaxy/pix-button</code></pre>
 
-      <h2>Usage</h2>
-      <pre><code>import "@pix-galaxy/pix-button";
-import "@pix-galaxy/pix-button/css";</code></pre>
-
-      <pre><code>&lt;pix-button&gt;Click me&lt;/pix-button&gt;</code></pre>
-
-      <h2>Examples</h2>
-      <div class="demo">
-        <pix-button>Primary</pix-button>
-        <pix-button variant="secondary">Secondary</pix-button>
-        <pix-button variant="ghost">Ghost</pix-button>
-        <pix-button disabled>Disabled</pix-button>
-      </div>
-
-      <h2>Keyboard Interaction</h2>
-      <p>The button is a native <code>&lt;button&gt;</code> element and supports all standard keyboard interactions including <kbd>Enter</kbd> and <kbd>Space</kbd> to activate.</p>
-
-      <h2>Attributes</h2>
-      <table>
-        <thead><tr><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
-        <tbody>
-          <tr><td>variant</td><td>"primary" | "secondary" | "ghost"</td><td>"primary"</td><td>Visual variant</td></tr>
-          <tr><td>disabled</td><td>boolean</td><td>false</td><td>Disables the button</td></tr>
-        </tbody>
-      </table>
-
-      <h2>Events</h2>
-      <table>
-        <thead><tr><th>Event</th><th>Bubbles</th><th>Composed</th><th>Description</th></tr></thead>
-        <tbody>
-          <tr><td>pix-button:click</td><td>yes</td><td>yes</td><td>Fired when the button is activated. Detail: <code>{ variant }</code></td></tr>
-        </tbody>
-      </table>
-
-      <h2>CSS Custom Properties</h2>
-      <table>
-        <thead><tr><th>Property</th><th>Description</th></tr></thead>
-        <tbody>
-          <tr><td>--pix-button-background</td><td>Button background color</td></tr>
-          <tr><td>--pix-button-color</td><td>Button text color</td></tr>
-          <tr><td>--pix-button-border-color</td><td>Button border color</td></tr>
-          <tr><td>--pix-button-radius</td><td>Button border radius</td></tr>
-          <tr><td>--pix-button-padding-block</td><td>Block padding</td></tr>
-          <tr><td>--pix-button-padding-inline</td><td>Inline padding</td></tr>
-        </tbody>
-      </table>
-
-      <h2>Parts</h2>
-      <table>
-        <thead><tr><th>Part</th><th>Description</th></tr></thead>
-        <tbody>
-          <tr><td>button</td><td>The native button element</td></tr>
-        </tbody>
-      </table>
-
-      <h2>Accessibility</h2>
-      <ul>
-        <li>Uses a native <code>&lt;button&gt;</code> element inside Shadow DOM</li>
-        <li>Supports keyboard activation (Enter, Space)</li>
-        <li>Supports forced colors (high contrast mode)</li>
-        <li>Supports reduced motion</li>
-        <li>Focus ring preserved via <code>:focus-visible</code></li>
-      </ul>
+      <section>
+        <h2>Seeded docs source</h2>
+        <p>This package now follows the same markdown-seed docs structure used by the other scaffolded packages.</p>
+        <ul>
+          <li><a href="./content/getting-started.md">getting-started.md</a></li>
+          <li><a href="./content/examples.md">examples.md</a></li>
+          <li><a href="./content/api.md">api.md</a></li>
+          <li><a href="./content/releasing.md">releasing.md</a></li>
+        </ul>
+      </section>
     </main>
-
-    <script type="module">
-      document.querySelectorAll("pix-button").forEach((btn) => {
-        btn.addEventListener("pix-button:click", (e) => {
-          console.log("pix-button:click", e.detail);
-        });
-      });
-    </script>
   </body>
 </html>

@@ -54,7 +54,7 @@ test('scaffoldComponent installs shared library and component on first run', asy
     const result = await scaffoldComponent(options);
 
     assert.equal(result.sharedLibraryInstalled, true);
-    assert.equal(result.sharedLibraryPath, path.join(target, 'src/lib/custom-element'));
+    assert.equal(result.sharedLibraryPath, path.join(target, 'packages/shared'));
     assert.equal(result.componentDir, path.join(target, 'src/components/PixCard'));
     assert.equal(result.dryRun, false);
 
@@ -65,14 +65,43 @@ test('scaffoldComponent installs shared library and component on first run', asy
     );
     assert.match(decoratorIndex, /export function componentDecorator/);
 
+    const templateEngineIndex = await readFile(
+      path.join(result.sharedLibraryPath, 'template-engine/index.js'),
+      'utf8',
+    );
+    assert.match(templateEngineIndex, /export class TemplateEngine/);
+    assert.doesNotMatch(templateEngineIndex, /node:|jsdom|marked/);
+
     // component file imports from the shared path
     const componentJs = await readFile(
       path.join(result.componentDir, 'pix-card.js'),
       'utf8',
     );
+    assert.match(componentJs, /static styles = styles/);
     assert.match(componentJs, /componentDecorator\(this\)/);
-    assert.match(componentJs, /from '\.\.\/\.\.\/lib\/custom-element\/decorator\/index\.js'/);
+    assert.match(componentJs, /from '@pix-galaxy\/shared\/decorator\/index\.js'/);
     assert.match(componentJs, /export class PixCard extends HTMLElement/);
+    assert.doesNotMatch(componentJs, /attachShadow|shadowRoot|<template>/);
+
+    const templateJs = await readFile(
+      path.join(result.componentDir, 'pix-card.template.js'),
+      'utf8',
+    );
+    assert.match(templateJs, /new TemplateEngine\(/);
+    assert.match(templateJs, /from '@pix-galaxy\/shared\/template-engine\/index\.js'/);
+    assert.match(templateJs, /engine\.html`/);
+
+    const constsJs = await readFile(
+      path.join(result.componentDir, 'pix-card.consts.js'),
+      'utf8',
+    );
+    assert.match(constsJs, /export const/);
+
+    const utilsJs = await readFile(
+      path.join(result.componentDir, 'pix-card.utils.js'),
+      'utf8',
+    );
+    assert.match(utilsJs, /export const/);
   } finally {
     await rm(target, { recursive: true, force: true });
   }
@@ -92,13 +121,15 @@ test('scaffoldComponent reuses an existing shared library and does not duplicate
     );
 
     assert.equal(second.sharedLibraryInstalled, false);
-    assert.equal(second.sharedLibraryPath, path.join(target, 'src/lib/custom-element'));
+    assert.equal(second.sharedLibraryPath, path.join(target, 'packages/shared'));
 
     const componentJs = await readFile(
       path.join(second.componentDir, 'pix-badge.js'),
       'utf8',
     );
-    assert.match(componentJs, /from '\.\.\/\.\.\/lib\/custom-element\/decorator\/index\.js'/);
+    assert.match(componentJs, /from '@pix-galaxy\/shared\/decorator\/index\.js'/);
+    assert.match(componentJs, /static styles = styles/);
+    assert.match(componentJs, /componentDecorator\(this\)/);
   } finally {
     await rm(target, { recursive: true, force: true });
   }
