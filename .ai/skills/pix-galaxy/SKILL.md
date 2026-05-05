@@ -15,7 +15,6 @@ Current orchestration target:
 - `pix-template-engine`
 - `pix-design-system`
 - `pix-custom-element`
-- `pix-color-scheme-switcher`
 
 Repository governance, community-health, and release-documentation tasks default to `pix-styleguides` unless the user explicitly names another skill.
 
@@ -53,7 +52,6 @@ Explicit slash trigger:
 - Current routed skill: [../pix-template-engine/SKILL.md](../pix-template-engine/SKILL.md)
 - Current routed skill: [../pix-design-system/SKILL.md](../pix-design-system/SKILL.md)
 - Current routed skill: [../pix-custom-element/SKILL.md](../pix-custom-element/SKILL.md)
-- Current routed skill: [../pix-color-scheme-switcher/SKILL.md](../pix-color-scheme-switcher/SKILL.md)
 
 ## Decision flow
 1. If the user explicitly names a skill and it exists in the registry, select it.

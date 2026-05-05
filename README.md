@@ -11,6 +11,7 @@ Zero-runtime-dependency vanilla JavaScript Web Components, packaged as a pnpm wo
 | [@pix-galaxy/pix-baseline](./packages/pix-baseline) | Baseline component scaffold for the shared runtime |
 | [@pix-galaxy/pix-button](./packages/pix-button) | Accessible light-DOM button wrapper |
 | [@pix-galaxy/pix-card](./packages/pix-card) | Accessible light-DOM card container |
+| [@pix-galaxy/pix-color-scheme-switcher](./packages/pix-color-scheme-switcher) | Persisted light, dark, and system mode switcher custom element |
 | [@pix-galaxy/pix-design-system](./packages/pix-design-system) | Shared design-system package |
 | [@pix-galaxy/pix-highlighter](./packages/pix-highlighter) | Highlighter component scaffold for the shared runtime |
 
@@ -95,6 +96,7 @@ pix-galaxy/
 │   ├── pix-button/
 │   ├── pix-card/
 │   ├── pix-baseline/
+│   ├── pix-color-scheme-switcher/
 │   ├── pix-design-system/
 │   ├── pix-highlighter/
 │   └── shared/

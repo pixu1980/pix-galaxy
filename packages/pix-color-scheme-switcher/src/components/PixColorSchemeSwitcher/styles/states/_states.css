@@ -1,0 +1,19 @@
+pix-color-scheme-switcher [data-part='option'][data-active] {
+  color: var(--pix-color-scheme-switcher--active-text-color);
+  background: var(--pix-color-scheme-switcher--active-background-color);
+}
+
+pix-color-scheme-switcher [data-part='option']:not([data-active]) svg {
+  opacity: 0.72;
+}
+
+pix-color-scheme-switcher [data-part='option'][data-active] svg {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  pix-color-scheme-switcher svg {
+    transition-duration: 1ms;
+  }
+}

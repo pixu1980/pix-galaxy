@@ -1,4 +1,0 @@
-interface:
-  display_name: "Pix Color Scheme Switcher"
-  short_description: "Add theme switcher custom element."
-  default_prompt: "Use $pix-color-scheme-switcher to add a persisted light/dark/system color scheme switcher to this Pix app."

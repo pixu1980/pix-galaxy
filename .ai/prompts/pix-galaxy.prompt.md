@@ -10,7 +10,7 @@ Input:
 - User prompt (preferably with `/pix-galaxy` prefix)
 - Optional target files
 - Optional operation (`review`, `refactor`, `format`, `lint`, `fix`, `generate`, `audit`, `install`, `report`, `create`, `scaffold`, `setup`, `build`, `release`)
-- Available skills: `pix-a11y`, `pix-custom-element`, `pix-color-scheme-switcher`, `pix-design-system`, `pix-styleguides`, `pix-template-engine`
+- Available skills: `pix-a11y`, `pix-custom-element`, `pix-design-system`, `pix-styleguides`, `pix-template-engine`
 
 Execute in order:
 1. Read [skill pix-galaxy](../skills/pix-galaxy/SKILL.md) and [registry](../skills/pix-galaxy/assets/registry.json).

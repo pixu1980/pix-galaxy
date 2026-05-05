@@ -8,7 +8,7 @@
   "scripts": {
     "clean": "node scripts/_clean.js",
     "build": "pnpm -r --if-present run build",
-    "changelog:generate": "node scripts/_generate-changelog.js",
+    "changelog": "node scripts/_generate-changelog.js",
     "rel:patch": "node scripts/_release.js patch",
     "rel:minor": "node scripts/_release.js minor",
     "rel:major": "node scripts/_release.js major",

@@ -1,0 +1,79 @@
+:root {
+  --pix-color-scheme-switcher--border-width: 0.1rem;
+  --pix-color-scheme-switcher--border-color: var(--color-border, CanvasText);
+  --pix-color-scheme-switcher--background-color: var(--color-surface, Canvas);
+  --pix-color-scheme-switcher--text-color: var(--color-text-muted, CanvasText);
+  --pix-color-scheme-switcher--active-background-color: var(--color-accent, Highlight);
+  --pix-color-scheme-switcher--active-text-color: var(--color-primitive-white, HighlightText);
+  --pix-color-scheme-switcher--focus-ring-color: var(--color-focus-ring, Highlight);
+  --pix-color-scheme-switcher--radius: var(--radius-control, var(--radius-pill, 999rem));
+  --pix-color-scheme-switcher--control-size: var(--space-6, 3.2rem);
+  --pix-color-scheme-switcher--icon-size: var(--space-4, 1.6rem);
+  --pix-color-scheme-switcher--transition-duration: 120ms;
+}
+
+pix-color-scheme-switcher {
+  display: inline-flex;
+  color: var(--pix-color-scheme-switcher--text-color);
+}
+
+pix-color-scheme-switcher [data-part='control'] {
+  display: inline-flex;
+  align-items: center;
+  overflow: hidden;
+  border: var(--pix-color-scheme-switcher--border-width) solid var(--pix-color-scheme-switcher--border-color);
+  border-radius: var(--pix-color-scheme-switcher--radius);
+  background: var(--pix-color-scheme-switcher--background-color);
+}
+
+pix-color-scheme-switcher [data-part='option'] {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-inline-size: var(--pix-color-scheme-switcher--control-size);
+  min-block-size: var(--pix-color-scheme-switcher--control-size);
+  color: var(--pix-color-scheme-switcher--text-color);
+  cursor: pointer;
+}
+
+pix-color-scheme-switcher [data-part='option'] + [data-part='option'] {
+  border-inline-start: var(--pix-color-scheme-switcher--border-width) solid var(--pix-color-scheme-switcher--border-color);
+}
+
+pix-color-scheme-switcher input[type='radio'] {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  border: 0;
+  white-space: nowrap;
+}
+
+pix-color-scheme-switcher input[type='radio']:focus-visible + svg {
+  outline: 0.2rem solid var(--pix-color-scheme-switcher--focus-ring-color);
+  outline-offset: 0.2rem;
+  border-radius: 50%;
+}
+
+pix-color-scheme-switcher svg {
+  display: block;
+  inline-size: var(--pix-color-scheme-switcher--icon-size);
+  block-size: var(--pix-color-scheme-switcher--icon-size);
+  pointer-events: none;
+  transition:
+    opacity var(--pix-color-scheme-switcher--transition-duration) ease,
+    transform var(--pix-color-scheme-switcher--transition-duration) ease;
+}
+
+pix-color-scheme-switcher [sr-only] {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}

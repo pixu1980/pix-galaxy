@@ -10,6 +10,7 @@ import {
   renderRootIndex,
   resolvePackages,
 } from '../_build-docs.js';
+import { renderPackageDocsTokens } from '../_docs/index.js';
 
 test('resolvePackages returns all packages when no target is set', () => {
   assert.deepEqual(resolvePackages(['pix-button', 'pix-card'], null), ['pix-button', 'pix-card']);
@@ -91,6 +92,7 @@ test('renderPackageDocsHtml embeds docs app shell and serialized payload', () =>
       releaseTag: 'v0.0.1',
     },
     highlighterModulePath: '../pix-highlighter/dist/index.js',
+    colorSchemeSwitcherModulePath: '../pix-color-scheme-switcher/dist/index.js',
   });
 
   assert.match(html, /<title>@pix-galaxy\/pix-button docs<\/title>/u);
@@ -98,15 +100,21 @@ test('renderPackageDocsHtml embeds docs app shell and serialized payload', () =>
   assert.match(html, /<script type="module" src="\.\/index\.js"><\/script>/u);
   assert.match(html, /<script type="application\/json" id="pix-docs-data">/u);
   assert.match(html, /"highlighterModulePath":"\.\.\/pix-highlighter\/dist\/index\.js"/u);
+  assert.match(html, /"colorSchemeSwitcherModulePath":"\.\.\/pix-color-scheme-switcher\/dist\/index\.js"/u);
 });
 
 test('renderPackageDocsScript and styles expose shared docs template assets', () => {
   const css = renderPackageDocsStyles();
   const js = renderPackageDocsScript();
+  const tokens = renderPackageDocsTokens();
 
   assert.match(css, /\.docs-shell/u);
   assert.match(css, /\.docs-hero/u);
+  assert.doesNotMatch(css, /\.docs-color-mode-group/u);
   assert.match(js, /function createDocsSite/u);
   assert.match(js, /pix-docs-data/u);
-  assert.match(js, /data-site-color-mode/u);
+  assert.match(js, /colorSchemeSwitcherModulePath/u);
+  assert.match(js, /pix-color-scheme-switcher/u);
+  assert.doesNotMatch(js, /data-site-color-mode/u);
+  assert.match(tokens, /--pix-ds-font-display/u);
 });
