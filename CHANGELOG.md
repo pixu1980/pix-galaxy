@@ -8,6 +8,7 @@ Generated from Conventional Commits via `pnpm changelog:generate`.
 
 ### Added
 
+- pix-highlighter: add PixHighlighter component
 - skills: improve synergy between skills
 - skills: improve PixDesignSystem skill
 - skills: add ColorSchemeSwitcher skill

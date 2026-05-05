@@ -186,7 +186,7 @@
     {
       "name": "pix-custom-element",
       "priority": 93,
-      "description": "Build Custom Elements v1 in light DOM with adoptedStyleSheets and a metadata-driven decorator (componentDecorator) inside a static initialization block. Includes a CLI to scaffold new components.",
+      "description": "Build Custom Elements v1 in light DOM with adoptedStyleSheets and a metadata-driven decorator (componentDecorator) inside a static initialization block. Includes a CLI to scaffold new components and theme switcher controls.",
       "triggers": {
         "keywords": [
           "custom element",
@@ -208,47 +208,7 @@
           "connectedCallback",
           "attributeChangedCallback",
           "shadow dom",
-          "shadowdom"
-        ],
-        "regex": [
-          "\\bcustomElements\\.define\\b",
-          "\\bextends\\s+HTML\\w*Element\\b",
-          "<\\w+\\s+is=\"[\\w-]+\"",
-          "\\bweb(?:\\s|-)?component\\b",
-          "\\bcustom(?:\\s|-)?element\\b",
-          "\\b(?:scaffold|create|generate|new)\\b.*\\bcomponent\\b",
-          "\\badoptedStyleSheets\\b",
-          "\\bstatic\\s*\\{"
-        ],
-        "fileExtensions": [
-          ".js",
-          ".mjs",
-          ".css",
-          ".html"
-        ],
-        "operations": [
-          "scaffold",
-          "create",
-          "generate",
-          "build"
-        ],
-        "intents": [
-          "custom element",
-          "web component",
-          "component",
-          "widget",
-          "lifecycle",
-          "shadow dom",
-          "is attribute"
-        ]
-      }
-    },
-    {
-      "name": "pix-color-scheme-switcher",
-      "priority": 99,
-      "description": "Add a Pix light/dark/system color-scheme switcher custom element with persisted preference, `data-color-scheme`, color-scheme meta, and system fallback.",
-      "triggers": {
-        "keywords": [
+          "shadowdom",
           "pix-color-scheme-switcher",
           "color scheme switcher",
           "color-scheme switcher",
@@ -264,27 +224,42 @@
           "color scheme meta"
         ],
         "regex": [
+          "\\bcustomElements\\.define\\b",
+          "\\bextends\\s+HTML\\w*Element\\b",
+          "<\\w+\\s+is=\"[\\w-]+\"",
+          "\\bweb(?:\\s|-)?component\\b",
+          "\\bcustom(?:\\s|-)?element\\b",
+          "\\b(?:scaffold|create|generate|new)\\b.*\\bcomponent\\b",
+          "\\badoptedStyleSheets\\b",
+          "\\bstatic\\s*\\{",
           "\\b(?:add|create|build|install|scaffold|integrate)\\b.*\\b(?:color(?:\\s|-)?scheme|theme|dark mode|light mode)\\b.*\\b(?:switcher|toggle|control|selector)\\b",
           "\\bprefers-color-scheme\\b",
           "\\bdata-color-scheme\\b",
           "\\bmeta\\[name=[\"']color-scheme[\"']\\]"
         ],
         "fileExtensions": [
-          ".html",
           ".js",
           ".mjs",
-          ".css"
+          ".css",
+          ".html"
         ],
         "operations": [
           "add",
-          "create",
           "scaffold",
-          "install",
-          "integrate",
+          "create",
+          "generate",
           "build",
-          "generate"
+          "install",
+          "integrate"
         ],
         "intents": [
+          "custom element",
+          "web component",
+          "component",
+          "widget",
+          "lifecycle",
+          "shadow dom",
+          "is attribute",
           "theme switching",
           "theme control",
           "color scheme",

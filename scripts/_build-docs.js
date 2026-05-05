@@ -5,14 +5,21 @@ import { fileURLToPath } from 'node:url';
 import { join, resolve } from 'node:path';
 import { Marked, Renderer } from 'marked';
 import { log, logTitle } from './_cli.js';
+import {
+  renderPackageDocsScript,
+  renderPackageDocsStyles,
+  renderPackageDocsTokens,
+} from './_docs/index.js';
+
+export {
+  renderPackageDocsScript,
+  renderPackageDocsStyles,
+};
 
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
 const rootDir = resolve(__dirname, '..');
 const siteDir = join(rootDir, 'site');
 const packagesDir = join(rootDir, 'packages');
-const docsTemplateCss = readFileSync(join(__dirname, '_docs-template.css'), 'utf8');
-const docsTemplateJs = readFileSync(join(__dirname, '_docs-template.js'), 'utf8');
-const docsTokensCss = readFileSync(join(__dirname, '_docs-tokens.css'), 'utf8');
 const docsDisplayOrder = ['getting-started', 'examples', 'api', 'releasing'];
 
 /**
@@ -106,27 +113,6 @@ export function buildExamplesGallery(markdown) {
 }
 
 /**
- * @returns {string}
- */
-export function renderPackageDocsStyles() {
-  return docsTemplateCss;
-}
-
-/**
- * @returns {string}
- */
-export function renderPackageDocsScript() {
-  return docsTemplateJs;
-}
-
-/**
- * @returns {string}
- */
-function renderPackageDocsTokens() {
-  return docsTokensCss;
-}
-
-/**
  * @param {unknown} payload
  * @returns {string}
  */
@@ -143,6 +129,7 @@ function serializeForHtml(payload) {
  *   examples: Array<{ title: string; description: string; lang: string; code: string }>;
  *   meta: { version: string; releaseTag: string };
  *   highlighterModulePath: string;
+ *   colorSchemeSwitcherModulePath: string;
  * }} data
  * @returns {string}
  */
@@ -155,6 +142,7 @@ export function renderPackageDocsHtml(data) {
     examples: data.examples,
     meta: data.meta,
     highlighterModulePath: data.highlighterModulePath,
+    colorSchemeSwitcherModulePath: data.colorSchemeSwitcherModulePath,
   };
 
   return `<!doctype html>
@@ -201,10 +189,29 @@ function compareDocsFiles(left, right) {
 
 /**
  * @param {string} packageFolder
+ * @param {string} dependencyPackage
+ * @returns {string}
+ */
+function resolveSharedModulePath(packageFolder, dependencyPackage) {
+  return packageFolder === dependencyPackage
+    ? './dist/index.js'
+    : `../${dependencyPackage}/dist/index.js`;
+}
+
+/**
+ * @param {string} packageFolder
  * @returns {string}
  */
 function resolveHighlighterModulePath(packageFolder) {
-  return packageFolder === 'pix-highlighter' ? './dist/index.js' : '../pix-highlighter/dist/index.js';
+  return resolveSharedModulePath(packageFolder, 'pix-highlighter');
+}
+
+/**
+ * @param {string} packageFolder
+ * @returns {string}
+ */
+function resolveColorSchemeSwitcherModulePath(packageFolder) {
+  return resolveSharedModulePath(packageFolder, 'pix-color-scheme-switcher');
 }
 
 /**
@@ -218,6 +225,7 @@ function resolveHighlighterModulePath(packageFolder) {
  *   examples: Array<{ title: string; description: string; lang: string; code: string }>;
  *   meta: { version: string; releaseTag: string };
  *   highlighterModulePath: string;
+ *   colorSchemeSwitcherModulePath: string;
  * } | null}
  */
 function buildPackageDocsModel(packageFolder, packageDir) {
@@ -251,6 +259,7 @@ function buildPackageDocsModel(packageFolder, packageDir) {
       releaseTag: `v${packageJson.version ?? '0.0.0'}`,
     },
     highlighterModulePath: resolveHighlighterModulePath(packageFolder),
+    colorSchemeSwitcherModulePath: resolveColorSchemeSwitcherModulePath(packageFolder),
   };
 }
 
@@ -340,24 +349,71 @@ async function copyPackageDist(packageFolder, packageDir, sitePackageDir) {
 }
 
 /**
+ * @param {string} sitePackageDir
+ * @param {{
+ *   packageName: string;
+ *   tagName: string;
+ *   description: string;
+ *   docs: Array<{ slug: string; title: string; html: string; sourcePath: string }>;
+ *   examples: Array<{ title: string; description: string; lang: string; code: string }>;
+ *   meta: { version: string; releaseTag: string };
+ *   highlighterModulePath: string;
+ *   colorSchemeSwitcherModulePath: string;
+ * }} docsModel
+ * @returns {void}
+ */
+function writePackageDocsAssets(sitePackageDir, docsModel) {
+  writeFileSync(join(sitePackageDir, 'index.html'), renderPackageDocsHtml(docsModel), 'utf8');
+  writeFileSync(join(sitePackageDir, 'index.css'), renderPackageDocsStyles(), 'utf8');
+  writeFileSync(join(sitePackageDir, 'index.js'), renderPackageDocsScript(), 'utf8');
+  writeFileSync(join(sitePackageDir, '_ds-tokens.css'), renderPackageDocsTokens(), 'utf8');
+}
+
+/**
+ * @param {string | null} targetPackage
+ * @param {string} dependencyPackage
+ * @param {string} warningMessage
+ * @returns {Promise<void>}
+ */
+async function copySharedDocsDependencyDist(targetPackage, dependencyPackage, warningMessage) {
+  if (targetPackage === null || targetPackage === dependencyPackage) {
+    return;
+  }
+
+  const packageDir = join(packagesDir, dependencyPackage);
+  const distDir = join(packageDir, 'dist');
+  if (!existsSync(distDir)) {
+    log('warn', warningMessage);
+    return;
+  }
+
+  const sitePackageDir = join(siteDir, dependencyPackage);
+  await mkdir(sitePackageDir, { recursive: true });
+  await cp(distDir, join(sitePackageDir, 'dist'), { recursive: true });
+}
+
+/**
  * @param {string | null} targetPackage
  * @returns {Promise<void>}
  */
 async function copySharedHighlighterDist(targetPackage) {
-  if (targetPackage === null || targetPackage === 'pix-highlighter') {
-    return;
-  }
+  await copySharedDocsDependencyDist(
+    targetPackage,
+    'pix-highlighter',
+    'pix-highlighter: dist/ not found, docs code blocks will stay unenhanced'
+  );
+}
 
-  const packageDir = join(packagesDir, 'pix-highlighter');
-  const distDir = join(packageDir, 'dist');
-  if (!existsSync(distDir)) {
-    log('warn', 'pix-highlighter: dist/ not found, docs code blocks will stay unenhanced');
-    return;
-  }
-
-  const sitePackageDir = join(siteDir, 'pix-highlighter');
-  await mkdir(sitePackageDir, { recursive: true });
-  await cp(distDir, join(sitePackageDir, 'dist'), { recursive: true });
+/**
+ * @param {string | null} targetPackage
+ * @returns {Promise<void>}
+ */
+async function copySharedColorSchemeSwitcherDist(targetPackage) {
+  await copySharedDocsDependencyDist(
+    targetPackage,
+    'pix-color-scheme-switcher',
+    'pix-color-scheme-switcher: dist/ not found, docs color scheme switcher will stay unavailable'
+  );
 }
 
 /**
@@ -401,10 +457,7 @@ export async function buildDocsSite(targetPackage = null) {
 
     const docsModel = buildPackageDocsModel(pkg, packageDir);
     if (docsModel) {
-      writeFileSync(join(sitePackageDir, 'index.html'), renderPackageDocsHtml(docsModel), 'utf8');
-      writeFileSync(join(sitePackageDir, 'index.css'), renderPackageDocsStyles(), 'utf8');
-      writeFileSync(join(sitePackageDir, 'index.js'), renderPackageDocsScript(), 'utf8');
-      writeFileSync(join(sitePackageDir, '_ds-tokens.css'), renderPackageDocsTokens(), 'utf8');
+      writePackageDocsAssets(sitePackageDir, docsModel);
     }
 
     await copyPackageDist(pkg, packageDir, sitePackageDir);
@@ -412,6 +465,7 @@ export async function buildDocsSite(targetPackage = null) {
   }
 
   await copySharedHighlighterDist(targetPackage);
+  await copySharedColorSchemeSwitcherDist(targetPackage);
 
   if (targetPackage === null) {
     const packageEntries = allPackages
