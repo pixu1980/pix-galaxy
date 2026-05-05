@@ -2,6 +2,10 @@
 
 /**
  * Browser-safe tagged template runtime for inline component rendering.
+ *
+ * This helper is intentionally limited to `engine.template` and `engine.html`
+ * so runtime Web Components can reuse the pix-template-engine tagged literal
+ * API without pulling in the SSR/SSG renderer or Node-only dependencies.
  */
 export class TemplateEngine {
   /**
@@ -16,6 +20,8 @@ export class TemplateEngine {
   }
 
   /**
+   * Compile an inline template into a reusable render function.
+   *
    * @param {TemplateStringsArray} strings
    * @param {...unknown} values
    * @returns {(data?: object) => string}
@@ -29,6 +35,8 @@ export class TemplateEngine {
   }
 
   /**
+   * Alias for `template()`.
+   *
    * @param {TemplateStringsArray} strings
    * @param {...unknown} values
    * @returns {(data?: object) => string}
@@ -38,6 +46,8 @@ export class TemplateEngine {
   }
 
   /**
+   * Resolve JavaScript interpolations for a tagged template literal.
+   *
    * @param {TemplateStringsArray} strings
    * @param {unknown[]} values
    * @param {object} data

@@ -1,5 +1,5 @@
 ---
-description: "Use when routing tasks across project skills, handling /pix-galaxy prompts, choosing between pix-styleguides, pix-a11y, pix-template-engine, pix-design-system, pix-custom-element, and pix-color-scheme-switcher, or updating orchestration rules."
+description: "Use when routing tasks across project skills, handling /pix-galaxy prompts, choosing between pix-styleguides, pix-a11y, pix-template-engine, pix-design-system, and pix-custom-element, or updating orchestration rules."
 name: "pix Galaxy Orchestration"
 ---
 # pix Galaxy Orchestration Instructions
@@ -7,7 +7,7 @@ name: "pix Galaxy Orchestration"
 - Treat `pix-galaxy` as the single orchestration entrypoint for multi-skill routing.
 - Route design system setup, foundations, tokens, theme baseline, layout primitives, helpers, and reusable CSS package requests to `pix-design-system`.
 - Route custom element creation, web component scaffolding, `is="..."` customized built-ins, `componentDecorator`, `adoptedStyleSheets`, and component lifecycle requests to `pix-custom-element`.
-- Route light/dark/system theme controls, `data-color-scheme`, `prefers-color-scheme`, color-scheme meta, and persisted color-scheme UI requests to `pix-color-scheme-switcher`.
+- Route light/dark/system theme controls, `data-color-scheme`, `prefers-color-scheme`, color-scheme meta, and persisted color-scheme UI requests to `pix-custom-element`.
 - Route repository governance, community-health, and release-documentation work such as `CHANGELOG.md`, `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, `GOVERNANCE.md`, `SECURITY.md`, `SUPPORT.md`, `CODEOWNERS`, `FUNDING.yml`, and GitHub issue or pull-request templates to `pix-styleguides` unless the user explicitly asks for another registered skill.
 - If prompt starts with `/pix-galaxy`, classify only content after the prefix.
 - Route using deterministic scoring and confidence threshold rules from skill registry.

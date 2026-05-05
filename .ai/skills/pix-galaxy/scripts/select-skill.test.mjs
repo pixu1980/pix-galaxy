@@ -162,7 +162,7 @@ test('routes to pix-custom-element for autonomous web component requests', async
   assert.equal(result.fallbackUsed, false);
 });
 
-test('routes to pix-color-scheme-switcher for persisted theme controls', async () => {
+test('routes to pix-custom-element for persisted theme controls', async () => {
   const registry = await loadRegistry();
   const result = selectSkill(
     registry,
@@ -171,12 +171,12 @@ test('routes to pix-color-scheme-switcher for persisted theme controls', async (
     'add'
   );
 
-  assert.equal(result.selectedSkill, 'pix-color-scheme-switcher');
+  assert.equal(result.selectedSkill, 'pix-custom-element');
   assert.equal(result.fallbackUsed, false);
   assert.equal(result.slashCommandUsed, true);
 });
 
-test('routes data-color-scheme theme toggle work to pix-color-scheme-switcher', async () => {
+test('routes data-color-scheme theme toggle work to pix-custom-element', async () => {
   const registry = await loadRegistry();
   const result = selectSkill(
     registry,
@@ -185,7 +185,7 @@ test('routes data-color-scheme theme toggle work to pix-color-scheme-switcher', 
     'create'
   );
 
-  assert.equal(result.selectedSkill, 'pix-color-scheme-switcher');
+  assert.equal(result.selectedSkill, 'pix-custom-element');
   assert.equal(result.fallbackUsed, false);
 });
 
