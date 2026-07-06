@@ -110,13 +110,11 @@
 
     /* ── Resizing cursor on body ──────────────────────────────────── */
 
-    body[data-splitter-resizing] {
+    pix-splitter[data-resizing] {
       cursor: col-resize;
-      user-select: none;
-      -webkit-user-select: none;
     }
 
-    body[data-splitter-resizing][data-splitter-orientation='vertical'] {
+    pix-splitter[data-resizing][data-orientation='vertical'] {
       cursor: row-resize;
     }
 

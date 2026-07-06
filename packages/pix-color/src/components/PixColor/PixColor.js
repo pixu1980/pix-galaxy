@@ -67,10 +67,26 @@ class PixColor extends HTMLElement {
   #contrastEl = null;
   #copyBtn = null;
 
-  /* ── Bound handlers ───────────────────────────────────────────── */
+  /* ── Bound handlers (stabili, mai inline) ─────────────────────── */
 
-  #onDocumentClick = this.#handleOutsideClick.bind(this);
+  #onColorInput = (e) => { const hex = e.target.value; this.#color = new Color(hex); this.#updateDisplay(); };
+  #onBarClick = (e) => {
+    if (e.target.closest('[data-part="native-input"]')) return;
+    this.expanded = !this.#expanded;
+    this.#bar?.setAttribute('aria-expanded', String(this.#expanded));
+  };
+  #onBarKeydown = (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      this.expanded = !this.#expanded;
+      this.#bar?.setAttribute('aria-expanded', String(this.#expanded));
+    }
+  };
+  #onCopyClick = () => this.#copyValue();
   #onKeyDown = this.#handleKeyDown.bind(this);
+
+  // Per-tab handlers (creati al volo ma puliti in teardownPanel)
+  #tabCleanup = [];
 
   constructor() {
     super();
@@ -84,7 +100,7 @@ class PixColor extends HTMLElement {
   }
 
   disconnectedCallback() {
-    document.removeEventListener('click', this.#onDocumentClick);
+    this.#teardownPanel();
     document.removeEventListener('keydown', this.#onKeyDown);
   }
 
@@ -125,11 +141,7 @@ class PixColor extends HTMLElement {
     this.#colorInput.type = 'color';
     this.#colorInput.value = this.#color.toHEXString();
     this.#colorInput.setAttribute('tabindex', '-1');
-    this.#colorInput.addEventListener('input', (e) => {
-      const hex = e.target.value;
-      this.#color = new Color(hex);
-      this.#updateDisplay();
-    });
+    this.#colorInput.addEventListener('input', this.#onColorInput);
 
     this.#bar = document.createElement('div');
     this.#bar.setAttribute('data-part', 'bar');
@@ -154,24 +166,9 @@ class PixColor extends HTMLElement {
     this.#bar.append(this.#colorInput, this.#swatch, this.#hexVal, arrow);
     this.append(this.#bar);
 
-    // Events
-    this.#bar.addEventListener('click', (e) => {
-      if (e.target.closest('[data-part="native-input"]')) return;
-      this.expanded = !this.#expanded;
-      if (this.#expanded) {
-        this.#bar.setAttribute('aria-expanded', 'true');
-        this.#bar.focus();
-      } else {
-        this.#bar.setAttribute('aria-expanded', 'false');
-      }
-    });
-    this.#bar.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        this.expanded = !this.#expanded;
-        this.#bar.setAttribute('aria-expanded', String(this.#expanded));
-      }
-    });
+    // Events (usando handler stabili — niente inline arrow)
+    this.#bar.addEventListener('click', this.#onBarClick);
+    this.#bar.addEventListener('keydown', this.#onBarKeydown);
   }
 
   /* ── Render panel ─────────────────────────────────────────────── */
@@ -197,7 +194,10 @@ class PixColor extends HTMLElement {
     this.#renderValues();
     this.#panel.append(this.#valuesEl);
 
-    // Tabs
+    // Tabs — cleanup qualsiasi handler precedente
+    for (const fn of this.#tabCleanup) fn();
+    this.#tabCleanup = [];
+
     this.#tabs = document.createElement('div');
     this.#tabs.setAttribute('data-part', 'tabs');
     this.#tabs.setAttribute('role', 'tablist');
@@ -210,8 +210,11 @@ class PixColor extends HTMLElement {
       tab.setAttribute('aria-selected', fmt === this.#activeFormat ? 'true' : 'false');
       tab.setAttribute('tabindex', fmt === this.#activeFormat ? '0' : '-1');
       tab.textContent = fmt;
-      tab.addEventListener('click', () => this.#switchFormat(fmt));
-      tab.addEventListener('keydown', (e) => this.#handleTabKeydown(e, fmt));
+      const onClick = () => this.#switchFormat(fmt);
+      const onKeydown = (e) => this.#handleTabKeydown(e, fmt);
+      tab.addEventListener('click', onClick);
+      tab.addEventListener('keydown', onKeydown);
+      this.#tabCleanup.push(() => { tab.removeEventListener('click', onClick); tab.removeEventListener('keydown', onKeydown); });
       if (fmt === this.#activeFormat) tab.setAttribute('data-active', '');
       this.#tabs.append(tab);
     }
@@ -235,20 +238,29 @@ class PixColor extends HTMLElement {
     this.#copyBtn = document.createElement('button');
     this.#copyBtn.setAttribute('data-part', 'copy-btn');
     this.#copyBtn.innerHTML = SVG_COPY + ' Copy';
-    this.#copyBtn.addEventListener('click', () => this.#copyValue());
+    this.#copyBtn.addEventListener('click', this.#onCopyClick);
     actions.append(this.#copyBtn);
 
     this.#panel.append(actions);
     this.append(this.#panel);
 
-    // Outside click + Escape
-    setTimeout(() => document.addEventListener('click', this.#onDocumentClick), 0);
+    // Outside click via overlay backdrop (nessun setTimeout, nessun document listener)
+    this.#panel.addEventListener('click', this.#onPanelClick);
     document.addEventListener('keydown', this.#onKeyDown);
   }
 
+  #onPanelClick = (e) => {
+    // Click sul backdrop (panel stesso) chiude
+    if (e.target === this.#panel || e.target === this.#previewLarge) {
+      this.expanded = false;
+    }
+  };
+
   #teardownPanel() {
-    document.removeEventListener('click', this.#onDocumentClick);
+    for (const fn of this.#tabCleanup) fn();
+    this.#tabCleanup = [];
     document.removeEventListener('keydown', this.#onKeyDown);
+    this.#panel?.removeEventListener('click', this.#onPanelClick);
     this.#panel?.remove();
     this.#panel = null;
     this.#previewLarge = null;
@@ -487,15 +499,7 @@ class PixColor extends HTMLElement {
     }, 1500);
   }
 
-  /* ── Outside click & Escape ───────────────────────────────────── */
-
-  #handleOutsideClick(event) {
-    if (!this.#expanded) return;
-    if (!this.contains(event.target)) {
-      this.expanded = false;
-      this.#bar?.setAttribute('aria-expanded', 'false');
-    }
-  }
+  /* ── Escape ───────────────────────────────────────────────────── */
 
   #handleKeyDown(event) {
     if (event.key === 'Escape' && this.#expanded) {

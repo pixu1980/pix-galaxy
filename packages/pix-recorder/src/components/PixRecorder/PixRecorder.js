@@ -55,8 +55,12 @@ class PixRecorder extends HTMLElement {
   #audioContext = null;
   #animationId = 0;
 
-  /* ── Bound handlers ───────────────────────────────────────────── */
+  /* ── Bound handlers (stabili) ─────────────────────────────────── */
 
+  #onRecordClick = () => { if (this.#state === 'idle') this.#doRecord(); };
+  #onPauseClick = () => { if (this.#state === 'recording') this.#doPause(); else if (this.#state === 'paused') this.#doResume(); };
+  #onStopClick = () => { if (this.#state === 'recording' || this.#state === 'paused') this.#doStop(); };
+  #onDownloadClick = () => this.#doDownload();
   #onKeyDown = this.#handleKeyDown.bind(this);
 
   constructor() {
@@ -69,6 +73,9 @@ class PixRecorder extends HTMLElement {
   }
 
   disconnectedCallback() {
+    if (this.#mediaRecorder && this.#mediaRecorder.state !== 'inactive') {
+      this.#mediaRecorder.stop();
+    }
     this.#stopMedia();
     cancelAnimationFrame(this.#timerRAF);
     cancelAnimationFrame(this.#animationId);
@@ -108,28 +115,21 @@ class PixRecorder extends HTMLElement {
     toolbar.setAttribute('role', 'toolbar');
     toolbar.setAttribute('aria-label', 'Audio recorder controls');
 
-    // Record button
+    // Record button — usare handler stabili, niente inline arrow
     const recordBtn = this.#makeBtn('record', 'Start recording', SVG_RECORD);
-    recordBtn.addEventListener('click', () => {
-      if (this.#state === 'idle') this.#doRecord();
-    });
+    recordBtn.addEventListener('click', this.#onRecordClick);
 
     // Pause button
     const pauseBtn = this.#makeBtn('pause', 'Pause recording', SVG_PAUSE);
-    pauseBtn.addEventListener('click', () => {
-      if (this.#state === 'recording') this.#doPause();
-      else if (this.#state === 'paused') this.#doResume();
-    });
+    pauseBtn.addEventListener('click', this.#onPauseClick);
 
     // Stop button
     const stopBtn = this.#makeBtn('stop', 'Stop recording', SVG_STOP);
-    stopBtn.addEventListener('click', () => {
-      if (this.#state === 'recording' || this.#state === 'paused') this.#doStop();
-    });
+    stopBtn.addEventListener('click', this.#onStopClick);
 
     // Download button
     const downloadBtn = this.#makeBtn('download', 'Download recording', SVG_DOWNLOAD);
-    downloadBtn.addEventListener('click', () => this.#doDownload());
+    downloadBtn.addEventListener('click', this.#onDownloadClick);
     downloadBtn.hidden = true;
 
     const timer = document.createElement('span');
@@ -197,6 +197,7 @@ class PixRecorder extends HTMLElement {
     try {
       this.#stream = await navigator.mediaDevices.getUserMedia({ audio: true });
     } catch (err) {
+      this.#state = 'idle'; // permette un secondo tentativo
       this.#setStatus('Microphone access denied');
       this.#announce('Microphone access denied');
       this.dispatchEvent(new CustomEvent('recorder-error', { detail: { message: 'Microphone access denied' }, bubbles: true }));
