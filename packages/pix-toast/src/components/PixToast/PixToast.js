@@ -71,6 +71,7 @@ class PixToast extends HTMLElement {
   #onPointerLeave = this.#handleResume.bind(this);
   #onFocusIn = this.#handlePause.bind(this);
   #onFocusOut = this.#handleResume.bind(this);
+  #onClick = (e) => { if (e.target.closest('[data-toast-dismiss]')) this.dismiss(); };
   #leaving = false;
 
   constructor() {
@@ -87,7 +88,7 @@ class PixToast extends HTMLElement {
     this.addEventListener('pointerleave', this.#onPointerLeave);
     this.addEventListener('focusin', this.#onFocusIn);
     this.addEventListener('focusout', this.#onFocusOut);
-    this.addEventListener('click', this.#handleContainerClick.bind(this));
+    this.addEventListener('click', this.#onClick);
   }
 
   disconnectedCallback() {
@@ -95,6 +96,7 @@ class PixToast extends HTMLElement {
     this.removeEventListener('pointerleave', this.#onPointerLeave);
     this.removeEventListener('focusin', this.#onFocusIn);
     this.removeEventListener('focusout', this.#onFocusOut);
+    this.removeEventListener('click', this.#onClick);
     this.#clearTimer();
   }
 
@@ -222,12 +224,6 @@ class PixToast extends HTMLElement {
   #handleResume() {
     if (this.#duration > 0) {
       this.#restartTimer();
-    }
-  }
-
-  #handleContainerClick(event) {
-    if (event.target.closest('[data-toast-dismiss]')) {
-      this.dismiss();
     }
   }
 

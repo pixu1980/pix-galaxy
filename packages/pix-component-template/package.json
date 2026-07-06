@@ -73,8 +73,12 @@
     "lint": "eslint src/",
     "typecheck": "tsc --project ./tsconfig.types.json --noEmit"
   },
-  "devDependencies": {
+  "dependencies": {
+    "@pix-galaxy/pix-color-scheme-selector": "workspace:*",
     "@pix-galaxy/pix-highlighter": "workspace:*",
+    "@pix-galaxy/shared": "workspace:*"
+  },
+  "devDependencies": {
     "c8": "11.0.0",
     "concurrently": "9.2.1",
     "esbuild": "0.28.0",

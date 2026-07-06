@@ -87,6 +87,7 @@ class PixSortable extends HTMLElement {
 
   #rebuild() {
     this.#observer?.disconnect();
+    this.#observer?.takeRecords(); // svuota coda mutazioni pendenti
     this.#observer = null;
 
     const announce = this.querySelector('[data-part="announce"]');
@@ -230,11 +231,13 @@ class PixSortable extends HTMLElement {
     const index = this.#items.indexOf(el);
     if (index < 0) return;
 
-    // Use a long-press threshold (150ms)
+    // Use a long-press threshold (150ms) + movement threshold (10px)
     this.#touchDrag = {
       element: el,
+      startX: event.touches[0].clientX,
       startY: event.touches[0].clientY,
       startIndex: index,
+      active: false,
       timer: setTimeout(() => {
         if (!this.#touchDrag) return;
         this.#draggedIndex = index;
@@ -245,14 +248,18 @@ class PixSortable extends HTMLElement {
   }
 
   #handleTouchMove(event) {
-    if (!this.#touchDrag || !this.#touchDrag.active) {
-      if (this.#touchDrag) {
-        // Cancel if scrolled
-        clearTimeout(this.#touchDrag.timer);
-        this.#touchDrag = null;
-      }
+    if (!this.#touchDrag) return;
+
+    // Movement threshold: se l'utente ha spostato il dito > 10px, è scroll, non drag
+    const dx = Math.abs(event.touches[0].clientX - this.#touchDrag.startX);
+    const dy = Math.abs(event.touches[0].clientY - this.#touchDrag.startY);
+    if (!this.#touchDrag.active && (dx > 10 || dy > 10)) {
+      clearTimeout(this.#touchDrag.timer);
+      this.#touchDrag = null;
       return;
     }
+
+    if (!this.#touchDrag.active) return;
     event.preventDefault();
 
     const touch = event.touches[0];

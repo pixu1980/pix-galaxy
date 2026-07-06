@@ -97,7 +97,7 @@ class PixSplitter extends HTMLElement {
     if (name === 'orientation') {
       const orientation = newValue === 'vertical' ? 'vertical' : 'horizontal';
       this.dataset.orientation = orientation;
-      document.body.dataset.splitterOrientation = this.#activeIndex >= 0 ? orientation : '';
+      this.dataset.resizing = this.#activeIndex >= 0 ? 'true' : '';
       this.#updateGrid();
     }
 
@@ -144,8 +144,7 @@ class PixSplitter extends HTMLElement {
     });
     this.#panels = [];
     this.#handles = [];
-    document.body.dataset.splitterResizing = '';
-    document.body.dataset.splitterOrientation = '';
+    this.dataset.resizing = '';
   }
 
   #rebuild() {
@@ -306,8 +305,7 @@ class PixSplitter extends HTMLElement {
     this.#startPointer = this.orientation === 'horizontal' ? event.clientX : event.clientY;
     this.#startRatios = [...this.#ratios];
 
-    document.body.dataset.splitterResizing = '';
-    document.body.dataset.splitterOrientation = this.orientation;
+    this.dataset.resizing = 'true';
 
     // Add global listeners for move/up so we don't lose the drag
     document.addEventListener('pointermove', this.#onPointerMove);
@@ -374,8 +372,7 @@ class PixSplitter extends HTMLElement {
       handle.removeAttribute('data-active');
     }
 
-    document.body.dataset.splitterResizing = '';
-    document.body.dataset.splitterOrientation = '';
+    this.dataset.resizing = '';
 
     this.dispatchEvent(
       new CustomEvent('splitter-resize-end', {

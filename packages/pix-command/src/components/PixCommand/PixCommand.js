@@ -359,6 +359,9 @@ class PixCommand extends HTMLElement {
 
     this.#footer = document.createElement('div');
     this.#footer.dataset.commandFooter = '';
+    this.#footer.setAttribute('role', 'status');
+    this.#footer.setAttribute('aria-live', 'polite');
+    this.#footer.setAttribute('aria-atomic', 'true');
     this.#footer.innerHTML = `
       <span><kbd>↑↓</kbd> navigate · <kbd>↵</kbd> select</span>
       <span><kbd>esc</kbd> close</span>
