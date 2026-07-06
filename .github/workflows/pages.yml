@@ -1,9 +1,18 @@
+# GitHub Pages Deployment
+#
+# Each package has its own GitHub Pages site deployed at:
+#   https://pixu1980.github.io/<package-name>/
+#
+ # For now, per-package docs are built locally or via the release workflow.
+# To enable monorepo-level pages, create a root site/ aggregator that
+# collects all package dist/ outputs into a single deployable directory.
+#
+# See packages/*/README.md for links to individual docs sites.
+
 name: Deploy GitHub Pages
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -29,7 +38,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v6
         with:
-          node-version: "24"
+          node-version: '24'
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v5
@@ -39,11 +48,44 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Build packages
-        run: pnpm build
+      - name: Build all packages
+        run: pnpm -r --if-present run build:lib
 
-      - name: Build docs
-        run: pnpm docs:build
+      - name: Build docs sites
+        run: pnpm -r --if-present run build:site
+
+      - name: Aggregate docs into site/
+        run: |
+          mkdir -p site
+          for dir in packages/pix-*; do
+            if [ -d "$dir/dist" ]; then
+              pkg=$(basename "$dir")
+              cp -r "$dir/dist" "site/$pkg"
+            fi
+          done
+          cat > site/index.html << 'EOF'
+          <!DOCTYPE html>
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width">
+          <title>pix-galaxy</title>
+          <style>
+            body { font-family: system-ui, sans-serif; max-width: 40rem; margin: 2rem auto; padding: 0 1rem; }
+            h1 { font-size: 1.5rem; }
+            ul { list-style: none; padding: 0; }
+            li { margin: .5rem 0; }
+            a { color: #0066cc; }
+          </style>
+          <h1>pix-galaxy</h1>
+          <p>Zero-runtime-dependency vanilla JavaScript Web Components.</p>
+          <ul>
+            <li><a href="pix-accent-color-selector/">pix-accent-color-selector</a></li>
+            <li><a href="pix-color-scheme-selector/">pix-color-scheme-selector</a></li>
+            <li><a href="pix-display-preferences/">pix-display-preferences</a></li>
+            <li><a href="pix-highlighter/">pix-highlighter</a></li>
+          </ul>
+          <hr>
+          <p><a href="https://github.com/pixu1980/pix-galaxy">GitHub</a></p>
+          EOF
 
       - name: Configure Pages
         uses: actions/configure-pages@v6
@@ -51,7 +93,7 @@ jobs:
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v5
         with:
-          path: site
+          path: ./site
 
       - name: Deploy to GitHub Pages
         id: deployment

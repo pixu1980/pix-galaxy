@@ -1,7 +1,3 @@
-// @ts-nocheck
-
-
-
 import { lexJS } from './_JavaScript.js';
 
 /**

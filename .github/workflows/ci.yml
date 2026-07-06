@@ -11,7 +11,7 @@ permissions:
 
 jobs:
   ci:
-    name: Test, Typecheck, Build, Docs
+    name: Test, Typecheck, Build
     runs-on: ubuntu-latest
 
     steps:
@@ -32,13 +32,13 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Run tests
-        run: pnpm test
+        run: pnpm -r --if-present run test
 
       - name: Run typecheck
-        run: pnpm typecheck
+        run: pnpm -r --if-present run typecheck
 
-      - name: Build packages
-        run: pnpm build
+      - name: Build all packages
+        run: pnpm -r --if-present run build:lib
 
-      - name: Build docs
-        run: pnpm docs:build
+      - name: Lint
+        run: pnpm -r --if-present run lint

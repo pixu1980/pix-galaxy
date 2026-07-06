@@ -1,7 +1,3 @@
-// @ts-nocheck
-
-
-
 import { makePusher, readString } from './_Utils.js';
 
 // biome-ignore lint/complexity/noExcessiveCognitiveComplexity: lexer scanners are intentionally branch-heavy.

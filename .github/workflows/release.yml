@@ -2,50 +2,105 @@ name: Release
 
 on:
   workflow_dispatch:
+    inputs:
+      package:
+        description: 'Package name (e.g., pix-highlighter) to publish manually'
+        required: true
+        type: string
   push:
     tags:
-      - "v*"
+      - '@pix-galaxy/*@*'
 
 permissions:
-  contents: read
+  contents: write
   id-token: write
+  packages: write
 
 jobs:
-  release:
-    name: Test, Verify, and Publish
+  publish:
+    name: Publish ${{ github.ref_name }}
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
         uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v6
         with:
-          node-version: "24"
-          registry-url: "https://registry.npmjs.org"
+          node-version: '24'
+          registry-url: 'https://registry.npmjs.org'
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v5
         with:
           version: 10.33.2
 
+      - name: Extract package from tag or input
+        id: package
+        run: |
+          if [[ -n "${{ github.event.inputs.package }}" ]]; then
+            echo "name=${{ github.event.inputs.package }}" >> "$GITHUB_OUTPUT"
+            echo "dir=packages/${{ github.event.inputs.package }}" >> "$GITHUB_OUTPUT"
+          else
+            # Tag format: @pix-galaxy/pix-highlighter@0.2.0
+            TAG="${{ github.ref_name }}"
+            # Strip @pix-galaxy/ prefix and @version suffix
+            PACKAGE="${TAG#@pix-galaxy/}"
+            PACKAGE="${PACKAGE%@*}"
+            echo "name=$PACKAGE" >> "$GITHUB_OUTPUT"
+            echo "dir=packages/$PACKAGE" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Validate package exists
+        run: |
+          if [[ ! -d "${{ steps.package.outputs.dir }}" ]]; then
+            echo "ERROR: Package directory '${{ steps.package.outputs.dir }}' not found"
+            exit 1
+          fi
+          if [[ ! -f "${{ steps.package.outputs.dir }}/package.json" ]]; then
+            echo "ERROR: No package.json in '${{ steps.package.outputs.dir }}'"
+            exit 1
+          fi
+
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Run tests
-        run: pnpm test
+      - name: Run tests (${{ steps.package.outputs.name }})
+        run: pnpm --filter "@pix-galaxy/${{ steps.package.outputs.name }}" run test
+        continue-on-error: false
 
-      - name: Run typecheck
-        run: pnpm typecheck
+      - name: Run typecheck (${{ steps.package.outputs.name }})
+        run: pnpm --filter "@pix-galaxy/${{ steps.package.outputs.name }}" run typecheck
+        continue-on-error: false
 
-      - name: Verify release artifacts
-        run: pnpm release:verify "${GITHUB_REF_NAME}"
+      - name: Build library (${{ steps.package.outputs.name }})
+        run: pnpm --filter "@pix-galaxy/${{ steps.package.outputs.name }}" run build:lib
 
-      - name: Build docs
-        run: pnpm docs:build
-
-      - name: Publish packages
-        run: pnpm release
+      - name: Publish to npm
+        run: |
+          cd "${{ steps.package.outputs.dir }}" && npm publish --access public --provenance
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Setup Node.js for GitHub Packages
+        uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+          registry-url: 'https://npm.pkg.github.com'
+
+      - name: Publish to GitHub Packages
+        run: |
+          cd "${{ steps.package.outputs.dir }}" && npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: '${{ steps.package.outputs.name }} ${{ github.ref_name }}'
+          tag_name: ${{ github.ref_name }}
+          generate_release_notes: true
+          discussion_category_name: 'announcements'

@@ -1,7 +1,3 @@
-// @ts-nocheck
-
-
-
 import { lexBash } from './_Bash.js';
 import { lexC, lexCPP } from './_C.js';
 import { lexCSharp } from './_Csharp.js';

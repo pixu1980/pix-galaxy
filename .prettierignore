@@ -1,0 +1,9 @@
+node_modules/
+dist/
+artifact/
+.artifacts/
+coverage/
+.vite/
+pnpm-lock.yaml
+*.map
+.DS_Store
