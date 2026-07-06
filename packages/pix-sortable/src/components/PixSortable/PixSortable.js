@@ -23,6 +23,7 @@ function adoptComponentStyles() {
 }
 
 class PixSortable extends HTMLElement {
+  static formAssociated = true;
   static ensureComponentStyles() { return adoptComponentStyles(); }
   static {
     this.ensureComponentStyles();
@@ -50,8 +51,11 @@ class PixSortable extends HTMLElement {
   #onKeyDown = this.#handleKeyDown.bind(this);
   #onClick = this.#handleClick.bind(this);
 
+  #internals = null;
+
   constructor() {
     super();
+    this.#internals = this.attachInternals?.();
   }
 
   connectedCallback() {
@@ -129,8 +133,9 @@ class PixSortable extends HTMLElement {
       const children = Array.from(el.childNodes);
       // Move all child nodes EXCEPT [data-sortable-handle] and [data-sortable-content] into content
       const handleEl = el.querySelector('[data-sortable-handle]');
+      const Node = globalThis.Node;
       for (const child of children) {
-        if (child !== handleEl && child.nodeType === Node.ELEMENT_NODE && !child.hasAttribute('data-sortable-content')) {
+        if (child !== handleEl && child.nodeType === (Node?.ELEMENT_NODE || 1) && !child.hasAttribute('data-sortable-content')) {
           existingContent.appendChild(child);
         }
       }
@@ -391,11 +396,13 @@ class PixSortable extends HTMLElement {
     const label = moved.textContent?.trim().slice(0, 50) || 'Item';
     if (announce) announce.textContent = `Moved "${label}" from position ${from + 1} to ${to + 1}`;
 
+    if (this.#internals?.setFormValue) this.#internals.setFormValue(this.values.join(','));
+
     this.dispatchEvent(new CustomEvent('sortable-change', {
       detail: {
         fromIndex: from,
         toIndex: to,
-        items: this.#items.map((el) => el.getAttribute('data-sortable-value') || el.textContent?.trim()),
+        items: this.values,
       },
       bubbles: true,
     }));

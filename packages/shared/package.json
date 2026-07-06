@@ -7,7 +7,9 @@
   "sideEffects": false,
   "exports": {
     "./docs/docs-site": "./docs/docs-site.js",
-    "./docs/docs-site.js": "./docs/docs-site.js"
+    "./docs/docs-site.js": "./docs/docs-site.js",
+    "./dom/ssr-safe": "./dom/ssr-safe.js",
+    "./dom/ssr-safe.js": "./dom/ssr-safe.js"
   },
   "dependencies": {
     "marked": "^18.0.2"

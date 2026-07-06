@@ -152,10 +152,17 @@ importers:
         version: 8.0.10(esbuild@0.28.0)
 
   packages/pix-component-template:
-    devDependencies:
+    dependencies:
+      '@pix-galaxy/pix-color-scheme-selector':
+        specifier: workspace:*
+        version: link:../pix-color-scheme-selector
       '@pix-galaxy/pix-highlighter':
         specifier: workspace:*
         version: link:../pix-highlighter
+      '@pix-galaxy/shared':
+        specifier: workspace:*
+        version: link:../shared
+    devDependencies:
       c8:
         specifier: 11.0.0
         version: 11.0.0

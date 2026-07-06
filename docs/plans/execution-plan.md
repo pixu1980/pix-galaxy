@@ -1,9 +1,10 @@
-# pix-component-template overhaul
+# Fix tutto — remaining items
 
-- [x] Fix template docs to use `@pix-galaxy/shared/docs/docs-site.js` (shared module)
-- [x] Fix CSS to be valid even before placeholder replacement (`:where()` selector)
-- [x] Remove vite.config.mjs from template (no auto-start via dev-all)
-- [x] Remove template from dev-all.mjs auto-discovery + knownColors
-- [x] Create `scripts/scaffold-component.mjs` — PascalName → full scaffold
-- [x] Add `pnpm scaffold` to root package.json
-- [x] Remove duplicate pix-color entry from components.json
+## 1. light-dark() fallback — 6 componenti
+## 2. ElementInternals — pix-color, pix-sortable
+## 3. Docs template vecchi componenti → shared
+## 4. Test coverage — 6 componenti
+## 5. WAV format — pix-recorder
+## 6. SSR boilerplate → shared
+## 7. innerHTML escape — pix-color
+## 8. Scaffold verification
