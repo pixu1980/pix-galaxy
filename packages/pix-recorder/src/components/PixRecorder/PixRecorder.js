@@ -84,7 +84,7 @@ class PixRecorder extends HTMLElement {
 
   attributeChangedCallback(name, oldVal, newVal) {
     if (name === 'max-duration') this.#maxDuration = parseInt(newVal) || 0;
-    if (name === 'format') this.#format = (newVal === 'ogg' || newVal === 'wav') ? newVal : 'webm';
+    if (name === 'format') this.#format = (newVal === 'ogg') ? newVal : 'webm';
     if (name === 'filename') this.#filename = newVal || 'recording';
   }
 

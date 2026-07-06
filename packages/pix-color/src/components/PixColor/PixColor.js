@@ -36,6 +36,7 @@ function adoptComponentStyles() {
 }
 
 class PixColor extends HTMLElement {
+  static formAssociated = true;
   static observedAttributes = ['value', 'name'];
 
   static ensureComponentStyles() { return adoptComponentStyles(); }
@@ -88,8 +89,11 @@ class PixColor extends HTMLElement {
   // Per-tab handlers (creati al volo ma puliti in teardownPanel)
   #tabCleanup = [];
 
+  #internals = null;
+
   constructor() {
     super();
+    this.#internals = this.attachInternals?.();
   }
 
   connectedCallback() {
@@ -280,6 +284,7 @@ class PixColor extends HTMLElement {
     if (this.#previewLarge) this.#previewLarge.style.background = hex;
     if (this.#colorInput) this.#colorInput.value = hex;
     if (this.#bar) this.#bar.setAttribute('aria-label', 'Color picker. Current value: ' + hex);
+    if (this.#internals?.setFormValue) this.#internals.setFormValue(hex);
     this.#renderValues();
     this.#renderSliders();
     this.#renderContrast();

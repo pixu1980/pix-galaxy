@@ -164,6 +164,7 @@ class PixSplitter extends HTMLElement {
     }
 
     // Insert handles between children
+    const DocumentFragment = globalThis.DocumentFragment || window.DocumentFragment;
     const fragment = new DocumentFragment();
     const newPanels = [];
     const newHandles = [];
