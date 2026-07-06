@@ -1,0 +1,31 @@
+# Security Policy
+
+## Supported Versions
+
+| Version | Supported |
+| --- | --- |
+| 0.x | Yes |
+
+## Reporting a Vulnerability
+
+Please do not report security vulnerabilities in public issues.
+
+Preferred path:
+
+1. Use GitHub private vulnerability reporting or a private security advisory, if enabled for the repository.
+2. If private reporting is unavailable, contact the repository owner through GitHub at https://github.com/{%REPO_OWNER%} and clearly mark the report as a security issue.
+
+Include:
+
+- A description of the issue.
+- Reproduction steps or a proof of concept.
+- Impact assessment.
+- Any suggested mitigation.
+
+## Response Targets
+
+- Initial acknowledgement: within 3 business days.
+- Triage decision: within 10 business days.
+- Coordinated remediation target: within 90 days when feasible.
+
+We will credit reporters who want public acknowledgement after a fix is available.

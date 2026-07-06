@@ -1,0 +1,95 @@
+{
+  "name": "@pix-galaxy/pix-accent-color-selector",
+  "version": "0.1.0",
+  "description": "Accent color selector Web Component for the pix-galaxy suite.",
+  "type": "module",
+  "author": "Emiliano Pisu",
+  "license": "MIT",
+  "homepage": "https://pixu1980.github.io/pix-accent-color-selector/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pixu1980/pix-accent-color-selector.git"
+  },
+  "bugs": {
+    "url": "https://github.com/pixu1980/pix-accent-color-selector/issues"
+  },
+  "funding": {
+    "type": "github",
+    "url": "https://github.com/sponsors/pixu1980"
+  },
+  "keywords": [
+    "pix-galaxy",
+    "pix-accent-color-selector",
+    "accent-color",
+    "web-component",
+    "custom-elements",
+    "color-picker",
+    "theme-switcher",
+    "browser"
+  ],
+  "sideEffects": true,
+  "engines": {
+    "node": ">=20.11",
+    "pnpm": ">=10"
+  },
+  "packageManager": "pnpm@10.33.2",
+  "main": "./artifact/index.cjs",
+  "module": "./artifact/index.js",
+  "types": "./artifact/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./artifact/index.d.ts",
+      "import": "./artifact/index.js",
+      "require": "./artifact/index.cjs",
+      "default": "./artifact/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "artifact",
+    "CHANGELOG.md",
+    "LICENSE",
+    "README.md",
+    "CODE_OF_CONDUCT.md",
+    "CONTRIBUTING.md",
+    "GOVERNANCE.md",
+    "SECURITY.md",
+    "SUPPORT.md"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "scripts": {
+    "build": "pnpm build:lib && pnpm build:site",
+    "build:lib": "node ./scripts/build.mjs && pnpm build:types",
+    "build:site": "pnpm docs:build && vite build --config ./vite.config.mjs",
+    "build:types": "tsc --project ./tsconfig.types.json && node ./scripts/finalize-types.mjs",
+    "check": "pnpm test && pnpm build",
+    "clean": "rm -rf artifact dist coverage .artifacts",
+    "dev": "pnpm docs:build && node ../../scripts/dev.mjs --config ./vite.config.mjs --name acs",
+    "docs:build": "node ./scripts/docs.mjs",
+    "docs:watch": "node ./scripts/docs.mjs --watch",
+    "pack:check": "pnpm pack --pack-destination ./.artifacts",
+    "prepack": "pnpm build:lib",
+    "prepublishOnly": "pnpm check && pnpm pack --pack-destination ./.artifacts",
+    "preview": "vite preview --config ./vite.config.mjs",
+    "release": "node ./scripts/release.mjs",
+    "test": "pnpm docs:build && node --test --import ./scripts/register-test-loader.mjs ./src/tests/*.test.js",
+    "test:coverage": "pnpm docs:build && c8 --reporter=text --reporter=lcov node --test --import ./scripts/register-test-loader.mjs ./src/tests/*.test.js",
+    "lint": "eslint src/",
+    "typecheck": "tsc --project ./tsconfig.types.json --noEmit"
+  },
+  "dependencies": {
+    "@pix-galaxy/pix-highlighter": "workspace:*"
+  },
+  "devDependencies": {
+    "c8": "11.0.0",
+    "concurrently": "9.2.1",
+    "esbuild": "0.28.0",
+    "jsdom": "29.1.0",
+    "marked": "18.0.2",
+    "typescript": "6.0.3",
+    "vite": "8.0.10"
+  }
+}

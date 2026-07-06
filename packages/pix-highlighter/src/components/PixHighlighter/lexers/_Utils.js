@@ -1,7 +1,3 @@
-// @ts-nocheck
-
-
-
 /**
  * @typedef {'kw' | 'str' | 'num' | 'com' | 'id' | 'fn' | 'op' | 'tag' | 'attr' | 'key' | 'var' | 'mac' | 'pp' | 'prop' | 'type' | 'mdh' | 'mde' | 'mds' | 'mdc' | 'mdl' | 'mdbq' | 'mdli' | 'mdhr' | 'mdimg'} PixHighlighterTokenType
  */

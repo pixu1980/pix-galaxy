@@ -1,33 +1,52 @@
 {
   "name": "pix-galaxy",
   "private": true,
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Monorepo for the PixGalaxy ecosystem of zero-runtime-dependency vanilla JS Web Components",
   "type": "module",
-  "packageManager": "pnpm@11.0.4",
+  "author": "Emiliano Pisu",
+  "license": "MIT",
+  "homepage": "https://pixu1980.github.io/pix-galaxy/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pixu1980/pix-galaxy.git"
+  },
+  "bugs": {
+    "url": "https://github.com/pixu1980/pix-galaxy/issues"
+  },
+  "funding": {
+    "type": "github",
+    "url": "https://github.com/sponsors/pixu1980"
+  },
   "scripts": {
-    "clean": "node scripts/_clean.js",
-    "build": "pnpm -r --if-present run build",
-    "changelog": "node scripts/_generate-changelog.js",
-    "rel:patch": "node scripts/_release.js patch",
-    "rel:minor": "node scripts/_release.js minor",
-    "rel:major": "node scripts/_release.js major",
-    "release:verify": "node scripts/_release.js verify",
-    "test:scripts": "node --test scripts/tests/index.js",
-    "test": "pnpm test:scripts && pnpm -r --if-present run test",
-    "typecheck": "pnpm -r --if-present run typecheck",
-    "validate": "pnpm -r --if-present run validate",
-    "docs:build": "node scripts/_build-docs.js",
-    "docs:serve": "node scripts/_serve-docs.js",
-    "package:list": "node scripts/_list-packages.js",
-    "package:create": "node scripts/_create-package.js",
-    "release": "pnpm -r publish --access public --no-git-checks"
+    "build": "pnpm build:portal && pnpm -r --if-present run build",
+    "build:lib": "pnpm -r --if-present run build:lib",
+    "build:portal": "vite build --config ./vite.config.mjs",
+    "build:site": "pnpm build:portal && pnpm -r --if-present run build:site",
+    "build:types": "pnpm -r --if-present run build:types",
+    "clean": "pnpm -r --if-present run clean",
+    "dev": "node scripts/dev.mjs --config ./vite.config.mjs --name portal",
+    "dev:all": "node scripts/dev-all.mjs",
+    "scaffold": "node scripts/scaffold-component.mjs",
+    "dev:packages": "pnpm -r --if-present run dev",
+    "test": "pnpm -r --if-present run test",
+    "release": "node ./scripts/release.mjs",
+    "release:dry": "node ./scripts/release.mjs --dry-run",
+    "lint": "pnpm -r --if-present run lint",
+    "format": "prettier --write '**/*.{js,mjs,css,md,json}'",
+    "format:check": "prettier --check '**/*.{js,mjs,css,md,json}'"
   },
   "devDependencies": {
-    "esbuild": "0.28.0",
-    "jsdom": "29.1.1",
-    "gray-matter": "4.0.3",
-    "marked": "18.0.3",
-    "typescript": "6.0.3"
-  }
+    "@eslint/js": "9.24.0",
+    "concurrently": "9.2.1",
+    "eslint": "9.24.0",
+    "prettier": "3.5.3",
+    "typescript": "6.0.3",
+    "vite": "8.0.10"
+  },
+  "engines": {
+    "node": ">=20.11",
+    "pnpm": ">=10"
+  },
+  "packageManager": "pnpm@11.9.0"
 }

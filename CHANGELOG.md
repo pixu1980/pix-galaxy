@@ -27,7 +27,7 @@ Generated from Conventional Commits via `pnpm changelog:generate`.
 
 ### Maintenance
 
-- ai: add .github symlinks to .ai/{instructions,prompts,skills}
+- ai: add .github symlinks to .agents/{instructions,prompts,skills}
 - ai-skills: added agent skills
 - package-manager: removed lock files with gitignore
 - use Node.js 24 across all workflows

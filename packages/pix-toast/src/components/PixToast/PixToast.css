@@ -1,0 +1,231 @@
+@layer pix-galaxy {
+  @layer pix-toast {
+    /* ── Individual toast ────────────────────────────────────────── */
+
+    pix-toast {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 0.125rem 0.75rem;
+      align-items: start;
+      padding: 0.75rem 0.875rem;
+      border-radius: var(--pix-toast--radius, 10px);
+      background: var(--pix-toast--bg, light-dark(oklch(0.98 0.005 85), oklch(0.16 0.01 260)));
+      border: 1px solid var(--pix-toast--border, light-dark(oklch(from gray 0.85 0.01 0 / 0.5), oklch(from gray 0.28 0.01 0 / 0.5)));
+      box-shadow:
+        0 4px 16px light-dark(oklch(from black 0 0 0 / 0.1), oklch(from black 0 0 0 / 0.35)),
+        0 1px 4px light-dark(oklch(from black 0 0 0 / 0.06), oklch(from black 0 0 0 / 0.2));
+      position: relative;
+      overflow: hidden;
+      pointer-events: auto;
+      animation: pix-toast-slide-in 220ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    @keyframes pix-toast-slide-in {
+      from {
+        opacity: 0;
+        transform: translateX(100%);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    pix-toast[data-leaving] {
+      animation: pix-toast-slide-out 200ms cubic-bezier(0.55, 0, 1, 0.45) both;
+      pointer-events: none;
+    }
+
+    @keyframes pix-toast-slide-out {
+      from {
+        opacity: 1;
+        transform: translateX(0);
+      }
+      to {
+        opacity: 0;
+        transform: translateX(100%);
+      }
+    }
+
+    /* ── Variant accents (WCAG AA ≥ 4.5:1 contrast) ─────────────── */
+
+    pix-toast[data-variant='info'] {
+      --pix-toast--accent: light-dark(oklch(0.55 0.18 260), oklch(0.65 0.15 260));
+      --pix-toast--accent-bg: light-dark(oklch(0.55 0.18 260 / 0.1), oklch(0.65 0.15 260 / 0.12));
+    }
+
+    pix-toast[data-variant='success'] {
+      --pix-toast--accent: light-dark(oklch(0.5 0.2 150), oklch(0.6 0.18 150));
+      --pix-toast--accent-bg: light-dark(oklch(0.5 0.2 150 / 0.1), oklch(0.6 0.18 150 / 0.12));
+    }
+
+    pix-toast[data-variant='warning'] {
+      --pix-toast--accent: light-dark(oklch(0.58 0.18 80), oklch(0.68 0.15 80));
+      --pix-toast--accent-bg: light-dark(oklch(0.58 0.18 80 / 0.1), oklch(0.68 0.15 80 / 0.12));
+    }
+
+    pix-toast[data-variant='error'] {
+      --pix-toast--accent: light-dark(oklch(0.52 0.2 25), oklch(0.62 0.18 25));
+      --pix-toast--accent-bg: light-dark(oklch(0.52 0.2 25 / 0.1), oklch(0.62 0.18 25 / 0.12));
+    }
+
+    /* ── Accent bar ──────────────────────────────────────────────── */
+
+    pix-toast::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      border-left: 3px solid var(--pix-toast--accent);
+      background: var(--pix-toast--accent-bg);
+      pointer-events: none;
+    }
+
+    /* ── Icon ────────────────────────────────────────────────────── */
+
+    pix-toast [data-toast-icon] {
+      grid-row: 1 / 3;
+      width: 1.5rem;
+      height: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--pix-toast--accent);
+      margin-top: 1px;
+    }
+
+    pix-toast [data-toast-icon] svg {
+      width: 1.25rem;
+      height: 1.25rem;
+    }
+
+    /* ── Body ────────────────────────────────────────────────────── */
+
+    pix-toast [data-toast-body] {
+      grid-column: 2;
+      min-width: 0;
+    }
+
+    pix-toast [data-toast-title] {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--pix-toast--fg, light-dark(oklch(0.18 0.012 60), oklch(0.88 0.01 85)));
+      line-height: 1.4;
+    }
+
+    pix-toast [data-toast-message] {
+      font-size: 0.8125rem;
+      color: var(--pix-toast--fg-secondary, light-dark(oklch(0.38 0.01 60), oklch(0.72 0.01 85)));
+      line-height: 1.4;
+      margin-top: 0.0625rem;
+    }
+
+    /* ── Dismiss ─────────────────────────────────────────────────── */
+
+    pix-toast [data-toast-dismiss] {
+      grid-column: 3;
+      grid-row: 1;
+      width: 1.25rem;
+      height: 1.25rem;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      cursor: pointer;
+      color: var(--pix-toast--fg-muted, light-dark(oklch(0.55 0.01 60), oklch(0.5 0.01 85)));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 4px;
+      transition: color 120ms ease;
+    }
+
+    pix-toast [data-toast-dismiss]:hover {
+      color: var(--pix-toast--fg, light-dark(oklch(0.18 0.012 60), oklch(0.88 0.01 85)));
+    }
+
+    pix-toast [data-toast-dismiss]:focus-visible {
+      outline: 2px solid var(--pix-toast--accent);
+      outline-offset: 1px;
+    }
+
+    pix-toast [data-toast-dismiss] svg {
+      width: 0.875rem;
+      height: 0.875rem;
+    }
+
+    /* ── Progress bar ────────────────────────────────────────────── */
+
+    pix-toast[data-timer] [data-toast-progress] {
+      grid-column: 1 / -1;
+      height: 2px;
+      border-radius: 0 0 inherit inherit;
+      background: var(--pix-toast--accent);
+      opacity: 0.3;
+      margin-top: 0.5rem;
+      transform-origin: left;
+      animation: pix-toast-timer var(--pix-toast--duration, 5000ms) linear forwards;
+    }
+
+    pix-toast[data-variant='error'] {
+      --pix-toast--border: light-dark(oklch(0.52 0.2 25 / 0.25), oklch(0.62 0.18 25 / 0.3));
+    }
+
+    pix-toast:hover [data-toast-progress],
+    pix-toast:focus-within [data-toast-progress] {
+      animation-play-state: paused;
+    }
+
+    @keyframes pix-toast-timer {
+      from { transform: scaleX(1); }
+      to { transform: scaleX(0); }
+    }
+
+    /* ── Stack container ─────────────────────────────────────────── */
+
+    pix-toast-stack {
+      position: fixed;
+      z-index: 2147483646;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      pointer-events: none;
+      max-width: min(400px, calc(100vw - 2rem));
+      max-height: calc(100vh - 2rem);
+      overflow-y: auto;
+    }
+
+    pix-toast-stack[data-position='top-right'] {
+      top: 1rem;
+      right: 1rem;
+    }
+
+    pix-toast-stack[data-position='top-left'] {
+      top: 1rem;
+      left: 1rem;
+    }
+
+    pix-toast-stack[data-position='bottom-right'] {
+      bottom: 1rem;
+      right: 1rem;
+      flex-direction: column-reverse;
+    }
+
+    pix-toast-stack[data-position='bottom-left'] {
+      bottom: 1rem;
+      left: 1rem;
+      flex-direction: column-reverse;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      pix-toast {
+        animation: none;
+      }
+      pix-toast[data-leaving] {
+        display: none;
+      }
+      pix-toast [data-toast-progress] {
+        animation: none;
+      }
+    }
+  }
+}

@@ -9,6 +9,6 @@ coverage/
 *.tsbuildinfo
 .pnpm-store
 .npm
-
-*lock*.*
 .tokensave
+artifact/
+.artifacts/

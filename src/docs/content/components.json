@@ -1,0 +1,102 @@
+[
+  {
+    "name": "pix-highlighter",
+    "packageName": "@pix-galaxy/pix-highlighter",
+    "title": "Pix Highlighter",
+    "description": "Browser-native syntax highlighting Web Component. Uses the CSS Highlight API for zero-runtime, zero-dependency code highlighting.",
+    "homepage": "https://pixu1980.github.io/pix-highlighter/",
+    "repo": "https://github.com/pixu1980/pix-highlighter",
+    "accent": "sky",
+    "keywords": ["syntax-highlighting", "code-blocks", "css-highlight-api"]
+  },
+  {
+    "name": "pix-toast",
+    "packageName": "@pix-galaxy/pix-toast",
+    "title": "Pix Toast",
+    "description": "Accessible toast notification system with smart queuing, deduplication, and auto-dismiss. Includes both individual toast and stack manager.",
+    "homepage": "https://pixu1980.github.io/pix-toast/",
+    "repo": "https://github.com/pixu1980/pix-toast",
+    "accent": "rose",
+    "keywords": ["notifications", "toast", "queue", "alerts"]
+  },
+  {
+    "name": "pix-sortable",
+    "packageName": "@pix-galaxy/pix-sortable",
+    "title": "Pix Sortable",
+    "description": "Accessible sortable list with drag & drop, touch support, and full keyboard navigation. WCAG 2.2 AA.",
+    "homepage": "https://pixu1980.github.io/pix-sortable/",
+    "repo": "https://github.com/pixu1980/pix-sortable",
+    "accent": "sky",
+    "keywords": ["sortable", "drag-drop", "reorder", "keyboard"]
+  },
+  {
+    "name": "pix-splitter",
+    "packageName": "@pix-galaxy/pix-splitter",
+    "title": "Pix Splitter",
+    "description": "Accessible resizable panel splitter Web Component. Supports horizontal and vertical layouts with keyboard navigation.",
+    "homepage": "https://pixu1980.github.io/pix-splitter/",
+    "repo": "https://github.com/pixu1980/pix-splitter",
+    "accent": "amber",
+    "keywords": ["split-panel", "resizable", "layout"]
+  },
+  {
+    "name": "pix-color",
+    "packageName": "@pix-galaxy/pix-color",
+    "title": "Pix Color",
+    "description": "Accessible OKLCH color picker with HEX, RGB, HSL, and OKLCH formats. Includes WCAG contrast checking and native form support.",
+    "homepage": "https://pixu1980.github.io/pix-color/",
+    "repo": "https://github.com/pixu1980/pix-color",
+    "accent": "emerald",
+    "keywords": ["color-picker", "oklch", "contrast", "form"]
+  },
+  {
+    "name": "pix-recorder",
+    "packageName": "@pix-galaxy/pix-recorder",
+    "title": "Pix Recorder",
+    "description": "Accessible audio recorder with waveform visualization, pause/resume, download, and WCAG 2.2 AA support.",
+    "homepage": "https://pixu1980.github.io/pix-recorder/",
+    "repo": "https://github.com/pixu1980/pix-recorder",
+    "accent": "aqua",
+    "keywords": ["audio", "recorder", "waveform", "microphone"]
+  },
+  {
+    "name": "pix-command",
+    "packageName": "@pix-galaxy/pix-command",
+    "title": "Pix Command",
+    "description": "Accessible command palette Web Component with fuzzy search, keyboard navigation, and category grouping.",
+    "homepage": "https://pixu1980.github.io/pix-command/",
+    "repo": "https://github.com/pixu1980/pix-command",
+    "accent": "indigo",
+    "keywords": ["command-palette", "keyboard-shortcuts", "fuzzy-search"]
+  },
+  {
+    "name": "pix-display-preferences",
+    "packageName": "@pix-galaxy/pix-display-preferences",
+    "title": "Pix Display Preferences",
+    "description": "Accessible popover Web Component for managing display preferences: color scheme, accent color, reduced motion, and typography settings.",
+    "homepage": "https://pixu1980.github.io/pix-display-preferences/",
+    "repo": "https://github.com/pixu1980/pix-display-preferences",
+    "accent": "coral",
+    "keywords": ["display-preferences", "popover", "accessibility", "theme-switcher"]
+  },
+  {
+    "name": "pix-accent-color-selector",
+    "packageName": "@pix-galaxy/pix-accent-color-selector",
+    "title": "Pix Accent Color Selector",
+    "description": "Accent color selector Web Component. Lets users pick a custom accent color that syncs with the system and persists across sessions.",
+    "homepage": "https://pixu1980.github.io/pix-accent-color-selector/",
+    "repo": "https://github.com/pixu1980/pix-accent-color-selector",
+    "accent": "mint",
+    "keywords": ["accent-color", "color-picker", "theme-switcher"]
+  },
+  {
+    "name": "pix-color-scheme-selector",
+    "packageName": "@pix-galaxy/pix-color-scheme-selector",
+    "title": "Pix Color Scheme Selector",
+    "description": "Color scheme selector Web Component. Provides a light / dark / system toggle that respects the user's OS-level preference.",
+    "homepage": "https://pixu1980.github.io/pix-color-scheme-selector/",
+    "repo": "https://github.com/pixu1980/pix-color-scheme-selector",
+    "accent": "violet",
+    "keywords": ["color-scheme", "light-dark", "theme-switcher"]
+  }
+]
