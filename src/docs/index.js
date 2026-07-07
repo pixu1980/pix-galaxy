@@ -67,18 +67,19 @@ async function bootPortal() {
   const cardsHtml = components
     .map((comp) => {
       const devPort = getDevPort(comp.name);
-      const docUrl = isDev && devPort
+      const docUrl = (isDev && devPort)
         ? `http://localhost:${devPort}/`
-        : comp.homepage;
+        : (comp.homepage || '#');
+      const isComingSoon = !comp.homepage;
 
       return `
         <a
           data-part="card"
           data-component-accent="${escapeAttr(comp.accent)}"
           href="${escapeAttr(docUrl)}"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="${escapeAttr(comp.title)} - opens documentation in new tab"
+          ${isComingSoon ? '' : 'target="_blank" rel="noopener noreferrer"'}
+          aria-label="${escapeAttr(comp.title)}${isComingSoon ? '' : ' - opens documentation in new tab'}"
+          ${isComingSoon ? 'style="cursor:default;opacity:0.6;"' : ''}
         >
           <header data-part="card-header">
             <span data-part="card-badge" aria-hidden="true">${ICONS[comp.accent] || ''}</span>
@@ -86,8 +87,8 @@ async function bootPortal() {
           </header>
           <p data-part="card-desc">${escapeHtml(comp.description)}</p>
           <footer data-part="card-footer">
-            <span data-part="card-tag">${escapeHtml(comp.packageName)}</span>
-            ${comp.keywords
+            ${comp.packageName ? `<span data-part="card-tag">${escapeHtml(comp.packageName)}</span>` : ''}
+            ${(comp.keywords || [])
               .slice(0, 3)
               .map((kw) => `<span data-part="card-tag">${escapeHtml(kw)}</span>`)
               .join('')}

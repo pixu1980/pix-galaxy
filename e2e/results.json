@@ -1064,19 +1064,27 @@
                       "parallelIndex": 0,
                       "status": "passed",
 <<<<<<< HEAD
+<<<<<<< HEAD
                       "duration": 99,
 =======
                       "duration": 378,
 >>>>>>> f19e3d7 (fix(test): all 22 e2e tests passing, fix duplicate deps, restore missing symlinks)
+=======
+                      "duration": 253,
+>>>>>>> f86adf1 (feat(release): standard-version based monorepo release orchestration)
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
 <<<<<<< HEAD
+<<<<<<< HEAD
                       "startTime": "2026-08-02T01:16:12.796Z",
 =======
                       "startTime": "2026-07-07T14:19:01.208Z",
 >>>>>>> f19e3d7 (fix(test): all 22 e2e tests passing, fix duplicate deps, restore missing symlinks)
+=======
+                      "startTime": "2026-07-07T14:34:39.922Z",
+>>>>>>> f86adf1 (feat(release): standard-version based monorepo release orchestration)
                       "annotations": [],
                       "attachments": []
                     }
@@ -1097,8 +1105,12 @@
               "column": 3
             },
             {
+<<<<<<< HEAD
               "title": "each card has a valid href pointing to localhost",
 >>>>>>> f19e3d7 (fix(test): all 22 e2e tests passing, fix duplicate deps, restore missing symlinks)
+=======
+              "title": "each real card has a valid href pointing to localhost",
+>>>>>>> f86adf1 (feat(release): standard-version based monorepo release orchestration)
               "ok": true,
               "tags": [],
               "tests": [
@@ -1114,19 +1126,27 @@
                       "parallelIndex": 0,
                       "status": "passed",
 <<<<<<< HEAD
+<<<<<<< HEAD
                       "duration": 117,
 =======
                       "duration": 131,
 >>>>>>> f19e3d7 (fix(test): all 22 e2e tests passing, fix duplicate deps, restore missing symlinks)
+=======
+                      "duration": 126,
+>>>>>>> f86adf1 (feat(release): standard-version based monorepo release orchestration)
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
 <<<<<<< HEAD
+<<<<<<< HEAD
                       "startTime": "2026-08-02T01:16:12.901Z",
 =======
                       "startTime": "2026-07-07T14:19:01.860Z",
 >>>>>>> f19e3d7 (fix(test): all 22 e2e tests passing, fix duplicate deps, restore missing symlinks)
+=======
+                      "startTime": "2026-07-07T14:34:40.462Z",
+>>>>>>> f86adf1 (feat(release): standard-version based monorepo release orchestration)
                       "annotations": [],
                       "attachments": []
                     }
@@ -1135,11 +1155,15 @@
                 }
               ],
 <<<<<<< HEAD
+<<<<<<< HEAD
               "id": "044afb3f960dccc579f2-2b11a60f1bd6701b5f51",
               "file": "portal.spec.mjs",
               "line": 41,
 =======
               "id": "044afb3f960dccc579f2-e691735aed7f9932fb22",
+=======
+              "id": "044afb3f960dccc579f2-2b11a60f1bd6701b5f51",
+>>>>>>> f86adf1 (feat(release): standard-version based monorepo release orchestration)
               "file": "portal.spec.mjs",
               "line": 42,
 >>>>>>> f19e3d7 (fix(test): all 22 e2e tests passing, fix duplicate deps, restore missing symlinks)
@@ -1162,19 +1186,27 @@
                       "parallelIndex": 0,
                       "status": "passed",
 <<<<<<< HEAD
+<<<<<<< HEAD
                       "duration": 178,
 =======
                       "duration": 263,
 >>>>>>> f19e3d7 (fix(test): all 22 e2e tests passing, fix duplicate deps, restore missing symlinks)
+=======
+                      "duration": 213,
+>>>>>>> f86adf1 (feat(release): standard-version based monorepo release orchestration)
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
 <<<<<<< HEAD
+<<<<<<< HEAD
                       "startTime": "2026-08-02T01:16:13.022Z",
 =======
                       "startTime": "2026-07-07T14:19:01.997Z",
 >>>>>>> f19e3d7 (fix(test): all 22 e2e tests passing, fix duplicate deps, restore missing symlinks)
+=======
+                      "startTime": "2026-07-07T14:34:40.594Z",
+>>>>>>> f86adf1 (feat(release): standard-version based monorepo release orchestration)
                       "annotations": [],
                       "attachments": []
                     }
@@ -1184,7 +1216,7 @@
               ],
               "id": "044afb3f960dccc579f2-8d877da27fe6bc4fb90c",
               "file": "portal.spec.mjs",
-              "line": 54,
+              "line": 55,
               "column": 3
             },
             {
@@ -1204,19 +1236,27 @@
                       "parallelIndex": 0,
                       "status": "passed",
 <<<<<<< HEAD
+<<<<<<< HEAD
                       "duration": 92,
 =======
                       "duration": 83,
 >>>>>>> f19e3d7 (fix(test): all 22 e2e tests passing, fix duplicate deps, restore missing symlinks)
+=======
+                      "duration": 84,
+>>>>>>> f86adf1 (feat(release): standard-version based monorepo release orchestration)
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
 <<<<<<< HEAD
+<<<<<<< HEAD
                       "startTime": "2026-08-02T01:16:13.205Z",
 =======
                       "startTime": "2026-07-07T14:19:02.266Z",
 >>>>>>> f19e3d7 (fix(test): all 22 e2e tests passing, fix duplicate deps, restore missing symlinks)
+=======
+                      "startTime": "2026-07-07T14:34:40.813Z",
+>>>>>>> f86adf1 (feat(release): standard-version based monorepo release orchestration)
                       "annotations": [],
                       "attachments": []
                     }
@@ -1226,7 +1266,7 @@
               ],
               "id": "044afb3f960dccc579f2-e2be75f1bbea463e59fc",
               "file": "portal.spec.mjs",
-              "line": 71,
+              "line": 72,
               "column": 3
             },
             {
@@ -1246,14 +1286,620 @@
                       "parallelIndex": 0,
                       "status": "passed",
 <<<<<<< HEAD
+<<<<<<< HEAD
                       "duration": 117,
 =======
+=======
+                      "duration": 111,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-07T14:34:40.905Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "044afb3f960dccc579f2-98098a852112d953d861",
+              "file": "portal.spec.mjs",
+              "line": 78,
+              "column": 3
+            }
+          ]
+        },
+        {
+          "title": "Component docs sites",
+          "file": "portal.spec.mjs",
+          "line": 93,
+          "column": 6,
+          "specs": [
+            {
+              "title": "pix-accent-color-selector docs loads at :3001",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 15000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 146,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-07T14:34:41.021Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "044afb3f960dccc579f2-ef4c7bfa15d848d8fd7c",
+              "file": "portal.spec.mjs",
+              "line": 96,
+              "column": 5
+            },
+            {
+              "title": "pix-color docs loads at :3002",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 15000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 149,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-07T14:34:41.172Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "044afb3f960dccc579f2-b8f538515dd587fee98a",
+              "file": "portal.spec.mjs",
+              "line": 96,
+              "column": 5
+            },
+            {
+              "title": "pix-color-scheme-selector docs loads at :3003",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 15000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 134,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-07T14:34:41.326Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "044afb3f960dccc579f2-229ed4adcac4472b976c",
+              "file": "portal.spec.mjs",
+              "line": 96,
+              "column": 5
+            },
+            {
+              "title": "pix-command docs loads at :3004",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 15000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 130,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-07T14:34:41.465Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "044afb3f960dccc579f2-c947606f2d9282cac593",
+              "file": "portal.spec.mjs",
+              "line": 96,
+              "column": 5
+            },
+            {
+              "title": "pix-display-preferences docs loads at :3005",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 15000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 149,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-07T14:34:41.600Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "044afb3f960dccc579f2-47880d268e67c07b760e",
+              "file": "portal.spec.mjs",
+              "line": 96,
+              "column": 5
+            },
+            {
+              "title": "pix-foundations docs loads at :3006",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 15000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 153,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-07T14:34:41.758Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "044afb3f960dccc579f2-558465bb57404a1ca053",
+              "file": "portal.spec.mjs",
+              "line": 96,
+              "column": 5
+            },
+            {
+              "title": "pix-highlighter docs loads at :3007",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 15000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 164,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-07T14:34:41.916Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "044afb3f960dccc579f2-fbe1913fafb401413ab7",
+              "file": "portal.spec.mjs",
+              "line": 96,
+              "column": 5
+            },
+            {
+              "title": "pix-recorder docs loads at :3008",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 15000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 150,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-07T14:34:42.087Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "044afb3f960dccc579f2-0febcbe225db6d8f6dc5",
+              "file": "portal.spec.mjs",
+              "line": 96,
+              "column": 5
+            },
+            {
+              "title": "pix-sortable docs loads at :3009",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 15000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 159,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-07T14:34:42.242Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "044afb3f960dccc579f2-17e8e757ffca47349779",
+              "file": "portal.spec.mjs",
+              "line": 96,
+              "column": 5
+            },
+            {
+              "title": "pix-splitter docs loads at :3010",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 15000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 145,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-07T14:34:42.406Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "044afb3f960dccc579f2-0ef8b430e61efe2ac4d0",
+              "file": "portal.spec.mjs",
+              "line": 96,
+              "column": 5
+            },
+            {
+              "title": "pix-toast docs loads at :3011",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 15000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 129,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-07T14:34:42.557Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "044afb3f960dccc579f2-476fddb8dd5130c43261",
+              "file": "portal.spec.mjs",
+              "line": 96,
+              "column": 5
+            },
+            {
+              "title": "color scheme selector is present on new-template docs",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 15000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 579,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-07T14:34:42.691Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "044afb3f960dccc579f2-4f10139d5e317bcc4350",
+              "file": "portal.spec.mjs",
+              "line": 104,
+              "column": 3
+            },
+            {
+              "title": "nav links are present on all docs",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 15000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 689,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-07T14:34:43.278Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "044afb3f960dccc579f2-0a18259093771739d5a9",
+              "file": "portal.spec.mjs",
+              "line": 116,
+              "column": 3
+            }
+          ]
+        },
+        {
+          "title": "Pix Highlighter",
+          "file": "portal.spec.mjs",
+          "line": 128,
+          "column": 6,
+          "specs": [
+            {
+              "title": "code blocks show toolbar",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 15000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 161,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-07T14:34:43.972Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "044afb3f960dccc579f2-2bbc906399090b778c8c",
+              "file": "portal.spec.mjs",
+              "line": 130,
+              "column": 3
+            },
+            {
+              "title": "theme selector button has visible border",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 15000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 154,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-07T14:34:44.139Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "044afb3f960dccc579f2-c6dc8ff2f5e0d3465ed5",
+              "file": "portal.spec.mjs",
+              "line": 137,
+              "column": 3
+            },
+            {
+              "title": "theme menu opens and lists options",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 15000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 234,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-07T14:34:44.298Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "044afb3f960dccc579f2-478ecac55c4659141ae7",
+              "file": "portal.spec.mjs",
+              "line": 146,
+              "column": 3
+            }
+          ]
+        },
+        {
+          "title": "Keyboard a11y",
+          "file": "portal.spec.mjs",
+          "line": 158,
+          "column": 6,
+          "specs": [
+            {
+              "title": "Enter activates nav link on pix-command docs",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 15000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+>>>>>>> f86adf1 (feat(release): standard-version based monorepo release orchestration)
                       "duration": 137,
 >>>>>>> f19e3d7 (fix(test): all 22 e2e tests passing, fix duplicate deps, restore missing symlinks)
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
+<<<<<<< HEAD
 <<<<<<< HEAD
                       "startTime": "2026-08-02T01:16:13.303Z",
 =======
@@ -2159,6 +2805,9 @@
 =======
                       "startTime": "2026-07-07T14:19:06.529Z",
 >>>>>>> f19e3d7 (fix(test): all 22 e2e tests passing, fix duplicate deps, restore missing symlinks)
+=======
+                      "startTime": "2026-07-07T14:34:44.539Z",
+>>>>>>> f86adf1 (feat(release): standard-version based monorepo release orchestration)
                       "annotations": [],
                       "attachments": []
                     }
@@ -2168,7 +2817,7 @@
               ],
               "id": "044afb3f960dccc579f2-423ca45fb32f950526d1",
               "file": "portal.spec.mjs",
-              "line": 159,
+              "line": 160,
               "column": 3
             }
           ]
@@ -2179,12 +2828,17 @@
   "errors": [],
   "stats": {
 <<<<<<< HEAD
+<<<<<<< HEAD
     "startTime": "2026-08-02T01:15:44.916Z",
     "duration": 32323.755,
     "expected": 49,
 =======
     "startTime": "2026-07-07T14:19:00.902Z",
     "duration": 5806.954000000001,
+=======
+    "startTime": "2026-07-07T14:34:39.634Z",
+    "duration": 5082.289,
+>>>>>>> f86adf1 (feat(release): standard-version based monorepo release orchestration)
     "expected": 22,
 >>>>>>> f19e3d7 (fix(test): all 22 e2e tests passing, fix duplicate deps, restore missing symlinks)
     "skipped": 0,

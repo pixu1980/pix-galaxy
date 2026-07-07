@@ -6,26 +6,30 @@
 pnpm add @pix-galaxy/pix-foundations
 ```
 
-In your CSS, import the foundations:
+In your CSS entry point:
 
 ```css
 @import '@pix-galaxy/pix-foundations/foundations.css';
 ```
 
-In Vite / JavaScript:
+For Vite projects, also works as a JS import:
 
 ```js
 import '@pix-galaxy/pix-foundations/foundations.css';
 ```
 
-## Layer Structure
+## What you get
 
-Foundations are organized in CSS layers:
+Once imported, every `--pix--*` custom property is available on `:root`:
 
+```css
+.card {
+  padding: var(--pix--s--md);
+  border-radius: var(--pix--r--md);
+  background: var(--pix--c--surface);
+  color: var(--pix--c--text);
+  box-shadow: var(--pix--e--sm);
+}
 ```
-pix.reset          → minimal box-sizing / margin reset
-pix.foundations    → radii, spacing, typography, colors, focus, elevations
-pix.components     → (reserved for component-specific layers)
-```
 
-Import foundations before your component styles so the cascade works predictably.
+No classes. No components. Pure CSS custom properties.

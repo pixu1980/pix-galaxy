@@ -1,8 +1,11 @@
 # Releasing
 
-This package is private. No releases.
+This package is private — part of the pix-galaxy monorepo. No npm publish.
 
 ```bash
-# Update when design tokens change
-pnpm build  # validates the CSS layer structure
+# Validate CSS layer structure
+node ./scripts/docs.mjs
+
+# Check all tokens compile
+pnpm build  # runs esbuild + types
 ```
