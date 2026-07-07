@@ -17,16 +17,29 @@ const isDev = typeof import.meta !== 'undefined' && import.meta.env && import.me
 /**
  * Retrieve the dev port for a component from the dynamic port map
  * injected by dev-all.mjs via VITE_DEV_PORTS env var.
+ * Falls back to computing the port from the component index when
+ * the server was started independently (without dev-all.mjs).
  */
 function getDevPort(compName) {
+  // Try VITE_DEV_PORTS first (set by dev-all.mjs)
   try {
     const raw = import.meta.env.VITE_DEV_PORTS;
-    if (!raw) return null;
-    const map = JSON.parse(raw);
-    return map[compName] ?? null;
-  } catch {
-    return null;
-  }
+    if (raw) {
+      const map = JSON.parse(raw);
+      if (map[compName]) return map[compName];
+    }
+  } catch { /* fall through */ }
+
+  // Fallback: compute port from order (same algorithm as dev-all.mjs)
+  const order = [
+    'pix-galaxy', 'pix-accent-color-selector', 'pix-color',
+    'pix-color-scheme-selector', 'pix-command', 'pix-display-preferences',
+    'pix-foundations', 'pix-highlighter', 'pix-recorder',
+    'pix-sortable', 'pix-splitter', 'pix-toast',
+  ];
+  const idx = order.indexOf(compName);
+  if (idx >= 0) return 3000 + idx;
+  return null;
 }
 
 const ICONS = Object.freeze({
