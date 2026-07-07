@@ -76,10 +76,11 @@
     "typecheck": "tsc --project ./tsconfig.types.json --noEmit"
   },
   "dependencies": {
-    "@pix-galaxy/pix-highlighter": "workspace:*"
-  },
-  "dependencies": {
     "@pix-galaxy/pix-foundations": "workspace:*"
+  },
+  "dependencies":   {
+      "@pix-galaxy/pix-highlighter": "workspace:*",
+      "@pix-galaxy/pix-foundations": "workspace:*"
   },
   "devDependencies": {
     "c8": "11.0.0",

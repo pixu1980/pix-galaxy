@@ -9,5 +9,8 @@
     "./foundations": "./lib/foundations.css",
     "./foundations.css": "./lib/foundations.css",
     "./lib/foundations.css": "./lib/foundations.css"
+  },
+  "dependencies": {
+    "@pix-galaxy/shared": "workspace:*"
   }
 }
