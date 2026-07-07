@@ -17,6 +17,9 @@ importers:
       '@pix-galaxy/pix-foundations':
         specifier: workspace:*
         version: link:packages/pix-foundations
+      '@playwright/test':
+        specifier: ^1.61.1
+        version: 1.61.1
       concurrently:
         specifier: 9.2.1
         version: 9.2.1
@@ -31,13 +34,16 @@ importers:
         version: 6.0.3
       vite:
         specifier: 8.0.10
-        version: 8.0.10(esbuild@0.28.0)
+        version: 8.0.10(esbuild@0.28.1)
 
   packages/pix-accent-color-selector:
     dependencies:
       '@pix-galaxy/pix-foundations':
         specifier: workspace:*
         version: link:../pix-foundations
+      '@pix-galaxy/pix-highlighter':
+        specifier: workspace:*
+        version: link:../pix-highlighter
     devDependencies:
       c8:
         specifier: 11.0.0
@@ -63,9 +69,18 @@ importers:
 
   packages/pix-color:
     dependencies:
+      '@pix-galaxy/pix-color-scheme-selector':
+        specifier: workspace:*
+        version: link:../pix-color-scheme-selector
       '@pix-galaxy/pix-foundations':
         specifier: workspace:*
         version: link:../pix-foundations
+      '@pix-galaxy/pix-highlighter':
+        specifier: workspace:*
+        version: link:../pix-highlighter
+      '@pix-galaxy/shared':
+        specifier: workspace:*
+        version: link:../shared
     devDependencies:
       c8:
         specifier: 11.0.0
@@ -94,6 +109,9 @@ importers:
       '@pix-galaxy/pix-foundations':
         specifier: workspace:*
         version: link:../pix-foundations
+      '@pix-galaxy/pix-highlighter':
+        specifier: workspace:*
+        version: link:../pix-highlighter
     devDependencies:
       c8:
         specifier: 11.0.0
@@ -119,9 +137,18 @@ importers:
 
   packages/pix-command:
     dependencies:
+      '@pix-galaxy/pix-color-scheme-selector':
+        specifier: workspace:*
+        version: link:../pix-color-scheme-selector
       '@pix-galaxy/pix-foundations':
         specifier: workspace:*
         version: link:../pix-foundations
+      '@pix-galaxy/pix-highlighter':
+        specifier: workspace:*
+        version: link:../pix-highlighter
+      '@pix-galaxy/shared':
+        specifier: workspace:*
+        version: link:../shared
     devDependencies:
       c8:
         specifier: 11.0.0
@@ -147,9 +174,18 @@ importers:
 
   packages/pix-component-template:
     dependencies:
+      '@pix-galaxy/pix-color-scheme-selector':
+        specifier: workspace:*
+        version: link:../pix-color-scheme-selector
       '@pix-galaxy/pix-foundations':
         specifier: workspace:*
         version: link:../pix-foundations
+      '@pix-galaxy/pix-highlighter':
+        specifier: workspace:*
+        version: link:../pix-highlighter
+      '@pix-galaxy/shared':
+        specifier: workspace:*
+        version: link:../shared
     devDependencies:
       c8:
         specifier: 11.0.0
@@ -175,9 +211,18 @@ importers:
 
   packages/pix-display-preferences:
     dependencies:
+      '@pix-galaxy/pix-accent-color-selector':
+        specifier: workspace:*
+        version: link:../pix-accent-color-selector
+      '@pix-galaxy/pix-color-scheme-selector':
+        specifier: workspace:*
+        version: link:../pix-color-scheme-selector
       '@pix-galaxy/pix-foundations':
         specifier: workspace:*
         version: link:../pix-foundations
+      '@pix-galaxy/pix-highlighter':
+        specifier: workspace:*
+        version: link:../pix-highlighter
     devDependencies:
       c8:
         specifier: 11.0.0
@@ -201,7 +246,11 @@ importers:
         specifier: 8.1.3
         version: 8.1.3(esbuild@0.28.1)
 
-  packages/pix-foundations: {}
+  packages/pix-foundations:
+    dependencies:
+      '@pix-galaxy/shared':
+        specifier: workspace:*
+        version: link:../shared
 
   packages/pix-highlighter:
     dependencies:
@@ -233,9 +282,18 @@ importers:
 
   packages/pix-recorder:
     dependencies:
+      '@pix-galaxy/pix-color-scheme-selector':
+        specifier: workspace:*
+        version: link:../pix-color-scheme-selector
       '@pix-galaxy/pix-foundations':
         specifier: workspace:*
         version: link:../pix-foundations
+      '@pix-galaxy/pix-highlighter':
+        specifier: workspace:*
+        version: link:../pix-highlighter
+      '@pix-galaxy/shared':
+        specifier: workspace:*
+        version: link:../shared
     devDependencies:
       c8:
         specifier: 11.0.0
@@ -261,9 +319,18 @@ importers:
 
   packages/pix-sortable:
     dependencies:
+      '@pix-galaxy/pix-color-scheme-selector':
+        specifier: workspace:*
+        version: link:../pix-color-scheme-selector
       '@pix-galaxy/pix-foundations':
         specifier: workspace:*
         version: link:../pix-foundations
+      '@pix-galaxy/pix-highlighter':
+        specifier: workspace:*
+        version: link:../pix-highlighter
+      '@pix-galaxy/shared':
+        specifier: workspace:*
+        version: link:../shared
     devDependencies:
       c8:
         specifier: 11.0.0
@@ -289,9 +356,18 @@ importers:
 
   packages/pix-splitter:
     dependencies:
+      '@pix-galaxy/pix-color-scheme-selector':
+        specifier: workspace:*
+        version: link:../pix-color-scheme-selector
       '@pix-galaxy/pix-foundations':
         specifier: workspace:*
         version: link:../pix-foundations
+      '@pix-galaxy/pix-highlighter':
+        specifier: workspace:*
+        version: link:../pix-highlighter
+      '@pix-galaxy/shared':
+        specifier: workspace:*
+        version: link:../shared
     devDependencies:
       c8:
         specifier: 11.0.0
@@ -317,9 +393,18 @@ importers:
 
   packages/pix-toast:
     dependencies:
+      '@pix-galaxy/pix-color-scheme-selector':
+        specifier: workspace:*
+        version: link:../pix-color-scheme-selector
       '@pix-galaxy/pix-foundations':
         specifier: workspace:*
         version: link:../pix-foundations
+      '@pix-galaxy/pix-highlighter':
+        specifier: workspace:*
+        version: link:../pix-highlighter
+      '@pix-galaxy/shared':
+        specifier: workspace:*
+        version: link:../shared
     devDependencies:
       c8:
         specifier: 11.0.0
@@ -840,6 +925,11 @@ packages:
   '@oxc-project/types@0.138.0':
     resolution: {integrity: sha512-1a7ZKmrRTCoN1XMZ4L0PyyqrMnrNlLyPuOkdSX2MZg7IiIGRUyurNhAm73ptDOraoBcIordsIGKNPKUzy3ZmfA==}
 
+  '@playwright/test@1.61.1':
+    resolution: {integrity: sha512-8nKv6+0RJSL9FE4jYOEGXnPeM/Hg12qZpmqzZjRh3qM0Y7c3z1mrOTfFLids72RDQYVh9WpLEfR5WdpNX4fkig==}
+    engines: {node: '>=18'}
+    hasBin: true
+
   '@rolldown/binding-android-arm64@1.0.0-rc.17':
     resolution: {integrity: sha512-s70pVGhw4zqGeFnXWvAzJDlvxhlRollagdCCKRgOsgUOH3N1l0LIxf83AtGzmb5SiVM4Hjl5HyarMRfdfj3DaQ==}
     engines: {node: ^20.19.0 || >=22.12.0}
@@ -1288,6 +1378,11 @@ packages:
     resolution: {integrity: sha512-gIXjKqtFuWEgzFRJA9WCQeSJLZDjgJUOMCMzxtvFq/37KojM1BFGufqsCy0r4qSQmYLsZYMeyRqzIWOMup03sw==}
     engines: {node: '>=14'}
 
+  fsevents@2.3.2:
+    resolution: {integrity: sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA==}
+    engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
+    os: [darwin]
+
   fsevents@2.3.3:
     resolution: {integrity: sha512-5xoDfX+fL7faATnagmWPpbFtwh/R77WmMMqqHGS65C3vvB0YHrgF+B1YmZ3441tMj5n63k0212XNoJwzlhffQw==}
     engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
@@ -1562,9 +1657,19 @@ packages:
   picocolors@1.1.1:
     resolution: {integrity: sha512-xceH2snhtb5M9liqDsmEw56le376mTZkEX/jEb/RxNFyegNul7eNslCXP9FDj/Lcu0X8KEyMceP2ntpaHrDEVA==}
 
-  picomatch@4.0.4:
-    resolution: {integrity: sha512-QP88BAKvMam/3NxH6vj2o21R6MjxZUAd6nlwAS/pnGvN9IVLocLHxGYIzFhg6fUQ+5th6P4dv4eW9jX3DSIj7A==}
+  picomatch@4.0.5:
+    resolution: {integrity: sha512-RvwwcruNjI1ncT5xRakeyS9Lf8lcItv34KD+aif+VH9kduAyfYBipGh12274xtenIPZ119/R9BdTBa8gAwSh0A==}
     engines: {node: '>=12'}
+
+  playwright-core@1.61.1:
+    resolution: {integrity: sha512-h7Qlt6m4REp25qvIdvbDtVmD4LqVXfpRxhORv9L0jzETM05p4fuPJ3dKyuSXQxDSbXnmS79HAgi9589lGSpLkg==}
+    engines: {node: '>=18'}
+    hasBin: true
+
+  playwright@1.61.1:
+    resolution: {integrity: sha512-DWnY5o3YbLWK4GovuAVwpqL+1VwGNdUGrRr++8j8PtQQzvAVZUIMjKQ90fY689sEJZJBbZVw1rXaOKSTitkzPQ==}
+    engines: {node: '>=18'}
+    hasBin: true
 
   postcss@8.5.16:
     resolution: {integrity: sha512-vuwillviilfKZsg0VGj5R/YwwcHx4SLsIOI/7K6mQkWx+l5cUHTjj5g0AasTBcyXsbfTgrwsUNmVUb5xVwyPwg==}
@@ -1684,11 +1789,11 @@ packages:
     resolution: {integrity: sha512-wXR/dYpcqKmfWpEdZjiKJOwCNFndD0DMnrW/cYjVGttEkBfVgcLFHoNrlj47mjOVic9yyNu65alsgF4NQyTa2g==}
     engines: {node: '>=12.0.0'}
 
-  tldts-core@7.4.5:
-    resolution: {integrity: sha512-pGrwzZDvPwKe+7NNUqAunb6rqTfynr0VOUhCMdqbu5xlvNiszsAJygRzwvpVycdzejlbpY+SWJOn+s75Og7FEA==}
+  tldts-core@7.4.6:
+    resolution: {integrity: sha512-TkQNGJIhlEphpHCjKodMTSe23egUZr/g+flI2qkLgiJ/maAzSgXypSLRTNH3nCmqgayEmtcJBiLcfODSAr1xoA==}
 
-  tldts@7.4.5:
-    resolution: {integrity: sha512-RfEzKWcq5fHUOFq7J3rl3Oz6ylKGtcHqUznzj4EcXsxLSIjJcvpbXAQtWGeJQ0xKnimR5e0Cn+cn9TssfMzm+g==}
+  tldts@7.4.6:
+    resolution: {integrity: sha512-rbP0Gyx8b3Ae9yO//CU2wbSnQNoQ66m1nJdSbSHmnwKwzkkz/u8mERYU8T2rmlmy+bJvRNn84yNCW8gYqox44Q==}
     hasBin: true
 
   tough-cookie@6.0.1:
@@ -2215,6 +2320,10 @@ snapshots:
 
   '@oxc-project/types@0.138.0': {}
 
+  '@playwright/test@1.61.1':
+    dependencies:
+      playwright: 1.61.1
+
   '@rolldown/binding-android-arm64@1.0.0-rc.17':
     optional: true
 
@@ -2602,9 +2711,9 @@ snapshots:
 
   fast-levenshtein@2.0.6: {}
 
-  fdir@6.5.0(picomatch@4.0.4):
+  fdir@6.5.0(picomatch@4.0.5):
     optionalDependencies:
-      picomatch: 4.0.4
+      picomatch: 4.0.5
 
   file-entry-cache@8.0.0:
     dependencies:
@@ -2626,6 +2735,9 @@ snapshots:
     dependencies:
       cross-spawn: 7.0.6
       signal-exit: 4.1.0
+
+  fsevents@2.3.2:
+    optional: true
 
   fsevents@2.3.3:
     optional: true
@@ -2880,7 +2992,15 @@ snapshots:
 
   picocolors@1.1.1: {}
 
-  picomatch@4.0.4: {}
+  picomatch@4.0.5: {}
+
+  playwright-core@1.61.1: {}
+
+  playwright@1.61.1:
+    dependencies:
+      playwright-core: 1.61.1
+    optionalDependencies:
+      fsevents: 2.3.2
 
   postcss@8.5.16:
     dependencies:
@@ -3008,18 +3128,18 @@ snapshots:
 
   tinyglobby@0.2.17:
     dependencies:
-      fdir: 6.5.0(picomatch@4.0.4)
-      picomatch: 4.0.4
+      fdir: 6.5.0(picomatch@4.0.5)
+      picomatch: 4.0.5
 
-  tldts-core@7.4.5: {}
+  tldts-core@7.4.6: {}
 
-  tldts@7.4.5:
+  tldts@7.4.6:
     dependencies:
-      tldts-core: 7.4.5
+      tldts-core: 7.4.6
 
   tough-cookie@6.0.1:
     dependencies:
-      tldts: 7.4.5
+      tldts: 7.4.6
 
   tr46@6.0.0:
     dependencies:
@@ -3050,7 +3170,7 @@ snapshots:
   vite@8.0.10(esbuild@0.28.0):
     dependencies:
       lightningcss: 1.32.0
-      picomatch: 4.0.4
+      picomatch: 4.0.5
       postcss: 8.5.16
       rolldown: 1.0.0-rc.17
       tinyglobby: 0.2.17
@@ -3058,10 +3178,21 @@ snapshots:
       esbuild: 0.28.0
       fsevents: 2.3.3
 
+  vite@8.0.10(esbuild@0.28.1):
+    dependencies:
+      lightningcss: 1.32.0
+      picomatch: 4.0.5
+      postcss: 8.5.16
+      rolldown: 1.0.0-rc.17
+      tinyglobby: 0.2.17
+    optionalDependencies:
+      esbuild: 0.28.1
+      fsevents: 2.3.3
+
   vite@8.1.3(esbuild@0.28.1):
     dependencies:
       lightningcss: 1.32.0
-      picomatch: 4.0.4
+      picomatch: 4.0.5
       postcss: 8.5.16
       rolldown: 1.1.4
       tinyglobby: 0.2.17

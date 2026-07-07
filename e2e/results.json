@@ -1,9 +1,16 @@
 {
   "config": {
     "argv": [
+<<<<<<< HEAD
       "/Users/emilianopisu/.nvm/versions/node/v24.18.0/bin/node",
       "/Users/emilianopisu/Projects/pixu1980/pix-galaxy/node_modules/@playwright/test/cli.js",
       "test"
+=======
+      "/Users/emilianopisu/.nvm/versions/node/v26.3.1/bin/node",
+      "/Users/emilianopisu/Projects/pixu1980/pix-galaxy/node_modules/@playwright/test/cli.js",
+      "test",
+      "--config=playwright.config.mjs"
+>>>>>>> f19e3d7 (fix(test): all 22 e2e tests passing, fix duplicate deps, restore missing symlinks)
     ],
     "configFile": "/Users/emilianopisu/Projects/pixu1980/pix-galaxy/playwright.config.mjs",
     "rootDir": "/Users/emilianopisu/Projects/pixu1980/pix-galaxy/e2e",
@@ -65,6 +72,7 @@
   },
   "suites": [
     {
+<<<<<<< HEAD
       "title": "a11y.spec.mjs",
       "file": "a11y.spec.mjs",
       "column": 0,
@@ -1025,6 +1033,8 @@
       ]
     },
     {
+=======
+>>>>>>> f19e3d7 (fix(test): all 22 e2e tests passing, fix duplicate deps, restore missing symlinks)
       "title": "portal.spec.mjs",
       "file": "portal.spec.mjs",
       "column": 0,
@@ -1053,12 +1063,20 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
+<<<<<<< HEAD
                       "duration": 99,
+=======
+                      "duration": 378,
+>>>>>>> f19e3d7 (fix(test): all 22 e2e tests passing, fix duplicate deps, restore missing symlinks)
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
+<<<<<<< HEAD
                       "startTime": "2026-08-02T01:16:12.796Z",
+=======
+                      "startTime": "2026-07-07T14:19:01.208Z",
+>>>>>>> f19e3d7 (fix(test): all 22 e2e tests passing, fix duplicate deps, restore missing symlinks)
                       "annotations": [],
                       "attachments": []
                     }
@@ -1068,11 +1086,19 @@
               ],
               "id": "044afb3f960dccc579f2-825713b17fe83216204b",
               "file": "portal.spec.mjs",
+<<<<<<< HEAD
               "line": 34,
               "column": 3
             },
             {
               "title": "each real card has a valid href pointing to localhost",
+=======
+              "line": 35,
+              "column": 3
+            },
+            {
+              "title": "each card has a valid href pointing to localhost",
+>>>>>>> f19e3d7 (fix(test): all 22 e2e tests passing, fix duplicate deps, restore missing symlinks)
               "ok": true,
               "tags": [],
               "tests": [
@@ -1087,12 +1113,20 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
+<<<<<<< HEAD
                       "duration": 117,
+=======
+                      "duration": 131,
+>>>>>>> f19e3d7 (fix(test): all 22 e2e tests passing, fix duplicate deps, restore missing symlinks)
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
+<<<<<<< HEAD
                       "startTime": "2026-08-02T01:16:12.901Z",
+=======
+                      "startTime": "2026-07-07T14:19:01.860Z",
+>>>>>>> f19e3d7 (fix(test): all 22 e2e tests passing, fix duplicate deps, restore missing symlinks)
                       "annotations": [],
                       "attachments": []
                     }
@@ -1100,9 +1134,15 @@
                   "status": "expected"
                 }
               ],
+<<<<<<< HEAD
               "id": "044afb3f960dccc579f2-2b11a60f1bd6701b5f51",
               "file": "portal.spec.mjs",
               "line": 41,
+=======
+              "id": "044afb3f960dccc579f2-e691735aed7f9932fb22",
+              "file": "portal.spec.mjs",
+              "line": 42,
+>>>>>>> f19e3d7 (fix(test): all 22 e2e tests passing, fix duplicate deps, restore missing symlinks)
               "column": 3
             },
             {
@@ -1121,12 +1161,20 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
+<<<<<<< HEAD
                       "duration": 178,
+=======
+                      "duration": 263,
+>>>>>>> f19e3d7 (fix(test): all 22 e2e tests passing, fix duplicate deps, restore missing symlinks)
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
+<<<<<<< HEAD
                       "startTime": "2026-08-02T01:16:13.022Z",
+=======
+                      "startTime": "2026-07-07T14:19:01.997Z",
+>>>>>>> f19e3d7 (fix(test): all 22 e2e tests passing, fix duplicate deps, restore missing symlinks)
                       "annotations": [],
                       "attachments": []
                     }
@@ -1155,12 +1203,20 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
+<<<<<<< HEAD
                       "duration": 92,
+=======
+                      "duration": 83,
+>>>>>>> f19e3d7 (fix(test): all 22 e2e tests passing, fix duplicate deps, restore missing symlinks)
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
+<<<<<<< HEAD
                       "startTime": "2026-08-02T01:16:13.205Z",
+=======
+                      "startTime": "2026-07-07T14:19:02.266Z",
+>>>>>>> f19e3d7 (fix(test): all 22 e2e tests passing, fix duplicate deps, restore missing symlinks)
                       "annotations": [],
                       "attachments": []
                     }
@@ -1189,12 +1245,20 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
+<<<<<<< HEAD
                       "duration": 117,
+=======
+                      "duration": 137,
+>>>>>>> f19e3d7 (fix(test): all 22 e2e tests passing, fix duplicate deps, restore missing symlinks)
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
+<<<<<<< HEAD
                       "startTime": "2026-08-02T01:16:13.303Z",
+=======
+                      "startTime": "2026-07-07T14:19:02.358Z",
+>>>>>>> f19e3d7 (fix(test): all 22 e2e tests passing, fix duplicate deps, restore missing symlinks)
                       "annotations": [],
                       "attachments": []
                     }
@@ -1216,7 +1280,147 @@
           "column": 6,
           "specs": [
             {
+<<<<<<< HEAD
               "title": "pix-a11y-panel docs loads at :3001",
+=======
+              "title": "pix-accent-color-selector docs loads at :3001",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 15000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 209,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-07T14:19:02.506Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "044afb3f960dccc579f2-ef4c7bfa15d848d8fd7c",
+              "file": "portal.spec.mjs",
+              "line": 95,
+              "column": 5
+            },
+            {
+              "title": "pix-color docs loads at :3002",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 15000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 191,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-07T14:19:02.721Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "044afb3f960dccc579f2-b8f538515dd587fee98a",
+              "file": "portal.spec.mjs",
+              "line": 95,
+              "column": 5
+            },
+            {
+              "title": "pix-color-scheme-selector docs loads at :3003",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 15000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 162,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-07T14:19:02.918Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "044afb3f960dccc579f2-229ed4adcac4472b976c",
+              "file": "portal.spec.mjs",
+              "line": 95,
+              "column": 5
+            },
+            {
+              "title": "pix-command docs loads at :3004",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 15000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 157,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-07T14:19:03.086Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "044afb3f960dccc579f2-c947606f2d9282cac593",
+              "file": "portal.spec.mjs",
+              "line": 95,
+              "column": 5
+            },
+            {
+              "title": "pix-display-preferences docs loads at :3005",
+>>>>>>> f19e3d7 (fix(test): all 22 e2e tests passing, fix duplicate deps, restore missing symlinks)
               "ok": true,
               "tags": [],
               "tests": [
@@ -1236,7 +1440,11 @@
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
+<<<<<<< HEAD
                       "startTime": "2026-08-02T01:16:13.426Z",
+=======
+                      "startTime": "2026-07-07T14:19:03.254Z",
+>>>>>>> f19e3d7 (fix(test): all 22 e2e tests passing, fix duplicate deps, restore missing symlinks)
                       "annotations": [],
                       "attachments": []
                     }
@@ -1244,6 +1452,7 @@
                   "status": "expected"
                 }
               ],
+<<<<<<< HEAD
               "id": "044afb3f960dccc579f2-5255c937756b3cbcd7f7",
               "file": "portal.spec.mjs",
               "line": 94,
@@ -1383,6 +1592,11 @@
               "id": "044afb3f960dccc579f2-552cb9dcab3450e90179",
               "file": "portal.spec.mjs",
               "line": 94,
+=======
+              "id": "044afb3f960dccc579f2-47880d268e67c07b760e",
+              "file": "portal.spec.mjs",
+              "line": 95,
+>>>>>>> f19e3d7 (fix(test): all 22 e2e tests passing, fix duplicate deps, restore missing symlinks)
               "column": 5
             },
             {
@@ -1401,12 +1615,20 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
+<<<<<<< HEAD
                       "duration": 153,
+=======
+                      "duration": 187,
+>>>>>>> f19e3d7 (fix(test): all 22 e2e tests passing, fix duplicate deps, restore missing symlinks)
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
+<<<<<<< HEAD
                       "startTime": "2026-08-02T01:16:14.208Z",
+=======
+                      "startTime": "2026-07-07T14:19:03.440Z",
+>>>>>>> f19e3d7 (fix(test): all 22 e2e tests passing, fix duplicate deps, restore missing symlinks)
                       "annotations": [],
                       "attachments": []
                     }
@@ -1416,7 +1638,11 @@
               ],
               "id": "044afb3f960dccc579f2-558465bb57404a1ca053",
               "file": "portal.spec.mjs",
+<<<<<<< HEAD
               "line": 94,
+=======
+              "line": 95,
+>>>>>>> f19e3d7 (fix(test): all 22 e2e tests passing, fix duplicate deps, restore missing symlinks)
               "column": 5
             },
             {
@@ -1435,12 +1661,20 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
+<<<<<<< HEAD
                       "duration": 172,
+=======
+                      "duration": 168,
+>>>>>>> f19e3d7 (fix(test): all 22 e2e tests passing, fix duplicate deps, restore missing symlinks)
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
+<<<<<<< HEAD
                       "startTime": "2026-08-02T01:16:14.367Z",
+=======
+                      "startTime": "2026-07-07T14:19:03.632Z",
+>>>>>>> f19e3d7 (fix(test): all 22 e2e tests passing, fix duplicate deps, restore missing symlinks)
                       "annotations": [],
                       "attachments": []
                     }
@@ -1450,7 +1684,11 @@
               ],
               "id": "044afb3f960dccc579f2-fbe1913fafb401413ab7",
               "file": "portal.spec.mjs",
+<<<<<<< HEAD
               "line": 94,
+=======
+              "line": 95,
+>>>>>>> f19e3d7 (fix(test): all 22 e2e tests passing, fix duplicate deps, restore missing symlinks)
               "column": 5
             },
             {
@@ -1469,12 +1707,20 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
+<<<<<<< HEAD
                       "duration": 154,
+=======
+                      "duration": 181,
+>>>>>>> f19e3d7 (fix(test): all 22 e2e tests passing, fix duplicate deps, restore missing symlinks)
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
+<<<<<<< HEAD
                       "startTime": "2026-08-02T01:16:14.544Z",
+=======
+                      "startTime": "2026-07-07T14:19:03.806Z",
+>>>>>>> f19e3d7 (fix(test): all 22 e2e tests passing, fix duplicate deps, restore missing symlinks)
                       "annotations": [],
                       "attachments": []
                     }
@@ -1484,7 +1730,11 @@
               ],
               "id": "044afb3f960dccc579f2-0febcbe225db6d8f6dc5",
               "file": "portal.spec.mjs",
+<<<<<<< HEAD
               "line": 94,
+=======
+              "line": 95,
+>>>>>>> f19e3d7 (fix(test): all 22 e2e tests passing, fix duplicate deps, restore missing symlinks)
               "column": 5
             },
             {
@@ -1503,12 +1753,20 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
+<<<<<<< HEAD
                       "duration": 163,
+=======
+                      "duration": 198,
+>>>>>>> f19e3d7 (fix(test): all 22 e2e tests passing, fix duplicate deps, restore missing symlinks)
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
+<<<<<<< HEAD
                       "startTime": "2026-08-02T01:16:14.703Z",
+=======
+                      "startTime": "2026-07-07T14:19:03.992Z",
+>>>>>>> f19e3d7 (fix(test): all 22 e2e tests passing, fix duplicate deps, restore missing symlinks)
                       "annotations": [],
                       "attachments": []
                     }
@@ -1518,7 +1776,11 @@
               ],
               "id": "044afb3f960dccc579f2-17e8e757ffca47349779",
               "file": "portal.spec.mjs",
+<<<<<<< HEAD
               "line": 94,
+=======
+              "line": 95,
+>>>>>>> f19e3d7 (fix(test): all 22 e2e tests passing, fix duplicate deps, restore missing symlinks)
               "column": 5
             },
             {
@@ -1537,12 +1799,20 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
+<<<<<<< HEAD
                       "duration": 147,
+=======
+                      "duration": 162,
+>>>>>>> f19e3d7 (fix(test): all 22 e2e tests passing, fix duplicate deps, restore missing symlinks)
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
+<<<<<<< HEAD
                       "startTime": "2026-08-02T01:16:14.871Z",
+=======
+                      "startTime": "2026-07-07T14:19:04.196Z",
+>>>>>>> f19e3d7 (fix(test): all 22 e2e tests passing, fix duplicate deps, restore missing symlinks)
                       "annotations": [],
                       "attachments": []
                     }
@@ -1552,7 +1822,11 @@
               ],
               "id": "044afb3f960dccc579f2-0ef8b430e61efe2ac4d0",
               "file": "portal.spec.mjs",
+<<<<<<< HEAD
               "line": 94,
+=======
+              "line": 95,
+>>>>>>> f19e3d7 (fix(test): all 22 e2e tests passing, fix duplicate deps, restore missing symlinks)
               "column": 5
             },
             {
@@ -1571,12 +1845,20 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
+<<<<<<< HEAD
                       "duration": 136,
+=======
+                      "duration": 139,
+>>>>>>> f19e3d7 (fix(test): all 22 e2e tests passing, fix duplicate deps, restore missing symlinks)
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
+<<<<<<< HEAD
                       "startTime": "2026-08-02T01:16:15.023Z",
+=======
+                      "startTime": "2026-07-07T14:19:04.363Z",
+>>>>>>> f19e3d7 (fix(test): all 22 e2e tests passing, fix duplicate deps, restore missing symlinks)
                       "annotations": [],
                       "attachments": []
                     }
@@ -1586,7 +1868,11 @@
               ],
               "id": "044afb3f960dccc579f2-476fddb8dd5130c43261",
               "file": "portal.spec.mjs",
+<<<<<<< HEAD
               "line": 94,
+=======
+              "line": 95,
+>>>>>>> f19e3d7 (fix(test): all 22 e2e tests passing, fix duplicate deps, restore missing symlinks)
               "column": 5
             },
             {
@@ -1605,12 +1891,20 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
+<<<<<<< HEAD
                       "duration": 549,
+=======
+                      "duration": 614,
+>>>>>>> f19e3d7 (fix(test): all 22 e2e tests passing, fix duplicate deps, restore missing symlinks)
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
+<<<<<<< HEAD
                       "startTime": "2026-08-02T01:16:15.166Z",
+=======
+                      "startTime": "2026-07-07T14:19:04.511Z",
+>>>>>>> f19e3d7 (fix(test): all 22 e2e tests passing, fix duplicate deps, restore missing symlinks)
                       "annotations": [],
                       "attachments": []
                     }
@@ -1620,7 +1914,11 @@
               ],
               "id": "044afb3f960dccc579f2-4f10139d5e317bcc4350",
               "file": "portal.spec.mjs",
+<<<<<<< HEAD
               "line": 102,
+=======
+              "line": 103,
+>>>>>>> f19e3d7 (fix(test): all 22 e2e tests passing, fix duplicate deps, restore missing symlinks)
               "column": 3
             },
             {
@@ -1639,12 +1937,20 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
+<<<<<<< HEAD
                       "duration": 748,
+=======
+                      "duration": 695,
+>>>>>>> f19e3d7 (fix(test): all 22 e2e tests passing, fix duplicate deps, restore missing symlinks)
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
+<<<<<<< HEAD
                       "startTime": "2026-08-02T01:16:15.720Z",
+=======
+                      "startTime": "2026-07-07T14:19:05.130Z",
+>>>>>>> f19e3d7 (fix(test): all 22 e2e tests passing, fix duplicate deps, restore missing symlinks)
                       "annotations": [],
                       "attachments": []
                     }
@@ -1654,7 +1960,11 @@
               ],
               "id": "044afb3f960dccc579f2-0a18259093771739d5a9",
               "file": "portal.spec.mjs",
+<<<<<<< HEAD
               "line": 117,
+=======
+              "line": 115,
+>>>>>>> f19e3d7 (fix(test): all 22 e2e tests passing, fix duplicate deps, restore missing symlinks)
               "column": 3
             }
           ]
@@ -1662,7 +1972,11 @@
         {
           "title": "Pix Highlighter",
           "file": "portal.spec.mjs",
+<<<<<<< HEAD
           "line": 129,
+=======
+          "line": 127,
+>>>>>>> f19e3d7 (fix(test): all 22 e2e tests passing, fix duplicate deps, restore missing symlinks)
           "column": 6,
           "specs": [
             {
@@ -1681,12 +1995,20 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
+<<<<<<< HEAD
                       "duration": 161,
+=======
+                      "duration": 162,
+>>>>>>> f19e3d7 (fix(test): all 22 e2e tests passing, fix duplicate deps, restore missing symlinks)
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
+<<<<<<< HEAD
                       "startTime": "2026-08-02T01:16:16.473Z",
+=======
+                      "startTime": "2026-07-07T14:19:05.832Z",
+>>>>>>> f19e3d7 (fix(test): all 22 e2e tests passing, fix duplicate deps, restore missing symlinks)
                       "annotations": [],
                       "attachments": []
                     }
@@ -1696,7 +2018,11 @@
               ],
               "id": "044afb3f960dccc579f2-2bbc906399090b778c8c",
               "file": "portal.spec.mjs",
+<<<<<<< HEAD
               "line": 130,
+=======
+              "line": 129,
+>>>>>>> f19e3d7 (fix(test): all 22 e2e tests passing, fix duplicate deps, restore missing symlinks)
               "column": 3
             },
             {
@@ -1715,12 +2041,20 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
+<<<<<<< HEAD
                       "duration": 155,
+=======
+                      "duration": 198,
+>>>>>>> f19e3d7 (fix(test): all 22 e2e tests passing, fix duplicate deps, restore missing symlinks)
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
+<<<<<<< HEAD
                       "startTime": "2026-08-02T01:16:16.639Z",
+=======
+                      "startTime": "2026-07-07T14:19:06.000Z",
+>>>>>>> f19e3d7 (fix(test): all 22 e2e tests passing, fix duplicate deps, restore missing symlinks)
                       "annotations": [],
                       "attachments": []
                     }
@@ -1730,7 +2064,11 @@
               ],
               "id": "044afb3f960dccc579f2-c6dc8ff2f5e0d3465ed5",
               "file": "portal.spec.mjs",
+<<<<<<< HEAD
               "line": 137,
+=======
+              "line": 136,
+>>>>>>> f19e3d7 (fix(test): all 22 e2e tests passing, fix duplicate deps, restore missing symlinks)
               "column": 3
             },
             {
@@ -1749,12 +2087,20 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
+<<<<<<< HEAD
                       "duration": 223,
+=======
+                      "duration": 320,
+>>>>>>> f19e3d7 (fix(test): all 22 e2e tests passing, fix duplicate deps, restore missing symlinks)
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
+<<<<<<< HEAD
                       "startTime": "2026-08-02T01:16:16.800Z",
+=======
+                      "startTime": "2026-07-07T14:19:06.204Z",
+>>>>>>> f19e3d7 (fix(test): all 22 e2e tests passing, fix duplicate deps, restore missing symlinks)
                       "annotations": [],
                       "attachments": []
                     }
@@ -1764,7 +2110,11 @@
               ],
               "id": "044afb3f960dccc579f2-478ecac55c4659141ae7",
               "file": "portal.spec.mjs",
+<<<<<<< HEAD
               "line": 146,
+=======
+              "line": 145,
+>>>>>>> f19e3d7 (fix(test): all 22 e2e tests passing, fix duplicate deps, restore missing symlinks)
               "column": 3
             }
           ]
@@ -1772,7 +2122,11 @@
         {
           "title": "Keyboard a11y",
           "file": "portal.spec.mjs",
+<<<<<<< HEAD
           "line": 158,
+=======
+          "line": 157,
+>>>>>>> f19e3d7 (fix(test): all 22 e2e tests passing, fix duplicate deps, restore missing symlinks)
           "column": 6,
           "specs": [
             {
@@ -1791,12 +2145,20 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
+<<<<<<< HEAD
                       "duration": 154,
+=======
+                      "duration": 138,
+>>>>>>> f19e3d7 (fix(test): all 22 e2e tests passing, fix duplicate deps, restore missing symlinks)
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
+<<<<<<< HEAD
                       "startTime": "2026-08-02T01:16:17.027Z",
+=======
+                      "startTime": "2026-07-07T14:19:06.529Z",
+>>>>>>> f19e3d7 (fix(test): all 22 e2e tests passing, fix duplicate deps, restore missing symlinks)
                       "annotations": [],
                       "attachments": []
                     }
@@ -1816,9 +2178,15 @@
   ],
   "errors": [],
   "stats": {
+<<<<<<< HEAD
     "startTime": "2026-08-02T01:15:44.916Z",
     "duration": 32323.755,
     "expected": 49,
+=======
+    "startTime": "2026-07-07T14:19:00.902Z",
+    "duration": 5806.954000000001,
+    "expected": 22,
+>>>>>>> f19e3d7 (fix(test): all 22 e2e tests passing, fix duplicate deps, restore missing symlinks)
     "skipped": 0,
     "unexpected": 0,
     "flaky": 0

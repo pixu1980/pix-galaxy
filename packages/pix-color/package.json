@@ -75,12 +75,13 @@
     "typecheck": "tsc --project ./tsconfig.types.json --noEmit"
   },
   "dependencies": {
-    "@pix-galaxy/pix-color-scheme-selector": "workspace:*",
-    "@pix-galaxy/pix-highlighter": "workspace:*",
-    "@pix-galaxy/shared": "workspace:*"
-  },
-  "dependencies": {
     "@pix-galaxy/pix-foundations": "workspace:*"
+  },
+  "dependencies":   {
+      "@pix-galaxy/pix-color-scheme-selector": "workspace:*",
+      "@pix-galaxy/pix-highlighter": "workspace:*",
+      "@pix-galaxy/shared": "workspace:*",
+      "@pix-galaxy/pix-foundations": "workspace:*"
   },
   "devDependencies": {
     "c8": "11.0.0",
