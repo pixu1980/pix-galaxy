@@ -252,7 +252,6 @@ body {
 }
 
 [data-part="nav-link"]:focus-visible {
-  outline: none;
   box-shadow: var(--pix-ds-focus-ring), var(--pix-ds-elevation-1);
 }
 
