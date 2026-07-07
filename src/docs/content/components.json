@@ -10,6 +10,16 @@
     "keywords": ["syntax-highlighting", "code-blocks", "css-highlight-api"]
   },
   {
+    "name": "pix-foundations",
+    "packageName": "@pix-galaxy/pix-foundations",
+    "title": "Pix Foundations",
+    "description": "Centralised design tokens for radii, spacing, colors, typography, focus, and elevations. Uses light-dark() for automatic theme support.",
+    "homepage": "https://pixu1980.github.io/pix-foundations/",
+    "repo": "https://github.com/pixu1980/pix-foundations",
+    "accent": "gold",
+    "keywords": ["design-tokens", "foundations", "css", "light-dark"]
+  },
+  {
     "name": "pix-toast",
     "packageName": "@pix-galaxy/pix-toast",
     "title": "Pix Toast",
