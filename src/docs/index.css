@@ -317,7 +317,8 @@ body {
 }
 
 [data-part="card"]:focus-visible {
-  outline: none;
+  outline: 2px solid var(--pix--f--color, oklch(0.55 0.18 260));
+  outline-offset: 2px;
   box-shadow: var(--pix-ds-focus-ring), var(--pix-ds-elevation-2);
 }
 
