@@ -9,6 +9,8 @@
  * In production, links point to GitHub Pages.
  */
 
+import '@pix-galaxy/pix-color-scheme-selector';
+
 const GITHUB_ORG = 'pixu1980';
 const isDev = typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.DEV;
 
@@ -37,6 +39,7 @@ const ICONS = Object.freeze({
   rose: `<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3a9 9 0 0 0-4 17l-3 3 5-1a9 9 0 1 0 2-19Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" /><path d="M12 9v4l2 2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /><circle cx="12" cy="9" r="1" fill="currentColor" fill-opacity="0.15" /></svg>`,
   emerald: `<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8" /><path d="M7 12l3 3 7-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /><circle cx="12" cy="12" r="4" fill="currentColor" fill-opacity="0.15" /></svg>`,
   aqua: `<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8" /><path d="M12 7v5l3 3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /><circle cx="9" cy="9" r="1" fill="currentColor" fill-opacity="0.15" /><circle cx="15" cy="15" r="1" fill="currentColor" fill-opacity="0.15" /></svg>`,
+  gold: `<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3" stroke="currentColor" stroke-width="1.8" /><path d="M8 12l2 2 6-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /><circle cx="12" cy="12" r="3" fill="currentColor" fill-opacity="0.15" /></svg>`,
 });
 
 async function bootPortal() {
@@ -95,6 +98,7 @@ async function bootPortal() {
           <span data-part="meta-pill">${components.length} components</span>
           <span data-part="meta-pill">Custom Elements v1</span>
           <span data-part="meta-pill">WCAG 2.2 AA</span>
+          <span data-part="meta-pill"><pix-color-scheme-selector></pix-color-scheme-selector></span>
         </p>
       </header>
 
