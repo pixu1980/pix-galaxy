@@ -14,10 +14,14 @@
 
 @layer pix.reset, pix.foundations, pix.components;
 
+/* Focus ring is intentionally UNLAYERED so it beats all component CSS.
+ * WCAG 2.2 SC 2.4.7 requires the focus indicator to always be visible
+ * regardless of component-specific styles — unlayered > all layered.    */
+@import "./_focus.css";
+
 @import "./_reset.css" layer(pix.reset);
 @import "./_radii.css" layer(pix.foundations.radii);
 @import "./_spacings.css" layer(pix.foundations.spacings);
 @import "./_typography.css" layer(pix.foundations.typography);
 @import "./_colors.css" layer(pix.foundations.colors);
-@import "./_focus.css" layer(pix.foundations.focus);
 @import "./_elevations.css" layer(pix.foundations.elevations);

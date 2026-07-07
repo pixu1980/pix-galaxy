@@ -238,7 +238,6 @@ fieldset[data-part="color-mode-group"] {
 [data-part="theme-chip"]:focus-visible,
 [data-part="nav-link"]:focus-visible,
 [data-part="color-mode-option"]:focus-within {
-  outline: none;
   box-shadow: var(--pix-ds-focus-ring), var(--pix-ds-elevation-1);
 }
 
