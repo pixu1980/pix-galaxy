@@ -5,7 +5,22 @@
  * Each component's src/docs/index.js imports from here and supplies
  * its specific examples and metadata.
  */
+import sharedDocsCSS from './docs.css?raw';
 import { Marked, Renderer } from 'marked';
+
+/* ── Register pix-color-scheme-selector for all docs sites ──────── */
+import '@pix-galaxy/pix-color-scheme-selector';
+
+/* ── Adopt shared docs CSS on first import ──────────────────────── */
+
+(function adoptSharedDocsCSS() {
+  if (typeof document === 'undefined' || typeof CSSStyleSheet !== 'function') return;
+  const sheet = new CSSStyleSheet();
+  sheet.replaceSync(sharedDocsCSS);
+  if (!document.adoptedStyleSheets.includes(sheet)) {
+    document.adoptedStyleSheets = [...document.adoptedStyleSheets, sheet];
+  }
+})();
 
 /* ── Helpers ────────────────────────────────────────────────────── */
 
@@ -131,6 +146,7 @@ export function createDocsSite({
             </section>
           </section>
           <section data-part="hero-panel">
+            <pix-color-scheme-selector></pix-color-scheme-selector>
             <section data-part="live-preview">
               <p data-part="eyebrow">Live component</p>
               ${meta.liveHtml || `<p style="color:var(--pix-ds-text-muted);font-size:0.875rem;"><${escapeHtml(componentTag)}> loaded</p>`}

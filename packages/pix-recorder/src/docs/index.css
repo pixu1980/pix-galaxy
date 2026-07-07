@@ -87,7 +87,7 @@ body { margin: 0; min-height: 100vh; font-size: var(--pix-ds-text-md); line-heig
   font-family: var(--pix-ds-font-mono);
   font-size: 0.8125rem;
   padding: 0.1em 0.3em;
-  border-radius: 4px;
+  border-radius: var(--pix--r--sm, 4px);
   background: color-mix(in srgb, var(--pix-ds-accent-primary) 10%, transparent);
   color: var(--pix-ds-accent-primary);
 }
@@ -122,7 +122,7 @@ body { margin: 0; min-height: 100vh; font-size: var(--pix-ds-text-md); line-heig
 [data-part="live-preview"] kbd {
   font-family: inherit;
   padding: 0.15em 0.4em;
-  border-radius: 4px;
+  border-radius: var(--pix--r--sm, 4px);
   background: var(--pix-ds-surface-strong);
   border: 1px solid var(--pix-ds-line-soft);
 }

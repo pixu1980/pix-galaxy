@@ -339,6 +339,9 @@ importers:
 
   packages/shared:
     dependencies:
+      '@pix-galaxy/pix-color-scheme-selector':
+        specifier: workspace:*
+        version: link:../pix-color-scheme-selector
       marked:
         specifier: 18.0.5
         version: 18.0.5
