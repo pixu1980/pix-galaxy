@@ -21,7 +21,7 @@ const pkg = JSON.parse(readFileSync(resolve(projectRoot, 'package.json'), 'utf8'
 
 // If the name contains {% %} placeholders, skip
 if (pkg.name && pkg.name.includes('{%')) {
-  // Always exit 0 — the template is not an error, it just needs initialisation
+  // Always exit 0 - the template is not an error, it just needs initialisation
   process.exit(0);
 }
 

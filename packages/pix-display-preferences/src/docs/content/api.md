@@ -2,17 +2,17 @@
 
 ## Exports
 
-- `PixDisplayPreferences` — Component class (extends `HTMLElement`)
-- `DEFAULT_PREFERENCES` — Default preference values
-- `STORAGE_KEY` — The `localStorage` key used for persistence
-- `ACCESSIBILITY_OPTIONS` — Array of accessibility toggle definitions
-- `RADIUS_PRESET_OPTIONS` — Array of corner radius preset definitions
-- `FONT_SCALE_OPTIONS` — Array of font scale percentage options
-- `HEADING_FONT_OPTIONS` — Array of heading font options
-- `BODY_FONT_OPTIONS` — Array of body font options
-- `CODE_FONT_OPTIONS` — Array of code font options
-- `readPreferences()` — Read saved preferences from localStorage
-- `applyPreferencesToDocument(prefs)` — Apply preferences to the document
+- `PixDisplayPreferences` - Component class (extends `HTMLElement`)
+- `DEFAULT_PREFERENCES` - Default preference values
+- `STORAGE_KEY` - The `localStorage` key used for persistence
+- `ACCESSIBILITY_OPTIONS` - Array of accessibility toggle definitions
+- `RADIUS_PRESET_OPTIONS` - Array of corner radius preset definitions
+- `FONT_SCALE_OPTIONS` - Array of font scale percentage options
+- `HEADING_FONT_OPTIONS` - Array of heading font options
+- `BODY_FONT_OPTIONS` - Array of body font options
+- `CODE_FONT_OPTIONS` - Array of code font options
+- `readPreferences()` - Read saved preferences from localStorage
+- `applyPreferencesToDocument(prefs)` - Apply preferences to the document
 
 ## Component class: `PixDisplayPreferences`
 

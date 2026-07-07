@@ -1,6 +1,6 @@
 ---
 name: "pix Custom Element Scaffold"
-description: "Scaffold a new Custom Element v1 (autonomous or customized built-in) following the pix-custom-element rules — light DOM, adoptedStyleSheets, componentDecorator in a static {} block — with shared decorator/events helpers centralised at the project level."
+description: "Scaffold a new Custom Element v1 (autonomous or customized built-in) following the pix-custom-element rules - light DOM, adoptedStyleSheets, componentDecorator in a static {} block - with shared decorator/events helpers centralised at the project level."
 argument-hint: "Component intent, e.g. 'scaffold PixCard autonomous element with click event' or 'scaffold PixDetails extending details with open attribute'"
 agent: "agent"
 ---
@@ -20,7 +20,7 @@ Default command (autonomous element):
 Customized built-in command:
 - `node ./.github/skills/pix-custom-element/scripts/scaffold-component.mjs --name "PixDetails" --extends "details" --attributes "open" --target "<project-root>"`
 
-First-run command (no shared library yet) — installs `decorator/` and `events/` once:
+First-run command (no shared library yet) - installs `decorator/` and `events/` once:
 - `node ./.github/skills/pix-custom-element/scripts/scaffold-component.mjs --name "PixCard" --install-shared --shared-dir "packages/shared" --target "<project-root>"`
 
 Hard rules:

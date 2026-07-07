@@ -2,8 +2,8 @@
 
 ## Exports
 
-- `{%COMPONENT_CLASS%}` — Component class (extends `HTMLElement`)
-- `STORAGE_KEY` — The `localStorage` key used for persistence
+- `{%COMPONENT_CLASS%}` - Component class (extends `HTMLElement`)
+- `STORAGE_KEY` - The `localStorage` key used for persistence
 
 ## Component class: `{%COMPONENT_CLASS%}`
 

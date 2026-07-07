@@ -80,7 +80,7 @@ console.log(selector.currentAccent); // 'sky'
 - Uses `CSSStyleSheet` + `adoptedStyleSheets` for scoped component styles.
 - Persists the selected accent in `localStorage` under `pix-accent-color`.
 - Sets `--pix-accent-h`, `--pix-accent-s`, `--pix-accent-l` CSS custom properties on `<html>`.
-- Five button options with radiogroup ARIA pattern — with accessible labels.
+- Five button options with radiogroup ARIA pattern - with accessible labels.
 - Full keyboard navigation with arrow keys, Home, and End.
 - Dispatches `accent-changed` custom event with `{ accentId, label }` detail.
 
@@ -104,9 +104,9 @@ Repo commands:
 | `pnpm release` | Auto-detect bump, update changelog, tag and commit |
 
 Library build outputs:
-- `artifact/index.js` — ESM
-- `artifact/index.cjs` — CommonJS
-- `artifact/index.d.ts` — TypeScript declarations
+- `artifact/index.js` - ESM
+- `artifact/index.cjs` - CommonJS
+- `artifact/index.d.ts` - TypeScript declarations
 
 Docs source: `src/docs/content/`. Docs app source: `src/docs/`, builds to `dist/`.
 

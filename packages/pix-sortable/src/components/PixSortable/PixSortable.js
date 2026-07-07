@@ -7,7 +7,7 @@
  * drag to a specific element within each item.
  * Use `data-sortable-value` on items to identify them.
  *
- * @fires sortable-change — { fromIndex, toIndex, items }
+ * @fires sortable-change - { fromIndex, toIndex, items }
  */
 import componentCSS from './PixSortable.css?raw';
 

@@ -32,7 +32,6 @@
         --pix-highlighter--font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
         --pix-highlighter--line-height: 1.5;
         --pix-highlighter--text-shadow: light-dark(0 1px white, none);
-        color-scheme: light dark;
       }
     }
   }

@@ -93,7 +93,7 @@ async function main() {
   }
 
   proc.on('exit', (code, signal) => {
-    // Exit cleanly when killed by signal — no ugly error propagation
+    // Exit cleanly when killed by signal - no ugly error propagation
     process.exit(signal ? 0 : (code ?? 0));
   });
 }

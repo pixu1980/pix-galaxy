@@ -1,11 +1,11 @@
 /**
- * _color.js — Color conversion library
+ * _color.js - Color conversion library
  *
  * Zero-dependency color conversions between sRGB, HEX, HSL, and OKLCH.
  * Based on the Oklab color space by Björn Ottosson (https://bottosson.github.io/posts/oklab/).
  *
  * Exports:
- *   Color class — parse any format, access rgb/hex/hsl/oklch getters
+ *   Color class - parse any format, access rgb/hex/hsl/oklch getters
  *   toHEXString(rgb), ok: convert to string
  *   formatValue(format, color): format for display
  */

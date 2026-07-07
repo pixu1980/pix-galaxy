@@ -72,7 +72,7 @@ console.log(META_CONTENT[selector.currentScheme]); // 'light dark'
 - Persists the selected scheme in `localStorage` under `pix-color-scheme`.
 - Creates or updates `<meta name="color-scheme">` in the document `<head>`.
 - Sets both `data-color-scheme` attribute and inline `colorScheme` style on `<html>`.
-- Three radio-button options: Light, Dark, System — with SVG icons.
+- Three radio-button options: Light, Dark, System - with SVG icons.
 - Accessible: uses `role="radiogroup"`, `aria-label`, and visually hidden text labels.
 
 ## Development
@@ -97,9 +97,9 @@ Repo commands:
 | `pnpm rel:major` | Bump major version and tag |
 
 Library build outputs:
-- `artifact/index.js` — ESM
-- `artifact/index.cjs` — CommonJS
-- `artifact/index.d.ts` — TypeScript declarations
+- `artifact/index.js` - ESM
+- `artifact/index.cjs` - CommonJS
+- `artifact/index.d.ts` - TypeScript declarations
 
 Docs source: `src/docs/content/`. Docs app source: `src/docs/`, builds to `dist/`.
 

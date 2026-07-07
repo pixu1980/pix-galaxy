@@ -2,9 +2,9 @@
 
 ## Exports
 
-- `PixAccentColorSelector` — Component class (extends `HTMLElement`)
-- `ACCENT_OPTIONS` — Read-only array of accent option objects
-- `STORAGE_KEY` — The `localStorage` key used for persistence
+- `PixAccentColorSelector` - Component class (extends `HTMLElement`)
+- `ACCENT_OPTIONS` - Read-only array of accent option objects
+- `STORAGE_KEY` - The `localStorage` key used for persistence
 
 ## Component class: `PixAccentColorSelector`
 

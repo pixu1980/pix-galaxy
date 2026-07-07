@@ -14,8 +14,8 @@
 | Method | Returns | Description |
 |--------|---------|-------------|
 | `add(item)` | `string` | Add a toast, returns the toast ID |
-| `dismiss(id)` | — | Dismiss a toast by ID |
-| `dismissAll()` | — | Dismiss all visible toasts |
+| `dismiss(id)` | - | Dismiss a toast by ID |
+| `dismissAll()` | - | Dismiss all visible toasts |
 
 ## `<pix-toast>`
 

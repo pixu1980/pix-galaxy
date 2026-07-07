@@ -9,7 +9,7 @@ const examples = [
   },
   {
     title: 'Smart queuing',
-    description: 'Add 10 rapid toasts — stack shows max 5, queues the rest.',
+    description: 'Add 10 rapid toasts - stack shows max 5, queues the rest.',
     lang: 'js',
     code: `const stack = document.querySelector('pix-toast-stack');\nfor (let i = 0; i < 10; i++) {\n  stack.add({ message: 'Toast #' + (i + 1) });\n}`,
   },

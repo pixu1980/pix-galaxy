@@ -4,7 +4,7 @@
 
 ## Persistence
 
-The selected scheme is stored in `localStorage` under the key `pix-color-scheme`. On subsequent page loads, the saved preference is restored automatically — no flicker, no flash of unstyled content.
+The selected scheme is stored in `localStorage` under the key `pix-color-scheme`. On subsequent page loads, the saved preference is restored automatically - no flicker, no flash of unstyled content.
 
 ```js
 // Reading the stored preference
@@ -26,8 +26,8 @@ The component creates or updates a `<meta name="color-scheme">` tag in the docum
 
 On the `<html>` element, the component sets:
 
-- **`data-color-scheme` attribute** — `"light"` or `"dark"` for explicit schemes; removed in system mode.
-- **`style.colorScheme`** — `"light"`, `"dark"`, or `"light dark"` for system mode.
+- **`data-color-scheme` attribute** - `"light"` or `"dark"` for explicit schemes; removed in system mode.
+- **`style.colorScheme`** - `"light"`, `"dark"`, or `"light dark"` for system mode.
 
 This allows your CSS to hook into the scheme with an attribute selector:
 
@@ -53,4 +53,4 @@ When the user selects "System", the component removes the explicit `data-color-s
 
 ## Synchronised instances
 
-Multiple `pix-color-scheme-selector` elements on the same page stay in sync because they all read from and write to the same `localStorage` key and `<meta name="color-scheme">` tag. No event bus, no global state manager — just shared DOM and storage.
+Multiple `pix-color-scheme-selector` elements on the same page stay in sync because they all read from and write to the same `localStorage` key and `<meta name="color-scheme">` tag. No event bus, no global state manager - just shared DOM and storage.

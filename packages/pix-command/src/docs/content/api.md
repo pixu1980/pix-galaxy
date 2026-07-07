@@ -5,7 +5,7 @@
 | Attribute | Type | Default | Description |
 |-----------|------|---------|-------------|
 | `open` | `boolean` | `false` | Toggles the command palette visibility |
-| `src` | `string` | `—` | URL to fetch commands JSON from |
+| `src` | `string` | `-` | URL to fetch commands JSON from |
 
 ## Properties
 
@@ -19,4 +19,4 @@
 | Event | Detail | Description |
 |-------|--------|-------------|
 | `command-selected` | `PixCommandItem` | Fired when a command is activated |
-| `command-dismissed` | — | Fired when the palette is closed without selecting |
+| `command-dismissed` | - | Fired when the palette is closed without selecting |

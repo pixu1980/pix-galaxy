@@ -1,4 +1,4 @@
-# .agents — Source of truth for AI configuration
+# .agents - Source of truth for AI configuration
 
 All AI instructions, prompts, and skills live here. Tool-specific directories
 are symlinks that point back to this folder.
@@ -30,4 +30,4 @@ are symlinks that point back to this folder.
 ## Adding new content
 
 Edit or add files directly in `.agents/`. All symlinked paths will reflect
-changes automatically — no need to copy files across tool directories.
+changes automatically - no need to copy files across tool directories.

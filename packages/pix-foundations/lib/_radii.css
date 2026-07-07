@@ -1,0 +1,14 @@
+/* pix-foundations — radii
+ *
+ * Usage:   border-radius: var(--pix--r--md);
+ * Scale:   xs (2px), sm (4px), md (8px), lg (12px), xl (16px), pill (999px)
+ */
+
+:root {
+  --pix--r--xs: 2px;
+  --pix--r--sm: 4px;
+  --pix--r--md: 8px;
+  --pix--r--lg: 12px;
+  --pix--r--xl: 16px;
+  --pix--r--pill: 999px;
+}

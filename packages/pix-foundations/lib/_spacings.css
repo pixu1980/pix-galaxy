@@ -1,0 +1,15 @@
+/* pix-foundations — spacing scale
+ *
+ * Ratio 1.25, base 1rem (16px).
+ * Usage: padding: var(--pix--s--md);
+ */
+
+:root {
+  --pix--s--ratio: 1.25;
+  --pix--s--xs: 0.25rem;    /*  4px */
+  --pix--s--sm: 0.5rem;     /*  8px */
+  --pix--s--md: 1rem;       /* 16px */
+  --pix--s--lg: 1.5rem;     /* 24px */
+  --pix--s--xl: 2rem;       /* 32px */
+  --pix--s--2xl: 3rem;      /* 48px */
+}

@@ -12,6 +12,6 @@
     "./dom/ssr-safe.js": "./dom/ssr-safe.js"
   },
   "dependencies": {
-    "marked": "^18.0.2"
+    "marked": "18.0.5"
   }
 }

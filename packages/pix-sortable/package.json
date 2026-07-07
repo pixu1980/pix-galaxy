@@ -36,5 +36,8 @@
     "typecheck": "tsc --project ./tsconfig.types.json --noEmit"
   },
   "dependencies": {"@pix-galaxy/pix-color-scheme-selector": "workspace:*","@pix-galaxy/pix-highlighter": "workspace:*","@pix-galaxy/shared": "workspace:*"},
+  "dependencies": {
+    "@pix-galaxy/pix-foundations": "workspace:*"
+  },
   "devDependencies": {"c8": "11.0.0","concurrently": "9.2.1","esbuild": "0.28.0","jsdom": "29.1.0","marked": "18.0.2","typescript": "6.0.3","vite": "8.0.10"}
 }

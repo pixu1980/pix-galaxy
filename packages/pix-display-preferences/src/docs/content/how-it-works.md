@@ -17,8 +17,8 @@ const prefs = JSON.parse(raw);
 
 The component integrates two sibling pix-galaxy components:
 
-- **`<pix-color-scheme-selector>`** (from `@pix-galaxy/pix-color-scheme-selector`) — manages light, dark, and system colour scheme preferences.
-- **`<accent-color-selector>`** (from `@pix-galaxy/pix-accent-color-selector`) — manages accent colour swatches.
+- **`<pix-color-scheme-selector>`** (from `@pix-galaxy/pix-color-scheme-selector`) - manages light, dark, and system colour scheme preferences.
+- **`<accent-color-selector>`** (from `@pix-galaxy/pix-accent-color-selector`) - manages accent colour swatches.
 
 Both self-register when their packages are imported.
 
@@ -49,9 +49,9 @@ To hook your CSS into these preferences:
 
 Font preferences are applied as CSS custom properties ond `<html>`:
 
-- `--pix-ds-font-display` — heading font stack
-- `--pix-ds-font-sans` — body font stack
-- `--pix-ds-font-mono` — code font stack
+- `--pix-ds-font-display` - heading font stack
+- `--pix-ds-font-sans` - body font stack
+- `--pix-ds-font-mono` - code font stack
 
 Font scale is applied as an inline `font-size` on `<html>`.
 

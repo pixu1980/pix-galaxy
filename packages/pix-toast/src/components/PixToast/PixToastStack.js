@@ -90,13 +90,13 @@ class PixToastStack extends HTMLElement {
   /**
    * Add a toast notification.
    * @param {Object} config
-   * @param {string} [config.id] — Unique ID for dedup
-   * @param {string} config.message — Message text
-   * @param {string} [config.title] — Optional heading
+   * @param {string} [config.id] - Unique ID for dedup
+   * @param {string} config.message - Message text
+   * @param {string} [config.title] - Optional heading
    * @param {'info'|'success'|'warning'|'error'} [config.variant='info']
-   * @param {number} [config.duration=5000] — Auto-dismiss ms (0 = persistent)
+   * @param {number} [config.duration=5000] - Auto-dismiss ms (0 = persistent)
    * @param {boolean} [config.dismissible=true]
-   * @returns {string} — The toast ID
+   * @returns {string} - The toast ID
    */
   add(config) {
     const id = config.id || `toast-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;

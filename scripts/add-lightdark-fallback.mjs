@@ -26,5 +26,5 @@ for (const file of files) {
   );
   writeFileSync(file, result, 'utf8');
   const count = (result.match(/light-dark/g) || []).length;
-  console.log(`✓ ${file} — ${count} light-dark() with fallback`);
+  console.log(`✓ ${file} - ${count} light-dark() with fallback`);
 }

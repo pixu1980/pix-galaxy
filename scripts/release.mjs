@@ -1,14 +1,14 @@
 #!/usr/bin/env node
 
 /**
- * Monorepo release orchestration — pix-galaxy.
+ * Monorepo release orchestration - pix-galaxy.
  *
  * Discovers which packages have unreleased changes (via path-filtered
  * conventional commits), then releases them in topological order so
  * dependencies are always published before their dependents.
  *
  * Each package's own scripts/release.mjs does the actual version bump,
- * changelog update, commit and tag — this script just orchestrates.
+ * changelog update, commit and tag - this script just orchestrates.
  *
  * Usage:
  *   node scripts/release.mjs           # interactive (asks confirmation)
@@ -128,7 +128,7 @@ async function main() {
   // ── Summary ─────────────────────────────────────────────────────
   console.log('');
   console.log('┌─────────────────────────────────────────────────────┐');
-  console.log('│  pix-galaxy — Monorepo Release Orchestrator        │');
+  console.log('│  pix-galaxy - Monorepo Release Orchestrator        │');
   console.log('└─────────────────────────────────────────────────────┘');
   console.log('');
   console.log('Packages to release (topological order):');
@@ -144,7 +144,7 @@ async function main() {
   console.log('');
 
   if (DRY_RUN) {
-    console.log('⚠️  Dry-run mode — no changes made.');
+    console.log('⚠️  Dry-run mode - no changes made.');
     console.log('   Run without --dry-run to execute.\n');
     process.exit(0);
   }
@@ -169,7 +169,7 @@ async function main() {
     console.log(`\n── ${pkgName} ────────────────────────────────────────`);
 
     if (!fileExists(scriptPath)) {
-      console.log(`  ⏭️  No scripts/release.mjs found — skipping.`);
+      console.log(`  ⏭️  No scripts/release.mjs found - skipping.`);
       continue;
     }
 
