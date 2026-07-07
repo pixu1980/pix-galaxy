@@ -2,28 +2,28 @@ import { createDocsSite, buildDocsPages } from '@pix-galaxy/shared/docs/docs-sit
 
 const examples = [
   {
-    title: 'Using radii tokens',
-    description: 'Consistent border-radius across components.',
+    title: 'Use tokens in CSS',
+    description: 'Consistent spacing, radii, and colors across components.',
     lang: 'css',
-    code: `.card {\n  border-radius: var(--pix--r--md, 8px);\n}\n\npre, code {\n  border-radius: var(--pix--r--md, 8px);\n}\n\nbutton {\n  border-radius: var(--pix--r--md, 8px);\n}`,
+    code: `.card {\n  padding: var(--pix--s--md);\n  border-radius: var(--pix--r--md);\n  background: var(--pix--c--surface);\n  color: var(--pix--c--text);\n  border: 1px solid var(--pix--c--border);\n}\n\nbutton {\n  border-radius: var(--pix--r--md);\n  outline: 2px solid var(--pix--f--color);\n  outline-offset: var(--pix--f--offset);\n}`,
   },
   {
-    title: 'Semantic colors with light-dark',
-    description: 'Colors adapt automatically to color scheme.',
+    title: 'Import in project',
+    description: 'Add foundations once, use tokens everywhere.',
     lang: 'css',
-    code: `.box {\n  background: var(--pix--c--surface);\n  color: var(--pix--c--text);\n  border: 1px solid var(--pix--c--border);\n}`,
+    code: `/* main.css */\n@import '@pix-galaxy/pix-foundations/foundations.css';\n\n/* Now use any --pix--* token */\nbody {\n  background: var(--pix--c--page);\n  color: var(--pix--c--text);\n}`,
   },
   {
-    title: 'Spacing scale',
-    description: 'Use spacing tokens for consistent gaps.',
+    title: 'Theme-aware colors',
+    description: 'light-dark() handles light/dark mode automatically.',
     lang: 'css',
-    code: `.panel {\n  padding: var(--pix--s--md);\n  gap: var(--pix--s--sm);\n}\n\n@media (min-width: 48rem) {\n  .panel {\n    padding: var(--pix--s--lg);\n  }\n}`,
+    code: `.box {\n  background: var(--pix--c--surface);\n  color: var(--pix--c--text);\n  border: 1px solid var(--pix--c--border);\n}\n\n/* Switch theme via pix-color-scheme-selector → <html style=\"color-scheme: dark\">\n   light-dark() reads this, adapts all --pix--c--* tokens automatically */`,
   },
   {
-    title: 'Focus ring',
-    description: 'WCAG 2.2 compliant focus indicator, auto-applied.',
+    title: 'Override tokens per scope',
+    description: 'Customize tokens inside a subtree.',
     lang: 'css',
-    code: `/* Applied automatically to all interactive elements.\n   To customise:\n   :focus-visible {\n     outline-width: var(--pix--f--width);\n     outline-offset: var(--pix--f--offset);\n   } */`,
+    code: `.dark-section {\n  --pix--c--surface: oklch(0.18 0.01 260);\n  --pix--c--text: oklch(0.88 0.01 85);\n  --pix--c--border: oklch(from gray 0.3 0.01 0 / 0.5);\n}\n\n.dark-section .card {\n  background: var(--pix--c--surface);\n  color: var(--pix--c--text);\n}`,
   },
 ];
 
@@ -33,12 +33,12 @@ async function bootDocsSite() {
   if (!mount) return;
 
   const [
-    { default: gettingStarted }, { default: howItWorks }, { default: api },
+    { default: gettingStarted }, { default: api }, { default: howItWorks },
     { default: examplesMd }, { default: releasing },
     { default: packageJson },
   ] = await Promise.all([
-    import('./content/getting-started.md?raw'), import('./content/how-it-works.md?raw'),
-    import('./content/api.md?raw'), import('./content/examples.md?raw'),
+    import('./content/getting-started.md?raw'), import('./content/api.md?raw'),
+    import('./content/how-it-works.md?raw'), import('./content/examples.md?raw'),
     import('./content/releasing.md?raw'), import('../../package.json'),
   ]);
 
@@ -46,8 +46,8 @@ async function bootDocsSite() {
     mount,
     docs: buildDocsPages([
       { markdown: gettingStarted, sourcePath: 'src/docs/content/getting-started.md' },
-      { markdown: howItWorks, sourcePath: 'src/docs/content/how-it-works.md' },
       { markdown: api, sourcePath: 'src/docs/content/api.md' },
+      { markdown: howItWorks, sourcePath: 'src/docs/content/how-it-works.md' },
       { markdown: examplesMd, sourcePath: 'src/docs/content/examples.md' },
       { markdown: releasing, sourcePath: 'src/docs/content/releasing.md' },
     ]),
@@ -56,12 +56,19 @@ async function bootDocsSite() {
       version: packageJson.version,
       componentName: 'pix-foundations',
       componentTag: 'pix-foundations',
-      description: 'Centralised design tokens for radii, spacing, colors, typography, focus, and elevations.',
+      description: 'CSS custom property tokens for radii, spacing, colors, typography, focus, and elevations. Zero-runtime, light-dark() ready.',
       liveHtml: `
-        <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:0.5rem;">
-          <span style="padding:0.25rem 0.5rem;border:1px solid var(--pix--c--border);border-radius:var(--pix--r--md,8px);background:var(--pix--c--surface);font-size:0.75rem;">radius: 8px</span>
-          <span style="padding:0.25rem 0.5rem;border:1px solid var(--pix--c--border);border-radius:var(--pix--r--pill,999px);background:var(--pix--c--surface);font-size:0.75rem;">pill shape</span>
-          <span style="padding:0.25rem 0.5rem;border:1px solid var(--pix--c--border);border-radius:var(--pix--r--lg,12px);background:var(--pix--c--surface);font-size:0.75rem;">radius: 12px</span>
+        <div style="display:flex;flex-direction:column;gap:0.5rem;font-size:0.75rem;margin-top:0.5rem;">
+          <div style="display:flex;gap:0.5rem;">
+            <span style="padding:0.2rem 0.5rem;border:1px solid var(--pix--c--border);border-radius:var(--pix--r--md,8px);background:var(--pix--c--surface);">radius md (8px)</span>
+            <span style="padding:0.2rem 0.5rem;border:1px solid var(--pix--c--border);border-radius:var(--pix--r--pill,999px);background:var(--pix--c--surface);">radius pill</span>
+          </div>
+          <div style="display:flex;gap:0.5rem;">
+            <span style="padding:0.2rem 0.5rem;border:1px solid var(--pix--c--border);border-radius:var(--pix--r--md,8px);background:var(--pix--c--accent);color:white;">accent</span>
+            <span style="padding:0.2rem 0.5rem;border:1px solid var(--pix--c--border);border-radius:var(--pix--r--md,8px);background:var(--pix--c--success);color:white;">success</span>
+            <span style="padding:0.2rem 0.5rem;border:1px solid var(--pix--c--border);border-radius:var(--pix--r--md,8px);background:var(--pix--c--warning);color:white;">warning</span>
+            <span style="padding:0.2rem 0.5rem;border:1px solid var(--pix--c--border);border-radius:var(--pix--r--md,8px);background:var(--pix--c--danger);color:white;">danger</span>
+          </div>
         </div>
       `,
     },

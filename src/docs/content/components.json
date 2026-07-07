@@ -108,5 +108,15 @@
     "repo": "https://github.com/pixu1980/pix-color-scheme-selector",
     "accent": "violet",
     "keywords": ["color-scheme", "light-dark", "theme-switcher"]
+  },
+  {
+    "name": "coming-soon",
+    "packageName": "",
+    "title": "Coming Soon...",
+    "description": "New components are being developed. Stay tuned for more accessible, zero-dependency vanilla JS Web Components.",
+    "homepage": "",
+    "repo": "",
+    "accent": "neutral",
+    "keywords": []
   }
 ]

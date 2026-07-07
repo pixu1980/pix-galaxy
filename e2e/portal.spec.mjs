@@ -36,10 +36,10 @@ test.describe('Portal (http://localhost:3000)', () => {
     await page.goto('/');
     await page.waitForSelector('[data-part="grid"]', { timeout: 8000 });
     const cards = page.locator('[data-part="card"]');
-    await expect(cards).toHaveCount(COMPONENTS.length);
+    await expect(cards).toHaveCount(COMPONENTS.length + 1);
   });
 
-  test('each card has a valid href pointing to localhost', async ({ page }) => {
+  test('each real card has a valid href pointing to localhost', async ({ page }) => {
     await page.goto('/');
     await page.waitForSelector('[data-part="card"]');
     const cards = page.locator('[data-part="card"]');
@@ -47,6 +47,7 @@ test.describe('Portal (http://localhost:3000)', () => {
     for (let i = 0; i < count; i++) {
       const href = await cards.nth(i).getAttribute('href');
       expect(href).toBeTruthy();
+      if (href === '#') continue;
       expect(href).toMatch(/^https?:\/\/localhost/);
     }
   });

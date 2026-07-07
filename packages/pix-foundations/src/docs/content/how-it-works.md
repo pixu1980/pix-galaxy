@@ -1,13 +1,26 @@
 # How It Works
 
-Pix-foundations provides a single CSS entry point that imports all token files in the correct order:
+Foundations is a pure CSS package. No JavaScript. No component registration. No runtime overhead.
 
-1. **Reset** — Normalises box-sizing, margins, and media elements.
-2. **Radii** — Border-radius scale from 2px to 999px.
-3. **Spacing** — Spacing scale (ratio 1.25) from 4px to 48px.
-4. **Typography** — Font stacks and line-height.
-5. **Colors** — Semantic color tokens using `light-dark()` for theme support.
-6. **Focus** — Universal `:focus-visible` ring (2px solid currentColor).
-7. **Elevations** — Box-shadow scale from subtle to prominent.
+## CSS Layer structure
 
-The focus ring is intentionally **unlayered** (imported before all layered tokens) so it always overrides component-specific styles. This guarantees WCAG 2.2 SC 2.4.7 compliance.
+```css
+@layer pix.reset, pix.foundations, pix.components;
+```
+
+| Layer | Contents |
+|-------|----------|
+| `pix.reset` | Box-sizing, margin removal, media defaults |
+| `pix.foundations.radii` | `--pix--r--*` tokens |
+| `pix.foundations.spacings` | `--pix--s--*` tokens |
+| `pix.foundations.typography` | `--pix--t--*` tokens |
+| `pix.foundations.colors` | `--pix--c--*` tokens with `light-dark()` |
+| `pix.foundations.elevations` | `--pix--e--*` box-shadow tokens |
+
+## Focus ring — unlayered
+
+`_focus.css` is intentionally imported **outside** all layers. This guarantees WCAG 2.2 SC 2.4.7 compliance — the focus ring always shows regardless of component CSS.
+
+## Theme switching
+
+Color tokens use `light-dark()`. When a `color-scheme` value is set on `<html>` (e.g. by `<pix-color-scheme-selector>`), all `--pix--c--*` tokens adapt automatically.
