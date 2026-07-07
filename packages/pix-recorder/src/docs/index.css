@@ -170,7 +170,6 @@ body { margin: 0; min-height: 100vh; font-size: var(--pix-ds-text-md); line-heig
   box-shadow: var(--pix-ds-elevation-1);
 }
 
-[data-part="nav-link"]:focus-visible { outline: none; box-shadow: var(--pix-ds-focus-ring), var(--pix-ds-elevation-1); }
 [data-part="nav-link"]:active { transform: scale(var(--pix-ds-scale-press)); }
 
 /* ─── 4. Main content ─── */
