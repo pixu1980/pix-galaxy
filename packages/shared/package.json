@@ -8,10 +8,13 @@
   "exports": {
     "./docs/docs-site": "./docs/docs-site.js",
     "./docs/docs-site.js": "./docs/docs-site.js",
+    "./docs/docs.css": "./docs/docs.css",
+    "./docs/docs.css?raw": "./docs/docs.css",
     "./dom/ssr-safe": "./dom/ssr-safe.js",
     "./dom/ssr-safe.js": "./dom/ssr-safe.js"
   },
   "dependencies": {
-    "marked": "18.0.5"
+    "marked": "18.0.5",
+    "@pix-galaxy/pix-color-scheme-selector": "workspace:*"
   }
 }

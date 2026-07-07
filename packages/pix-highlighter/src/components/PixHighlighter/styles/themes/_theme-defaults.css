@@ -66,7 +66,8 @@
       tab-size: var(--pix-highlighter--tab-size, 2);
       hyphens: none;
       padding: 0.75rem 1rem 1rem;
-      border-radius: var(--dout--radius-md, 0.85rem);
+      border: 1px solid var(--pix-highlighter--toolbar-border);
+      border-radius: var(--pix--r--md, 8px);
       color: var(--pix-highlighter--fg);
       background-color: var(--pix-highlighter--bg);
 
@@ -134,9 +135,8 @@
         min-height: 2.5rem;
         padding: 0.4rem 0.85rem;
         border: 1px solid var(--pix-highlighter--toolbar-border);
-        border-radius: var(--dout--radius-pill, 1.25rem);
+        border-radius: var(--pix--r--md, 8px);
         background-color: var(--pix-highlighter--toolbar-surface);
-        box-shadow: var(--pix-highlighter--toolbar-shadow);
         color: var(--pix-highlighter--toolbar-color);
         backdrop-filter: blur(var(--dout--blur-panel));
         cursor: pointer;
@@ -232,7 +232,7 @@
       margin: 0;
       list-style: none;
       border: 1px solid var(--pix-highlighter--toolbar-border);
-      border-radius: var(--dout--radius-md, 0.85rem);
+      border-radius: var(--pix--r--md, 8px);
       background: var(--pix-highlighter--toolbar-menu-bg);
       box-shadow: var(--pix-highlighter--toolbar-shadow);
       backdrop-filter: blur(var(--dout--blur-panel, 16px));
