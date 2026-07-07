@@ -1,3 +1,4 @@
+@import '@pix-galaxy/pix-foundations/foundations.css';
 @import '../shared/_ds-tokens.css';
 
 /**
@@ -53,7 +54,7 @@ body {
 /*
  * #app is the sole mount point for the docs site;
  * it gets fully replaced on render. Using an id selector
- * here is acceptable — it is the only element with this id,
+ * here is acceptable - it is the only element with this id,
  * serves as the application root, and is never used for
  * visual styling beyond min-height.
  */

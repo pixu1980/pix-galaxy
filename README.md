@@ -25,19 +25,19 @@ pix-display-preferences
   └── pix-highlighter
 ```
 
-All internal deps use `workspace:*` protocol — pnpm resolves them automatically.
+All internal deps use `workspace:*` protocol - pnpm resolves them automatically.
 
 ## Principles
 
-- **Zero runtime dependencies** — browser-native Custom Elements v1.
-- **Self-registering** — `customElements.define()` in `static { }` block.
-- **Scoped CSS** — `adoptedStyleSheets` with `CSSStyleSheet`.
-- **No CSS classes** — `[data-*]` attribute selectors only.
-- **No inline styles** — all via CSS custom properties and external stylesheets.
-- **`@layer` architecture** — `@layer pix-galaxy { @layer component { ... } }`.
-- **JSDoc types** — TypeScript declarations generated from `src/index.types.js`.
-- **Dual format** — ESM + CJS via esbuild.
-- **Independent versioning** — each package released separately.
+- **Zero runtime dependencies** - browser-native Custom Elements v1.
+- **Self-registering** - `customElements.define()` in `static { }` block.
+- **Scoped CSS** - `adoptedStyleSheets` with `CSSStyleSheet`.
+- **No CSS classes** - `[data-*]` attribute selectors only.
+- **No inline styles** - all via CSS custom properties and external stylesheets.
+- **`@layer` architecture** - `@layer pix-galaxy { @layer component { ... } }`.
+- **JSDoc types** - TypeScript declarations generated from `src/index.types.js`.
+- **Dual format** - ESM + CJS via esbuild.
+- **Independent versioning** - each package released separately.
 
 ## Getting Started
 

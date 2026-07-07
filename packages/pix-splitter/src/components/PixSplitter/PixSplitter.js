@@ -13,16 +13,16 @@
  * </pix-splitter>
  * ```
  *
- * @fires splitter-resize — while dragging
- * @fires splitter-resize-end — when drag ends
+ * @fires splitter-resize - while dragging
+ * @fires splitter-resize-end - when drag ends
  */
 import componentCSS from './PixSplitter.css?raw';
 
 const ELEMENT_NAME = 'pix-splitter';
-const HANDLE_SIZE = 8; // px — must match --pix-splitter--handle-size in CSS
+const HANDLE_SIZE = 8; // px - must match --pix-splitter--handle-size in CSS
 const KEYBOARD_STEP = 10; // px
 const KEYBOARD_FINE_STEP = 1; // px
-const MIN_PANEL_SIZE = 100; // px — default min
+const MIN_PANEL_SIZE = 100; // px - default min
 
 let componentStyleSheet = null;
 
@@ -341,12 +341,12 @@ class PixSplitter extends HTMLElement {
       newRatios[leftIdx] = leftNew;
       newRatios[rightIdx] = rightNew;
     } else if (leftNew < minFrac) {
-      // Left panel at minimum — give remaining to right
+      // Left panel at minimum - give remaining to right
       const diff = minFrac - leftNew;
       newRatios[leftIdx] = minFrac;
       newRatios[rightIdx] = rightNew - diff;
     } else {
-      // Right panel at minimum — give remaining to left
+      // Right panel at minimum - give remaining to left
       const diff = minFrac - rightNew;
       newRatios[rightIdx] = minFrac;
       newRatios[leftIdx] = leftNew - diff;

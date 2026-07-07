@@ -136,9 +136,9 @@ Repo commands:
 | `pnpm rel:major` | Bump major version and tag |
 
 Library build outputs:
-- `artifact/index.js` — ESM
-- `artifact/index.cjs` — CommonJS
-- `artifact/index.d.ts` — TypeScript declarations
+- `artifact/index.js` - ESM
+- `artifact/index.cjs` - CommonJS
+- `artifact/index.d.ts` - TypeScript declarations
 
 Docs source: `src/docs/content/`. Docs app source: `src/docs/`, builds to `dist/`.
 

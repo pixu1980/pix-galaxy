@@ -1,0 +1,19 @@
+/* pix-foundations — typography
+ *
+ * Font family: system-ui stack.
+ * Scale: ratio 1.25, base 1rem.
+ */
+
+:root {
+  --pix--t--font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --pix--t--font-family-mono: ui-monospace, 'SF Mono', 'Fira Code', 'Cascadia Code', Consolas, monospace;
+  --pix--t--font-family-display: var(--pix--t--font-family);
+  --pix--t--ratio: 1.25;
+  --pix--t--line-height: 1.6;
+  --pix--t--line-height-tight: 1.2;
+}
+
+body {
+  font-family: var(--pix--t--font-family);
+  line-height: var(--pix--t--line-height);
+}

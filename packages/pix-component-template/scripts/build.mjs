@@ -11,7 +11,7 @@ const packageJsonPath = resolve(projectRoot, 'package.json');
 // Detect if this is an uninitialized template (contains {% %} placeholders)
 const pkg = JSON.parse(await readFile(packageJsonPath, 'utf8'));
 if (pkg.name && pkg.name.startsWith('{%')) {
-  console.log('[template] Skipping build — uninitialized template detected.');
+  console.log('[template] Skipping build - uninitialized template detected.');
   console.log('[template] Run `node ./scripts/init.mjs <package-name> "<description>"` after scaffolding.');
   process.exit(0);
 }

@@ -10,7 +10,7 @@ pix-galaxy is a zero-runtime-dependency vanilla JavaScript Web Components monore
 - Do **not** introduce runtime dependencies unless explicitly requested and well-documented.
 - Do **not** introduce frameworks (React, Vue, Svelte, Lit, Stencil, Angular, etc.).
 - Do **not** convert JavaScript source files to TypeScript.
-- Keep source files **readable and unbundled** — source lives in `src/`, build output in `dist/`.
+- Keep source files **readable and unbundled** - source lives in `src/`, build output in `dist/`.
 - Use `// @ts-check` at the top of every JavaScript source file.
 - Use **JSDoc** for all public classes, methods, events, attributes, typedefs, and options.
 - Use **TypeScript only** for type checking (`--noEmit`) and `.d.ts` declaration generation via `emitDeclarationOnly`.

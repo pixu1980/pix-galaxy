@@ -4,7 +4,7 @@
  * Individual toast notification element.
  * Use via <pix-toast-stack> for queue management.
  *
- * @fires toast-dismiss — when the user clicks dismiss
+ * @fires toast-dismiss - when the user clicks dismiss
  */
 import componentCSS from './PixToast.css?raw';
 

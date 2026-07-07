@@ -2,10 +2,10 @@
 
 ## Exports
 
-- `PixColorSchemeSelector` — Component class (extends `HTMLElement`)
-- `META_CONTENT` — Read-only mapping of scheme → meta content value
-- `SCHEMES` — Read-only array of supported scheme values
-- `STORAGE_KEY` — The `localStorage` key used for persistence
+- `PixColorSchemeSelector` - Component class (extends `HTMLElement`)
+- `META_CONTENT` - Read-only mapping of scheme → meta content value
+- `SCHEMES` - Read-only array of supported scheme values
+- `STORAGE_KEY` - The `localStorage` key used for persistence
 
 ## Component class: `PixColorSchemeSelector`
 

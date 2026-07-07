@@ -1,5 +1,5 @@
 /**
- * ssr-safe.js — Centralised SSR guards for pix-galaxy components.
+ * ssr-safe.js - Centralised SSR guards for pix-galaxy components.
  *
  * Every component currently duplicates the same guards:
  *   if (typeof document === 'undefined') return null;

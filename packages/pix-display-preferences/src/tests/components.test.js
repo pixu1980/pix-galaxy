@@ -117,7 +117,7 @@ function mountPreferences() {
    Rendering & structure
    ─────────────────────────────────────────────── */
 
-describe('PixDisplayPreferences — rendering & structure', () => {
+describe('PixDisplayPreferences - rendering & structure', () => {
   test('registers the custom element as pix-display-preferences', () => {
     const element = mountPreferences();
     assert.equal(customElements.get('pix-display-preferences'), PixDisplayPreferences);
@@ -206,7 +206,7 @@ describe('PixDisplayPreferences — rendering & structure', () => {
    Document application & persistence
    ─────────────────────────────────────────────── */
 
-describe('PixDisplayPreferences — document application & persistence', () => {
+describe('PixDisplayPreferences - document application & persistence', () => {
   test('applies saved preferences including legacy reduceAnimations', () => {
     window.localStorage.setItem(
       STORAGE_KEY,
@@ -336,7 +336,7 @@ describe('PixDisplayPreferences — document application & persistence', () => {
    Exported API surface
    ─────────────────────────────────────────────── */
 
-describe('PixDisplayPreferences — exported API surface', () => {
+describe('PixDisplayPreferences - exported API surface', () => {
   test('exports STORAGE_KEY', () => {
     assert.equal(STORAGE_KEY, 'pix-display-preferences');
   });
@@ -400,7 +400,7 @@ describe('PixDisplayPreferences — exported API surface', () => {
    readPreferences / writePreferences
    ─────────────────────────────────────────────── */
 
-describe('PixDisplayPreferences — readPreferences & normalizePreferences', () => {
+describe('PixDisplayPreferences - readPreferences & normalizePreferences', () => {
   test('readPreferences returns defaults when storage is empty', () => {
     const prefs = readPreferences();
     assert.deepEqual(prefs, DEFAULT_PREFERENCES);
@@ -483,7 +483,7 @@ describe('PixDisplayPreferences — readPreferences & normalizePreferences', () 
    applyPreferencesToDocument
    ─────────────────────────────────────────────── */
 
-describe('PixDisplayPreferences — applyPreferencesToDocument', () => {
+describe('PixDisplayPreferences - applyPreferencesToDocument', () => {
   test('applies defaults directly to the document without component', () => {
     const applied = applyPreferencesToDocument(DEFAULT_PREFERENCES);
     assert.equal(applied.radiusPreset, 'rounded');
@@ -577,7 +577,7 @@ describe('PixDisplayPreferences — applyPreferencesToDocument', () => {
    Popover behaviour
    ─────────────────────────────────────────────── */
 
-describe('PixDisplayPreferences — popover behaviour', () => {
+describe('PixDisplayPreferences - popover behaviour', () => {
   test('click-driven fallback toggles open/close state', () => {
     const element = mountPreferences();
     const toggle = element.querySelector('[data-preferences-toggle]');
@@ -650,7 +650,7 @@ describe('PixDisplayPreferences — popover behaviour', () => {
    CSS & component styles
    ─────────────────────────────────────────────── */
 
-describe('PixDisplayPreferences — CSS & component styles', () => {
+describe('PixDisplayPreferences - CSS & component styles', () => {
   test('loads local component styles and registers them autonomously', async () => {
     mountPreferences();
 
@@ -729,9 +729,9 @@ describe('PixDisplayPreferences — CSS & component styles', () => {
    Re-initialisation & multiple instances
    ─────────────────────────────────────────────── */
 
-describe('PixDisplayPreferences — re-initialisation & multiple instances', () => {
+describe('PixDisplayPreferences - re-initialisation & multiple instances', () => {
   test('two instances write to shared localStorage', () => {
-    // Each instance writes independently — the last write wins for any given key
+    // Each instance writes independently - the last write wins for any given key
     const el1 = mountPreferences();
     el1.updatePreference('fontScale', '125%');
     assert.equal(JSON.parse(window.localStorage.getItem(STORAGE_KEY)).fontScale, '125%');
@@ -757,7 +757,7 @@ describe('PixDisplayPreferences — re-initialisation & multiple instances', () 
    Docs site adaptation
    ─────────────────────────────────────────────── */
 
-describe('PixDisplayPreferences — docs site adaptation', () => {
+describe('PixDisplayPreferences - docs site adaptation', () => {
   test('applyPreferencesToDocument sets attributes readable by getAttribute', () => {
     applyPreferencesToDocument({ ...DEFAULT_PREFERENCES, radiusPreset: 'squircle', reduceMotion: true });
 

@@ -6,7 +6,7 @@
 
 Current maintainers:
 
-- Emiliano Pisu (@pixu1980) — creator and lead maintainer
+- Emiliano Pisu (@pixu1980) - creator and lead maintainer
 
 ## Decision Making
 

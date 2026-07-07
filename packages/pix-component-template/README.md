@@ -128,17 +128,17 @@ el.doSomething();
 
 All pix-galaxy components follow these conventions:
 
-- **Self-registering** — `static { customElements.define(ELEMENT_NAME, this) }` in class body
-- **Scoped CSS** — `adoptedStyleSheets` with `CSSStyleSheet` (falls back to `<style>` element)
-- **No CSS classes** — element + `[data-*]` attribute selectors only
-- **No inline styles** — all styling via CSS custom properties and external stylesheets
-- **`@layer` CSS** — `@layer pix-galaxy { @layer component-name { ... } }`
-- **Zero dependencies** — browser-native Web Components
-- **`?raw` CSS imports** — imported as strings, handled by esbuild plugin and Node test loader
-- **JSDoc types** — TypeScript declarations generated from `index.types.js`
-- **Dual format** — ESM + CJS output via esbuild
-- **ARIA** — full keyboard navigation and accessible labels
-- **localStorage** — preference persistence when applicable
+- **Self-registering** - `static { customElements.define(ELEMENT_NAME, this) }` in class body
+- **Scoped CSS** - `adoptedStyleSheets` with `CSSStyleSheet` (falls back to `<style>` element)
+- **No CSS classes** - element + `[data-*]` attribute selectors only
+- **No inline styles** - all styling via CSS custom properties and external stylesheets
+- **`@layer` CSS** - `@layer pix-galaxy { @layer component-name { ... } }`
+- **Zero dependencies** - browser-native Web Components
+- **`?raw` CSS imports** - imported as strings, handled by esbuild plugin and Node test loader
+- **JSDoc types** - TypeScript declarations generated from `index.types.js`
+- **Dual format** - ESM + CJS output via esbuild
+- **ARIA** - full keyboard navigation and accessible labels
+- **localStorage** - preference persistence when applicable
 
 ## 🚀 Release automation
 

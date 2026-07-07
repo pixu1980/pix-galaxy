@@ -84,6 +84,9 @@
     "@pix-galaxy/pix-highlighter": "workspace:*",
     "@pix-galaxy/shared": "workspace:*"
   },
+  "dependencies": {
+    "@pix-galaxy/pix-foundations": "workspace:*"
+  },
   "devDependencies": {
     "c8": "11.0.0",
     "concurrently": "9.2.1",

@@ -1,5 +1,5 @@
 ---
-description: "Use when creating, scaffolding, or editing Custom Elements v1 — including autonomous elements (e.g. <pix-card>) and customized built-ins (e.g. <details is=\"pix-details\">) — and any code involving customElements.define, adoptedStyleSheets, or componentDecorator."
+description: "Use when creating, scaffolding, or editing Custom Elements v1 - including autonomous elements (e.g. <pix-card>) and customized built-ins (e.g. <details is=\"pix-details\">) - and any code involving customElements.define, adoptedStyleSheets, or componentDecorator."
 name: "pix Custom Element"
 applyTo: "**/*.{js,mjs,css,html}"
 ---

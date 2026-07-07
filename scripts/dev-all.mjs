@@ -26,10 +26,10 @@ const knownColors = {
   'pix-color': '38;5;47',                // emerald
   'pix-recorder': '38;5;45',             // aqua
   'pix-sortable': '38;5;75',             // sky (light blue)
-  'pix-component-template': '90',        // dark grey — hidden, not auto-started
+  'pix-component-template': '90',        // dark grey - hidden, not auto-started
 };
 
-// Palette for packages without a known color — cycles through them
+// Palette for packages without a known color - cycles through them
 const fallbackPalette = ['33', '31', '35;1', '36;1', '32;1', '34;1', '38;5;130', '38;5;164', '38;5;70', '38;5;202'];
 
 /**
@@ -167,7 +167,7 @@ async function main() {
 
     child.on('exit', (code, signal) => {
       if (!closing && signal) {
-        // Child was killed by signal — ignore in shutdown
+        // Child was killed by signal - ignore in shutdown
       }
     });
 

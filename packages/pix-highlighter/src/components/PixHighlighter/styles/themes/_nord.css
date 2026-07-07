@@ -2,31 +2,31 @@
   @layer pix-highlighter {
     @layer themes {
       :root[data-pix-highlighter-theme='nord'] pre[is='pix-highlighter'] {
-        --pix-highlighter--bg: #2e3440;
-        --pix-highlighter--fg: #d8dee9;
-        --pix-highlighter--kw: #81a1c1;
-        --pix-highlighter--str: #a3be8c;
-        --pix-highlighter--num: #b48ead;
-        --pix-highlighter--com: #616e88;
-        --pix-highlighter--id: #e5e9f0;
-        --pix-highlighter--op: #88c0d0;
-        --pix-highlighter--tag: #81a1c1;
-        --pix-highlighter--attr: #8fbcbb;
-        --pix-highlighter--key: #5e81ac;
-        --pix-highlighter--var: #d08770;
-        --pix-highlighter--mac: #bf616a;
-        --pix-highlighter--pp: #ebcb8b;
-        --pix-highlighter--prop: #88c0d0;
-        --pix-highlighter--type: #8fbcbb;
-        --pix-highlighter--mdh: #88c0d0;
-        --pix-highlighter--mde: #d08770;
-        --pix-highlighter--mds: #ebcb8b;
-        --pix-highlighter--mdc: #616e88;
-        --pix-highlighter--mdl: #81a1c1;
-        --pix-highlighter--mdbq: #a7b1c2;
-        --pix-highlighter--mdli: #b48ead;
-        --pix-highlighter--mdhr: #4c566a;
-        --pix-highlighter--mdimg: #8fbcbb;
+        --pix-highlighter--bg: light-dark(#eef1f5, #2e3440);
+        --pix-highlighter--fg: light-dark(#2c3039, #d8dee9);
+        --pix-highlighter--kw: light-dark(#4f7aa8, #81a1c1);
+        --pix-highlighter--str: light-dark(#608c4a, #a3be8c);
+        --pix-highlighter--num: light-dark(#915d90, #b48ead);
+        --pix-highlighter--com: light-dark(#6a758c, #616e88);
+        --pix-highlighter--id: light-dark(#3b4252, #e5e9f0);
+        --pix-highlighter--op: light-dark(#4099ad, #88c0d0);
+        --pix-highlighter--tag: light-dark(#4f7aa8, #81a1c1);
+        --pix-highlighter--attr: light-dark(#4f8a87, #8fbcbb);
+        --pix-highlighter--key: light-dark(#43698b, #5e81ac);
+        --pix-highlighter--var: light-dark(#aa6a47, #d08770);
+        --pix-highlighter--mac: light-dark(#9b4851, #bf616a);
+        --pix-highlighter--pp: light-dark(#b8974d, #ebcb8b);
+        --pix-highlighter--prop: light-dark(#4099ad, #88c0d0);
+        --pix-highlighter--type: light-dark(#4f8a87, #8fbcbb);
+        --pix-highlighter--mdh: light-dark(#4099ad, #88c0d0);
+        --pix-highlighter--mde: light-dark(#aa6a47, #d08770);
+        --pix-highlighter--mds: light-dark(#b8974d, #ebcb8b);
+        --pix-highlighter--mdc: light-dark(#6a758c, #616e88);
+        --pix-highlighter--mdl: light-dark(#4f7aa8, #81a1c1);
+        --pix-highlighter--mdbq: light-dark(#7a8495, #a7b1c2);
+        --pix-highlighter--mdli: light-dark(#915d90, #b48ead);
+        --pix-highlighter--mdhr: light-dark(#3b4358, #4c566a);
+        --pix-highlighter--mdimg: light-dark(#4f8a87, #8fbcbb);
 
         --pix-highlighter--tab-size: 2;
         --pix-highlighter--line-height: 1.55;

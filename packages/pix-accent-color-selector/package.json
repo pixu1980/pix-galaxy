@@ -28,11 +28,6 @@
     "browser"
   ],
   "sideEffects": true,
-  "engines": {
-    "node": ">=20.11",
-    "pnpm": ">=10"
-  },
-  "packageManager": "pnpm@10.33.2",
   "main": "./artifact/index.cjs",
   "module": "./artifact/index.js",
   "types": "./artifact/index.d.ts",
@@ -83,13 +78,16 @@
   "dependencies": {
     "@pix-galaxy/pix-highlighter": "workspace:*"
   },
+  "dependencies": {
+    "@pix-galaxy/pix-foundations": "workspace:*"
+  },
   "devDependencies": {
     "c8": "11.0.0",
-    "concurrently": "9.2.1",
-    "esbuild": "0.28.0",
-    "jsdom": "29.1.0",
-    "marked": "18.0.2",
+    "concurrently": "10.0.3",
+    "esbuild": "0.28.1",
+    "jsdom": "29.1.1",
+    "marked": "18.0.5",
     "typescript": "6.0.3",
-    "vite": "8.0.10"
+    "vite": "8.1.3"
   }
 }

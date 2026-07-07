@@ -62,7 +62,7 @@ async function bootPortal() {
           href="${escapeAttr(docUrl)}"
           target="_blank"
           rel="noopener noreferrer"
-          aria-label="${escapeAttr(comp.title)} — opens documentation in new tab"
+          aria-label="${escapeAttr(comp.title)} - opens documentation in new tab"
         >
           <header data-part="card-header">
             <span data-part="card-badge" aria-hidden="true">${ICONS[comp.accent] || ''}</span>

@@ -17,8 +17,8 @@
  *
  * Press CMD+K (Mac) / Ctrl+K (Win/Linux) to toggle.
  *
- * @fires command-selected — when a command is activated
- * @fires command-dismissed — when the palette is closed without selecting
+ * @fires command-selected - when a command is activated
+ * @fires command-dismissed - when the palette is closed without selecting
  */
 import componentCSS from './PixCommand.css?raw';
 
@@ -124,7 +124,7 @@ class PixCommand extends HTMLElement {
     return adoptComponentStyles();
   }
 
-  /** @type {Set<PixCommand>} — all live instances for global shortcut dispatch */
+  /** @type {Set<PixCommand>} - all live instances for global shortcut dispatch */
   static #instances = new Set();
 
   static #onGlobalKeyDown = (event) => {

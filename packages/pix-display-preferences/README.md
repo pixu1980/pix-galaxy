@@ -1,6 +1,6 @@
 # @pix-galaxy/pix-display-preferences
 
-@pix-galaxy/pix-display-preferences is a browser-first display preferences popover Web Component designed for the pix-galaxy suite. It provides an accessible popover panel for adjusting color scheme, accent color, accessibility options, typography, and corner radius preferences — all persisted to localStorage and applied to the document in real time.
+@pix-galaxy/pix-display-preferences is a browser-first display preferences popover Web Component designed for the pix-galaxy suite. It provides an accessible popover panel for adjusting color scheme, accent color, accessibility options, typography, and corner radius preferences - all persisted to localStorage and applied to the document in real time.
 
 Live docs site: https://pixu1980.github.io/pix-display-preferences/
 
@@ -97,9 +97,9 @@ Repo commands:
 | `pnpm test` | Run component and site tests |
 
 Library build outputs:
-- `artifact/index.js` — ESM
-- `artifact/index.cjs` — CommonJS
-- `artifact/index.d.ts` — TypeScript declarations
+- `artifact/index.js` - ESM
+- `artifact/index.cjs` - CommonJS
+- `artifact/index.d.ts` - TypeScript declarations
 
 Docs source: `src/docs/content/`. Docs app source: `src/docs/`, builds to `dist/`.
 

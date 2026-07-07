@@ -1,7 +1,7 @@
 @layer pix-galaxy {
   @layer {%COMPONENT_NAME%} {
-    /* Component: {%ELEMENT_NAME%} — {%COMPONENT_DESCRIPTION%} */
-    /* ↓ placeholder selector — replaced by actual element name on init */
+    /* Component: {%ELEMENT_NAME%} - {%COMPONENT_DESCRIPTION%} */
+    /* ↓ placeholder selector - replaced by actual element name on init */
     :where([is="{%ELEMENT_NAME%}"], {%ELEMENT_NAME%}) {
       display: inline-flex;
     }

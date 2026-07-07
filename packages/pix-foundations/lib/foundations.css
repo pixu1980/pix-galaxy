@@ -1,0 +1,23 @@
+/* pix-foundations — entry point
+ *
+ * Import order: reset → helpers → foundations tokens → typography
+ *
+ * Usage in HTML:
+ *   <link rel="stylesheet" href="/path/to/foundations.css">
+ *
+ * Usage in CSS:
+ *   @import '@pix-galaxy/pix-foundations/foundations.css';
+ *
+ * Usage in JS (Vite):
+ *   import '@pix-galaxy/pix-foundations/foundations.css';
+ */
+
+@layer pix.reset, pix.foundations, pix.components;
+
+@import "./_reset.css" layer(pix.reset);
+@import "./_radii.css" layer(pix.foundations.radii);
+@import "./_spacings.css" layer(pix.foundations.spacings);
+@import "./_typography.css" layer(pix.foundations.typography);
+@import "./_colors.css" layer(pix.foundations.colors);
+@import "./_focus.css" layer(pix.foundations.focus);
+@import "./_elevations.css" layer(pix.foundations.elevations);

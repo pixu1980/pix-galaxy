@@ -1,0 +1,16 @@
+/* pix-foundations — focus ring
+ *
+ * WCAG 2.2 SC 2.4.7: visible focus indicator.
+ * outline: 2px solid currentColor; outline-offset: 2px
+ */
+
+:root {
+  --pix--f--width: 2px;
+  --pix--f--style: solid;
+  --pix--f--offset: 2px;
+}
+
+:where(:focus-visible) {
+  outline: var(--pix--f--width) var(--pix--f--style) currentColor;
+  outline-offset: var(--pix--f--offset);
+}

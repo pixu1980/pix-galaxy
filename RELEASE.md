@@ -1,4 +1,4 @@
-# Release Process — pix-galaxy
+# Release Process - pix-galaxy
 
 > **Zero-runtime-dependency vanilla JavaScript Web Components, packaged as a pnpm workspace monorepo.**
 
@@ -32,11 +32,11 @@ This document describes the complete release workflow for all packages in the pi
 
 ## Release Philosophy
 
-- **Independent versioning** — each package has its own semver, its own changelog, and its own release tag.
-- **Conventional Commits** — `feat:` bumps minor, `fix:` bumps patch, `!` or `BREAKING CHANGE:` bumps major.
-- **Topological order** — dependencies are always released before their dependents.
-- **Only changed packages** — if a package has no new commits since its last tag, it is skipped.
-- **Commit-based detection** — releases are based on merged commits, not file timestamps or manual selection.
+- **Independent versioning** - each package has its own semver, its own changelog, and its own release tag.
+- **Conventional Commits** - `feat:` bumps minor, `fix:` bumps patch, `!` or `BREAKING CHANGE:` bumps major.
+- **Topological order** - dependencies are always released before their dependents.
+- **Only changed packages** - if a package has no new commits since its last tag, it is skipped.
+- **Commit-based detection** - releases are based on merged commits, not file timestamps or manual selection.
 
 ---
 
@@ -48,7 +48,7 @@ This document describes the complete release workflow for all packages in the pi
 | pix-accent-color-selector | `@pix-galaxy/pix-accent-color-selector` | Publishable | `packages/pix-accent-color-selector/` |
 | pix-color-scheme-selector | `@pix-galaxy/pix-color-scheme-selector` | Publishable | `packages/pix-color-scheme-selector/` |
 | pix-display-preferences | `@pix-galaxy/pix-display-preferences` | Publishable | `packages/pix-display-preferences/` |
-| pix-component-template | — | Private (template) | `packages/pix-component-template/` |
+| pix-component-template | - | Private (template) | `packages/pix-component-template/` |
 
 ---
 
@@ -71,7 +71,7 @@ This determines the **release order**: dependencies first, dependents last.
 
 ### 1. Development
 
-Use **Conventional Commits** — the commit message determines the semver bump:
+Use **Conventional Commits** - the commit message determines the semver bump:
 
 ```
 feat(pix-highlighter): add dracula theme           → minor
@@ -99,7 +99,7 @@ Output:
 
 ```
 ┌─────────────────────────────────────────────────────┐
-│  pix-galaxy — Monorepo Release Orchestrator        │
+│  pix-galaxy - Monorepo Release Orchestrator        │
 └─────────────────────────────────────────────────────┘
 
 Packages to release (topological order):
@@ -107,7 +107,7 @@ Packages to release (topological order):
   pix-highlighter                     2 commit(s)    last: @pix-galaxy/pix-highlighter@0.1.0
   pix-accent-color-selector           1 commit(s)    last: @pix-galaxy/pix-accent-color-selector@0.1.0
 
-⚠️  Dry-run mode — no changes made.
+⚠️  Dry-run mode - no changes made.
    Run without --dry-run to execute.
 ```
 
@@ -122,7 +122,7 @@ This will:
 1. Verify the working tree is clean
 2. Detect packages with unreleased changes (path-filtered per package)
 3. Show a summary and ask for confirmation
-4. Process packages in topological order — for each changed package:
+4. Process packages in topological order - for each changed package:
    - Parse conventional commits since its last tag
    - Determine the semver bump type (major/minor/patch)
    - Update `package.json` version
@@ -161,7 +161,7 @@ The GitHub Actions release workflow (`.github/workflows/release.yml`) is trigger
 
 **Script location:** `scripts/release.mjs`
 
-This is the entry point for releasing. It does NOT duplicate the release logic — it discovers changed packages and delegates to each package's own `scripts/release.mjs`.
+This is the entry point for releasing. It does NOT duplicate the release logic - it discovers changed packages and delegates to each package's own `scripts/release.mjs`.
 
 **How it detects changes:**
 
@@ -206,7 +206,7 @@ The per-package script:
 - Updates `package.json` version
 - Updates `CHANGELOG.md`
 - Creates a commit and a namespaced tag
-- Never publishes — that's the CI's job
+- Never publishes - that's the CI's job
 
 ---
 
@@ -264,7 +264,7 @@ Each package maintains its own `CHANGELOG.md`. The release script generates entr
 ### Other
 ```
 
-Only commits that touch the specific package's directory are included — cross-package commits do not leak into neighbouring changelogs.
+Only commits that touch the specific package's directory are included - cross-package commits do not leak into neighbouring changelogs.
 
 ---
 
@@ -322,7 +322,7 @@ https://npm.pkg.github.com
 ```
 
 - Published automatically with the same release workflow
-- Uses the auto-generated `GITHUB_TOKEN` — no additional configuration needed
+- Uses the auto-generated `GITHUB_TOKEN` - no additional configuration needed
 - Available to anyone with access to the `pixu1980` organisation
 
 ### Other registries (not configured, but possible)

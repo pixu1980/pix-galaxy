@@ -6,7 +6,7 @@
  * Shows all format values simultaneously with format-specific slider controls.
  * Form-associated via ElementInternals.
  *
- * @fires color-change — when the color changes
+ * @fires color-change - when the color changes
  */
 import { Color, formatValue } from './_color.js';
 import componentCSS from './PixColor.css?raw';
@@ -170,7 +170,7 @@ class PixColor extends HTMLElement {
     this.#bar.append(this.#colorInput, this.#swatch, this.#hexVal, arrow);
     this.append(this.#bar);
 
-    // Events (usando handler stabili — niente inline arrow)
+    // Events (usando handler stabili - niente inline arrow)
     this.#bar.addEventListener('click', this.#onBarClick);
     this.#bar.addEventListener('keydown', this.#onBarKeydown);
   }
@@ -198,7 +198,7 @@ class PixColor extends HTMLElement {
     this.#renderValues();
     this.#panel.append(this.#valuesEl);
 
-    // Tabs — cleanup qualsiasi handler precedente
+    // Tabs - cleanup qualsiasi handler precedente
     for (const fn of this.#tabCleanup) fn();
     this.#tabCleanup = [];
 

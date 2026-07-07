@@ -13,6 +13,7 @@ import prismThemeCSS from './styles/themes/_prism.css?raw';
 import monokaiThemeCSS from './styles/themes/_monokai.css?raw';
 import nordThemeCSS from './styles/themes/_nord.css?raw';
 import themeDefaultsCSS from './styles/themes/_theme-defaults.css?raw';
+import foundationsCSS from '@pix-galaxy/pix-foundations/foundations.css?raw';
 
 import {
   TOKEN_TYPES,
@@ -36,6 +37,7 @@ import {
 } from './lexers/index.js';
 
 const COMPONENT_STYLE_TEXT = [
+  foundationsCSS,
   themeDefaultsCSS,
   defaultThemeCSS,
   prismThemeCSS,

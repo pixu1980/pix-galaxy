@@ -6,11 +6,11 @@
  *
  * States: idle → recording → paused → done
  *
- * @fires recorder-start — recording started
- * @fires recorder-pause — recording paused
- * @fires recorder-resume — recording resumed
- * @fires recorder-complete — { blob, duration } recording finished
- * @fires recorder-error — { message } error occurred
+ * @fires recorder-start - recording started
+ * @fires recorder-pause - recording paused
+ * @fires recorder-resume - recording resumed
+ * @fires recorder-complete - { blob, duration } recording finished
+ * @fires recorder-error - { message } error occurred
  */
 import componentCSS from './PixRecorder.css?raw';
 
@@ -115,7 +115,7 @@ class PixRecorder extends HTMLElement {
     toolbar.setAttribute('role', 'toolbar');
     toolbar.setAttribute('aria-label', 'Audio recorder controls');
 
-    // Record button — usare handler stabili, niente inline arrow
+    // Record button - usare handler stabili, niente inline arrow
     const recordBtn = this.#makeBtn('record', 'Start recording', SVG_RECORD);
     recordBtn.addEventListener('click', this.#onRecordClick);
 
@@ -420,7 +420,7 @@ class PixRecorder extends HTMLElement {
     this.#setStatus('Recording complete');
 
     const total = this.#elapsed();
-    this.#announce(`Recording complete — ${Math.floor(total / 60)} minutes ${Math.floor(total % 60)} seconds`);
+    this.#announce(`Recording complete - ${Math.floor(total / 60)} minutes ${Math.floor(total % 60)} seconds`);
     this.dispatchEvent(new CustomEvent('recorder-complete', {
       detail: { blob: this.#blob, duration: total },
       bubbles: true,

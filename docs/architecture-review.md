@@ -1,4 +1,4 @@
-# Pix-Galaxy — Architectural Review
+# Pix-Galaxy - Architectural Review
 
 > **Author:** Senior UI Architect review  
 > **Date:** 2026-07-05  
@@ -17,11 +17,11 @@
 | **Modularity** | 1.0 | ✅ Eccellente |
 | **Coverage discipline** | 1.0 | ✅ |
 
-> Il quality signal `7213/10000` è trainato verso il basso dalla **disuguaglianza estrema** (Gini 0.745) — pochi file concentrano la maggior parte della complessità.
+> Il quality signal `7213/10000` è trainato verso il basso dalla **disuguaglianza estrema** (Gini 0.745) - pochi file concentrano la maggior parte della complessità.
 
 ---
 
-## 🔴 CRITICAL — 6 problemi strutturali
+## 🔴 CRITICAL - 6 problemi strutturali
 
 ### 1. Memory leak: event listener inline arrow functions mai rimossi
 
@@ -30,12 +30,12 @@
 Ogni componente che usa **inline arrow function** in `addEventListener` perde quei listener quando il componente viene rimosso dal DOM.
 
 ```js
-// pix-color: righe 128, 158, 168 — MAI rimossi in disconnectedCallback
+// pix-color: righe 128, 158, 168 - MAI rimossi in disconnectedCallback
 this.#colorInput.addEventListener('input', (e) => { ... });
 this.#bar.addEventListener('click', (e) => { ... });
 this.#bar.addEventListener('keydown', (e) => { ... });
 
-// pix-recorder: righe 113–132 — IDEM
+// pix-recorder: righe 113–132 - IDEM
 recordBtn.addEventListener('click', () => { ... });
 pauseBtn.addEventListener('click', () => { ... });
 stopBtn.addEventListener('click', () => { ... });
@@ -60,7 +60,7 @@ disconnectedCallback() {
 
 ---
 
-### 2. `.bind()` senza referenza stabile — leak garantito
+### 2. `.bind()` senza referenza stabile - leak garantito
 
 **Coinvolge:** `pix-toast`
 
@@ -103,7 +103,7 @@ this.#overlay.addEventListener('click', (e) => {
 
 ---
 
-### 4. Pix-splitter modifica `document.body.dataset` — side effect globale
+### 4. Pix-splitter modifica `document.body.dataset` - side effect globale
 
 **Coinvolge:** `pix-splitter`
 
@@ -162,13 +162,13 @@ disconnectedCallback() {
 
 ---
 
-## 🟡 MODERATE — 8 problemi
+## 🟡 MODERATE - 8 problemi
 
 ### 7. `light-dark()` senza fallback per browser vecchi
 
 **Coinvolge:** **Tutti i componenti**
 
-`light-dark()` è supportato da Chrome 119+, Safari 17.5+, Firefox 120+. Su browser più vecchi, l'intera dichiarazione CSS viene scartata — il componente diventa invisibile.
+`light-dark()` è supportato da Chrome 119+, Safari 17.5+, Firefox 120+. Su browser più vecchi, l'intera dichiarazione CSS viene scartata - il componente diventa invisibile.
 
 ```css
 --pix-command--fg: light-dark(oklch(0.18 0.012 60), oklch(0.88 0.01 85));
@@ -184,7 +184,7 @@ disconnectedCallback() {
 
 ---
 
-### 8. `adoptedStyleSheets` ordering — conflitto potenziale
+### 8. `adoptedStyleSheets` ordering - conflitto potenziale
 
 **Coinvolge:** **Tutti i componenti**
 
@@ -194,7 +194,7 @@ Ogni componente pusha il proprio CSS in `document.adoptedStyleSheets`. L'ultimo 
 
 ---
 
-### 9. Pix-recorder: microfono — nessun recovery
+### 9. Pix-recorder: microfono - nessun recovery
 
 **Coinvolge:** `pix-recorder`
 
@@ -251,9 +251,9 @@ Pix-color e pix-sortable dichiarano form association ma non chiamano `attachInte
 
 ---
 
-## 🟢 MINOR — 10 note
+## 🟢 MINOR - 10 note
 
-### 15. `innerHTML` — escape parziale
+### 15. `innerHTML` - escape parziale
 
 Pix-color non fa escapeHTML sui gradient backgrounds (riga 347-349). Rischio XSS teorico se un valore slider viene manipolato.
 
@@ -273,7 +273,7 @@ Il gradiente OKLCH usa `hex` corrente ma non viene ricalcolato su `updateDisplay
 
 Link e pulsanti dentro item sortable non sono cliccabili. Rendere `data-sortable-handle` obbligatorio.
 
-### 20. Pix-command: `isMetaOrCtrl()` — comportamento corretto
+### 20. Pix-command: `isMetaOrCtrl()` - comportamento corretto
 
 CMD+K su Mac, Ctrl+K su Windows. Volutamente inclusivo, nessuna ambiguità.
 
