@@ -1,2 +1,2 @@
 /** Barrel — pix-display-preferences components. */
-export * from './DisplayPreferencesPopover/DisplayPreferencesPopover.js';
+export * from './DisplayPreferencesPopover/index.js';

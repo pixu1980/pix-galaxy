@@ -1,2 +1,2 @@
 /** Barrel — pix-component-template components. */
-export * from './ComponentName/ComponentName.js';
+export * from './ComponentName/index.js';

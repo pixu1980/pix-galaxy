@@ -1,2 +1,2 @@
 /** Barrel — pix-splitter components. */
-export * from './PixSplitter/PixSplitter.js';
+export * from './PixSplitter/index.js';

@@ -1,2 +1,2 @@
 /** Barrel — pix-accent-color-selector components. */
-export * from './AccentColorSelector/AccentColorSelector.js';
+export * from './AccentColorSelector/index.js';
