@@ -1,2 +1,2 @@
 /** Barrel — pix-recorder components. */
-export * from './PixRecorder/PixRecorder.js';
+export * from './PixRecorder/index.js';

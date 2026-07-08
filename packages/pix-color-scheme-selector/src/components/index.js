@@ -1,2 +1,2 @@
 /** Barrel — pix-color-scheme-selector components. */
-export * from './ColorSchemeSelector/ColorSchemeSelector.js';
+export * from './ColorSchemeSelector/index.js';
