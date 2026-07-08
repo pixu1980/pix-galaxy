@@ -1,3 +1,4 @@
+/** Lexer — TypeScript syntax tokens. */
 import { lexJS } from './_JavaScript.js';
 
 /**

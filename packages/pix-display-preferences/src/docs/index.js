@@ -1,3 +1,4 @@
+/** pix-display-preferences — documentation site entry. */
 import { Marked, Renderer } from 'marked';
 
 function escapeHtml(value) {

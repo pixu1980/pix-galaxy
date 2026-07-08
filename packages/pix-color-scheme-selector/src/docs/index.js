@@ -1,3 +1,4 @@
+/** pix-color-scheme-selector — documentation site entry. */
 import { Marked, Renderer } from 'marked';
 
 function escapeHtml(value) {

@@ -12,3 +12,4 @@ coverage/
 .tokensave
 artifact/
 .artifacts/
+e2e/results.json
