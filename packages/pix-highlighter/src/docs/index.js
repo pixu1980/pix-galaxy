@@ -1,3 +1,4 @@
+/** pix-highlighter — documentation site entry. */
 import { Marked, Renderer } from 'marked';
 
 const SITE_COLOR_MODE_STORAGE_KEY = 'pix-highlighter-site-color-mode';

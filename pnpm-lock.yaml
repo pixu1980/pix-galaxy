@@ -14,6 +14,9 @@ importers:
       '@pix-galaxy/pix-color-scheme-selector':
         specifier: workspace:*
         version: link:packages/pix-color-scheme-selector
+      '@pix-galaxy/pix-display-preferences':
+        specifier: workspace:*
+        version: link:packages/pix-display-preferences
       '@pix-galaxy/pix-foundations':
         specifier: workspace:*
         version: link:packages/pix-foundations

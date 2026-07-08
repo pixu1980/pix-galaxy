@@ -39,6 +39,7 @@
   "devDependencies": {
     "@eslint/js": "9.24.0",
     "@pix-galaxy/pix-color-scheme-selector": "workspace:*",
+    "@pix-galaxy/pix-display-preferences": "workspace:*",
     "@pix-galaxy/pix-foundations": "workspace:*",
     "@playwright/test": "^1.61.1",
     "concurrently": "9.2.1",

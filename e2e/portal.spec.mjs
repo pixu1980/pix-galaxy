@@ -71,7 +71,7 @@ test.describe('Portal (http://localhost:3000)', () => {
 
   test('color scheme selector is present', async ({ page }) => {
     await page.goto('/');
-    const selector = page.locator('pix-color-scheme-selector');
+    const selector = page.locator('pix-color-scheme-selector').first();
     await expect(selector).toBeVisible({ timeout: 8000 });
   });
 

@@ -1,3 +1,4 @@
+/** ComponentName — pix-component-template component styles. */
 @layer pix-galaxy {
   @layer {%COMPONENT_NAME%} {
     /* Component: {%ELEMENT_NAME%} - {%COMPONENT_DESCRIPTION%} */

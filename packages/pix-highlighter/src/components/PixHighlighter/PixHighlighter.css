@@ -1,3 +1,4 @@
+/** PixHighlighter — pix-highlighter component styles. */
 @layer pix-galaxy {
   @layer pix-highlighter {
     ::highlight(pix-kw),
