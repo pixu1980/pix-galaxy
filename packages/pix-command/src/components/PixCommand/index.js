@@ -1,3 +1,3 @@
 /** PixCommand — barrel. */
-export * from './PixCommand.js';
+export * from './_PixCommand.js';
 

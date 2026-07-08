@@ -1,3 +1,3 @@
 /** ColorSchemeSelector — barrel. */
-export * from './ColorSchemeSelector.js';
+export * from './_ColorSchemeSelector.js';
 

@@ -4,7 +4,7 @@
  * - Falls back to token spans when the API is not supported.
  * - Exposes a copy action and a page-wide theme selector on every instance.
  */
-import mainCSS from './PixHighlighter.css?raw';
+import mainCSS from './_PixHighlighter.css?raw';
 import cyberpunkThemeCSS from './styles/themes/_cyberpunk.css?raw';
 import darculaThemeCSS from './styles/themes/_darcula.css?raw';
 import defaultThemeCSS from './styles/themes/_default.css?raw';

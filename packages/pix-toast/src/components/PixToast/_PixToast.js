@@ -6,7 +6,7 @@
  *
  * @fires toast-dismiss - when the user clicks dismiss
  */
-import componentCSS from './PixToast.css?raw';
+import componentCSS from './_PixToast.css?raw';
 
 const ELEMENT_NAME = 'pix-toast';
 

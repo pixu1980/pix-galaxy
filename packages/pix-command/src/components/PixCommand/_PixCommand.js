@@ -20,7 +20,7 @@
  * @fires command-selected - when a command is activated
  * @fires command-dismissed - when the palette is closed without selecting
  */
-import componentCSS from './PixCommand.css?raw';
+import componentCSS from './_PixCommand.css?raw';
 
 const ELEMENT_NAME = 'pix-command';
 

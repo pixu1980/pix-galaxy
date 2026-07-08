@@ -9,7 +9,7 @@
  * @fires color-change - when the color changes
  */
 import { Color, formatValue } from './_color.js';
-import componentCSS from './PixColor.css?raw';
+import componentCSS from './_PixColor.css?raw';
 
 const ELEMENT_NAME = 'pix-color';
 const FORMATS = ['HEX', 'RGB', 'HSL', 'OKLCH'];

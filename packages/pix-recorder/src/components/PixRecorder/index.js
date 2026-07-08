@@ -1,3 +1,3 @@
 /** PixRecorder — barrel. */
-export * from './PixRecorder.js';
+export * from './_PixRecorder.js';
 

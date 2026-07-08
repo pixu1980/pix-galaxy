@@ -1,3 +1,3 @@
 /** AccentColorSelector — barrel. */
-export * from './AccentColorSelector.js';
+export * from './_AccentColorSelector.js';
 
