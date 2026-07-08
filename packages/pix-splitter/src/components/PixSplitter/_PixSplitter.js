@@ -16,7 +16,7 @@
  * @fires splitter-resize - while dragging
  * @fires splitter-resize-end - when drag ends
  */
-import componentCSS from './PixSplitter.css?raw';
+import componentCSS from './_PixSplitter.css?raw';
 
 const ELEMENT_NAME = 'pix-splitter';
 const HANDLE_SIZE = 8; // px - must match --pix-splitter--handle-size in CSS

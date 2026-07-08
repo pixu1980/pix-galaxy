@@ -1,3 +1,3 @@
 /** PixColor — barrel. */
-export * from './PixColor.js';
+export * from './_PixColor.js';
 

@@ -14,7 +14,7 @@
  * </script>
  * ```
  */
-import { PixToast } from './PixToast.js';
+import { PixToast } from './_PixToast.js';
 
 const ELEMENT_NAME = 'pix-toast-stack';
 

@@ -12,7 +12,7 @@
  * @fires recorder-complete - { blob, duration } recording finished
  * @fires recorder-error - { message } error occurred
  */
-import componentCSS from './PixRecorder.css?raw';
+import componentCSS from './_PixRecorder.css?raw';
 
 const ELEMENT_NAME = 'pix-recorder';
 const SVG_RECORD = '<svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="6" fill="currentColor"/></svg>';

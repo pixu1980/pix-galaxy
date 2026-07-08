@@ -1,3 +1,3 @@
 /** PixHighlighter — barrel. */
-export * from './PixHighlighter.js';
+export * from './_PixHighlighter.js';
 

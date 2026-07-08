@@ -6,7 +6,7 @@
  * Persists to localStorage, syncs with <meta name="color-scheme">,
  * and sets both data-color-scheme attribute and style.colorScheme on <html>.
  */
-import componentCSS from './ColorSchemeSelector.css?raw';
+import componentCSS from './_ColorSchemeSelector.css?raw';
 import sunIconSVG from './icons/sun.svg?raw';
 import moonIconSVG from './icons/moon.svg?raw';
 import monitorIconSVG from './icons/monitor.svg?raw';

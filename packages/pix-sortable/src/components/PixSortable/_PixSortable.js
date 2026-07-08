@@ -9,7 +9,7 @@
  *
  * @fires sortable-change - { fromIndex, toIndex, items }
  */
-import componentCSS from './PixSortable.css?raw';
+import componentCSS from './_PixSortable.css?raw';
 
 const ELEMENT_NAME = 'pix-sortable';
 const SVG_GRIP = '<svg aria-hidden="true" viewBox="0 0 16 16" fill="currentColor"><circle cx="5" cy="4" r="1.2"/><circle cx="11" cy="4" r="1.2"/><circle cx="5" cy="8" r="1.2"/><circle cx="11" cy="8" r="1.2"/><circle cx="5" cy="12" r="1.2"/><circle cx="11" cy="12" r="1.2"/></svg>';

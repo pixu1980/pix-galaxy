@@ -5,7 +5,7 @@
  * Manages 5 pastel accent color options with keyboard navigation and persistence.
  * Sets CSS custom properties on <html> for the selected accent color.
  */
-import componentCSS from './AccentColorSelector.css?raw';
+import componentCSS from './_AccentColorSelector.css?raw';
 
 const STORAGE_KEY = 'pix-accent-color';
 const ELEMENT_NAME = 'pix-accent-color-selector';

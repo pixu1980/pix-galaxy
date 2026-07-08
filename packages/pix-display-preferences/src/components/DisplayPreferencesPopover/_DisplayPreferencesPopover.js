@@ -12,7 +12,7 @@
  */
 import '@pix-galaxy/pix-accent-color-selector';
 import '@pix-galaxy/pix-color-scheme-selector';
-import componentCSS from './DisplayPreferencesPopover.css?raw';
+import componentCSS from './_DisplayPreferencesPopover.css?raw';
 
 const STORAGE_KEY = 'pix-display-preferences';
 const ELEMENT_NAME = 'pix-display-preferences';

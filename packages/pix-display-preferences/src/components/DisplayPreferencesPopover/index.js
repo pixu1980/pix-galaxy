@@ -1,3 +1,3 @@
 /** DisplayPreferencesPopover — barrel. */
-export * from './DisplayPreferencesPopover.js';
+export * from './_DisplayPreferencesPopover.js';
 

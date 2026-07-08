@@ -4,7 +4,7 @@
  * {%COMPONENT_DESCRIPTION%}
  * (TODO: describe what this component does, its keyboard navigation, persistence, events, etc.)
  */
-import componentCSS from './ComponentName.css?raw';
+import componentCSS from './_ComponentName.css?raw';
 
 const STORAGE_KEY = '{%STORAGE_KEY%}';
 const ELEMENT_NAME = '{%ELEMENT_NAME%}';

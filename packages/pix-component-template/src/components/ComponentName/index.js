@@ -1,3 +1,3 @@
 /** ComponentName — barrel. */
-export * from './ComponentName.js';
+export * from './_ComponentName.js';
 
