@@ -9,31 +9,31 @@
 
 ### Properties
 
-| Property | Type | Description |
-|----------|------|-------------|
+| Property       | Type     | Description                |
+| -------------- | -------- | -------------------------- |
 | `currentValue` | `string` | The currently active value |
 
 ### Methods
 
-| Method | Description |
-|--------|-------------|
-| *(TODO)* | *(TODO)* |
+| Method   | Description |
+| -------- | ----------- |
+| _(TODO)_ | _(TODO)_    |
 
 ### Static Methods
 
-| Method | Description |
-|--------|-------------|
+| Method                    | Description                                     |
+| ------------------------- | ----------------------------------------------- |
 | `ensureComponentStyles()` | Ensure component CSS is adopted in the document |
 
 ## Events
 
-| Event | Detail | Description |
-|-------|--------|-------------|
-| *(TODO)* | *(TODO)* | *(TODO)* |
+| Event    | Detail   | Description |
+| -------- | -------- | ----------- |
+| _(TODO)_ | _(TODO)_ | _(TODO)_    |
 
 ## CSS custom properties set on `:root`
 
-*(TODO)*
+_(TODO)_
 
 ## Example
 

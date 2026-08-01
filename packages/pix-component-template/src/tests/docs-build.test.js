@@ -1,7 +1,7 @@
 import { readFile } from 'node:fs/promises';
 import assert from 'node:assert/strict';
 import { describe, test } from 'node:test';
-import { buildDocsManifest } from '../../scripts/docs.mjs';
+import { buildDocsManifest } from '../../../pix-core/scripts/docs.mjs';
 
 describe('docs build', () => {
   test('buildDocsManifest returns expected structure', async () => {

@@ -21,9 +21,7 @@ npm install @pix-galaxy/pix-command
 ```html
 <pix-command>
   <script type="application/json">
-    [
-      { "id": "hello", "label": "Say Hello", "description": "Greet the user" }
-    ]
+    [{ "id": "hello", "label": "Say Hello", "description": "Greet the user" }]
   </script>
 </pix-command>
 ```

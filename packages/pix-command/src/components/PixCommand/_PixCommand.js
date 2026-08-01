@@ -73,18 +73,29 @@ function isMetaOrCtrl(event) {
 
 /* ── Default icons ──────────────────────────────────────────────── */
 
-const SEARCH_ICON = '<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m16.5 16.5 4 4"/></svg>';
-const NAV_ICON = '<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>';
-const APPEARANCE_ICON = '<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" stroke-linecap="round"/></svg>';
-const ACTION_ICON = '<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>';
-const CLOSE_ICON = '<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>';
+const SEARCH_ICON =
+  '<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m16.5 16.5 4 4"/></svg>';
+const NAV_ICON =
+  '<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>';
+const APPEARANCE_ICON =
+  '<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" stroke-linecap="round"/></svg>';
+const ACTION_ICON =
+  '<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>';
+const CLOSE_ICON =
+  '<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>';
 
 const UNKNOWN_ICON = SEARCH_ICON;
 
 function iconForCategory(category) {
   const cat = (category || '').toLowerCase();
   if (cat.includes('nav') || cat.includes('goto') || cat.includes('page')) return NAV_ICON;
-  if (cat.includes('appear') || cat.includes('theme') || cat.includes('color') || cat.includes('display')) return APPEARANCE_ICON;
+  if (
+    cat.includes('appear') ||
+    cat.includes('theme') ||
+    cat.includes('color') ||
+    cat.includes('display')
+  )
+    return APPEARANCE_ICON;
   if (cat.includes('action') || cat.includes('util') || cat.includes('tool')) return ACTION_ICON;
   return UNKNOWN_ICON;
 }
@@ -314,7 +325,7 @@ class PixCommand extends HTMLElement {
   #render() {
     if (this.#overlay) return;
 
-    const uid = this.#uid = (this.#uid + 1).toString(36);
+    const uid = (this.#uid = (this.#uid + 1).toString(36));
 
     this.#overlay = document.createElement('div');
     this.#overlay.dataset.commandOverlay = '';
@@ -326,12 +337,14 @@ class PixCommand extends HTMLElement {
 
     // Input wrapper with search icon
     const inputWrapper = document.createElement('div');
-    inputWrapper.style.cssText = 'display:flex;align-items:center;gap:0.5rem;padding:0 1rem;border-bottom:1px solid var(--pix-command--border, inherit);';
+    inputWrapper.style.cssText =
+      'display:flex;align-items:center;gap:0.5rem;padding:0 1rem;border-bottom:1px solid var(--pix-command--border, inherit);';
 
     const searchIcon = document.createElement('span');
     searchIcon.dataset.commandSearchIcon = '';
     searchIcon.innerHTML = SEARCH_ICON;
-    searchIcon.style.cssText = 'flex-shrink:0;width:1.25rem;height:1.25rem;display:flex;color:var(--pix-command--muted, inherit);opacity:0.5;';
+    searchIcon.style.cssText =
+      'flex-shrink:0;width:1.25rem;height:1.25rem;display:flex;color:var(--pix-command--muted, inherit);opacity:0.5;';
     inputWrapper.append(searchIcon);
 
     this.#input = document.createElement('input');
@@ -344,7 +357,8 @@ class PixCommand extends HTMLElement {
     this.#input.setAttribute('aria-expanded', 'true');
     this.#input.autocomplete = 'off';
     this.#input.spellcheck = false;
-    this.#input.style.cssText = 'flex:1;border:0;background:transparent;font:inherit;font-size:1rem;padding:0.875rem 0;outline:none;color:inherit;';
+    this.#input.style.cssText =
+      'flex:1;border:0;background:transparent;font:inherit;font-size:1rem;padding:0.875rem 0;color:inherit;';
     inputWrapper.append(this.#input);
 
     this.#list = document.createElement('ul');
@@ -541,7 +555,13 @@ class PixCommand extends HTMLElement {
       }
       default: {
         // If a printable key is pressed and input isn't focused, focus it
-        if (event.key.length === 1 && !event.metaKey && !event.ctrlKey && !event.altKey && document.activeElement !== this.#input) {
+        if (
+          event.key.length === 1 &&
+          !event.metaKey &&
+          !event.ctrlKey &&
+          !event.altKey &&
+          document.activeElement !== this.#input
+        ) {
           this.#input?.focus();
         }
       }

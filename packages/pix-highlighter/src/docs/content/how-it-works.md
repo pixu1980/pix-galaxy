@@ -44,8 +44,12 @@ For every connected instance, the component collects all token ranges into `High
 
 ```css
 /* The theme defines colours per token type */
-::highlight(pix-keyword)   { color: var(--pix-highlighter--keyword); }
-::highlight(pix-string)    { color: var(--pix-highlighter--string); }
+::highlight(pix-keyword) {
+  color: var(--pix-highlighter--keyword);
+}
+::highlight(pix-string) {
+  color: var(--pix-highlighter--string);
+}
 ```
 
 Because highlights are registered globally on the document, all instances share a single set of `Highlight` objects - the component batches ranges from every connected block into the same highlight groups. When an instance connects or disconnects, `PixHighlighter.renderHighlights()` rebuilds the full set.
@@ -57,7 +61,9 @@ This path keeps the DOM clean: the `<code>` element contains only a single `Text
 When the Highlight API is unavailable, pix-highlighter falls back to wrapping each token in a `<span data-token="type">` element inside the `<code>` block. The same theme CSS variables style the spans via attribute selectors:
 
 ```css
-code span[data-token="keyword"] { color: var(--pix-highlighter--keyword); }
+code span[data-token='keyword'] {
+  color: var(--pix-highlighter--keyword);
+}
 ```
 
 This ensures the component works in all browsers without a polyfill.
@@ -67,9 +73,9 @@ This ensures the component works in all browsers without a polyfill.
 Every theme is a set of CSS custom properties scoped to `html[data-pix-highlighter-theme="<name>"]`:
 
 ```css
-html[data-pix-highlighter-theme="nord"] {
+html[data-pix-highlighter-theme='nord'] {
   --pix-highlighter--keyword: #81a1c1;
-  --pix-highlighter--string:  #a3be8c;
+  --pix-highlighter--string: #a3be8c;
   --pix-highlighter--function: #88c0d0;
   /* ... */
 }
@@ -77,15 +83,15 @@ html[data-pix-highlighter-theme="nord"] {
 
 ### Built-in themes
 
-| Theme          | Description |
-|----------------|-------------|
+| Theme          | Description             |
+| -------------- | ----------------------- |
 | `default`      | Warm, readable defaults |
-| `prism`        | Inspired by Prism.js |
-| `prettylights` | GitHub-inspired |
-| `darcula`      | JetBrains Darcula |
-| `cyberpunk`    | Neon on dark |
-| `monokai`      | Classic Monokai |
-| `nord`         | Arctic, blue-tinted |
+| `prism`        | Inspired by Prism.js    |
+| `prettylights` | GitHub-inspired         |
+| `darcula`      | JetBrains Darcula       |
+| `cyberpunk`    | Neon on dark            |
+| `monokai`      | Classic Monokai         |
+| `nord`         | Arctic, blue-tinted     |
 
 Themes are applied globally via `PixHighlighter.applyTheme('nord')` and persisted to `localStorage` under the key `pix-highlighter-theme`.
 

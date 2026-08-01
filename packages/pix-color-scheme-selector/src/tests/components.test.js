@@ -57,7 +57,10 @@ let PixColorSchemeSelector, SCHEMES, STORAGE_KEY, META_CONTENT;
 
 before(async () => {
   const mod = await import(
-    new URL('../components/ColorSchemeSelector/ColorSchemeSelector.js?component-test', import.meta.url)
+    new URL(
+      '../components/ColorSchemeSelector/ColorSchemeSelector.js?component-test',
+      import.meta.url
+    )
   );
   ({ PixColorSchemeSelector, SCHEMES, STORAGE_KEY, META_CONTENT } = mod);
 });
@@ -140,14 +143,12 @@ describe('PixColorSchemeSelector', () => {
         'pix-color-scheme-selector [data-color-scheme-selector]'
       )
     );
-    assert.ok(componentSource.includes("import componentCSS from './ColorSchemeSelector.css?raw';"));
+    assert.ok(
+      componentSource.includes("import componentCSS from './ColorSchemeSelector.css?raw';")
+    );
     assert.ok(componentSource.includes('static {'));
-    assert.ok(
-      componentSource.includes("globalThis.customElements.define(ELEMENT_NAME, this)")
-    );
-    assert.ok(
-      componentCss.includes('pix-color-scheme-selector [data-color-scheme-selector]')
-    );
+    assert.ok(componentSource.includes('globalThis.customElements.define(ELEMENT_NAME, this)'));
+    assert.ok(componentCss.includes('pix-color-scheme-selector [data-color-scheme-selector]'));
     assert.ok(!componentCss.includes(':host'));
   });
 

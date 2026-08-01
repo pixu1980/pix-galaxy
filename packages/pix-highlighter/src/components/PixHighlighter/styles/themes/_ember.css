@@ -1,7 +1,12 @@
+/**
+ * FILE: _ember.css
+ * USAGE: Stylesheet for packages/pix-highlighter/src/components/PixHighlighter/styles/themes/_ember.css.
+ * SCOPE: File-local selectors and pix-galaxy design tokens.
+ */
 @layer pix-galaxy {
   @layer pix-highlighter {
     @layer themes {
-      :root[data-pix-highlighter-theme="ember"] pre[is="pix-highlighter"] {
+      :root[data-pix-highlighter-theme='ember'] pre[is='pix-highlighter'] {
         --pix-highlighter--bg: light-dark(#fff7f1, #1b1410);
         --pix-highlighter--fg: light-dark(#3b2217, #f7ede2);
         --pix-highlighter--kw: light-dark(#dc2626, #ff7b72);
@@ -30,7 +35,7 @@
         --pix-highlighter--mdimg: light-dark(#e11d48, #fb7185);
         --pix-highlighter--tab-size: 2;
         --pix-highlighter--line-height: 1.55;
-        --pix-highlighter--text-shadow: light-dark(none, 0 0 20px rgba(255, 123, 114, 0.08));
+        --pix-highlighter--text-shadow: light-dark(none, 0 0 1.25rem rgba(255, 123, 114, 0.08));
       }
     }
   }

@@ -1,5 +1,5 @@
 /** pix-splitter — documentation site entry. */
-import { createDocsSite, buildDocsPages } from '@pix-galaxy/shared/docs/docs-site.js';
+import { createDocsSite, buildDocsPages } from '@pix-galaxy/pix-core/docs/docs-site.js';
 
 const examples = [
   {
@@ -75,7 +75,8 @@ async function bootDocsSite() {
       version: packageJson.version,
       componentName: 'pix-splitter',
       componentTag: 'pix-splitter',
-      description: 'Accessible resizable panel splitter Web Component. Supports horizontal and vertical layouts with keyboard navigation.',
+      description:
+        'Accessible resizable panel splitter Web Component. Supports horizontal and vertical layouts with keyboard navigation.',
       liveHtml: `
         <pix-color-scheme-selector></pix-color-scheme-selector>
         <pix-splitter orientation="horizontal" style="height:120px;border:1px solid var(--pix-ds-line-soft);border-radius:8px;overflow:hidden;margin-top:0.5rem;">

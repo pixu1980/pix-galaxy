@@ -23,7 +23,10 @@ function createMarked() {
   const renderer = new Renderer();
 
   renderer.code = ({ text, lang = '' }) => {
-    const language = String(lang || 'text').trim().toLowerCase() || 'text';
+    const language =
+      String(lang || 'text')
+        .trim()
+        .toLowerCase() || 'text';
     return `<pre is="pix-highlighter" data-lang="${escapeHtml(language)}"><code>${escapeHtml(text)}</code></pre>`;
   };
 
@@ -88,13 +91,7 @@ function renderExamples(exampleEntries, cardPartName = 'example-card') {
     .join('');
 }
 
-export function createDocsSite({
-  mount,
-  docs,
-  examples: exampleEntries,
-  meta,
-  afterRender,
-}) {
+export function createDocsSite({ mount, docs, examples: exampleEntries, meta, afterRender }) {
   const state = {
     activeSlug: docs[0]?.slug || '',
   };
@@ -193,22 +190,31 @@ export function createDocsSite({
 }
 
 export async function loadDocsData() {
-  const [gettingStartedModule, howItWorksModule, apiModule, examplesModule, releasingModule, packageJsonModule] =
-    await Promise.all([
-      import('./content/getting-started.md?raw'),
-      import('./content/how-it-works.md?raw'),
-      import('./content/api.md?raw'),
-      import('./content/examples.md?raw'),
-      import('./content/releasing.md?raw'),
-      import('../../package.json'),
-    ]);
+  const [
+    gettingStartedModule,
+    howItWorksModule,
+    apiModule,
+    examplesModule,
+    releasingModule,
+    packageJsonModule,
+  ] = await Promise.all([
+    import('./content/getting-started.md?raw'),
+    import('./content/how-it-works.md?raw'),
+    import('./content/api.md?raw'),
+    import('./content/examples.md?raw'),
+    import('./content/releasing.md?raw'),
+    import('../../package.json'),
+  ]);
 
   const packageJson = packageJsonModule.default;
 
   return {
     docsPages: Object.freeze(
       buildDocsPages([
-        { markdown: gettingStartedModule.default, sourcePath: 'src/docs/content/getting-started.md' },
+        {
+          markdown: gettingStartedModule.default,
+          sourcePath: 'src/docs/content/getting-started.md',
+        },
         { markdown: howItWorksModule.default, sourcePath: 'src/docs/content/how-it-works.md' },
         { markdown: apiModule.default, sourcePath: 'src/docs/content/api.md' },
         { markdown: examplesModule.default, sourcePath: 'src/docs/content/examples.md' },
@@ -232,11 +238,7 @@ async function bootDocsSite() {
     return;
   }
 
-  const [
-    { docsPages, siteMeta },
-    _componentModule,
-    pixHighlighterModule,
-  ] = await Promise.all([
+  const [{ docsPages, siteMeta }, _componentModule, pixHighlighterModule] = await Promise.all([
     loadDocsData(),
     import('../index.js'),
     import('@pix-galaxy/pix-highlighter'),
@@ -259,9 +261,15 @@ async function bootDocsSite() {
 
       if (accentSelector && swatchDot && swatchValue) {
         function updateSwatch() {
-          const h = getComputedStyle(document.documentElement).getPropertyValue('--pix-accent-h').trim();
-          const s = getComputedStyle(document.documentElement).getPropertyValue('--pix-accent-s').trim();
-          const l = getComputedStyle(document.documentElement).getPropertyValue('--pix-accent-l').trim();
+          const h = getComputedStyle(document.documentElement)
+            .getPropertyValue('--pix-accent-h')
+            .trim();
+          const s = getComputedStyle(document.documentElement)
+            .getPropertyValue('--pix-accent-s')
+            .trim();
+          const l = getComputedStyle(document.documentElement)
+            .getPropertyValue('--pix-accent-l')
+            .trim();
           swatchDot.style.setProperty('--swatch-color', h && s && l ? `hsl(${h} ${s} ${l})` : null);
           swatchValue.textContent = h && s && l ? `${h} ${s} ${l}` : '';
         }

@@ -1,7 +1,12 @@
+/**
+ * FILE: _prism.css
+ * USAGE: Stylesheet for packages/pix-highlighter/src/components/PixHighlighter/styles/themes/_prism.css.
+ * SCOPE: File-local selectors and pix-galaxy design tokens.
+ */
 @layer pix-galaxy {
   @layer pix-highlighter {
     @layer themes {
-      :root[data-pix-highlighter-theme="prism"] pre[is="pix-highlighter"] {
+      :root[data-pix-highlighter-theme='prism'] pre[is='pix-highlighter'] {
         --pix-highlighter--bg: light-dark(#f5f2f0, #16181d);
         --pix-highlighter--fg: light-dark(#111111, #f3f4f6);
         --pix-highlighter--kw: light-dark(#0077aa, #7dd3fc);
@@ -29,7 +34,7 @@
         --pix-highlighter--mdhr: light-dark(#999999, #475569);
         --pix-highlighter--mdimg: light-dark(#ee9900, #fbbf24);
         --pix-highlighter--tab-size: 2;
-        --pix-highlighter--font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
+        --pix-highlighter--font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
         --pix-highlighter--line-height: 1.5;
         --pix-highlighter--text-shadow: light-dark(0 1px white, none);
       }

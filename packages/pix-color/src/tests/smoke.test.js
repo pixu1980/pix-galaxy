@@ -5,7 +5,10 @@ import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
 import { JSDOM } from 'jsdom';
 
-const dom = new JSDOM('<!DOCTYPE html><html><body></body></html>', { url: 'http://localhost', pretendToBeVisual: true });
+const dom = new JSDOM('<!DOCTYPE html><html><body></body></html>', {
+  url: 'http://localhost',
+  pretendToBeVisual: true,
+});
 
 globalThis.document = dom.window.document;
 globalThis.HTMLElement = dom.window.HTMLElement;
@@ -47,7 +50,9 @@ describe('pix-color', () => {
     const el = document.createElement('pix-color');
     document.body.appendChild(el);
     let fired = false;
-    el.addEventListener('color-change', () => { fired = true; });
+    el.addEventListener('color-change', () => {
+      fired = true;
+    });
     el.value = '#00FF00';
     assert.ok(fired, 'color-change should fire on value change');
     el.remove();

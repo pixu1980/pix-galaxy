@@ -2,16 +2,16 @@
 
 `{%COMPONENT_NAME%}` is a lightweight Web Component that manages {%COMPONENT_NAME%} preferences in the browser with zero runtime dependencies.
 
-*(TODO: describe how the component works)*
+_(TODO: describe how the component works)_
 
 ## Persistence
 
-*(TODO: describe localStorage persistence if applicable)*
+_(TODO: describe localStorage persistence if applicable)_
 
 ## Events
 
-*(TODO: describe custom events)*
+_(TODO: describe custom events)_
 
 ## Keyboard navigation
 
-*(TODO: describe keyboard interaction patterns)*
+_(TODO: describe keyboard interaction patterns)_

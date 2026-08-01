@@ -12,22 +12,35 @@
 import componentCSS from './_PixSortable.css?raw';
 
 const ELEMENT_NAME = 'pix-sortable';
-const SVG_GRIP = '<svg aria-hidden="true" viewBox="0 0 16 16" fill="currentColor"><circle cx="5" cy="4" r="1.2"/><circle cx="11" cy="4" r="1.2"/><circle cx="5" cy="8" r="1.2"/><circle cx="11" cy="8" r="1.2"/><circle cx="5" cy="12" r="1.2"/><circle cx="11" cy="12" r="1.2"/></svg>';
+const SVG_GRIP =
+  '<svg aria-hidden="true" viewBox="0 0 16 16" fill="currentColor"><circle cx="5" cy="4" r="1.2"/><circle cx="11" cy="4" r="1.2"/><circle cx="5" cy="8" r="1.2"/><circle cx="11" cy="8" r="1.2"/><circle cx="5" cy="12" r="1.2"/><circle cx="11" cy="12" r="1.2"/></svg>';
 
 let componentStyleSheet = null;
 function adoptComponentStyles() {
-  if (typeof document === 'undefined' || !('adoptedStyleSheets' in document) || typeof CSSStyleSheet !== 'function') return null;
-  if (!componentStyleSheet) { componentStyleSheet = new CSSStyleSheet(); componentStyleSheet.replaceSync(componentCSS); }
-  if (!document.adoptedStyleSheets.includes(componentStyleSheet)) document.adoptedStyleSheets = [...document.adoptedStyleSheets, componentStyleSheet];
+  if (
+    typeof document === 'undefined' ||
+    !('adoptedStyleSheets' in document) ||
+    typeof CSSStyleSheet !== 'function'
+  )
+    return null;
+  if (!componentStyleSheet) {
+    componentStyleSheet = new CSSStyleSheet();
+    componentStyleSheet.replaceSync(componentCSS);
+  }
+  if (!document.adoptedStyleSheets.includes(componentStyleSheet))
+    document.adoptedStyleSheets = [...document.adoptedStyleSheets, componentStyleSheet];
   return componentStyleSheet;
 }
 
 class PixSortable extends HTMLElement {
   static formAssociated = true;
-  static ensureComponentStyles() { return adoptComponentStyles(); }
+  static ensureComponentStyles() {
+    return adoptComponentStyles();
+  }
   static {
     this.ensureComponentStyles();
-    if (!globalThis.customElements?.get(ELEMENT_NAME)) globalThis.customElements.define(ELEMENT_NAME, this);
+    if (!globalThis.customElements?.get(ELEMENT_NAME))
+      globalThis.customElements.define(ELEMENT_NAME, this);
   }
 
   /* ── State ────────────────────────────────────────────────────── */
@@ -135,7 +148,11 @@ class PixSortable extends HTMLElement {
       const handleEl = el.querySelector('[data-sortable-handle]');
       const Node = globalThis.Node;
       for (const child of children) {
-        if (child !== handleEl && child.nodeType === (Node?.ELEMENT_NODE || 1) && !child.hasAttribute('data-sortable-content')) {
+        if (
+          child !== handleEl &&
+          child.nodeType === (Node?.ELEMENT_NODE || 1) &&
+          !child.hasAttribute('data-sortable-content')
+        ) {
           existingContent.appendChild(child);
         }
       }
@@ -286,7 +303,12 @@ class PixSortable extends HTMLElement {
     if (!this.#touchDrag) return;
     clearTimeout(this.#touchDrag.timer);
 
-    if (this.#touchDrag.active && this.#dragOverIndex >= 0 && this.#draggedIndex >= 0 && this.#dragOverIndex !== this.#draggedIndex) {
+    if (
+      this.#touchDrag.active &&
+      this.#dragOverIndex >= 0 &&
+      this.#draggedIndex >= 0 &&
+      this.#dragOverIndex !== this.#draggedIndex
+    ) {
       this.#moveItem(this.#draggedIndex, this.#dragOverIndex);
     }
 
@@ -367,7 +389,8 @@ class PixSortable extends HTMLElement {
   /* ── Move ─────────────────────────────────────────────────────── */
 
   #moveItem(from, to) {
-    if (from === to || from < 0 || to < 0 || from >= this.#items.length || to >= this.#items.length) return;
+    if (from === to || from < 0 || to < 0 || from >= this.#items.length || to >= this.#items.length)
+      return;
 
     const [moved] = this.#items.splice(from, 1);
     this.#items.splice(to, 0, moved);
@@ -398,22 +421,28 @@ class PixSortable extends HTMLElement {
 
     if (this.#internals?.setFormValue) this.#internals.setFormValue(this.values.join(','));
 
-    this.dispatchEvent(new CustomEvent('sortable-change', {
-      detail: {
-        fromIndex: from,
-        toIndex: to,
-        items: this.values,
-      },
-      bubbles: true,
-    }));
+    this.dispatchEvent(
+      new CustomEvent('sortable-change', {
+        detail: {
+          fromIndex: from,
+          toIndex: to,
+          items: this.values,
+        },
+        bubbles: true,
+      })
+    );
   }
 
   /* ── Public API ────────────────────────────────────────────────── */
 
-  get items() { return [...this.#items]; }
+  get items() {
+    return [...this.#items];
+  }
 
   get values() {
-    return this.#items.map((el) => el.getAttribute('data-sortable-value') || el.textContent?.trim() || '');
+    return this.#items.map(
+      (el) => el.getAttribute('data-sortable-value') || el.textContent?.trim() || ''
+    );
   }
 }
 

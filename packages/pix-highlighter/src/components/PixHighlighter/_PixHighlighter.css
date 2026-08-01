@@ -115,6 +115,5 @@
     pre[is='pix-highlighter'] [data-token='mdimg'] {
       color: var(--pix-highlighter--mdimg);
     }
-
   }
 }

@@ -155,7 +155,8 @@ class PixToastStack extends HTMLElement {
   /* ── Internal ──────────────────────────────────────────────────── */
 
   #addToast(config, explicitId) {
-    const id = explicitId || config.id || `toast-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
+    const id =
+      explicitId || config.id || `toast-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
 
     const toastConfig = {
       ...config,
@@ -217,9 +218,13 @@ class PixToastStack extends HTMLElement {
       observer.observe(this, { childList: true });
 
       // Also handle the case where dismiss animation completes
-      toast.addEventListener('toast-dismiss', () => {
-        // The toast will be removed by its own animationend
-      }, { once: true });
+      toast.addEventListener(
+        'toast-dismiss',
+        () => {
+          // The toast will be removed by its own animationend
+        },
+        { once: true }
+      );
 
       // Fallback if toast was already removed
       setTimeout(() => {

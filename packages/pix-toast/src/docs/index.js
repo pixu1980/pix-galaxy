@@ -1,5 +1,5 @@
 /** pix-toast — documentation site entry. */
-import { createDocsSite, buildDocsPages } from '@pix-galaxy/shared/docs/docs-site.js';
+import { createDocsSite, buildDocsPages } from '@pix-galaxy/pix-core/docs/docs-site.js';
 
 const examples = [
   {
@@ -75,7 +75,8 @@ async function bootDocsSite() {
       version: packageJson.version,
       componentName: 'pix-toast',
       componentTag: 'pix-toast-stack',
-      description: 'Accessible toast notification system with smart queuing, deduplication, and auto-dismiss. Includes both individual toast and stack manager.',
+      description:
+        'Accessible toast notification system with smart queuing, deduplication, and auto-dismiss. Includes both individual toast and stack manager.',
       liveHtml: `
         <pix-color-scheme-selector></pix-color-scheme-selector>
         <div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-top:0.5rem;">
@@ -87,7 +88,8 @@ async function bootDocsSite() {
       enhancePixHighlighters(root);
 
       const btn = root.querySelector('#demo-toast-btn');
-      const stack = document.querySelector('pix-toast-stack') || document.createElement('pix-toast-stack');
+      const stack =
+        document.querySelector('pix-toast-stack') || document.createElement('pix-toast-stack');
       if (!stack.isConnected) {
         stack.setAttribute('position', 'top-right');
         document.body.appendChild(stack);

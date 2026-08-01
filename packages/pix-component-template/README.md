@@ -12,17 +12,17 @@ Click **"Use this template"** on GitHub, then clone your new repo.
 
 Search for `{%...%}` placeholders across all files and replace with your component's values:
 
-| Placeholder | Example value |
-|---|---|
-| `{%COMPONENT_NAME%}` | `pix-accent-color-selector` |
-| `{%PACKAGE_NAME%}` | `@pix-galaxy/pix-accent-color-selector` |
-| `{%COMPONENT_CLASS%}` | `PixAccentColorSelector` |
-| `{%ELEMENT_NAME%}` | `pix-accent-color-selector` |
-| `{%STORAGE_KEY%}` | `pix-accent-color` |
+| Placeholder                 | Example value                                                   |
+| --------------------------- | --------------------------------------------------------------- |
+| `{%COMPONENT_NAME%}`        | `pix-accent-color-selector`                                     |
+| `{%PACKAGE_NAME%}`          | `@pix-galaxy/pix-accent-color-selector`                         |
+| `{%COMPONENT_CLASS%}`       | `PixAccentColorSelector`                                        |
+| `{%ELEMENT_NAME%}`          | `pix-accent-color-selector`                                     |
+| `{%STORAGE_KEY%}`           | `pix-accent-color`                                              |
 | `{%COMPONENT_DESCRIPTION%}` | `Accent color selector Web Component for the pix-galaxy suite.` |
-| `{%REPO_OWNER%}` | `pixu1980` |
-| `{%REPO_NAME%}` | `pix-accent-color-selector` |
-| `{%DOCS_TITLE%}` | `pix-accent-color-selector` |
+| `{%REPO_OWNER%}`            | `pixu1980`                                                      |
+| `{%REPO_NAME%}`             | `pix-accent-color-selector`                                     |
+| `{%DOCS_TITLE%}`            | `pix-accent-color-selector`                                     |
 
 ### Install & develop
 
@@ -113,16 +113,16 @@ el.doSomething();
 
 ## 🧪 Commands
 
-| Command | Description |
-|---------|-------------|
-| `pnpm build:lib` | Build npm artifacts (ESM + CJS) |
-| `pnpm build:site` | Build docs site |
-| `pnpm build` | Build library and site |
-| `pnpm dev` | Start Vite docs dev server |
-| `pnpm test` | Run component and docs tests |
-| `pnpm check` | Test + build |
-| `pnpm release` | Auto-detect bump, update changelog, tag and commit |
-| `pnpm clean` | Remove build artifacts |
+| Command           | Description                                        |
+| ----------------- | -------------------------------------------------- |
+| `pnpm build:lib`  | Build npm artifacts (ESM + CJS)                    |
+| `pnpm build:site` | Build docs site                                    |
+| `pnpm build`      | Build library and site                             |
+| `pnpm dev`        | Start Vite docs dev server                         |
+| `pnpm test`       | Run component and docs tests                       |
+| `pnpm check`      | Test + build                                       |
+| `pnpm release`    | Auto-detect bump, update changelog, tag and commit |
+| `pnpm clean`      | Remove build artifacts                             |
 
 ## 🧩 Component patterns
 

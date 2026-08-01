@@ -1,7 +1,12 @@
+/**
+ * FILE: _prettylights.css
+ * USAGE: Stylesheet for packages/pix-highlighter/src/components/PixHighlighter/styles/themes/_prettylights.css.
+ * SCOPE: File-local selectors and pix-galaxy design tokens.
+ */
 @layer pix-galaxy {
   @layer pix-highlighter {
     @layer themes {
-      :root[data-pix-highlighter-theme="prettylights"] pre[is="pix-highlighter"] {
+      :root[data-pix-highlighter-theme='prettylights'] pre[is='pix-highlighter'] {
         --pix-highlighter--bg: light-dark(#f6f8fa, #151b23);
         --pix-highlighter--fg: light-dark(#1f2328, #f0f6fc);
         --pix-highlighter--kw: light-dark(#cf222e, #ff7b72);

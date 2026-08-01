@@ -44,12 +44,12 @@ selector.applyScheme('dark');
 
 ### Exports
 
-| Symbol | Description |
-|--------|-------------|
-| `PixColorSchemeSelector` | Component class (extends `HTMLElement`) |
-| `META_CONTENT` | Read-only mapping of scheme → meta content value |
-| `SCHEMES` | Read-only array of supported scheme values |
-| `STORAGE_KEY` | The `localStorage` key used for persistence |
+| Symbol                   | Description                                      |
+| ------------------------ | ------------------------------------------------ |
+| `PixColorSchemeSelector` | Component class (extends `HTMLElement`)          |
+| `META_CONTENT`           | Read-only mapping of scheme → meta content value |
+| `SCHEMES`                | Read-only array of supported scheme values       |
+| `STORAGE_KEY`            | The `localStorage` key used for persistence      |
 
 ### Programmatic example
 
@@ -85,18 +85,19 @@ pnpm build
 
 Repo commands:
 
-| Command | Description |
-|---------|-------------|
-| `pnpm build:lib` | Build npm artifacts (ESM + CJS) |
-| `pnpm build:site` | Build docs site |
-| `pnpm build` | Build library and site |
-| `pnpm dev` | Start Vite docs dev server |
-| `pnpm test` | Run component and site tests |
-| `pnpm rel:patch` | Bump patch version and tag |
-| `pnpm rel:minor` | Bump minor version and tag |
-| `pnpm rel:major` | Bump major version and tag |
+| Command           | Description                     |
+| ----------------- | ------------------------------- |
+| `pnpm build:lib`  | Build npm artifacts (ESM + CJS) |
+| `pnpm build:site` | Build docs site                 |
+| `pnpm build`      | Build library and site          |
+| `pnpm dev`        | Start Vite docs dev server      |
+| `pnpm test`       | Run component and site tests    |
+| `pnpm rel:patch`  | Bump patch version and tag      |
+| `pnpm rel:minor`  | Bump minor version and tag      |
+| `pnpm rel:major`  | Bump major version and tag      |
 
 Library build outputs:
+
 - `artifact/index.js` - ESM
 - `artifact/index.cjs` - CommonJS
 - `artifact/index.d.ts` - TypeScript declarations

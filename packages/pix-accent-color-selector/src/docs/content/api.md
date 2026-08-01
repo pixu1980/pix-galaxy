@@ -10,50 +10,50 @@
 
 ### Properties
 
-| Property | Type | Description |
-|----------|------|-------------|
+| Property        | Type     | Description                    |
+| --------------- | -------- | ------------------------------ |
 | `currentAccent` | `string` | The currently active accent ID |
 
 ### Methods
 
-| Method | Description |
-|--------|-------------|
-| `applyAccent(accentId)` | Apply an accent color by ID |
-| `getInitialAccent()` | Read the initial accent from localStorage or default |
-| `getSavedAccent()` | Read the accent from localStorage, or null |
-| `getAccentValues(accentId)` | Get the HSL values for an accent ID |
+| Method                      | Description                                          |
+| --------------------------- | ---------------------------------------------------- |
+| `applyAccent(accentId)`     | Apply an accent color by ID                          |
+| `getInitialAccent()`        | Read the initial accent from localStorage or default |
+| `getSavedAccent()`          | Read the accent from localStorage, or null           |
+| `getAccentValues(accentId)` | Get the HSL values for an accent ID                  |
 
 ### Static Methods
 
-| Method | Description |
-|--------|-------------|
+| Method                    | Description                                     |
+| ------------------------- | ----------------------------------------------- |
 | `ensureComponentStyles()` | Ensure component CSS is adopted in the document |
 
 ## Accent options `ACCENT_OPTIONS`
 
 ```js
 [
-  { id: 'coral',    label: 'Coral',    h: 16,  s: 95, l: 58 },
-  { id: 'rose',     label: 'Rose',     h: 340, s: 90, l: 62 },
+  { id: 'coral', label: 'Coral', h: 16, s: 95, l: 58 },
+  { id: 'rose', label: 'Rose', h: 340, s: 90, l: 62 },
   { id: 'lavender', label: 'Lavender', h: 280, s: 85, l: 65 },
-  { id: 'sky',      label: 'Sky',      h: 200, s: 85, l: 62 },
-  { id: 'mint',     label: 'Mint',     h: 145, s: 80, l: 60 },
-]
+  { id: 'sky', label: 'Sky', h: 200, s: 85, l: 62 },
+  { id: 'mint', label: 'Mint', h: 145, s: 80, l: 60 },
+];
 ```
 
 ## Events
 
-| Event | Detail | Description |
-|-------|--------|-------------|
+| Event            | Detail                | Description                        |
+| ---------------- | --------------------- | ---------------------------------- |
 | `accent-changed` | `{ accentId, label }` | Dispatched when the accent changes |
 
 ## CSS custom properties set on `:root`
 
-| Property | Type | Example |
-|----------|------|---------|
-| `--pix-accent-h` | number (0-360) | `340` |
-| `--pix-accent-s` | percentage | `90%` |
-| `--pix-accent-l` | percentage | `62%` |
+| Property         | Type           | Example |
+| ---------------- | -------------- | ------- |
+| `--pix-accent-h` | number (0-360) | `340`   |
+| `--pix-accent-s` | percentage     | `90%`   |
+| `--pix-accent-l` | percentage     | `62%`   |
 
 ## Example
 
@@ -67,7 +67,7 @@ import {
 const selector = document.querySelector('pix-accent-color-selector');
 selector.applyAccent('sky');
 
-console.log(ACCENT_OPTIONS.find(o => o.id === 'sky'));
+console.log(ACCENT_OPTIONS.find((o) => o.id === 'sky'));
 // → { id: 'sky', label: 'Sky', h: 200, s: 85, l: 62 }
 
 console.log(STORAGE_KEY);

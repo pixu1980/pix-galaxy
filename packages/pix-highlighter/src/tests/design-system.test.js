@@ -13,7 +13,7 @@ test('defines the shared token groups and consumes them in component and docs st
     '--pix-ds-color-ink-950',
     '--pix-ds-font-display',
     '--pix-ds-space-4',
-    '--pix-ds-radius-lg',
+    '--pix-ds--r--lg',
     '--pix-ds-elevation-2',
     '--pix-ds-duration-fast',
   ]) {
@@ -21,7 +21,9 @@ test('defines the shared token groups and consumes them in component and docs st
   }
 
   assert.ok(componentCss.includes('var(--dout--radius-md, 0.85rem)'));
-  assert.ok(componentCss.includes('var(--dout--motion-fast, 160ms) var(--dout--motion-ease, ease)'));
+  assert.ok(
+    componentCss.includes('var(--dout--motion-fast, 160ms) var(--dout--motion-ease, ease)')
+  );
   assert.ok(tokensCss.includes('light-dark('));
   assert.ok(siteCss.includes("@import '../shared/_ds-tokens.css';"));
   assert.ok(siteCss.includes('[data-part="color-mode-group"]'));

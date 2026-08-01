@@ -43,31 +43,28 @@ selector.applyAccent('mint');
 
 ## Available accents
 
-| Accent   | Color | HSL |
-|----------|-------|-----|
-| Coral    | 🔴 | 16°, 95%, 58% |
-| Rose     | 🩷 | 340°, 90%, 62% |
-| Lavender | 🟣 | 280°, 85%, 65% |
-| Sky      | 🔵 | 200°, 85%, 62% |
-| Mint     | 🟢 | 145°, 80%, 60% |
+| Accent   | Color | HSL            |
+| -------- | ----- | -------------- |
+| Coral    | 🔴    | 16°, 95%, 58%  |
+| Rose     | 🩷    | 340°, 90%, 62% |
+| Lavender | 🟣    | 280°, 85%, 65% |
+| Sky      | 🔵    | 200°, 85%, 62% |
+| Mint     | 🟢    | 145°, 80%, 60% |
 
 ## Package API
 
 ### Exports
 
-| Symbol | Description |
-|--------|-------------|
-| `PixAccentColorSelector` | Component class (extends `HTMLElement`) |
-| `ACCENT_OPTIONS` | Read-only array of accent option objects |
-| `STORAGE_KEY` | The `localStorage` key used for persistence |
+| Symbol                   | Description                                 |
+| ------------------------ | ------------------------------------------- |
+| `PixAccentColorSelector` | Component class (extends `HTMLElement`)     |
+| `ACCENT_OPTIONS`         | Read-only array of accent option objects    |
+| `STORAGE_KEY`            | The `localStorage` key used for persistence |
 
 ### Programmatic example
 
 ```js
-import {
-  PixAccentColorSelector,
-  ACCENT_OPTIONS,
-} from '@pix-galaxy/pix-accent-color-selector';
+import { PixAccentColorSelector, ACCENT_OPTIONS } from '@pix-galaxy/pix-accent-color-selector';
 
 const selector = document.querySelector('pix-accent-color-selector');
 selector.applyAccent('sky');
@@ -94,16 +91,17 @@ pnpm build
 
 Repo commands:
 
-| Command | Description |
-|---------|-------------|
-| `pnpm build:lib` | Build npm artifacts (ESM + CJS) |
-| `pnpm build:site` | Build docs site |
-| `pnpm build` | Build library and site |
-| `pnpm dev` | Start Vite docs dev server |
-| `pnpm test` | Run component and site tests |
-| `pnpm release` | Auto-detect bump, update changelog, tag and commit |
+| Command           | Description                                        |
+| ----------------- | -------------------------------------------------- |
+| `pnpm build:lib`  | Build npm artifacts (ESM + CJS)                    |
+| `pnpm build:site` | Build docs site                                    |
+| `pnpm build`      | Build library and site                             |
+| `pnpm dev`        | Start Vite docs dev server                         |
+| `pnpm test`       | Run component and site tests                       |
+| `pnpm release`    | Auto-detect bump, update changelog, tag and commit |
 
 Library build outputs:
+
 - `artifact/index.js` - ESM
 - `artifact/index.cjs` - CommonJS
 - `artifact/index.d.ts` - TypeScript declarations

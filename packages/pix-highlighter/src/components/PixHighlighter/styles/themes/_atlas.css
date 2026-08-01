@@ -1,7 +1,12 @@
+/**
+ * FILE: _atlas.css
+ * USAGE: Stylesheet for packages/pix-highlighter/src/components/PixHighlighter/styles/themes/_atlas.css.
+ * SCOPE: File-local selectors and pix-galaxy design tokens.
+ */
 @layer pix-galaxy {
   @layer pix-highlighter {
     @layer themes {
-      :root[data-pix-highlighter-theme="atlas"] pre[is="pix-highlighter"] {
+      :root[data-pix-highlighter-theme='atlas'] pre[is='pix-highlighter'] {
         --pix-highlighter--bg: light-dark(#f5f1e8, #18130f);
         --pix-highlighter--fg: light-dark(#2d251d, #f8ede2);
         --pix-highlighter--kw: light-dark(#9a3412, #f3a66c);

@@ -11,23 +11,23 @@
 
 ### Properties
 
-| Property | Type | Description |
-|----------|------|-------------|
+| Property        | Type                            | Description                 |
+| --------------- | ------------------------------- | --------------------------- |
 | `currentScheme` | `'light' \| 'dark' \| 'system'` | The currently active scheme |
 
 ### Methods
 
-| Method | Description |
-|--------|-------------|
-| `applyScheme(scheme)` | Apply a color scheme (light, dark, or system) |
-| `getInitialScheme()` | Read the initial scheme from localStorage or meta |
-| `getSavedScheme()` | Read the scheme from localStorage, or null |
+| Method                | Description                                       |
+| --------------------- | ------------------------------------------------- |
+| `applyScheme(scheme)` | Apply a color scheme (light, dark, or system)     |
+| `getInitialScheme()`  | Read the initial scheme from localStorage or meta |
+| `getSavedScheme()`    | Read the scheme from localStorage, or null        |
 | `getSchemeFromMeta()` | Read the scheme from `<meta name="color-scheme">` |
 
 ### Static Methods
 
-| Method | Description |
-|--------|-------------|
+| Method                    | Description                                     |
+| ------------------------- | ----------------------------------------------- |
 | `ensureComponentStyles()` | Ensure component CSS is adopted in the document |
 
 ## Example
@@ -43,7 +43,7 @@ import {
 const selector = document.querySelector('pix-color-scheme-selector');
 selector.applyScheme('dark');
 
-console.log(META_CONTENT.dark);    // 'dark'
-console.log(SCHEMES);              // ['light', 'dark', 'system']
-console.log(STORAGE_KEY);          // 'pix-color-scheme'
+console.log(META_CONTENT.dark); // 'dark'
+console.log(SCHEMES); // ['light', 'dark', 'system']
+console.log(STORAGE_KEY); // 'pix-color-scheme'
 ```

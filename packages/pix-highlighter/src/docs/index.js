@@ -71,7 +71,11 @@ function getInitialSiteColorMode(targetWindow = globalThis.window) {
   }
 }
 
-function applySiteColorMode(mode, targetDocument = globalThis.document, targetWindow = globalThis.window) {
+function applySiteColorMode(
+  mode,
+  targetDocument = globalThis.document,
+  targetWindow = globalThis.window
+) {
   if (!targetDocument) {
     return 'system';
   }
@@ -92,7 +96,10 @@ function createMarked() {
   const renderer = new Renderer();
 
   renderer.code = ({ text, lang = '' }) => {
-    const language = String(lang || 'text').trim().toLowerCase() || 'text';
+    const language =
+      String(lang || 'text')
+        .trim()
+        .toLowerCase() || 'text';
     return `<pre is="pix-highlighter" data-lang="${escapeHtml(language)}"><code>${escapeHtml(text)}</code></pre>`;
   };
 
@@ -118,13 +125,15 @@ export const examples = Object.freeze([
   },
   {
     title: 'Import & enhance',
-    description: 'Import and activate all <code>pre[is="pix-highlighter"]</code> blocks on the page.',
+    description:
+      'Import and activate all <code>pre[is="pix-highlighter"]</code> blocks on the page.',
     lang: 'js',
     code: `import { enhancePixHighlighters } from '@pix-galaxy/pix-highlighter';\n\ndocument.addEventListener('DOMContentLoaded', () => {\n  enhancePixHighlighters(document);\n});`,
   },
   {
     title: 'Theme API',
-    description: 'Switch the global theme programmatically. Persisted to localStorage automatically.',
+    description:
+      'Switch the global theme programmatically. Persisted to localStorage automatically.',
     lang: 'js',
     code: `import { PixHighlighter } from '@pix-galaxy/pix-highlighter';\n\nPixHighlighter.applyTheme('nord');\nconsole.log(PixHighlighter.getCurrentTheme());`,
   },
@@ -193,7 +202,11 @@ export function createDocsSite({
       return;
     }
 
-    state.selectedColorMode = applySiteColorMode(colorModeControl.value, ownerDocument, ownerWindow);
+    state.selectedColorMode = applySiteColorMode(
+      colorModeControl.value,
+      ownerDocument,
+      ownerWindow
+    );
   });
 
   function render() {
@@ -314,23 +327,33 @@ export function createDocsSite({
 }
 
 export async function loadDocsData() {
-  const [apiModule, examplesModule, gettingStartedModule, howItWorksModule, lexersModule, releasingModule, packageJsonModule] =
-    await Promise.all([
-      import('./content/api.md?raw'),
-      import('./content/examples.md?raw'),
-      import('./content/getting-started.md?raw'),
-      import('./content/how-it-works.md?raw'),
-      import('./content/lexers.md?raw'),
-      import('./content/releasing.md?raw'),
-      import('../../package.json'),
-    ]);
+  const [
+    apiModule,
+    examplesModule,
+    gettingStartedModule,
+    howItWorksModule,
+    lexersModule,
+    releasingModule,
+    packageJsonModule,
+  ] = await Promise.all([
+    import('./content/api.md?raw'),
+    import('./content/examples.md?raw'),
+    import('./content/getting-started.md?raw'),
+    import('./content/how-it-works.md?raw'),
+    import('./content/lexers.md?raw'),
+    import('./content/releasing.md?raw'),
+    import('../../package.json'),
+  ]);
 
   const packageJson = packageJsonModule.default;
 
   return {
     docsPages: Object.freeze(
       buildDocsPages([
-        { markdown: gettingStartedModule.default, sourcePath: 'src/docs/content/getting-started.md' },
+        {
+          markdown: gettingStartedModule.default,
+          sourcePath: 'src/docs/content/getting-started.md',
+        },
         { markdown: howItWorksModule.default, sourcePath: 'src/docs/content/how-it-works.md' },
         { markdown: apiModule.default, sourcePath: 'src/docs/content/api.md' },
         { markdown: lexersModule.default, sourcePath: 'src/docs/content/lexers.md' },

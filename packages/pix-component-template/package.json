@@ -50,32 +50,29 @@
     "provenance": true
   },
   "scripts": {
-    "build": "node ./scripts/run.mjs \"pnpm build:lib && pnpm build:site\"",
-    "build:lib": "node ./scripts/run.mjs \"node ./scripts/build.mjs\"",
-    "build:types": "node ./scripts/run.mjs \"tsc --project ./tsconfig.types.json && node ./scripts/finalize-types.mjs\"",
-    "build:site": "node ./scripts/run.mjs \"pnpm docs:build && vite build --config ./vite.config.mjs\"",
+    "build": "pnpm build:lib && pnpm build:site",
+    "build:lib": "node ../pix-core/scripts/build.mjs && pnpm build:types",
+    "build:types": "tsc --project ./tsconfig.types.json && node ../pix-core/scripts/finalize-types.mjs",
+    "build:site": "pnpm docs:build && vite build --config ./vite.config.mjs",
     "check": "pnpm test && pnpm build",
     "clean": "rm -rf artifact dist coverage .artifacts",
-    "dev": "node ./scripts/run.mjs \"pnpm docs:build && vite --config ./vite.config.mjs\"",
-    "docs:build": "node ./scripts/run.mjs \"node ./scripts/docs.mjs\"",
-    "docs:watch": "node ./scripts/run.mjs \"node ./scripts/docs.mjs --watch\"",
-    "prepack": "node ./scripts/run.mjs \"pnpm build:lib\"",
+    "dev": "pnpm docs:build && vite --config ./vite.config.mjs",
+    "docs:build": "node ../pix-core/scripts/docs.mjs",
+    "docs:watch": "node ../pix-core/scripts/docs.mjs --watch",
+    "prepack": "pnpm build:lib",
     "prepublishOnly": "pnpm check",
     "preview": "vite preview --config ./vite.config.mjs",
-    "release": "node ./scripts/run.mjs \"node ./scripts/release.mjs\"",
-    "test": "node ./scripts/run.mjs \"pnpm docs:build && node --test --import ./scripts/register-test-loader.mjs ./src/tests/*.test.js\"",
-    "test:coverage": "node ./scripts/run.mjs \"pnpm docs:build && c8 --reporter=text --reporter=lcov node --test --import ./scripts/register-test-loader.mjs ./src/tests/*.test.js\"",
+    "release": "node ./scripts/release.mjs",
+    "test": "pnpm docs:build && node --test --import ../pix-core/scripts/register-test-loader.mjs ./src/tests/*.test.js",
+    "test:coverage": "pnpm docs:build && c8 --reporter=text --reporter=lcov node --test --import ../pix-core/scripts/register-test-loader.mjs ./src/tests/*.test.js",
     "lint": "eslint src/",
     "typecheck": "tsc --project ./tsconfig.types.json --noEmit"
   },
   "dependencies": {
+    "@pix-galaxy/pix-color-scheme-selector": "workspace:*",
+    "@pix-galaxy/pix-highlighter": "workspace:*",
+    "@pix-galaxy/pix-core": "workspace:*",
     "@pix-galaxy/pix-foundations": "workspace:*"
-  },
-  "dependencies":   {
-      "@pix-galaxy/pix-color-scheme-selector": "workspace:*",
-      "@pix-galaxy/pix-highlighter": "workspace:*",
-      "@pix-galaxy/shared": "workspace:*",
-      "@pix-galaxy/pix-foundations": "workspace:*"
   },
   "devDependencies": {
     "c8": "11.0.0",

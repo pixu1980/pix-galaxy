@@ -1,19 +1,14 @@
 /** ComponentName — pix-component-template component styles. */
 @layer pix-galaxy {
-  @layer {%COMPONENT_NAME%} {
+  @layer pix-component-template {
     /* Component: {%ELEMENT_NAME%} - {%COMPONENT_DESCRIPTION%} */
-    /* ↓ placeholder selector - replaced by actual element name on init */
-    :where([is="{%ELEMENT_NAME%}"], {%ELEMENT_NAME%}) {
+    /* Placeholder selector remains valid CSS before template replacement. */
+    :where([is='{%ELEMENT_NAME%}'], [data-component-root='{%ELEMENT_NAME%}']) {
       display: inline-flex;
     }
 
-    :where([is="{%ELEMENT_NAME%}"], {%ELEMENT_NAME%}):focus-within {
-      outline: 2px solid var(--pix-ds-accent-primary, oklch(0.71 0.13 228));
-      outline-offset: 2px;
-    }
-
-    /* TODO: add component styles here */
-    /* Use element + [data-*] attribute selectors only */
-    /* No CSS classes, no inline styles */
+    /* TODO: add component styles here. */
+    /* Use element + [data-*] attribute selectors only. */
+    /* No CSS classes, no inline styles. */
   }
 }
