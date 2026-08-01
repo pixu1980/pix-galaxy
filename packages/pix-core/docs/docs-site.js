@@ -46,7 +46,10 @@ function createMarked() {
   const renderer = new Renderer();
 
   renderer.code = ({ text, lang = '' }) => {
-    const language = String(lang || 'text').trim().toLowerCase() || 'text';
+    const language =
+      String(lang || 'text')
+        .trim()
+        .toLowerCase() || 'text';
     return `<pre is="pix-highlighter" data-lang="${escapeHtml(language)}"><code>${escapeHtml(text)}</code></pre>`;
   };
 
@@ -55,6 +58,12 @@ function createMarked() {
 
 /* ── Page building ──────────────────────────────────────────────── */
 
+/**
+ * Build rendered docs pages from raw markdown entries.
+ *
+ * @param {Array<{ markdown: string, sourcePath: string }>} entries Markdown entries.
+ * @returns {Array<{ slug: string, title: string, html: string, sourcePath: string }>} Rendered pages.
+ */
 export function buildDocsPages(entries) {
   const marked = createMarked();
   return entries.map(({ markdown, sourcePath }) => ({
@@ -71,6 +80,13 @@ function escapeExampleCode(code) {
   return escapeHtml(code);
 }
 
+/**
+ * Render example cards for component docs pages.
+ *
+ * @param {Array<{ title: string, description: string, lang: string, code: string }>} exampleEntries Examples to render.
+ * @param {string} [cardPartName='example-card'] data-part value for cards.
+ * @returns {string} HTML string containing example cards.
+ */
 export function renderExamples(exampleEntries, cardPartName = 'example-card') {
   return exampleEntries
     .map(
@@ -89,13 +105,18 @@ export function renderExamples(exampleEntries, cardPartName = 'example-card') {
 
 /* ── Site builder ───────────────────────────────────────────────── */
 
-export function createDocsSite({
-  mount,
-  docs,
-  examples: exampleEntries,
-  meta,
-  afterRender,
-}) {
+/**
+ * Create an interactive docs site inside a mount element.
+ *
+ * @param {object} options Docs site options.
+ * @param {HTMLElement} options.mount Mount element.
+ * @param {Array<{ slug: string, title: string, html: string }>} options.docs Rendered docs pages.
+ * @param {Array<{ title: string, description: string, lang: string, code: string }>} options.examples Example cards.
+ * @param {{ componentName?: string, componentTag?: string, description?: string, version: string, liveHtml?: string }} options.meta Site metadata.
+ * @param {(root: HTMLElement, activeDoc: object) => void} [options.afterRender] Optional render hook.
+ * @returns {{ getActiveDoc(): object | null, selectDoc(slug: string): void }} Docs site controller.
+ */
+export function createDocsSite({ mount, docs, examples: exampleEntries, meta, afterRender }) {
   const state = {
     activeSlug: docs[0]?.slug || '',
   };
