@@ -20,7 +20,7 @@ pnpm validate
 pnpm docs:build
 ```
 
-Package-specific work stays under `packages/<name>/`. Shared runtime helpers live in `packages/shared/`.
+Package-specific work stays under `packages/<name>/`. Shared runtime helpers live in `packages/pix-core/`.
 
 ## Contribution Expectations
 

@@ -3,7 +3,7 @@
 # Each package has its own GitHub Pages site deployed at:
 #   https://pixu1980.github.io/<package-name>/
 #
- # For now, per-package docs are built locally or via the release workflow.
+# For now, per-package docs are built locally or via the release workflow.
 # To enable monorepo-level pages, create a root site/ aggregator that
 # collects all package dist/ outputs into a single deployable directory.
 #
@@ -80,7 +80,7 @@ jobs:
           <ul>
             <li><a href="pix-accent-color-selector/">pix-accent-color-selector</a></li>
             <li><a href="pix-color-scheme-selector/">pix-color-scheme-selector</a></li>
-            <li><a href="pix-display-preferences/">pix-display-preferences</a></li>
+            <li><a href="pix-a11y-panel/">pix-a11y-panel</a></li>
             <li><a href="pix-highlighter/">pix-highlighter</a></li>
           </ul>
           <hr>

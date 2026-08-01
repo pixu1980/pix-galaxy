@@ -26,11 +26,13 @@ pix-galaxy is a zero-runtime-dependency vanilla JavaScript Web Components monore
 Every JS source file must start with `// @ts-check`.
 
 Runtime folder structure rules:
+
 - In `src/`, `scripts/`, and `tests/`, keep `index.*` as the barrel or entrypoint.
 - All non-index runtime files in `src/`, `scripts/`, and `tests/` must be underscore-prefixed, for example `_pix-button.js`, `_build-package.js`, or `_template.test.js`.
 - Root script coverage lives in `scripts/tests/`, with one underscore-prefixed test file per script and `scripts/tests/index.js` as the test barrel.
 
 Example JSDoc style:
+
 ```js
 // @ts-check
 
@@ -49,6 +51,7 @@ export function normalizeVariant(value) { ... }
 ## Component structure
 
 Each component package must:
+
 - live in `packages/<component-name>/`
 - have `src/`, `tests/`, `docs/`, `package.json`, `tsconfig.types.json`, `README.md`
 - use `src/index.js` as the package barrel, plus `tests/index.js` as the package test barrel
@@ -60,6 +63,7 @@ Each component package must:
 ## Accessibility requirements
 
 Every component must:
+
 - use semantic HTML in light DOM
 - preserve keyboard interactions
 - use native `<button>` for buttons, native `<a>` for links

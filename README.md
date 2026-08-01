@@ -6,18 +6,18 @@ Zero-runtime-dependency vanilla JavaScript Web Components, packaged as a pnpm wo
 
 ## Packages
 
-| Package | Description |
-|---------|-------------|
-| [@pix-galaxy/pix-accent-color-selector](./packages/pix-accent-color-selector) | Accent color selector Web Component |
-| [@pix-galaxy/pix-color-scheme-selector](./packages/pix-color-scheme-selector) | Color-scheme selector Web Component |
-| [@pix-galaxy/pix-display-preferences](./packages/pix-display-preferences) | Display preferences popover Web Component |
-| [@pix-galaxy/pix-highlighter](./packages/pix-highlighter) | Syntax-highlighting Web Component |
-| [@pix-galaxy/pix-component-template](./packages/pix-component-template) | Scaffold template for new components |
+| Package                                                                       | Description                               |
+| ----------------------------------------------------------------------------- | ----------------------------------------- |
+| [@pix-galaxy/pix-accent-color-selector](./packages/pix-accent-color-selector) | Accent color selector Web Component       |
+| [@pix-galaxy/pix-color-scheme-selector](./packages/pix-color-scheme-selector) | Color-scheme selector Web Component       |
+| [@pix-galaxy/pix-a11y-panel](./packages/pix-a11y-panel)                       | Display preferences popover Web Component |
+| [@pix-galaxy/pix-highlighter](./packages/pix-highlighter)                     | Syntax-highlighting Web Component         |
+| [@pix-galaxy/pix-component-template](./packages/pix-component-template)       | Scaffold template for new components      |
 
 ## Dependency graph
 
 ```
-pix-display-preferences
+pix-a11y-panel
   ├── pix-accent-color-selector
   │     └── pix-highlighter
   ├── pix-color-scheme-selector
@@ -116,7 +116,7 @@ pix-galaxy/
 │   ├── pix-accent-color-selector/
 │   ├── pix-color-scheme-selector/
 │   ├── pix-component-template/
-│   ├── pix-display-preferences/
+│   ├── pix-a11y-panel/
 │   └── pix-highlighter/
 ├── eslint.config.js
 ├── prettierrc

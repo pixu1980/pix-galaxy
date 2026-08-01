@@ -7,3 +7,8 @@ coverage/
 pnpm-lock.yaml
 *.map
 .DS_Store
+
+# Uninitialized scaffold templates contain {%PLACEHOLDER%} tokens, not valid JS.
+packages/pix-component-template/src/components/ComponentName/_ComponentName.js
+packages/pix-component-template/src/index.types.js
+packages/pix-component-template/src/tests/components.test.js
