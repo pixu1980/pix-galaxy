@@ -118,7 +118,8 @@ async function* walk(dir) {
   for (const entry of entries) {
     const fullPath = join(dir, entry.name);
     if (entry.isDirectory()) {
-      if (entry.name === 'node_modules' || entry.name === 'artifact' || entry.name === '.git') continue;
+      if (entry.name === 'node_modules' || entry.name === 'artifact' || entry.name === '.git')
+        continue;
       yield* walk(fullPath);
     } else {
       yield fullPath;
@@ -129,7 +130,12 @@ async function* walk(dir) {
 for await (const filePath of walk(targetDir)) {
   const ext = extname(filePath);
 
-  if (['.js', '.mjs', '.json', '.md', '.yml', '.yaml', '.css', '.html', '.d.ts', '.json5'].includes(ext) || !ext) {
+  if (
+    ['.js', '.mjs', '.json', '.md', '.yml', '.yaml', '.css', '.html', '.d.ts', '.json5'].includes(
+      ext
+    ) ||
+    !ext
+  ) {
     let content = await readFile(filePath, 'utf8');
     let changed = false;
 
@@ -143,7 +149,9 @@ for await (const filePath of walk(targetDir)) {
     if (changed) {
       await writeFile(filePath, content, 'utf8');
       replaced++;
-      console.log(`  ✓ ${filePath.replace(projectRoot, '.').replace(targetDir, `packages/${elementName}`)}`);
+      console.log(
+        `  ✓ ${filePath.replace(projectRoot, '.').replace(targetDir, `packages/${elementName}`)}`
+      );
     }
   }
 
@@ -164,7 +172,9 @@ try {
     await rename(oldDir, newDir);
     renamed++;
   }
-} catch { /* may have been renamed already */ }
+} catch {
+  /* may have been renamed already */
+}
 
 console.log(`\n  📝  ${replaced} files updated, ${renamed} files/dirs renamed`);
 

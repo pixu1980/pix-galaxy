@@ -26,9 +26,7 @@ function findFreePort(start = MIN_PORT) {
   return new Promise((resolve, reject) => {
     const tryPort = (port) => {
       if (port > MAX_PORT) {
-        return reject(
-          new Error(`[${name}] no free port in ${MIN_PORT}-${MAX_PORT}`),
-        );
+        return reject(new Error(`[${name}] no free port in ${MIN_PORT}-${MAX_PORT}`));
       }
       // Dual-stack check: try both IPv4 (127.0.0.1) and IPv6 (::)
       // On macOS, IPv4 and IPv6 are independent stacks, so a process
@@ -43,17 +41,29 @@ function findFreePort(start = MIN_PORT) {
         srv6.close();
       };
 
-      srv4.on('error', () => { closeAll(); tryPort(port + 1); });
-      srv6.on('error', () => { closeAll(); tryPort(port + 1); });
+      srv4.on('error', () => {
+        closeAll();
+        tryPort(port + 1);
+      });
+      srv6.on('error', () => {
+        closeAll();
+        tryPort(port + 1);
+      });
 
       srv4.listen(port, '127.0.0.1', () => {
         v4ok = true;
-        if (v6ok) { closeAll(); resolve(port); }
+        if (v6ok) {
+          closeAll();
+          resolve(port);
+        }
       });
 
       srv6.listen(port, '::', () => {
         v6ok = true;
-        if (v4ok) { closeAll(); resolve(port); }
+        if (v4ok) {
+          closeAll();
+          resolve(port);
+        }
       });
     };
     tryPort(start);
@@ -62,9 +72,7 @@ function findFreePort(start = MIN_PORT) {
 
 async function main() {
   // Use explicit port if provided (e.g. from dev-all.mjs), otherwise auto-detect
-  const port = explicitPort !== undefined
-    ? Number(explicitPort)
-    : await findFreePort(MIN_PORT);
+  const port = explicitPort !== undefined ? Number(explicitPort) : await findFreePort(MIN_PORT);
 
   const viteBin = resolve(projectRoot, 'node_modules', '.bin', 'vite');
   const viteArgs = ['--port', String(port), '--strict-port', 'true'];

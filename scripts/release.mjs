@@ -33,18 +33,29 @@ function execIn(dir, cmd, opts = {}) {
 }
 
 function tagExists(tag) {
-  try { exec(`git rev-parse "${tag}"`, { stdio: 'pipe' }); return true; }
-  catch { return false; }
+  try {
+    exec(`git rev-parse "${tag}"`, { stdio: 'pipe' });
+    return true;
+  } catch {
+    return false;
+  }
 }
 
 function hasChangesSinceTag(tag, pkgRel) {
-  try { exec(`git diff --quiet "${tag}" -- "${pkgRel}"`, { stdio: 'pipe' }); return false; }
-  catch { return true; }
+  try {
+    exec(`git diff --quiet "${tag}" -- "${pkgRel}"`, { stdio: 'pipe' });
+    return false;
+  } catch {
+    return true;
+  }
 }
 
 function isWorkingTreeClean() {
-  try { return exec('git status --porcelain', { stdio: 'pipe' }).trim().length === 0; }
-  catch { return false; }
+  try {
+    return exec('git status --porcelain', { stdio: 'pipe' }).trim().length === 0;
+  } catch {
+    return false;
+  }
 }
 
 console.log('═══════════════════════════════════════════');
@@ -62,24 +73,32 @@ if (!isWorkingTreeClean()) {
   }
 }
 
-try { execSync("standard-version --version", { stdio: "pipe" }); } catch {
+try {
+  execSync('standard-version --version', { stdio: 'pipe' });
+} catch {
   console.log('standard-version not found globally — installing via npx.\n');
 }
 
 const packages = readdirSync(PKG_DIR, { withFileTypes: true })
-  .filter(d => d.isDirectory())
-  .map(d => d.name)
+  .filter((d) => d.isDirectory())
+  .map((d) => d.name)
   .sort();
 
-let released = 0, skipped = 0;
+let released = 0,
+  skipped = 0;
 
 for (const pkg of packages) {
   const pkgPath = join(PKG_DIR, pkg);
   const pkgJsonPath = join(pkgPath, 'package.json');
 
   let pkgJson;
-  try { pkgJson = JSON.parse(readFileSync(pkgJsonPath, 'utf-8')); }
-  catch { console.log(`⚠  ${pkg}: invalid package.json, skipped`); skipped++; continue; }
+  try {
+    pkgJson = JSON.parse(readFileSync(pkgJsonPath, 'utf-8'));
+  } catch {
+    console.log(`⚠  ${pkg}: invalid package.json, skipped`);
+    skipped++;
+    continue;
+  }
 
   if (pkgJson.private) {
     console.log(`⏭  ${pkgJson.name || pkg}: private, skipped`);
@@ -114,12 +133,18 @@ for (const pkg of packages) {
   const prefix = `${name}@`;
   if (isDryRun) {
     console.log(`   [dry-run] standard-version --tag-prefix "${prefix}"`);
-    execIn(pkgPath, `npx standard-version --dry-run --tag-prefix "${prefix}"`, { stdio: 'inherit' });
+    execIn(pkgPath, `npx standard-version --dry-run --tag-prefix "${prefix}"`, {
+      stdio: 'inherit',
+    });
     console.log(`   [dry-run] pnpm publish (skipped)`);
   } else {
     try {
-      execIn(pkgPath, `npx standard-version --no-verify --tag-prefix "${prefix}"`, { stdio: 'inherit' });
-      execIn(pkgPath, `git push --follow-tags origin main 2>/dev/null || true`, { stdio: 'inherit' });
+      execIn(pkgPath, `npx standard-version --no-verify --tag-prefix "${prefix}"`, {
+        stdio: 'inherit',
+      });
+      execIn(pkgPath, `git push --follow-tags origin main 2>/dev/null || true`, {
+        stdio: 'inherit',
+      });
       execIn(pkgPath, `pnpm publish --access public`, { stdio: 'inherit' });
       released++;
       console.log(`   ✅ ${name} published!`);

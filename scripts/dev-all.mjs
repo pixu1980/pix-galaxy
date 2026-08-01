@@ -15,23 +15,34 @@ const MIN_PORT = 3000;
 const MAX_PORT = 6000;
 
 const knownColors = {
-  'pix-galaxy': '36',                    // cyan
-  'pix-highlighter': '34',               // blue
-  'pix-display-preferences': '38;5;208', // orange
-  'pix-accent-color-selector': '32',     // green
-  'pix-color-scheme-selector': '35',     // violet
-  'pix-command': '38;5;63',              // indigo
-  'pix-splitter': '33',                  // yellow
-  'pix-toast': '31',                     // red
-  'pix-color': '38;5;47',                // emerald
-  'pix-recorder': '38;5;45',             // aqua
-  'pix-sortable': '38;5;75',             // sky (light blue)
-  'pix-foundations': '38;5;214',          // gold
-  'pix-component-template': '90',        // dark grey - hidden, not auto-started
+  'pix-galaxy': '36', // cyan
+  'pix-highlighter': '34', // blue
+  'pix-a11y-panel': '38;5;208', // orange
+  'pix-accent-color-selector': '32', // green
+  'pix-color-scheme-selector': '35', // violet
+  'pix-command': '38;5;63', // indigo
+  'pix-splitter': '33', // yellow
+  'pix-toast': '31', // red
+  'pix-color': '38;5;47', // emerald
+  'pix-recorder': '38;5;45', // aqua
+  'pix-sortable': '38;5;75', // sky (light blue)
+  'pix-foundations': '38;5;214', // gold
+  'pix-component-template': '90', // dark grey - hidden, not auto-started
 };
 
 // Palette for packages without a known color - cycles through them
-const fallbackPalette = ['33', '31', '35;1', '36;1', '32;1', '34;1', '38;5;130', '38;5;164', '38;5;70', '38;5;202'];
+const fallbackPalette = [
+  '33',
+  '31',
+  '35;1',
+  '36;1',
+  '32;1',
+  '34;1',
+  '38;5;130',
+  '38;5;164',
+  '38;5;70',
+  '38;5;202',
+];
 
 /**
  * Discover servers dynamically:
@@ -39,9 +50,7 @@ const fallbackPalette = ['33', '31', '35;1', '36;1', '32;1', '34;1', '38;5;130',
  * 2. Any directory under ./packages/ with a vite.config.mjs is included
  */
 function discoverServers() {
-  const servers = [
-    { name: 'pix-galaxy', config: './vite.config.mjs' },
-  ];
+  const servers = [{ name: 'pix-galaxy', config: './vite.config.mjs' }];
 
   const packagesDir = resolve(projectRoot, 'packages');
   if (existsSync(packagesDir)) {
@@ -92,17 +101,29 @@ function findFreePort(start) {
         srv6.close();
       };
 
-      srv4.on('error', () => { closeAll(); tryPort(port + 1); });
-      srv6.on('error', () => { closeAll(); tryPort(port + 1); });
+      srv4.on('error', () => {
+        closeAll();
+        tryPort(port + 1);
+      });
+      srv6.on('error', () => {
+        closeAll();
+        tryPort(port + 1);
+      });
 
       srv4.listen(port, '127.0.0.1', () => {
         v4ok = true;
-        if (v6ok) { closeAll(); resolve(port); }
+        if (v6ok) {
+          closeAll();
+          resolve(port);
+        }
       });
 
       srv6.listen(port, '::', () => {
         v6ok = true;
-        if (v4ok) { closeAll(); resolve(port); }
+        if (v4ok) {
+          closeAll();
+          resolve(port);
+        }
       });
     };
     tryPort(start);
@@ -142,19 +163,15 @@ async function main() {
     const srv = servers[i];
     const port = ports[i];
 
-    const child = spawn('node', [
-      DEV_SCRIPT,
-      '--config',
-      srv.config,
-      '--name',
-      srv.name,
-      '--port',
-      String(port),
-    ], {
-      cwd: projectRoot,
-      stdio: ['inherit', 'pipe', 'inherit'],
-      env: { ...process.env, VITE_DEV_PORTS: portMapEnv },
-    });
+    const child = spawn(
+      'node',
+      [DEV_SCRIPT, '--config', srv.config, '--name', srv.name, '--port', String(port)],
+      {
+        cwd: projectRoot,
+        stdio: ['inherit', 'pipe', 'inherit'],
+        env: { ...process.env, VITE_DEV_PORTS: portMapEnv },
+      }
+    );
 
     const code = getColor(srv.name, i);
     const prefix = `\x1b[${code}m[${srv.name}:${port}]\x1b[0m`;
