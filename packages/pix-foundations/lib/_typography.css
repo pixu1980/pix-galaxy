@@ -1,19 +1,104 @@
 /* pix-foundations — typography
  *
- * Font family: system-ui stack.
- * Scale: ratio 1.25, base 1rem.
+ * Single source of truth for every text-related value in pix-galaxy.
+ * Component/page CSS must not set font-size, line-height, font-family,
+ * font-weight, letter-spacing, text-transform, or font shorthand.
  */
 
 :root {
   --pix--t--font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-  --pix--t--font-family-mono: ui-monospace, 'SF Mono', 'Fira Code', 'Cascadia Code', Consolas, monospace;
-  --pix--t--font-family-display: var(--pix--t--font-family);
-  --pix--t--ratio: 1.25;
+  --pix--t--font-family-mono:
+    ui-monospace, 'SF Mono', 'Fira Code', 'Cascadia Code', Consolas, monospace;
+  --pix--t--font-family-display:
+    'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua', Palatino, Georgia, serif;
+
+  --pix--t--size-xs: 0.75em;
+  --pix--t--size-sm: 0.875em;
+  --pix--t--size-md: 1em;
+  --pix--t--size-lg: 1.125em;
+  --pix--t--size-xl: 1.25em;
+  --pix--t--size-2xl: 1.5em;
+  --pix--t--size-hero: clamp(3em, 6vw, 5em);
+
+  --pix--t--line-height-tight: 1.1;
   --pix--t--line-height: 1.6;
-  --pix--t--line-height-tight: 1.2;
+  --pix--t--line-height-relaxed: 1.72;
+
+  --pix--t--weight-regular: 400;
+  --pix--t--weight-medium: 500;
+  --pix--t--weight-semibold: 600;
+  --pix--t--weight-bold: 700;
+
+  --pix--t--tracking-tight: -0.04em;
+  --pix--t--tracking-wide: 0.14em;
+
+  /* Compatibility aliases used by existing pix-galaxy docs/components. */
+  --pix-ds-font-sans: var(--pix--t--font-family);
+  --pix-ds-font-display: var(--pix--t--font-family-display);
+  --pix-ds-font-mono: var(--pix--t--font-family-mono);
+  --pix-ds-text-xs: var(--pix--t--size-xs);
+  --pix-ds-text-sm: var(--pix--t--size-sm);
+  --pix-ds-text-md: var(--pix--t--size-md);
+  --pix-ds-text-lg: var(--pix--t--size-lg);
+  --pix-ds-text-xl: var(--pix--t--size-xl);
+  --pix-ds-text-2xl: var(--pix--t--size-2xl);
+  --pix-ds-leading-tight: var(--pix--t--line-height-tight);
+  --pix-ds-leading-normal: var(--pix--t--line-height);
+  --pix-ds-leading-relaxed: var(--pix--t--line-height-relaxed);
+  --pix-ds-tracking-wide: var(--pix--t--tracking-wide);
 }
 
 body {
   font-family: var(--pix--t--font-family);
+  font-size: var(--pix--t--size-md);
   line-height: var(--pix--t--line-height);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--pix--t--font-family-display);
+  font-weight: var(--pix--t--weight-bold);
+  line-height: var(--pix--t--line-height-tight);
+}
+
+h1 {
+  font-size: var(--pix--t--size-hero);
+  letter-spacing: var(--pix--t--tracking-tight);
+}
+
+h2 {
+  font-size: var(--pix--t--size-2xl);
+}
+
+h3 {
+  font-size: var(--pix--t--size-xl);
+}
+
+small,
+[data-text='small'] {
+  font-size: var(--pix--t--size-sm);
+}
+
+strong,
+b,
+[data-text='strong'] {
+  font-weight: var(--pix--t--weight-semibold);
+}
+
+code,
+kbd,
+samp,
+pre {
+  font-family: var(--pix--t--font-family-mono);
+}
+
+[data-text='eyebrow'] {
+  font-size: var(--pix--t--size-xs);
+  font-weight: var(--pix--t--weight-bold);
+  letter-spacing: var(--pix--t--tracking-wide);
+  text-transform: uppercase;
 }

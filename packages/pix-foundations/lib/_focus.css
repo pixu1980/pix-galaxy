@@ -2,7 +2,7 @@
  *
  * WCAG 2.2 SC 2.4.7: visible focus indicator.
  * outline: 2px solid; outline-offset: 2px
- * Colour is consistently var(--pix--f--color) across ALL interactive
+ * Colour is consistently var(--pix-ds--f--color) across ALL interactive
  * elements — no more currentColor which varies by context.
  *
  * Applied to all interactive elements globally.
@@ -10,41 +10,15 @@
  */
 
 :root {
-  --pix--f--width: 2px;
-  --pix--f--style: solid;
-  --pix--f--offset: 2px;
-  --pix--f--color: var(--pix--c--accent, oklch(0.55 0.18 260));
+  --pix-ds--f--width: 3px;
+  --pix-ds--f--style: solid;
+  --pix-ds--f--offset: 3px;
+  --pix-ds--f--color: var(--pix-ds--c--accent, oklch(0.55 0.18 260));
 }
 
 /* Universal focus ring — uses :focus-visible (not :where) for normal specificity,
  * so it can hold its own even when layered.                                  */
 :focus-visible {
-  outline: var(--pix--f--width) var(--pix--f--style) var(--pix--f--color);
-  outline-offset: var(--pix--f--offset);
-}
-
-/* Explicitly target common interactive elements to guarantee the ring
- * shows even when component-level CSS doesn't set outline.                */
-a:focus-visible,
-button:focus-visible,
-input:focus-visible,
-select:focus-visible,
-textarea:focus-visible,
-[tabindex]:focus-visible,
-[role="button"]:focus-visible,
-[role="tab"]:focus-visible,
-[role="option"]:focus-visible,
-[role="menuitem"]:focus-visible,
-[role="switch"]:focus-visible,
-[role="radio"]:focus-visible,
-[role="checkbox"]:focus-visible,
-[role="link"]:focus-visible,
-details summary:focus-visible {
-  outline: var(--pix--f--width) var(--pix--f--style) var(--pix--f--color);
-  outline-offset: var(--pix--f--offset);
-}
-
-/* Remove default browser focus outlines for mouse users only */
-:focus:not(:focus-visible) {
-  outline: none;
+  outline: var(--pix-ds--f--width) var(--pix-ds--f--style) var(--pix-ds--f--color);
+  outline-offset: var(--pix-ds--f--offset);
 }

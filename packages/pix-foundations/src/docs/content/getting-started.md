@@ -24,11 +24,11 @@ Once imported, every `--pix--*` custom property is available on `:root`:
 
 ```css
 .card {
-  padding: var(--pix--s--md);
-  border-radius: var(--pix--r--md);
-  background: var(--pix--c--surface);
-  color: var(--pix--c--text);
-  box-shadow: var(--pix--e--sm);
+  padding: var(--pix-ds--s--md);
+  border-radius: var(--pix-ds--r--md);
+  background: var(--pix-ds--c--surface);
+  color: var(--pix-ds--c--text);
+  box-shadow: var(--pix-ds--e--sm);
 }
 ```
 

@@ -1,15 +1,39 @@
 /* pix-foundations — spacing scale
  *
- * Ratio 1.25, base 1rem (16px).
- * Usage: padding: var(--pix--s--md);
+ * Single source of truth for gap, padding, and margin.
+ * Unit policy: px only for <= 3px; rem for spacing tokens.
  */
 
 :root {
-  --pix--s--ratio: 1.25;
-  --pix--s--xs: 0.25rem;    /*  4px */
-  --pix--s--sm: 0.5rem;     /*  8px */
-  --pix--s--md: 1rem;       /* 16px */
-  --pix--s--lg: 1.5rem;     /* 24px */
-  --pix--s--xl: 2rem;       /* 32px */
-  --pix--s--2xl: 3rem;      /* 48px */
+  --pix--s--0: 0;
+  --pix--s--1px: 1px;
+  --pix--s--2px: 2px;
+  --pix--s--3px: 3px;
+  --pix--s--neg-1px: -1px;
+  --pix--s--2xs: 0.125rem;
+  --pix--s--xs: 0.25rem;
+  --pix--s--sm: 0.5rem;
+  --pix--s--md: 1rem;
+  --pix--s--lg: 1.5rem;
+  --pix--s--xl: 2rem;
+  --pix--s--2xl: 3rem;
+
+  /* Compatibility aliases. */
+  --pix-ds--s--ratio: 1.25;
+  --pix-ds--s--xs: var(--pix--s--xs);
+  --pix-ds--s--sm: var(--pix--s--sm);
+  --pix-ds--s--md: var(--pix--s--md);
+  --pix-ds--s--lg: var(--pix--s--lg);
+  --pix-ds--s--xl: var(--pix--s--xl);
+  --pix-ds--s--2xl: var(--pix--s--2xl);
+
+  --pix-ds-space-1: var(--pix--s--xs);
+  --pix-ds-space-2: var(--pix--s--sm);
+  --pix-ds-space-3: 0.75rem;
+  --pix-ds-space-4: var(--pix--s--md);
+  --pix-ds-space-5: var(--pix--s--lg);
+  --pix-ds-space-6: var(--pix--s--xl);
+  --pix-ds-space-7: 2.5rem;
+  --pix-ds-space-8: var(--pix--s--2xl);
+  --pix-ds-space-9: 4rem;
 }

@@ -1,14 +1,56 @@
 /* pix-foundations — radii
  *
- * Usage:   border-radius: var(--pix--r--md);
- * Scale:   xs (2px), sm (4px), md (8px), lg (12px), xl (16px), pill (999px)
+ * Single source of truth for border radius. Unit policy:
+ * px only for tiny values up to 3px; rem for everything larger.
  */
 
 :root {
   --pix--r--xs: 2px;
-  --pix--r--sm: 4px;
-  --pix--r--md: 8px;
-  --pix--r--lg: 12px;
-  --pix--r--xl: 16px;
-  --pix--r--pill: 999px;
+  --pix--r--sm: 0.25rem; /* 0.25rem at 1rem root */
+  --pix--r--md: 0.5rem; /* 0.5rem at 1rem root */
+  --pix--r--lg: 0.75rem; /* 0.75rem at 1rem root */
+  --pix--r--xl: 1rem; /* 1rem at 1rem root */
+  --pix--r--pill: 999rem;
+  --pix--r--circle: 50%;
+  --pix--r--inherit: inherit;
+
+  /* Compatibility aliases used by pix-galaxy components/docs. */
+  --pix-ds-radius-sm: var(--pix--r--sm);
+  --pix-ds-radius-md: var(--pix--r--md);
+  --pix-ds-radius-lg: var(--pix--r--lg);
+  --pix-ds-radius-xl: var(--pix--r--xl);
+  --pix-ds-radius-pill: var(--pix--r--pill);
+}
+
+:root[data-radius-preset='square'] {
+  --pix--r--xs: 0;
+  --pix--r--sm: 0;
+  --pix--r--md: 0;
+  --pix--r--lg: 0;
+  --pix--r--xl: 0;
+  --pix--r--pill: 0;
+}
+
+:root[data-radius-preset='rounded'] {
+  --pix--r--xs: 2px;
+  --pix--r--sm: 0.25rem;
+  --pix--r--md: 0.5rem;
+  --pix--r--lg: 0.75rem;
+  --pix--r--xl: 1rem;
+  --pix--r--pill: 999rem;
+}
+
+:root[data-radius-preset='squircle'] {
+  --pix--r--xs: 0.375rem;
+  --pix--r--sm: 0.5rem;
+  --pix--r--md: 0.75rem;
+  --pix--r--lg: 1rem;
+  --pix--r--xl: 1.25rem;
+  --pix--r--pill: 1rem;
+}
+
+@supports (corner-shape: squircle) {
+  :root[data-radius-preset='squircle'] {
+    corner-shape: squircle;
+  }
 }
