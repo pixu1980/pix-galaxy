@@ -33,13 +33,15 @@
     "release": "node ./scripts/release.mjs",
     "release:dry": "node ./scripts/release.mjs --dry-run",
     "lint": "pnpm -r --if-present run lint",
-    "format": "prettier --write '**/*.{js,mjs,css,md,json}'",
-    "format:check": "prettier --check '**/*.{js,mjs,css,md,json}'"
+    "format": "prettier --write '**/*.{js,mjs,cjs,css,html,md,json,yml,yaml}'",
+    "format:check": "prettier --check '**/*.{js,mjs,cjs,css,html,md,json,yml,yaml}'",
+    "lint:format": "prettier --check '**/*.{js,mjs,cjs,css,html,md,json,yml,yaml}'",
+    "quality": "pnpm format:check && pnpm lint"
   },
   "devDependencies": {
     "@eslint/js": "9.24.0",
     "@pix-galaxy/pix-color-scheme-selector": "workspace:*",
-    "@pix-galaxy/pix-display-preferences": "workspace:*",
+    "@pix-galaxy/pix-a11y-panel": "workspace:*",
     "@pix-galaxy/pix-foundations": "workspace:*",
     "@playwright/test": "^1.61.1",
     "concurrently": "9.2.1",
