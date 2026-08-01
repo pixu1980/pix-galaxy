@@ -8,14 +8,14 @@
 
 ## Quality Signal: 7213/10000
 
-| Dimensione | Punteggio | Stato |
-|---|---|---|
-| **Acyclicity** | 0.86 | ⚠️ Buono (cicli solo in jsdom) |
-| **Depth** | 1.0 | ✅ Ottimo |
-| **Equality** | 0.25 | 🚨 **GOD FILES** (Gini 0.745) |
-| **Redundancy** | 0.89 | ⚠️ 11% dead code |
-| **Modularity** | 1.0 | ✅ Eccellente |
-| **Coverage discipline** | 1.0 | ✅ |
+| Dimensione              | Punteggio | Stato                          |
+| ----------------------- | --------- | ------------------------------ |
+| **Acyclicity**          | 0.86      | ⚠️ Buono (cicli solo in jsdom) |
+| **Depth**               | 1.0       | ✅ Ottimo                      |
+| **Equality**            | 0.25      | 🚨 **GOD FILES** (Gini 0.745)  |
+| **Redundancy**          | 0.89      | ⚠️ 11% dead code               |
+| **Modularity**          | 1.0       | ✅ Eccellente                  |
+| **Coverage discipline** | 1.0       | ✅                             |
 
 > Il quality signal `7213/10000` è trainato verso il basso dalla **disuguaglianza estrema** (Gini 0.745) - pochi file concentrano la maggior parte della complessità.
 
@@ -178,7 +178,7 @@ disconnectedCallback() {
 **Fix:**
 
 ```css
---pix-command--fg: oklch(0.18 0.012 60);            /* fallback */
+--pix-command--fg: oklch(0.18 0.012 60); /* fallback */
 --pix-command--fg: light-dark(oklch(0.18 0.012 60), oklch(0.88 0.01 85));
 ```
 
@@ -220,10 +220,10 @@ Quando l'utente digita, i risultati vengono filtrati ma non c'è annuncio screen
 
 **Coinvolge:** **Tutti i componenti**
 
-| Componente | Pattern | Accessibile da subclass |
-|---|---|---|
-| Componenti vecchi | `this._onChange` (public) | ✅ |
-| Componenti nuovi | `this.#items` (private) | ❌ |
+| Componente        | Pattern                   | Accessibile da subclass |
+| ----------------- | ------------------------- | ----------------------- |
+| Componenti vecchi | `this._onChange` (public) | ✅                      |
+| Componenti nuovi  | `this.#items` (private)   | ❌                      |
 
 **Raccomandazione:** `#private` per campi interni (timer, observer), `_protected` per metodi estendibili.
 
@@ -283,19 +283,19 @@ Layer innestati `pix-galaxy > pix-component`. L'ultimo stylesheet adottato vince
 
 ### 22. Pix-component-template: dipendenze mancanti
 
-Mancano `@pix-galaxy/shared`, `@pix-galaxy/pix-color-scheme-selector`, `@pix-galaxy/pix-highlighter` nel package.json del template.
+Mancano `@pix-galaxy/pix-core`, `@pix-galaxy/pix-color-scheme-selector`, `@pix-galaxy/pix-highlighter` nel package.json del template.
 
 ### 23. Zero test coverage sui nuovi componenti
 
-| Componente | Test |
-|---|---|
-| `pix-accent-color-selector` | ✅ 3 |
-| `pix-highlighter` | ✅ 4 |
+| Componente                                                                              | Test |
+| --------------------------------------------------------------------------------------- | ---- |
+| `pix-accent-color-selector`                                                             | ✅ 3 |
+| `pix-highlighter`                                                                       | ✅ 4 |
 | `pix-command`, `pix-color`, `pix-recorder`, `pix-sortable`, `pix-splitter`, `pix-toast` | ❌ 0 |
 
 ### 24. Boilerplate SSR ridondante
 
-`typeof document === 'undefined'` e `CSSStyleSheet` guards identiche in ogni componente. Centralizzare in `@pix-galaxy/shared/dom/ssr-safe.js`.
+`typeof document === 'undefined'` e `CSSStyleSheet` guards identiche in ogni componente. Centralizzare in `@pix-galaxy/pix-core/dom/ssr-safe.js`.
 
 ---
 
@@ -343,25 +343,25 @@ Aggiungere dipendenze mancanti.
 
 ## Riepilogo per priorità
 
-| Priorità | Issue | Componente | Impatto |
-|---|---|---|---|
-| 🔴 CRITICAL | Memory leak inline listeners | pix-color, pix-recorder, pix-toast | Alto |
-| 🔴 CRITICAL | `.bind()` senza riferimento | pix-toast | Alto |
-| 🔴 CRITICAL | Global listener race condition | pix-color | Medio |
-| 🔴 CRITICAL | `document.body.dataset` side effect | pix-splitter | Medio |
-| 🔴 CRITICAL | MutationObserver loop risk | pix-sortable | Medio |
-| 🔴 CRITICAL | disconnectedCallback incompleto | pix-toast-stack, pix-recorder | Alto |
-| 🟡 MODERATE | `light-dark()` senza fallback | Tutti | Alto |
-| 🟡 MODERATE | `adoptedStyleSheets` ordering | Tutti | Basso |
-| 🟡 MODERATE | Microfono recovery | pix-recorder | Medio |
-| 🟡 MODERATE | `aria-live` mancante | pix-command | Medio |
-| 🟡 MODERATE | `_` vs `#` incoerenza | Tutti | Basso |
-| 🟡 MODERATE | Native input bypass | pix-color | Basso |
-| 🟡 MODERATE | Touch drag threshold | pix-sortable | Medio |
-| 🟡 MODERATE | ElementInternals non implementato | pix-color, pix-sortable | Basso |
-| 🟢 MINOR | innerHTML escape | pix-color | Basso |
-| 🟢 MINOR | WAV format non implementato | pix-recorder | Basso |
-| 🟢 MINOR | Gradient slider statico | pix-color | Basso |
-| 🟢 MINOR | Template shared dep mancante | pix-component-template | Alto |
-| 🟢 MINOR | Zero test coverage | 5 componenti nuovi | Alto |
-| 🟢 MINOR | SSR boilerplate duplicato | Tutti | Basso |
+| Priorità    | Issue                               | Componente                         | Impatto |
+| ----------- | ----------------------------------- | ---------------------------------- | ------- |
+| 🔴 CRITICAL | Memory leak inline listeners        | pix-color, pix-recorder, pix-toast | Alto    |
+| 🔴 CRITICAL | `.bind()` senza riferimento         | pix-toast                          | Alto    |
+| 🔴 CRITICAL | Global listener race condition      | pix-color                          | Medio   |
+| 🔴 CRITICAL | `document.body.dataset` side effect | pix-splitter                       | Medio   |
+| 🔴 CRITICAL | MutationObserver loop risk          | pix-sortable                       | Medio   |
+| 🔴 CRITICAL | disconnectedCallback incompleto     | pix-toast-stack, pix-recorder      | Alto    |
+| 🟡 MODERATE | `light-dark()` senza fallback       | Tutti                              | Alto    |
+| 🟡 MODERATE | `adoptedStyleSheets` ordering       | Tutti                              | Basso   |
+| 🟡 MODERATE | Microfono recovery                  | pix-recorder                       | Medio   |
+| 🟡 MODERATE | `aria-live` mancante                | pix-command                        | Medio   |
+| 🟡 MODERATE | `_` vs `#` incoerenza               | Tutti                              | Basso   |
+| 🟡 MODERATE | Native input bypass                 | pix-color                          | Basso   |
+| 🟡 MODERATE | Touch drag threshold                | pix-sortable                       | Medio   |
+| 🟡 MODERATE | ElementInternals non implementato   | pix-color, pix-sortable            | Basso   |
+| 🟢 MINOR    | innerHTML escape                    | pix-color                          | Basso   |
+| 🟢 MINOR    | WAV format non implementato         | pix-recorder                       | Basso   |
+| 🟢 MINOR    | Gradient slider statico             | pix-color                          | Basso   |
+| 🟢 MINOR    | Template shared dep mancante        | pix-component-template             | Alto    |
+| 🟢 MINOR    | Zero test coverage                  | 5 componenti nuovi                 | Alto    |
+| 🟢 MINOR    | SSR boilerplate duplicato           | Tutti                              | Basso   |
