@@ -54,7 +54,7 @@
 - [x] Commit `chore(scripts)` — dev/release/scaffold
 - [x] Commit `docs` — handoff + architecture-review + HANDOFF-LLM
 - [x] Untrack test artifacts (e2e/results.json, test-results/.last-run.json)
-- [ ] **A CONFERMA**: `.agents/` (53 file) + `.github/ISSUE_TEMPLATE/` (2 file) — formatting + import rename
+- [x] **RIMOSSO**: `.agents/` (96 file) — contenuto migrato in pix-galaxy-mcp (`pix-frontend-custom-element`, `pix-frontend-template-engine`)
 
 ### Fase 2 — ADR consolidation
 - [ ] Creare `docs/adr/` con ADR numerati e indicizzati (001–018)
