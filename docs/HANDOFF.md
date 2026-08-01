@@ -194,206 +194,24 @@ No external state management. No stores. No signals (except vanilla reactive pat
 
 ## 3. ADR Log
 
-### ADR-001: Light DOM over Shadow DOM
-
-**Date:** 2026-06-01  
-**Status:** Accepted
-
-**Context:** Custom Elements can use Shadow DOM for encapsulation or Light DOM for simplicity.
-
-**Decision:** All components use Light DOM + `document.adoptedStyleSheets`. No Shadow DOM, no `<template>` elements.
-
-**Rationale:**
-
-- Shadow DOM breaks form participation (need `ElementInternals`)
-- Shadow DOM breaks global CSS (fonts, reset, design tokens)
-- Shadow DOM adds performance cost (style recalculation per shadow root)
-- Light DOM + `data-part` selectors provide sufficient encapsulation
-
-**Consequences:**
-
-- CSS uses `@layer` to isolate component styles
-- Component styles are prefixed with component element selector (e.g., `pix-command [data-part="input"]`)
-- Need to be careful about global CSS conflicts
-
-### ADR-002: `adoptedStyleSheets` over `<link>` or `<style>`
-
-**Date:** 2026-06-01  
-**Status:** Accepted
-
-**Context:** Components need to inject CSS into the page.
-
-**Decision:** Use `document.adoptedStyleSheets` via a singleton `CSSStyleSheet` per component.
-
-**Rationale:**
-
-- No duplicate `<style>` elements for multiple component instances
-- Styles are parsed once, shared across all instances
-- Works with `@layer`, `@supports`, `@container`
-- Fallback to single `<style>` element when `adoptedStyleSheets` not supported
-
-**Consequences:**
-
-- Order of stylesheet adoption matters (last wins)
-- Use `includes()` check to avoid duplicate adoption
-- Inline `?raw` CSS imports (Vite) or `bundle-text:` (Parcel)
-
-### ADR-003: `light-dark()` over CSS custom properties + media query toggle
-
-**Date:** 2026-06-15  
-**Status:** Accepted
-
-**Context:** Components need light/dark mode support.
-
-**Decision:** Use `light-dark()` CSS function instead of `@media (prefers-color-scheme)` or JavaScript toggle.
-
-**Rationale:**
-
-- Single declaration handles both modes
-- Works with `pix-color-scheme-selector` which sets `document.documentElement.style.colorScheme`
-- No JavaScript needed for theme switching
-- Supported in Chrome 119+, Safari 17.5+, Firefox 120+
-
-**Consequences:**
-
-- Add fallback before `light-dark()` for older browsers (see ADR-004)
-- `light-dark()` reads from computed `color-scheme` on the element
-
-### ADR-004: CSS fallback before `light-dark()`
-
-**Date:** 2026-07-05  
-**Status:** Accepted
-
-**Context:** `light-dark()` unsupported on older browsers — declaration is completely dropped, not partially applied.
-
-**Decision:** Always add a fallback value BEFORE the `light-dark()` declaration:
-
-```css
---color: oklch(0.18 0.012 60); /* fallback */
---color: light-dark(oklch(0.18 0.012 60), oklch(0.88 0.01 85));
-```
-
-**Rationale:** Browsers apply the last valid declaration. Old browsers: fallback applies. Modern browsers: `light-dark()` wins.
-
-### ADR-005: Private class fields for internal state
-
-**Date:** 2026-06-20  
-**Status:** Accepted
-
-**Context:** Component internal state needs encapsulation.
-
-**Decision:** Use `#private` fields for all internal state, DOM references, and bound handlers. Public API via getters/setters.
-
-**Rationale:**
-
-- True privacy (not just convention with `_` prefix)
-- Prevents accidental external access
-- Works with `static {}` blocks for class-level initialisation
-
-**Consequences:**
-
-- Cannot be accessed by subclass — use `_protected` convention for extensible methods
-- Old components (accent-color-selector, highlighter) use `_` prefix — migration needed
-
-### ADR-006: Oklch colour space
-
-**Date:** 2026-07-01  
-**Status:** Accepted
-
-**Context:** Components need a perceptually uniform colour space for colour pickers and design tokens.
-
-**Decision:** Use `oklch()` for all colour values. Provide HSL/HEX/RGB in colour picker for compatibility.
-
-**Rationale:**
-
-- Perceptually uniform (equal distance in colour ≈ equal perceptual difference)
-- HDR-ready
-- Supported in Chrome 111+, Safari 15.4+, Firefox 113+
-- `color-mix(in srgb, ...)` for colour manipulation
-
-### ADR-007: Shared docs template over per-package duplication
-
-**Date:** 2026-07-05  
-**Status:** Accepted
-
-**Context:** Each package has a documentation site. Initially duplicated per package.
-
-**Decision:** Centralise docs template in `@pix-galaxy/pix-core/docs/docs-site.js`. Each package imports `createDocsSite()`, `buildDocsPages()`.
-
-**Rationale:**
-
-- Single source of truth for docs layout
-- All sites get new features automatically (e.g., `pix-color-scheme-selector`)
-- Consistent visual appearance
-
-**Consequences:**
-
-- Old components (highlighter, accent-color-selector, display-preferences) still use inline template — migration pending
-- Shared CSS in `packages/pix-core/docs/docs.css` adopted automatically
-
-### ADR-008: `ElementInternals` for form association
-
-**Date:** 2026-07-05  
-**Status:** Accepted
-
-**Context:** Custom elements should participate in native HTML forms.
-
-**Decision:** Use `ElementInternals` API (`static formAssociated = true`, `attachInternals()`, `setFormValue()`).
-
-**Rationale:**
-
-- Form data submission without hidden inputs
-- Native validation API (`setValidity()`)
-- Works with `<form>` elements
-
-**Consequences:**
-
-- Only pix-color and pix-sortable currently implement it
-- JSDOM doesn't fully support `setFormValue` — guarded with `typeof` check
-
-### ADR-009: Release via standard-version
-
-**Date:** 2026-07-07  
-**Status:** Accepted
-
-**Context:** Manual versioning and changelog maintenance is error-prone.
-
-**Decision:** Use `standard-version` for semver bump, CHANGELOG generation, and git tag creation. Single orchestration script discovers all packages.
-
-**Rationale:**
-
-- Conventional commits → automatic version bump
-- CHANGELOG auto-generated from commit messages
-- Standard industry tool
-- Works with pnpm workspaces
-
-**Consequences:**
-
-- Requires conventional commit format for proper versioning
-- Old per-package release scripts removed
-
-### ADR-010: Single test runner suite over scattered tests
-
-**Date:** 2026-07-07  
-**Status:** Accepted
-
-**Context:** Component testing was ad-hoc with varying quality.
-
-**Decision:** Use Playwright for e2e tests (22 tests covering portal + all docs sites). Each component has a minimal node:test smoke test.
-
-**Rationale:**
-
-- Playwright catches real browser rendering issues
-- Smoke tests verify element registration and basic rendering
-- Combined: fast unit-level + comprehensive browser-level
-
-**Consequences:**
-
-- Tests depend on dev servers running (12 servers)
-- CI needs dev server setup
-- Portal card count test must be kept in sync with components.json
-
----
+All Architecture Decision Records are consolidated in [`docs/adr/`](adr/README.md) (Nygard format, 24 ADRs with status).
+
+Key decisions that shape this document:
+
+| ADR | Decision |
+|-----|----------|
+| [001](adr/0001-light-dom-over-shadow-dom.md) | Light DOM over Shadow DOM |
+| [004](adr/0004-light-dark-fallback.md) | CSS fallback before `light-dark()` |
+| [007](adr/0007-shared-docs-template.md) | Shared docs template in `pix-core` |
+| [009](adr/0009-release-standard-version.md) | Release via standard-version — **superseded by [018](adr/0018-release-commit-and-tag-version.md)** |
+| [011](adr/0011-rename-a11y-panel.md) | Rename `pix-display-preferences` → `pix-a11y-panel` |
+| [012](adr/0012-centralize-foundations.md) | Centralize design foundations |
+| [014](adr/0014-centralize-pix-core.md) | Centralize shared runtime/scripts |
+| [018](adr/0018-release-commit-and-tag-version.md) | Local release via `commit-and-tag-version`, no CI publish |
+| [019](adr/0019-modern-only-browsers.md) | Modern-only browser matrix |
+| [020](adr/0020-zero-dependencies.md) | Zero runtime dependencies is absolute |
+| [022](adr/0022-branch-strategy.md) | `develop` trunk, `main` for releases |
+| [024](adr/0024-migrate-skills-to-mcp.md) | Migrate `.agents` skills to `pix-galaxy-mcp` |
 
 ## 4. Package Catalog
 

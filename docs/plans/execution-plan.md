@@ -56,10 +56,11 @@
 - [x] Untrack test artifacts (e2e/results.json, test-results/.last-run.json)
 - [x] **RIMOSSO**: `.agents/` (96 file) — contenuto migrato in pix-galaxy-mcp (`pix-frontend-custom-element`, `pix-frontend-template-engine`)
 
-### Fase 2 — ADR consolidation
-- [ ] Creare `docs/adr/` con ADR numerati e indicizzati (001–018)
-- [ ] Aggiornare stati: deprecare ADR superati (rename, shared→core)
-- [ ] Aggiungere ADR per le nuove decisioni (release locale, JSDoc strict, modern-only)
+### Fase 2 — ADR consolidation ✅ FATTA
+- [x] Creato `docs/adr/` con 24 ADR numerati e indicizzati (Nygard format, README index)
+- [x] Stati aggiornati: ADR-009 (standard-version) → superseded da ADR-018 (commit-and-tag-version)
+- [x] Aggiunti ADR 018-024 per le decisioni strategiche (release locale, modern-only, zero-dep, WCAG, branch, JSDoc strict, skills→MCP)
+- [x] HANDOFF.md e HANDOFF-LLM aggiornati: sezioni ADR sostituite con riferimento a docs/adr/
 
 ### Fase 3 — Fix critici (architectural review, quality signal 7213)
 - [ ] Memory leak inline arrow listeners → private field pre-bound (`pix-color`, `pix-recorder`, `pix-command`)
