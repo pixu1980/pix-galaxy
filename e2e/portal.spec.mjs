@@ -16,22 +16,21 @@ import { test, expect } from '@playwright/test';
 
 const COMPONENTS = [
   { name: 'pix-accent-color-selector', port: 3001 },
-  { name: 'pix-color',                port: 3002 },
-  { name: 'pix-color-scheme-selector',port: 3003 },
-  { name: 'pix-command',              port: 3004 },
-  { name: 'pix-display-preferences',  port: 3005 },
-  { name: 'pix-foundations',          port: 3006 },
-  { name: 'pix-highlighter',          port: 3007 },
-  { name: 'pix-recorder',             port: 3008 },
-  { name: 'pix-sortable',             port: 3009 },
-  { name: 'pix-splitter',             port: 3010 },
-  { name: 'pix-toast',                port: 3011 },
+  { name: 'pix-color', port: 3002 },
+  { name: 'pix-color-scheme-selector', port: 3003 },
+  { name: 'pix-command', port: 3004 },
+  { name: 'pix-a11y-panel', port: 3005 },
+  { name: 'pix-foundations', port: 3006 },
+  { name: 'pix-highlighter', port: 3007 },
+  { name: 'pix-recorder', port: 3008 },
+  { name: 'pix-sortable', port: 3009 },
+  { name: 'pix-splitter', port: 3010 },
+  { name: 'pix-toast', port: 3011 },
 ];
 
 /* ── 1. Portal smoke tests ──────────────────────────────────────── */
 
 test.describe('Portal (http://localhost:3000)', () => {
-
   test('loads and shows all component cards', async ({ page }) => {
     await page.goto('/');
     await page.waitForSelector('[data-part="grid"]', { timeout: 8000 });
@@ -91,7 +90,6 @@ test.describe('Portal (http://localhost:3000)', () => {
 /* ── 2. Component docs sites ───────────────────────────────────── */
 
 test.describe('Component docs sites', () => {
-
   for (const comp of COMPONENTS) {
     test(`${comp.name} docs loads at :${comp.port}`, async ({ page }) => {
       await page.goto(`http://localhost:${comp.port}/`);
@@ -108,7 +106,10 @@ test.describe('Component docs sites', () => {
     for (const comp of COMPONENTS) {
       if (skip.has(comp.port)) continue;
       await page.goto(`http://localhost:${comp.port}/`);
-      await page.waitForSelector('pix-color-scheme-selector', { state: 'attached', timeout: 10000 });
+      await page.waitForSelector('pix-color-scheme-selector', {
+        state: 'attached',
+        timeout: 10000,
+      });
       await expect(page.locator('pix-color-scheme-selector').first()).toBeAttached();
     }
   });
@@ -126,7 +127,6 @@ test.describe('Component docs sites', () => {
 /* ── 3. pix-highlighter specific ────────────────────────────────── */
 
 test.describe('Pix Highlighter', () => {
-
   test('code blocks show toolbar', async ({ page }) => {
     await page.goto('http://localhost:3007/');
     await page.waitForSelector('pre[is="pix-highlighter"]', { timeout: 8000 });
@@ -156,7 +156,6 @@ test.describe('Pix Highlighter', () => {
 /* ── 4. Keyboard navigation ─────────────────────────────────────── */
 
 test.describe('Keyboard a11y', () => {
-
   test('Enter activates nav link on pix-command docs', async ({ page }) => {
     await page.goto('http://localhost:3004/');
     await page.waitForSelector('[data-part="nav-link"]', { timeout: 8000 });

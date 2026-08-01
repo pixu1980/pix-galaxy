@@ -11,12 +11,12 @@ importers:
       '@eslint/js':
         specifier: 9.24.0
         version: 9.24.0
+      '@pix-galaxy/pix-a11y-panel':
+        specifier: workspace:*
+        version: link:packages/pix-a11y-panel
       '@pix-galaxy/pix-color-scheme-selector':
         specifier: workspace:*
         version: link:packages/pix-color-scheme-selector
-      '@pix-galaxy/pix-display-preferences':
-        specifier: workspace:*
-        version: link:packages/pix-display-preferences
       '@pix-galaxy/pix-foundations':
         specifier: workspace:*
         version: link:packages/pix-foundations
@@ -41,6 +41,43 @@ importers:
       vite:
         specifier: 8.0.10
         version: 8.0.10(esbuild@0.28.1)
+
+  packages/pix-a11y-panel:
+    dependencies:
+      '@pix-galaxy/pix-accent-color-selector':
+        specifier: workspace:*
+        version: link:../pix-accent-color-selector
+      '@pix-galaxy/pix-color-scheme-selector':
+        specifier: workspace:*
+        version: link:../pix-color-scheme-selector
+      '@pix-galaxy/pix-foundations':
+        specifier: workspace:*
+        version: link:../pix-foundations
+      '@pix-galaxy/pix-highlighter':
+        specifier: workspace:*
+        version: link:../pix-highlighter
+    devDependencies:
+      c8:
+        specifier: 11.0.0
+        version: 11.0.0
+      concurrently:
+        specifier: 10.0.3
+        version: 10.0.3
+      esbuild:
+        specifier: 0.28.1
+        version: 0.28.1
+      jsdom:
+        specifier: 29.1.1
+        version: 29.1.1
+      marked:
+        specifier: 18.0.5
+        version: 18.0.5
+      typescript:
+        specifier: 6.0.3
+        version: 6.0.3
+      vite:
+        specifier: 8.1.3
+        version: 8.1.3(esbuild@0.28.1)
 
   packages/pix-accent-color-selector:
     dependencies:
@@ -78,15 +115,15 @@ importers:
       '@pix-galaxy/pix-color-scheme-selector':
         specifier: workspace:*
         version: link:../pix-color-scheme-selector
+      '@pix-galaxy/pix-core':
+        specifier: workspace:*
+        version: link:../pix-core
       '@pix-galaxy/pix-foundations':
         specifier: workspace:*
         version: link:../pix-foundations
       '@pix-galaxy/pix-highlighter':
         specifier: workspace:*
         version: link:../pix-highlighter
-      '@pix-galaxy/shared':
-        specifier: workspace:*
-        version: link:../shared
     devDependencies:
       c8:
         specifier: 11.0.0
@@ -146,15 +183,15 @@ importers:
       '@pix-galaxy/pix-color-scheme-selector':
         specifier: workspace:*
         version: link:../pix-color-scheme-selector
+      '@pix-galaxy/pix-core':
+        specifier: workspace:*
+        version: link:../pix-core
       '@pix-galaxy/pix-foundations':
         specifier: workspace:*
         version: link:../pix-foundations
       '@pix-galaxy/pix-highlighter':
         specifier: workspace:*
         version: link:../pix-highlighter
-      '@pix-galaxy/shared':
-        specifier: workspace:*
-        version: link:../shared
     devDependencies:
       c8:
         specifier: 11.0.0
@@ -183,15 +220,15 @@ importers:
       '@pix-galaxy/pix-color-scheme-selector':
         specifier: workspace:*
         version: link:../pix-color-scheme-selector
+      '@pix-galaxy/pix-core':
+        specifier: workspace:*
+        version: link:../pix-core
       '@pix-galaxy/pix-foundations':
         specifier: workspace:*
         version: link:../pix-foundations
       '@pix-galaxy/pix-highlighter':
         specifier: workspace:*
         version: link:../pix-highlighter
-      '@pix-galaxy/shared':
-        specifier: workspace:*
-        version: link:../shared
     devDependencies:
       c8:
         specifier: 11.0.0
@@ -215,48 +252,19 @@ importers:
         specifier: 8.1.3
         version: 8.1.3(esbuild@0.28.1)
 
-  packages/pix-display-preferences:
+  packages/pix-core:
     dependencies:
-      '@pix-galaxy/pix-accent-color-selector':
-        specifier: workspace:*
-        version: link:../pix-accent-color-selector
       '@pix-galaxy/pix-color-scheme-selector':
         specifier: workspace:*
         version: link:../pix-color-scheme-selector
-      '@pix-galaxy/pix-foundations':
-        specifier: workspace:*
-        version: link:../pix-foundations
-      '@pix-galaxy/pix-highlighter':
-        specifier: workspace:*
-        version: link:../pix-highlighter
-    devDependencies:
-      c8:
-        specifier: 11.0.0
-        version: 11.0.0
-      concurrently:
-        specifier: 10.0.3
-        version: 10.0.3
       esbuild:
         specifier: 0.28.1
         version: 0.28.1
-      jsdom:
-        specifier: 29.1.1
-        version: 29.1.1
       marked:
         specifier: 18.0.5
         version: 18.0.5
-      typescript:
-        specifier: 6.0.3
-        version: 6.0.3
-      vite:
-        specifier: 8.1.3
-        version: 8.1.3(esbuild@0.28.1)
 
-  packages/pix-foundations:
-    dependencies:
-      '@pix-galaxy/shared':
-        specifier: workspace:*
-        version: link:../shared
+  packages/pix-foundations: {}
 
   packages/pix-highlighter:
     dependencies:
@@ -291,15 +299,15 @@ importers:
       '@pix-galaxy/pix-color-scheme-selector':
         specifier: workspace:*
         version: link:../pix-color-scheme-selector
+      '@pix-galaxy/pix-core':
+        specifier: workspace:*
+        version: link:../pix-core
       '@pix-galaxy/pix-foundations':
         specifier: workspace:*
         version: link:../pix-foundations
       '@pix-galaxy/pix-highlighter':
         specifier: workspace:*
         version: link:../pix-highlighter
-      '@pix-galaxy/shared':
-        specifier: workspace:*
-        version: link:../shared
     devDependencies:
       c8:
         specifier: 11.0.0
@@ -328,15 +336,15 @@ importers:
       '@pix-galaxy/pix-color-scheme-selector':
         specifier: workspace:*
         version: link:../pix-color-scheme-selector
+      '@pix-galaxy/pix-core':
+        specifier: workspace:*
+        version: link:../pix-core
       '@pix-galaxy/pix-foundations':
         specifier: workspace:*
         version: link:../pix-foundations
       '@pix-galaxy/pix-highlighter':
         specifier: workspace:*
         version: link:../pix-highlighter
-      '@pix-galaxy/shared':
-        specifier: workspace:*
-        version: link:../shared
     devDependencies:
       c8:
         specifier: 11.0.0
@@ -365,15 +373,15 @@ importers:
       '@pix-galaxy/pix-color-scheme-selector':
         specifier: workspace:*
         version: link:../pix-color-scheme-selector
+      '@pix-galaxy/pix-core':
+        specifier: workspace:*
+        version: link:../pix-core
       '@pix-galaxy/pix-foundations':
         specifier: workspace:*
         version: link:../pix-foundations
       '@pix-galaxy/pix-highlighter':
         specifier: workspace:*
         version: link:../pix-highlighter
-      '@pix-galaxy/shared':
-        specifier: workspace:*
-        version: link:../shared
     devDependencies:
       c8:
         specifier: 11.0.0
@@ -402,15 +410,15 @@ importers:
       '@pix-galaxy/pix-color-scheme-selector':
         specifier: workspace:*
         version: link:../pix-color-scheme-selector
+      '@pix-galaxy/pix-core':
+        specifier: workspace:*
+        version: link:../pix-core
       '@pix-galaxy/pix-foundations':
         specifier: workspace:*
         version: link:../pix-foundations
       '@pix-galaxy/pix-highlighter':
         specifier: workspace:*
         version: link:../pix-highlighter
-      '@pix-galaxy/shared':
-        specifier: workspace:*
-        version: link:../shared
     devDependencies:
       c8:
         specifier: 11.0.0
@@ -433,15 +441,6 @@ importers:
       vite:
         specifier: 8.0.10
         version: 8.0.10(esbuild@0.28.0)
-
-  packages/shared:
-    dependencies:
-      '@pix-galaxy/pix-color-scheme-selector':
-        specifier: workspace:*
-        version: link:../pix-color-scheme-selector
-      marked:
-        specifier: 18.0.5
-        version: 18.0.5
 
 packages:
 

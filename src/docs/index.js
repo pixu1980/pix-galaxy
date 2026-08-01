@@ -10,7 +10,7 @@
  */
 
 import '@pix-galaxy/pix-color-scheme-selector';
-import '@pix-galaxy/pix-display-preferences';
+import '@pix-galaxy/pix-a11y-panel';
 
 const GITHUB_ORG = 'pixu1980';
 const isDev = typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.DEV;
@@ -29,14 +29,24 @@ function getDevPort(compName) {
       const map = JSON.parse(raw);
       if (map[compName]) return map[compName];
     }
-  } catch { /* fall through */ }
+  } catch {
+    /* fall through */
+  }
 
   // Fallback: compute port from order (same algorithm as dev-all.mjs)
   const order = [
-    'pix-galaxy', 'pix-accent-color-selector', 'pix-color',
-    'pix-color-scheme-selector', 'pix-command', 'pix-display-preferences',
-    'pix-foundations', 'pix-highlighter', 'pix-recorder',
-    'pix-sortable', 'pix-splitter', 'pix-toast',
+    'pix-galaxy',
+    'pix-accent-color-selector',
+    'pix-color',
+    'pix-color-scheme-selector',
+    'pix-command',
+    'pix-a11y-panel',
+    'pix-foundations',
+    'pix-highlighter',
+    'pix-recorder',
+    'pix-sortable',
+    'pix-splitter',
+    'pix-toast',
   ];
   const idx = order.indexOf(compName);
   if (idx >= 0) return 3000 + idx;
@@ -53,7 +63,7 @@ const ICONS = Object.freeze({
   'pix-color': `<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M12 3a5 5 0 0 0-5 5c0 2 1 3 2 4l3 5 3-5c1-1 2-2 2-4a5 5 0 0 0-5-5Z" fill="currentColor" fill-opacity="0.15"/><circle cx="12" cy="8" r="1.5" fill="currentColor"/></svg>`,
   'pix-recorder': `<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4" fill="currentColor" fill-opacity="0.15"/><path d="M12 7v5l3 3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
   'pix-command': `<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="4" y="5" width="16" height="14" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M7 9l3 3-3 3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 15h3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><rect x="8" y="13" width="3" height="2" fill="currentColor" fill-opacity="0.15"/></svg>`,
-  'pix-display-preferences': `<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.8"/><path d="M12 1v3M12 20v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M1 12h3M20 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="12" r="1" fill="currentColor" fill-opacity="0.15"/></svg>`,
+  'pix-a11y-panel': `<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.8"/><path d="M12 1v3M12 20v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M1 12h3M20 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="12" r="1" fill="currentColor" fill-opacity="0.15"/></svg>`,
   'pix-accent-color-selector': `<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 3l4 4-4 4-4-4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 7h12v2H9z" fill="currentColor" fill-opacity="0.15"/><path d="M5 13l4 4-4 4-4-4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 17h12v2H9z" fill="currentColor" fill-opacity="0.15"/></svg>`,
   'pix-color-scheme-selector': `<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="1.8"/><path d="M12 1v3M12 20v3M1 12h3M20 12h3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="12" r="2" fill="currentColor" fill-opacity="0.15"/></svg>`,
   // Fallback by accent (backward compat)
@@ -73,9 +83,7 @@ async function bootPortal() {
   const cardsHtml = components
     .map((comp) => {
       const devPort = getDevPort(comp.name);
-      const docUrl = (isDev && devPort)
-        ? `http://localhost:${devPort}/`
-        : (comp.homepage || '#');
+      const docUrl = isDev && devPort ? `http://localhost:${devPort}/` : comp.homepage || '#';
       const isComingSoon = !comp.homepage;
 
       return `
@@ -108,12 +116,7 @@ async function bootPortal() {
     <section data-part="shell">
       <div data-part="topbar">
         <pix-color-scheme-selector></pix-color-scheme-selector>
-        <button data-part="a11y-btn" type="button" aria-label="Accessibility settings"
-          onclick="this.nextElementSibling?.togglePopover()">
-          <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M12 1v3M12 20v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M1 12h3M20 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1" stroke-linecap="round"/></svg>
-          A11y
-        </button>
-        <pix-display-preferences style="display:none;"></pix-display-preferences>
+        <pix-a11y-panel></pix-a11y-panel>
       </div>
       <header data-part="hero">
         <h1>

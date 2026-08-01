@@ -80,12 +80,12 @@
     "keywords": ["command-palette", "keyboard-shortcuts", "fuzzy-search"]
   },
   {
-    "name": "pix-display-preferences",
-    "packageName": "@pix-galaxy/pix-display-preferences",
+    "name": "pix-a11y-panel",
+    "packageName": "@pix-galaxy/pix-a11y-panel",
     "title": "Pix Display Preferences",
     "description": "Accessible popover Web Component for managing display preferences: color scheme, accent color, reduced motion, and typography settings.",
-    "homepage": "https://pixu1980.github.io/pix-display-preferences/",
-    "repo": "https://github.com/pixu1980/pix-display-preferences",
+    "homepage": "https://pixu1980.github.io/pix-a11y-panel/",
+    "repo": "https://github.com/pixu1980/pix-a11y-panel",
     "accent": "coral",
     "keywords": ["display-preferences", "popover", "accessibility", "theme-switcher"]
   },
