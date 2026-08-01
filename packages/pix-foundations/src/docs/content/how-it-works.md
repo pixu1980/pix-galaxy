@@ -8,14 +8,14 @@ Foundations is a pure CSS package. No JavaScript. No component registration. No 
 @layer pix.reset, pix.foundations, pix.components;
 ```
 
-| Layer | Contents |
-|-------|----------|
-| `pix.reset` | Box-sizing, margin removal, media defaults |
-| `pix.foundations.radii` | `--pix--r--*` tokens |
-| `pix.foundations.spacings` | `--pix--s--*` tokens |
-| `pix.foundations.typography` | `--pix--t--*` tokens |
-| `pix.foundations.colors` | `--pix--c--*` tokens with `light-dark()` |
-| `pix.foundations.elevations` | `--pix--e--*` box-shadow tokens |
+| Layer                        | Contents                                    |
+| ---------------------------- | ------------------------------------------- |
+| `pix.reset`                  | Box-sizing, margin removal, media defaults  |
+| `pix.foundations.radii`      | `--pix-ds--r--*` tokens                     |
+| `pix.foundations.spacings`   | `--pix-ds--s--*` tokens                     |
+| `pix.foundations.typography` | `--pix-ds--t--*` tokens                     |
+| `pix.foundations.colors`     | `--pix-ds--c--*` tokens with `light-dark()` |
+| `pix.foundations.elevations` | `--pix-ds--e--*` box-shadow tokens          |
 
 ## Focus ring — unlayered
 
@@ -23,4 +23,4 @@ Foundations is a pure CSS package. No JavaScript. No component registration. No 
 
 ## Theme switching
 
-Color tokens use `light-dark()`. When a `color-scheme` value is set on `<html>` (e.g. by `<pix-color-scheme-selector>`), all `--pix--c--*` tokens adapt automatically.
+Color tokens use `light-dark()`. When a `color-scheme` value is set on `<html>` (e.g. by `<pix-color-scheme-selector>`), all `--pix-ds--c--*` tokens adapt automatically.

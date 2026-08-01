@@ -1,0 +1,271 @@
+/* pix-foundations — form controls
+ *
+ * Unified sizing, borders, colors, and typography for ALL interactive
+ * form elements: buttons, inputs, selects, textareas, and checkbox/radio
+ * label wrappers.
+ *
+ * Heights: sm=3.6rem / md=4rem (default) / lg=4.4rem — set via
+ *          data-size="sm|md|lg" attribute or the unset default (md).
+ *
+ * Button variants: data-variant="primary" (filled accent bg + border)
+ *                  data-variant="secondary" (transparent bg + accent border)
+ *
+ * Focus ring: centralised in _focus.css via var(--pix-ds--f--width/style/offset/color).
+ *             Every interactive element gets it automatically.
+ */
+
+@layer pix.foundations.controls {
+  /* ─── tokens ───────────────────────────────────────────── */
+
+  :root {
+    /* Height scale — default md */
+    --pix-ds--ctrl--h-sm: 3.6rem;
+    --pix-ds--ctrl--h-md: 4rem;
+    --pix-ds--ctrl--h-lg: 4.4rem;
+    --pix-ds--ctrl--h: var(--pix-ds--ctrl--h-md);
+
+    /* Border */
+    --pix-ds--ctrl--border: 1px solid var(--pix-ds--c--border);
+    --pix-ds--ctrl--border-hover: 1px solid var(--pix-ds--c--border-strong);
+    --pix-ds--ctrl--border-radius: var(--pix-ds--r--md);
+
+    /* Background */
+    --pix-ds--ctrl--bg: var(--pix-ds--c--surface);
+    --pix-ds--ctrl--bg-hover: var(--pix-ds--c--surface-raised);
+
+    /* Text */
+    --pix-ds--ctrl--color: var(--pix-ds--c--text);
+    --pix-ds--ctrl--color-muted: var(--pix-ds--c--text-muted);
+    --pix-ds--ctrl--placeholder: var(--pix-ds--c--text-muted);
+
+    /* Primary variant — filled accent */
+    --pix-ds--ctrl--primary-bg: var(--pix-ds--c--accent);
+    --pix-ds--ctrl--primary-border: var(--pix-ds--c--accent);
+    --pix-ds--ctrl--primary-color: var(--pix-ds--c--text-inverse);
+    --pix-ds--ctrl--primary-bg-hover: var(--pix-ds--c--accent);
+    --pix-ds--ctrl--primary-border-hover: var(--pix-ds--c--accent);
+
+    /* Secondary variant — accent border */
+    --pix-ds--ctrl--secondary-bg: transparent;
+    --pix-ds--ctrl--secondary-border: 1px solid var(--pix-ds--c--accent);
+    --pix-ds--ctrl--secondary-color: var(--pix-ds--c--accent);
+    --pix-ds--ctrl--secondary-bg-hover: var(--pix-ds--c--accent-soft);
+    --pix-ds--ctrl--secondary-border-hover: 1px solid var(--pix-ds--c--accent);
+
+    /* Checkbox / radio */
+    --pix-ds--ctrl--check-size: 1.25rem;
+    --pix-ds--ctrl--check-accent: var(--pix-ds--c--accent);
+  }
+
+  /* ─── size overrides ──────────────────────────────────── */
+
+  [data-size='sm'] {
+    --pix-ds--ctrl--h: var(--pix-ds--ctrl--h-sm);
+  }
+
+  [data-size='md'] {
+    --pix-ds--ctrl--h: var(--pix-ds--ctrl--h-md);
+  }
+
+  [data-size='lg'] {
+    --pix-ds--ctrl--h: var(--pix-ds--ctrl--h-lg);
+  }
+
+  /* ─── Base control ────────────────────────────────────── */
+
+  select,
+  input[type='text'],
+  input[type='email'],
+  input[type='password'],
+  input[type='search'],
+  input[type='url'],
+  input[type='tel'],
+  input[type='number'],
+  input[type='date'],
+  input[type='datetime-local'],
+  input[type='time'],
+  input[type='month'],
+  input[type='week'],
+  input[type='color'],
+  textarea,
+  button,
+  [role='button'],
+  [data-variant] {
+    display: inline-flex;
+    align-items: center;
+    box-sizing: border-box;
+    min-height: var(--pix-ds--ctrl--h);
+    padding: 0 1rem;
+    border: var(--pix-ds--ctrl--border);
+    border-radius: var(--pix-ds--ctrl--border-radius);
+    background: var(--pix-ds--ctrl--bg);
+    color: var(--pix-ds--ctrl--color);
+    font: inherit;
+    line-height: var(--pix--t--line-height-tight);
+    transition:
+      border-color var(--pix--ds-duration-fast, 140ms) var(--pix--ds-ease-standard, ease),
+      background-color var(--pix--ds-duration-fast, 140ms) var(--pix--ds-ease-standard, ease),
+      color var(--pix--ds-duration-fast, 140ms) var(--pix--ds-ease-standard, ease);
+    cursor: pointer;
+  }
+
+  /* Hover */
+  select:hover,
+  input:hover,
+  textarea:hover,
+  button:hover,
+  [role='button']:hover,
+  [data-variant]:hover {
+    border: var(--pix-ds--ctrl--border-hover);
+    background: var(--pix-ds--ctrl--bg-hover);
+  }
+
+  /* ─── text / textarea specific ────────────────────────── */
+
+  input[type='text'],
+  input[type='email'],
+  input[type='password'],
+  input[type='search'],
+  input[type='url'],
+  input[type='tel'],
+  input[type='number'],
+  input[type='date'],
+  input[type='datetime-local'],
+  input[type='time'],
+  input[type='month'],
+  input[type='week'],
+  textarea {
+    cursor: text;
+  }
+
+  textarea {
+    padding-block: 0.75rem;
+    min-height: calc(var(--pix-ds--ctrl--h) * 2);
+    resize: vertical;
+  }
+
+  select {
+    appearance: auto;
+  }
+
+  /* ─── placeholder ─────────────────────────────────────── */
+
+  ::placeholder {
+    color: var(--pix-ds--ctrl--placeholder);
+  }
+
+  /* ─── Button variants ─────────────────────────────────── */
+
+  [data-variant='primary'],
+  button[data-variant='primary'],
+  a[data-variant='primary'] {
+    background: var(--pix-ds--ctrl--primary-bg);
+    border: var(--pix-ds--ctrl--primary-border);
+    color: var(--pix-ds--ctrl--primary-color);
+    font-weight: var(--pix--t--weight-semibold);
+  }
+
+  [data-variant='primary']:hover {
+    background: var(--pix-ds--ctrl--primary-bg-hover);
+    border: var(--pix-ds--ctrl--primary-border-hover);
+  }
+
+  [data-variant='secondary'],
+  button[data-variant='secondary'],
+  a[data-variant='secondary'] {
+    background: var(--pix-ds--ctrl--secondary-bg);
+    border: var(--pix-ds--ctrl--secondary-border);
+    color: var(--pix-ds--ctrl--secondary-color);
+    font-weight: var(--pix--t--weight-semibold);
+  }
+
+  [data-variant='secondary']:hover {
+    background: var(--pix-ds--ctrl--secondary-bg-hover);
+    border: var(--pix-ds--ctrl--secondary-border-hover);
+  }
+
+  /* ─── plain button (no variant) ───────────────────────── */
+
+  button:not([data-variant]),
+  input[type='button']:not([data-variant]),
+  input[type='submit']:not([data-variant]),
+  input[type='reset']:not([data-variant]) {
+    font-weight: var(--pix--t--weight-semibold);
+    justify-content: center;
+  }
+
+  /* ─── checkbox / radio label wrappers ─────────────────── */
+
+  label:has(input[type='checkbox']),
+  label:has(input[type='radio']) {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.625rem;
+    min-height: var(--pix-ds--ctrl--h);
+    padding: 0 0.75rem;
+    border: var(--pix-ds--ctrl--border);
+    border-radius: var(--pix-ds--ctrl--border-radius);
+    background: var(--pix-ds--ctrl--bg);
+    color: var(--pix-ds--ctrl--color);
+    cursor: pointer;
+    transition:
+      border-color var(--pix--ds-duration-fast, 140ms) var(--pix--ds-ease-standard, ease),
+      background-color var(--pix--ds-duration-fast, 140ms) var(--pix--ds-ease-standard, ease);
+  }
+
+  label:has(input[type='checkbox']):hover,
+  label:has(input[type='radio']):hover {
+    border: var(--pix-ds--ctrl--border-hover);
+    background: var(--pix-ds--ctrl--bg-hover);
+  }
+
+  label:has(input[type='checkbox']:checked),
+  label:has(input[type='radio']:checked) {
+    border-color: var(--pix-ds--ctrl--check-accent);
+    background: color-mix(in srgb, var(--pix-ds--ctrl--check-accent) 10%, var(--pix-ds--ctrl--bg));
+  }
+
+  label input[type='checkbox'],
+  label input[type='radio'] {
+    width: var(--pix-ds--ctrl--check-size);
+    height: var(--pix-ds--ctrl--check-size);
+    accent-color: var(--pix-ds--ctrl--check-accent);
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  /* ─── Disabled state ──────────────────────────────────── */
+
+  select:disabled,
+  input:disabled,
+  textarea:disabled,
+  button:disabled,
+  [data-variant]:disabled,
+  label:has(input:disabled) {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  /* ─── Grouped controls ────────────────────────────────── */
+
+  [data-control-group] {
+    display: inline-flex;
+    align-items: center;
+    gap: 0;
+    border: var(--pix-ds--ctrl--border);
+    border-radius: var(--pix-ds--ctrl--border-radius);
+    overflow: hidden;
+    background: var(--pix-ds--ctrl--bg);
+  }
+
+  [data-control-group] > * {
+    border: none;
+    border-radius: 0;
+    min-height: var(--pix-ds--ctrl--h);
+    background: transparent;
+  }
+
+  [data-control-group] > * + * {
+    border-left: var(--pix-ds--ctrl--border);
+  }
+}

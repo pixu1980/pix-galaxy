@@ -1,3 +1,8 @@
+/**
+ * FILE: _ds-tokens.css
+ * USAGE: Stylesheet for packages/pix-foundations/src/shared/_ds-tokens.css.
+ * SCOPE: File-local selectors and pix-galaxy design tokens.
+ */
 @layer pix-galaxy {
   @layer design-system {
     :root {
@@ -26,7 +31,10 @@
       --pix-ds-color-violet-300: oklch(0.79 0.085 306);
       --pix-ds-color-gold-300: oklch(0.88 0.085 95);
 
-      --pix-ds-surface-page: light-dark(var(--pix-ds-color-sand-100), var(--pix-ds-color-night-950));
+      --pix-ds-surface-page: light-dark(
+        var(--pix-ds-color-sand-100),
+        var(--pix-ds-color-night-950)
+      );
       --pix-ds-surface-panel: light-dark(
         color-mix(in srgb, var(--pix-ds-color-sand-50) 82%, white 18%),
         color-mix(in srgb, var(--pix-ds-color-night-900) 88%, black 12%)
@@ -54,21 +62,24 @@
         var(--pix-ds-color-coral-400),
         var(--pix-ds-color-coral-300)
       );
-      --pix-ds-accent-tertiary: light-dark(var(--pix-ds-color-mint-500), var(--pix-ds-color-mint-400));
+      --pix-ds-accent-tertiary: light-dark(
+        var(--pix-ds-color-mint-500),
+        var(--pix-ds-color-mint-400)
+      );
 
-      --pix-ds-font-sans: 'Space Grotesk', 'Avenir Next', 'Segoe UI', sans-serif;
-      --pix-ds-font-display: 'Fraunces', 'Iowan Old Style', Georgia, serif;
-      --pix-ds-font-mono: 'IBM Plex Mono', 'SFMono-Regular', Menlo, Consolas, monospace;
+      --pix-ds-font-sans: var(--pix--t--font-family);
+      --pix-ds-font-display: var(--pix--t--font-family-display);
+      --pix-ds-font-mono: var(--pix--t--font-family-mono);
 
-      --pix-ds-text-xs: 0.75rem;
-      --pix-ds-text-sm: 0.875rem;
-      --pix-ds-text-md: 1rem;
-      --pix-ds-text-lg: 1.125rem;
-      --pix-ds-text-xl: 1.25rem;
-      --pix-ds-leading-tight: 1.1;
-      --pix-ds-leading-normal: 1.6;
-      --pix-ds-leading-relaxed: 1.72;
-      --pix-ds-tracking-wide: 0.14em;
+      --pix-ds-text-xs: var(--pix--t--size-xs);
+      --pix-ds-text-sm: var(--pix--t--size-sm);
+      --pix-ds-text-md: var(--pix--t--size-md);
+      --pix-ds-text-lg: var(--pix--t--size-lg);
+      --pix-ds-text-xl: var(--pix--t--size-xl);
+      --pix-ds-leading-tight: var(--pix--t--line-height-tight);
+      --pix-ds-leading-normal: var(--pix--t--line-height);
+      --pix-ds-leading-relaxed: var(--pix--t--line-height-relaxed);
+      --pix-ds-tracking-wide: var(--pix--t--tracking-wide);
 
       --pix-ds-space-1: 0.25rem;
       --pix-ds-space-2: 0.5rem;
@@ -80,23 +91,23 @@
       --pix-ds-space-8: 3rem;
       --pix-ds-space-9: 4rem;
 
-      --pix-ds-radius-sm: 0.5rem;
-      --pix-ds-radius-md: 0.85rem;
-      --pix-ds-radius-lg: 1.25rem;
-      --pix-ds-radius-xl: 1.6rem;
-      --pix-ds-radius-pill: 999px;
+      --pix-ds--r--sm: var(--pix-ds--r--sm);
+      --pix-ds--r--md: var(--pix-ds--r--md);
+      --pix-ds--r--lg: var(--pix-ds--r--lg);
+      --pix-ds--r--xl: var(--pix-ds--r--xl);
+      --pix-ds--r--pill: var(--pix-ds--r--pill);
 
       --pix-ds-elevation-1: light-dark(
-        0 12px 28px rgba(54, 39, 22, 0.08),
-        0 16px 34px rgba(0, 0, 0, 0.34)
+        0 0.75rem 1.75rem rgba(54, 39, 22, 0.08),
+        0 1rem 2.125rem rgba(0, 0, 0, 0.34)
       );
       --pix-ds-elevation-2: light-dark(
-        0 18px 42px rgba(54, 39, 22, 0.12),
-        0 22px 48px rgba(0, 0, 0, 0.42)
+        0 1.125rem 2.625rem rgba(54, 39, 22, 0.12),
+        0 1.375rem 3rem rgba(0, 0, 0, 0.42)
       );
       --pix-ds-elevation-3: light-dark(
-        0 24px 56px rgba(54, 39, 22, 0.16),
-        0 26px 64px rgba(0, 0, 0, 0.5)
+        0 1.5rem 3.5rem rgba(54, 39, 22, 0.16),
+        0 1.625rem 4rem rgba(0, 0, 0, 0.5)
       );
 
       --pix-ds-duration-fast: 140ms;
@@ -106,7 +117,6 @@
       --pix-ds-ease-emphasized: cubic-bezier(0.16, 1, 0.3, 1);
       --pix-ds-lift-hover: -1px;
       --pix-ds-scale-press: 0.985;
-      --pix-ds-focus-ring: 0 0 0 3px var(--pix-ds-focus);
     }
   }
 }
