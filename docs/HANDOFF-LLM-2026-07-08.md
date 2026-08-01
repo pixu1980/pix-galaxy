@@ -341,270 +341,34 @@ pnpm --filter @pix-galaxy/pix-a11y-panel build:lib
 
 # ADR Log
 
-## ADR-001: Rename `pix-display-preferences` to `pix-a11y-panel`
-
-**Status:** Accepted  
-**Date:** 2026-07-08
-
-### Context
-
-The component formerly called `pix-display-preferences` primarily exposes accessibility, typography, radius, and display preferences. The user clarified the intended name should be `pix-a11y-panel`.
-
-### Decision
-
-Rename package, custom element, class, CSS selectors, storage key, docs, tests, and portal references from `pix-display-preferences` to `pix-a11y-panel`.
-
-### Consequences
-
-Positive:
-
-- Name reflects user intent and product semantics.
-- Portal and component catalog use consistent naming.
-
-Negative:
-
-- Breaking API/package rename.
-- Existing saved localStorage under old key is not migrated.
-
-### Follow-up
-
-If backward compatibility is needed, add one-time migration from `pix-display-preferences` storage key.
-
----
-
-## ADR-002: Centralize design-system foundations in `pix-foundations`
-
-**Status:** Accepted  
-**Date:** 2026-07-08
-
-### Context
-
-Component CSS duplicated focus ring, typography, spacing, radius, and control styles. User required a single source of truth.
-
-### Decision
-
-Move foundational tokens and global rules into `packages/pix-foundations/lib/`:
-
-- typography in `_typography.css`
-- focus in `_focus.css`
-- radii in `_radii.css`
-- spacing in `_spacings.css`
-- controls in `_controls.css`
-
-Component CSS must use foundations tokens for:
-
-- focus
-- border-radius
-- gap
-- padding
-- margin
-- controls sizing
-- typography
-
-### Consequences
-
-Positive:
-
-- Consistent control sizes and focus ring across components.
-- Lower component CSS duplication.
-- Better design-system governance.
-
-Negative:
-
-- Broad CSS churn.
-- Existing component-specific text/spacing details removed or tokenized.
-- Artifact rebuild mandatory to see portal changes.
-
-### Follow-up
-
-Future components must not define local focus/text/spacing primitives unless adding new foundations tokens first.
-
----
-
-## ADR-003: Centralize focus ring in `pix-foundations`
-
-**Status:** Accepted  
-**Date:** 2026-07-08
-
-### Context
-
-Components contained local `:focus-visible`, `outline`, and focus box-shadow rules. User required focus ring centralization.
-
-### Decision
-
-Only `packages/pix-foundations/lib/_focus.css` manages focus ring.
-
-Focus selectors in component/docs CSS were removed. Browser focus globals remain in ESLint config only.
-
-### Consequences
-
-Positive:
-
-- Focus ring consistency.
-- Lower risk of inaccessible missing focus states.
-- WCAG focus behavior controlled globally.
-
-Negative:
-
-- Components cannot customize focus style locally.
-- If a component needs special focus geometry, it must be handled through foundations tokens or structural CSS, not a local outline.
-
-### Follow-up
-
-Add dedicated focus tokens in `pix-foundations` if special offset/width variants are needed.
-
----
-
-## ADR-004: Centralize shared runtime and scripts in `pix-core`
-
-**Status:** Accepted  
-**Date:** 2026-07-08
-
-### Context
-
-Every component package duplicated scripts:
-
-- `build.mjs`
-- `docs.mjs`
-- `finalize-types.mjs`
-- `raw-text-loader.mjs`
-- `raw-text-plugin.mjs`
-- `register-test-loader.mjs`
-
-Package `packages/shared` already held docs and SSR helpers, but name was generic.
-
-### Decision
-
-Rename `packages/shared` to `packages/pix-core` and move shared build/test/docs scripts there.
-
-Update all package scripts to call `../pix-core/scripts/*`.
-
-### Consequences
-
-Positive:
-
-- Duplicated scripts removed.
-- Shared raw text plugin now fixed once for all packages.
-- Package docs builder centralized.
-
-Negative:
-
-- Workspace dependency rename affects many package manifests.
-- `pix-core` now has build-time dependency on `esbuild`.
-
-### Follow-up
-
-Keep package-specific scripts only when genuinely package-specific. Otherwise add behavior to `pix-core/scripts/*`.
-
----
-
-## ADR-005: Keep `pix-foundations` independent of `pix-core`
-
-**Status:** Accepted  
-**Date:** 2026-07-08
-
-### Context
-
-Renaming `shared` to `pix-core` initially created a cycle:
-
-```text
-pix-core → pix-color-scheme-selector → pix-foundations → pix-core
-```
-
-### Decision
-
-Remove `pix-core` dependency from `pix-foundations`.
-
-### Consequences
-
-Positive:
-
-- Avoids cyclic workspace dependency.
-- Keeps design tokens package low-level and independent.
-
-Negative:
-
-- Foundations docs may import `pix-core` at docs-app level, but package manifest should not make foundations runtime depend on core.
-
-### Follow-up
-
-Maintain foundations as leaf/primitive design-system package.
-
----
-
-## ADR-006: Root formatting and linting are reproducible scripts
-
-**Status:** Accepted  
-**Date:** 2026-07-08
-
-### Context
-
-User required formatting/linting across JS, CSS, HTML and reusable npm scripts.
-
-### Decision
-
-Root `package.json` now exposes:
-
-```json
-{
-  "format": "prettier --write '**/*.{js,mjs,cjs,css,html,md,json,yml,yaml}'",
-  "format:check": "prettier --check '**/*.{js,mjs,cjs,css,html,md,json,yml,yaml}'",
-  "lint:format": "prettier --check '**/*.{js,mjs,cjs,css,html,md,json,yml,yaml}'",
-  "quality": "pnpm format:check && pnpm lint"
-}
-```
-
-### Consequences
-
-Positive:
-
-- Formatting is reproducible.
-- CI can call `pnpm quality`.
-
-Negative:
-
-- Uninitialized scaffold placeholders need `.prettierignore` exclusions because they are not valid JS.
-
-### Follow-up
-
-Consider adding `lint:css` with a CSS parser/stylelint if desired.
-
----
-
-## ADR-007: Validate CSS with a real parser after automated refactors
-
-**Status:** Accepted  
-**Date:** 2026-07-08
-
-### Context
-
-A previous automated CSS tokenization pass introduced syntax errors such as broken `var()` and `light-dark()` expressions.
-
-### Decision
-
-Use `lightningcss` parser validation after any broad CSS transformation.
-
-### Consequences
-
-Positive:
-
-- Detects syntax errors not caught by grep or Prettier.
-- Prevents broken runtime styles.
-
-Negative:
-
-- Requires command snippet or script wrapper until formalized.
-
-### Follow-up
-
-Promote CSS parser validation into root `quality` script or a dedicated `lint:css` script.
-
----
+All Architecture Decision Records from this session are consolidated in [`docs/adr/`](adr/README.md) (Nygard format).
+
+| Original (this doc) | Consolidated ADR | Decision |
+|---------------------|------------------|----------|
+| ADR-001 | [011](adr/0011-rename-a11y-panel.md) | Rename `pix-display-preferences` → `pix-a11y-panel` |
+| ADR-002 | [012](adr/0012-centralize-foundations.md) | Centralize design-system foundations in `pix-foundations` |
+| ADR-003 | [013](adr/0013-centralize-focus-ring.md) | Centralize focus ring in `pix-foundations` |
+| ADR-004 | [014](adr/0014-centralize-pix-core.md) | Centralize shared runtime and scripts in `pix-core` |
+| ADR-005 | [015](adr/0015-foundations-independent.md) | Keep `pix-foundations` independent of `pix-core` |
+| ADR-006 | [016](adr/0016-format-lint-scripts.md) | Root formatting and linting are reproducible scripts |
+| ADR-007 | [017](adr/0017-css-parser-validation.md) | Validate CSS with a real parser after automated refactors |
+
+New decisions recorded during the 2026-07-09 architect session:
+
+| ADR | Decision |
+|-----|----------|
+| [018](adr/0018-release-commit-and-tag-version.md) | Local release via `commit-and-tag-version`, no CI publish |
+| [019](adr/0019-modern-only-browsers.md) | Modern-only browser matrix |
+| [020](adr/0020-zero-dependencies.md) | Zero runtime dependencies is absolute |
+| [021](adr/0021-wcag-aa-requirement.md) | WCAG 2.2 AA is non-negotiable |
+| [022](adr/0022-branch-strategy.md) | `develop` trunk, `main` for releases |
+| [023](adr/0023-jsdoc-types-strict.md) | JSDoc types + strict typecheck, no TS migration |
+| [024](adr/0024-migrate-skills-to-mcp.md) | Migrate `.agents` skills to `pix-galaxy-mcp` |
 
 ## 6. Recommended Next Steps
 
-1. Review large git diff carefully.
-2. Decide whether to commit `.agents/` changes; many are unrelated to package runtime.
+1. ~~Review large git diff carefully.~~ Done — split into logical commits (2026-07-09).
+2. ~~Decide whether to commit `.agents/` changes~~ Done — skills migrated to `pix-galaxy-mcp` ([ADR-024](adr/0024-migrate-skills-to-mcp.md)), `.agents/` removed.
 3. Add formal `lint:css` script using `lightningcss` parser check.
 4. Clean remaining ESLint warnings when convenient.
 5. Consider storage migration from old `pix-display-preferences` key.
