@@ -57,7 +57,10 @@ let ACCENT_OPTIONS, PixAccentColorSelector, STORAGE_KEY;
 
 before(async () => {
   const mod = await import(
-    new URL('../components/AccentColorSelector/AccentColorSelector.js?component-test', import.meta.url)
+    new URL(
+      '../components/AccentColorSelector/AccentColorSelector.js?component-test',
+      import.meta.url
+    )
   );
   ({ ACCENT_OPTIONS, PixAccentColorSelector, STORAGE_KEY } = mod);
 });
@@ -157,12 +160,8 @@ describe('PixAccentColorSelector', () => {
       componentSource.includes("import componentCSS from './AccentColorSelector.css?raw';")
     );
     assert.ok(componentSource.includes('static {'));
-    assert.ok(
-      componentSource.includes('globalThis.customElements.define(ELEMENT_NAME, this)')
-    );
-    assert.ok(
-      componentCss.includes('pix-accent-color-selector [data-accent-selector]')
-    );
+    assert.ok(componentSource.includes('globalThis.customElements.define(ELEMENT_NAME, this)'));
+    assert.ok(componentCss.includes('pix-accent-color-selector [data-accent-selector]'));
     assert.ok(!componentCss.includes(':host'));
   });
 

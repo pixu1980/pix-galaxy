@@ -1,7 +1,12 @@
+/**
+ * FILE: _tide.css
+ * USAGE: Stylesheet for packages/pix-highlighter/src/components/PixHighlighter/styles/themes/_tide.css.
+ * SCOPE: File-local selectors and pix-galaxy design tokens.
+ */
 @layer pix-galaxy {
   @layer pix-highlighter {
     @layer themes {
-      :root[data-pix-highlighter-theme="tide"] pre[is="pix-highlighter"] {
+      :root[data-pix-highlighter-theme='tide'] pre[is='pix-highlighter'] {
         --pix-highlighter--bg: light-dark(#f2f8ff, #081523);
         --pix-highlighter--fg: light-dark(#102235, #e0f2fe);
         --pix-highlighter--kw: light-dark(#0369a1, #7dd3fc);

@@ -59,7 +59,10 @@ test('renders the docs shell and updates active doc/theme interactions', () => {
   });
 
   assert.ok(mount.querySelector('[data-part="shell"]'));
-  assert.equal(mount.querySelectorAll('input[data-site-color-mode][name="docs-color-mode"]').length, 3);
+  assert.equal(
+    mount.querySelectorAll('input[data-site-color-mode][name="docs-color-mode"]').length,
+    3
+  );
   assert.equal(dom.window.document.documentElement.dataset.siteColorMode, 'system');
   assert.equal(mount.querySelector('[data-part="markdown"] h1').textContent, 'Getting Started');
   assert.equal(afterRenderCalls.length, 1);

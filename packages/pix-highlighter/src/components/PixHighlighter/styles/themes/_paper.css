@@ -1,7 +1,12 @@
+/**
+ * FILE: _paper.css
+ * USAGE: Stylesheet for packages/pix-highlighter/src/components/PixHighlighter/styles/themes/_paper.css.
+ * SCOPE: File-local selectors and pix-galaxy design tokens.
+ */
 @layer pix-galaxy {
   @layer pix-highlighter {
     @layer themes {
-      :root[data-pix-highlighter-theme="paper"] pre[is="pix-highlighter"] {
+      :root[data-pix-highlighter-theme='paper'] pre[is='pix-highlighter'] {
         --pix-highlighter--bg: light-dark(#fcfbf7, #1f1d1b);
         --pix-highlighter--fg: light-dark(#2b2a28, #f6f0e8);
         --pix-highlighter--kw: light-dark(#8f2d56, #f2a7c4);
@@ -29,7 +34,8 @@
         --pix-highlighter--mdhr: light-dark(#d6d3d1, #4b4741);
         --pix-highlighter--mdimg: light-dark(#be185d, #f9a8d4);
         --pix-highlighter--tab-size: 2;
-        --pix-highlighter--font-family: "IBM Plex Mono", "SFMono-Regular", Menlo, Consolas, monospace;
+        --pix-highlighter--font-family:
+          'IBM Plex Mono', 'SFMono-Regular', Menlo, Consolas, monospace;
         --pix-highlighter--line-height: 1.6;
         --pix-highlighter--text-shadow: none;
       }

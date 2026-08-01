@@ -16,14 +16,14 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background: var(--pix-command--backdrop, light-dark(oklch(from black 0 0 0 / 0.35), oklch(from black 0 0 0 / 0.55)));
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
+      background: var(--pix-command--backdrop);
+      backdrop-filter: blur(0.375rem);
+      -webkit-backdrop-filter: blur(0.375rem);
       opacity: 0;
       transition: opacity 180ms ease;
       pointer-events: none;
       will-change: opacity;
-      padding: 1rem;
+      padding: var(--pix--s--md);
     }
 
     pix-command [data-command-overlay][data-open] {
@@ -34,20 +34,20 @@
     /* ── Panel ───────────────────────────────────────────────────── */
 
     pix-command [data-command-panel] {
-      width: min(620px, calc(100vw - 2.5rem));
-      max-height: min(480px, calc(100vh - 3rem));
+      width: min(38.75rem, calc(100vw - 2.5rem));
+      max-height: min(30rem, calc(100vh - 3rem));
       display: flex;
       flex-direction: column;
-      background: var(--pix-command--bg, light-dark(oklch(0.99 0.003 85), oklch(0.18 0.01 260)));
-      border: 1px solid var(--pix-command--border, light-dark(oklch(from gray 0.88 0.01 0 / 0.6), oklch(from gray 0.3 0.01 0 / 0.5)));
-      border-radius: var(--pix-command--radius, 14px);
+      background: var(--pix-command--bg);
+      border: 1px solid var(--pix-command--border);
+      border-radius: var(--pix-command--radius);
       box-shadow:
         0 0 0 1px light-dark(oklch(from gray 0.92 0 0 / 0.3), oklch(from gray 0.2 0 0 / 0.4)),
-        0 8px 32px light-dark(oklch(from black 0 0 0 / 0.15), oklch(from black 0 0 0 / 0.4)),
-        0 2px 8px light-dark(oklch(from black 0 0 0 / 0.08), oklch(from black 0 0 0 / 0.25));
+        0 0.5rem 2rem light-dark(oklch(from black 0 0 0 / 0.15), oklch(from black 0 0 0 / 0.4)),
+        0 2px 0.5rem light-dark(oklch(from black 0 0 0 / 0.08), oklch(from black 0 0 0 / 0.25));
       overflow: hidden;
       transform-origin: top center;
-      transform: scale(0.95) translateY(-12px);
+      transform: scale(0.95) translateY(-0.75rem);
       transition:
         transform 180ms cubic-bezier(0.22, 1, 0.36, 1),
         opacity 120ms ease;
@@ -62,19 +62,16 @@
 
     pix-command [data-command-input] {
       width: 100%;
-      padding: 1rem 1.125rem;
+      padding: var(--pix--s--md) 1.125rem;
       border: 0;
-      border-bottom: 1px solid var(--pix-command--border, light-dark(oklch(from gray 0.88 0.01 0 / 0.6), oklch(from gray 0.3 0.01 0 / 0.5)));
+      border-bottom: 1px solid var(--pix-command--border);
       background: transparent;
-      font: inherit;
-      font-size: 1rem;
-      color: var(--pix-command--fg, light-dark(oklch(0.18 0.012 60), oklch(0.88 0.01 85)));
-      caret-color: var(--pix-command--accent, oklch(0.6 0.18 260));
-      outline: none;
+      color: var(--pix-command--fg);
+      caret-color: var(--pix-command--accent);
     }
 
     pix-command [data-command-input]::placeholder {
-      color: var(--pix-command--placeholder, light-dark(oklch(0.6 0.01 60 / 0.6), oklch(0.5 0.01 85 / 0.6)));
+      color: var(--pix-command--placeholder);
     }
 
     pix-command [data-command-input]::-webkit-search-decoration,
@@ -89,11 +86,11 @@
       overflow-y: auto;
       overscroll-behavior: contain;
       list-style: none;
-      margin: 0;
-      padding: 0.5rem;
+      margin: var(--pix--s--0);
+      padding: var(--pix--s--sm);
       display: flex;
       flex-direction: column;
-      gap: 1px;
+      gap: var(--pix--s--1px);
     }
 
     pix-command [data-command-list]:empty {
@@ -102,7 +99,7 @@
 
     /* Custom scrollbar */
     pix-command [data-command-list]::-webkit-scrollbar {
-      width: 6px;
+      width: 0.375rem;
     }
 
     pix-command [data-command-list]::-webkit-scrollbar-track {
@@ -111,7 +108,7 @@
 
     pix-command [data-command-list]::-webkit-scrollbar-thumb {
       background: light-dark(oklch(from gray 0.8 0 0 / 0.3), oklch(from gray 0.4 0 0 / 0.3));
-      border-radius: 3px;
+      border-radius: var(--pix--s--3px);
     }
 
     pix-command [data-command-list]::-webkit-scrollbar-thumb:hover {
@@ -121,12 +118,8 @@
     /* ── Group label ─────────────────────────────────────────────── */
 
     pix-command [data-command-group-label] {
-      padding: 0.5rem 0.75rem 0.3rem;
-      font-size: 0.6875rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      color: var(--pix-command--muted, light-dark(oklch(0.52 0.01 60), oklch(0.55 0.01 85)));
+      padding: var(--pix--s--sm) var(--pix-ds-space-3) var(--pix--s--xs);
+      color: var(--pix-command--muted);
       pointer-events: none;
     }
 
@@ -135,26 +128,20 @@
     pix-command [data-command-item] {
       display: flex;
       align-items: center;
-      gap: 0.75rem;
-      padding: 0.55rem 0.75rem;
-      border-radius: 8px;
+      gap: var(--pix-ds-space-3);
+      padding: var(--pix--s--sm) var(--pix-ds-space-3);
+      border-radius: var(--pix--r--md);
       cursor: pointer;
       scroll-margin: 0.25rem;
       transition: background 80ms ease;
     }
 
     pix-command [data-command-item][aria-selected='true'] {
-      background: var(--pix-command--highlight, light-dark(oklch(0.88 0.05 260 / 0.35), oklch(0.4 0.12 260 / 0.35)));
-      outline: none;
-    }
-
-    pix-command [data-command-item]:focus-visible {
-      outline: 2px solid var(--pix-command--accent, oklch(0.6 0.18 260));
-      outline-offset: -2px;
+      background: var(--pix-command--highlight);
     }
 
     pix-command [data-command-item]:active {
-      background: var(--pix-command--highlight, light-dark(oklch(0.85 0.05 260 / 0.5), oklch(0.35 0.12 260 / 0.5)));
+      background: var(--pix-command--highlight);
     }
 
     /* ── Item icon ───────────────────────────────────────────────── */
@@ -166,7 +153,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      color: var(--pix-command--muted, light-dark(oklch(0.52 0.01 60), oklch(0.55 0.01 85)));
+      color: var(--pix-command--muted);
     }
 
     pix-command [data-command-item-icon] svg {
@@ -175,7 +162,7 @@
     }
 
     pix-command [data-command-item][aria-selected='true'] [data-command-item-icon] {
-      color: var(--pix-command--accent, oklch(0.6 0.18 260));
+      color: var(--pix-command--accent);
     }
 
     /* ── Item body ───────────────────────────────────────────────── */
@@ -185,32 +172,26 @@
       min-width: 0;
       display: flex;
       flex-direction: column;
-      gap: 1px;
+      gap: var(--pix--s--1px);
     }
 
     pix-command [data-command-item-label] {
-      font-size: 0.875rem;
-      font-weight: 500;
-      color: var(--pix-command--fg, light-dark(oklch(0.18 0.012 60), oklch(0.88 0.01 85)));
+      color: var(--pix-command--fg);
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      line-height: 1.4;
     }
 
     pix-command [data-command-item-label] mark {
       background: transparent;
-      color: var(--pix-command--accent, oklch(0.6 0.18 260));
-      font-weight: 600;
+      color: var(--pix-command--accent);
     }
 
     pix-command [data-command-item-desc] {
-      font-size: 0.75rem;
-      color: var(--pix-command--muted, light-dark(oklch(0.52 0.01 60), oklch(0.55 0.01 85)));
+      color: var(--pix-command--muted);
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      line-height: 1.3;
     }
 
     /* ── Shortcut badge ──────────────────────────────────────────── */
@@ -219,7 +200,7 @@
       flex-shrink: 0;
       display: flex;
       align-items: center;
-      gap: 3px;
+      gap: var(--pix--s--3px);
       margin-left: 0.5rem;
     }
 
@@ -229,24 +210,20 @@
       justify-content: center;
       min-width: 1.25rem;
       height: 1.375rem;
-      padding: 0 0.3rem;
-      border-radius: 4px;
-      background: var(--pix-command--shortcut-bg, light-dark(oklch(from gray 0.94 0.01 0 / 0.5), oklch(from gray 0.25 0.01 0 / 0.5)));
-      border: 1px solid var(--pix-command--shortcut-border, light-dark(oklch(from gray 0.88 0 0 / 0.4), oklch(from gray 0.3 0 0 / 0.3)));
-      font-family: inherit;
-      font-size: 0.6875rem;
-      color: var(--pix-command--muted, light-dark(oklch(0.52 0.01 60), oklch(0.55 0.01 85)));
-      line-height: 1;
+      padding: var(--pix--s--0) var(--pix--s--xs);
+      border-radius: var(--pix--r--sm);
+      background: var(--pix-command--shortcut-bg);
+      border: 1px solid var(--pix-command--shortcut-border);
+      color: var(--pix-command--muted);
     }
 
     /* ── Empty state ─────────────────────────────────────────────── */
 
     pix-command [data-command-empty] {
       display: none;
-      padding: 2.5rem 1rem;
+      padding: var(--pix-ds-space-7) var(--pix--s--md);
       text-align: center;
-      font-size: 0.875rem;
-      color: var(--pix-command--muted, light-dark(oklch(0.52 0.01 60), oklch(0.55 0.01 85)));
+      color: var(--pix-command--muted);
     }
 
     pix-command [data-command-empty][data-visible] {
@@ -256,22 +233,20 @@
     /* ── Footer ──────────────────────────────────────────────────── */
 
     pix-command [data-command-footer] {
-      padding: 0.5rem 0.875rem;
-      border-top: 1px solid var(--pix-command--border, light-dark(oklch(from gray 0.88 0.01 0 / 0.6), oklch(from gray 0.3 0.01 0 / 0.5)));
-      font-size: 0.75rem;
-      color: var(--pix-command--muted, light-dark(oklch(0.52 0.01 60), oklch(0.55 0.01 85)));
+      padding: var(--pix--s--sm) var(--pix-ds-space-3);
+      border-top: 1px solid var(--pix-command--border);
+      color: var(--pix-command--muted);
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 0.5rem;
+      gap: var(--pix--s--sm);
     }
 
     pix-command [data-command-footer] kbd {
-      font-family: inherit;
-      padding: 0.1em 0.35em;
-      border-radius: 3px;
-      background: var(--pix-command--shortcut-bg, light-dark(oklch(from gray 0.94 0.01 0 / 0.5), oklch(from gray 0.25 0.01 0 / 0.5)));
-      border: 1px solid var(--pix-command--shortcut-border, light-dark(oklch(from gray 0.88 0 0 / 0.4), oklch(from gray 0.3 0 0 / 0.3)));
+      padding: var(--pix--s--2xs) 0.35em;
+      border-radius: var(--pix--s--3px);
+      background: var(--pix-command--shortcut-bg);
+      border: 1px solid var(--pix-command--shortcut-border);
     }
 
     /* ── Reduced motion ──────────────────────────────────────────── */

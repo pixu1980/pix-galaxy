@@ -12,7 +12,9 @@
 
 /* ── Helpers ────────────────────────────────────────────────────── */
 
-function clamp(v, lo, hi) { return Math.min(hi, Math.max(lo, v)); }
+function clamp(v, lo, hi) {
+  return Math.min(hi, Math.max(lo, v));
+}
 
 /* ── sRGB linearization ─────────────────────────────────────────── */
 
@@ -30,10 +32,12 @@ function srgbTransferInv(channel) {
 /* ── RGB ↔ HEX ──────────────────────────────────────────────────── */
 
 function rgbToHex(r, g, b) {
-  return '#' +
+  return (
+    '#' +
     Math.round(r).toString(16).padStart(2, '0').toUpperCase() +
     Math.round(g).toString(16).padStart(2, '0').toUpperCase() +
-    Math.round(b).toString(16).padStart(2, '0').toUpperCase();
+    Math.round(b).toString(16).padStart(2, '0').toUpperCase()
+  );
 }
 
 function hexToRgb(hex) {
@@ -48,8 +52,11 @@ function hexToRgb(hex) {
 /* ── RGB ↔ HSL ──────────────────────────────────────────────────── */
 
 function rgbToHsl(r, g, b) {
-  const rn = r / 255, gn = g / 255, bn = b / 255;
-  const mx = Math.max(rn, gn, bn), mn = Math.min(rn, gn, bn);
+  const rn = r / 255,
+    gn = g / 255,
+    bn = b / 255;
+  const mx = Math.max(rn, gn, bn),
+    mn = Math.min(rn, gn, bn);
   const d = mx - mn;
   let h = 0;
   if (d !== 0) {
@@ -59,11 +66,16 @@ function rgbToHsl(r, g, b) {
   }
   const l = (mx + mn) / 2;
   const s = d === 0 ? 0 : d / (1 - Math.abs(2 * l - 1));
-  return { h: Math.round(h * 10) / 10, s: Math.round(s * 100 * 10) / 10, l: Math.round(l * 100 * 10) / 10 };
+  return {
+    h: Math.round(h * 10) / 10,
+    s: Math.round(s * 100 * 10) / 10,
+    l: Math.round(l * 100 * 10) / 10,
+  };
 }
 
 function hslToRgb(h, s, l) {
-  const sn = s / 100, ln = l / 100;
+  const sn = s / 100,
+    ln = l / 100;
   const a = sn * Math.min(ln, 1 - ln);
   const f = (n) => {
     const k = (n + h / 30) % 12;
@@ -83,27 +95,29 @@ const M1 = [
 
 // Oklab M2: cube-root LMS → Oklab
 const M2 = [
-  [0.2104542553, 0.7936177850, 0.0040726468],
-  [1.9779984951, -2.4285922050, 0.4505937099],
-  [0.0259040371, 0.7827717662, -0.8086757660],
+  [0.2104542553, 0.793617785, 0.0040726468],
+  [1.9779984951, -2.428592205, 0.4505937099],
+  [0.0259040371, 0.7827717662, -0.808675766],
 ];
 
 // Inverse M2: Oklab → cube-root LMS
 const M2I = [
   [1.0, 0.3963377774, 0.2158037573],
   [1.0, -0.1055613458, -0.0638541728],
-  [1.0, -0.0894841775, -1.2914855480],
+  [1.0, -0.0894841775, -1.291485548],
 ];
 
 // Inverse M1: linear sRGB → LMS
 const M1I = [
   [4.0767416621, -3.3077115913, 0.2309699292],
   [-1.2684380046, 2.6097574011, -0.3413193965],
-  [-0.0041960863, -0.7034186147, 1.7076147010],
+  [-0.0041960863, -0.7034186147, 1.707614701],
 ];
 
 function rgbToOklab(r, g, b) {
-  const rl = srgbTransfer(r), gl = srgbTransfer(g), bl = srgbTransfer(b);
+  const rl = srgbTransfer(r),
+    gl = srgbTransfer(g),
+    bl = srgbTransfer(b);
 
   // Linear sRGB → LMS
   let l = M1[0][0] * rl + M1[0][1] * gl + M1[0][2] * bl;
@@ -150,7 +164,9 @@ function oklabToOklch(L, a, b) {
 }
 
 function oklchToOklab(L, C, h) {
-  const Ln = L / 100, Cn = C / 100, hr = h * (Math.PI / 180);
+  const Ln = L / 100,
+    Cn = C / 100,
+    hr = h * (Math.PI / 180);
   return { L: Ln, a: Cn * Math.cos(hr), b: Cn * Math.sin(hr) };
 }
 
@@ -170,7 +186,9 @@ function oklchToRgb(L, C, h) {
 
 export class Color {
   constructor(value) {
-    this.r = 0; this.g = 0; this.b = 0;
+    this.r = 0;
+    this.g = 0;
+    this.b = 0;
     if (value) this.parse(value);
   }
 
@@ -186,35 +204,70 @@ export class Color {
     const s = String(value).trim();
     if (s.startsWith('#')) {
       const h = hexToRgb(s);
-      this.r = h.r; this.g = h.g; this.b = h.b;
+      this.r = h.r;
+      this.g = h.g;
+      this.b = h.b;
     } else if (s.startsWith('rgb')) {
       const m = s.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
-      if (m) { this.r = clamp(+m[1], 0, 255); this.g = clamp(+m[2], 0, 255); this.b = clamp(+m[3], 0, 255); }
+      if (m) {
+        this.r = clamp(+m[1], 0, 255);
+        this.g = clamp(+m[2], 0, 255);
+        this.b = clamp(+m[3], 0, 255);
+      }
     } else if (s.startsWith('hsl')) {
       const m = s.match(/hsla?\(([\d.]+),\s*([\d.]+)%?,\s*([\d.]+)%?/);
-      if (m) { const c = hslToRgb(+m[1], +m[2], +m[3]); this.r = c.r; this.g = c.g; this.b = c.b; }
+      if (m) {
+        const c = hslToRgb(+m[1], +m[2], +m[3]);
+        this.r = c.r;
+        this.g = c.g;
+        this.b = c.b;
+      }
     } else if (s.startsWith('oklch')) {
       const m = s.match(/oklch\(([\d.]+)%?\s+([\d.]+)%?\s+([\d.]+)/);
-      if (m) { const c = oklchToRgb(+m[1], +m[2], +m[3]); this.r = c.r; this.g = c.g; this.b = c.b; }
+      if (m) {
+        const c = oklchToRgb(+m[1], +m[2], +m[3]);
+        this.r = c.r;
+        this.g = c.g;
+        this.b = c.b;
+      }
     }
   }
 
   /* ── Getters ──────────────────────────────────────────────────── */
 
-  get hex() { return rgbToHex(this.r, this.g, this.b); }
-  get rgb() { return { r: this.r, g: this.g, b: this.b }; }
-  get hsl() { return rgbToHsl(this.r, this.g, this.b); }
-  get oklch() { return rgbToOklch(this.r, this.g, this.b); }
+  get hex() {
+    return rgbToHex(this.r, this.g, this.b);
+  }
+  get rgb() {
+    return { r: this.r, g: this.g, b: this.b };
+  }
+  get hsl() {
+    return rgbToHsl(this.r, this.g, this.b);
+  }
+  get oklch() {
+    return rgbToOklch(this.r, this.g, this.b);
+  }
 
-  toHEXString() { return this.hex; }
-  toRGBString() { return `rgb(${this.r}, ${this.g}, ${this.b})`; }
-  toHSLString() { const h = this.hsl; return `hsl(${h.h}, ${h.s}%, ${h.l}%)`; }
-  toOKLCHString() { const o = this.oklch; return `oklch(${o.L.toFixed(1)}% ${o.C.toFixed(1)}% ${o.h.toFixed(1)})`; }
+  toHEXString() {
+    return this.hex;
+  }
+  toRGBString() {
+    return `rgb(${this.r}, ${this.g}, ${this.b})`;
+  }
+  toHSLString() {
+    const h = this.hsl;
+    return `hsl(${h.h}, ${h.s}%, ${h.l}%)`;
+  }
+  toOKLCHString() {
+    const o = this.oklch;
+    return `oklch(${o.L.toFixed(1)}% ${o.C.toFixed(1)}% ${o.h.toFixed(1)})`;
+  }
 
   /* ── Utilities ────────────────────────────────────────────────── */
 
   static WCAGContrast(fg, bg) {
-    const f = new Color(fg), b = new Color(bg);
+    const f = new Color(fg),
+      b = new Color(bg);
     const lum1 = Color.luminance(f.r, f.g, f.b);
     const lum2 = Color.luminance(b.r, b.g, b.b);
     const lighter = Math.max(lum1, lum2);
@@ -223,19 +276,26 @@ export class Color {
   }
 
   static luminance(r, g, b) {
-    const rs = srgbTransfer(r), gs = srgbTransfer(g), bs = srgbTransfer(b);
+    const rs = srgbTransfer(r),
+      gs = srgbTransfer(g),
+      bs = srgbTransfer(b);
     return 0.2126 * rs + 0.7152 * gs + 0.0722 * bs;
   }
 
-  static ratioPassesAA(ratio, large) { return ratio >= (large ? 3 : 4.5); }
-  static ratioPassesAAA(ratio, large) { return ratio >= (large ? 4.5 : 7); }
+  static ratioPassesAA(ratio, large) {
+    return ratio >= (large ? 3 : 4.5);
+  }
+  static ratioPassesAAA(ratio, large) {
+    return ratio >= (large ? 4.5 : 7);
+  }
 }
 
 /* ── Format display helpers ─────────────────────────────────────── */
 
 export function formatValue(format, color) {
   switch (format) {
-    case 'HEX': return color.toHEXString();
+    case 'HEX':
+      return color.toHEXString();
     case 'RGB': {
       const o = color.rgb;
       return `${o.r}, ${o.g}, ${o.b}`;
@@ -248,6 +308,7 @@ export function formatValue(format, color) {
       const o = color.oklch;
       return `${o.L.toFixed(1)}% ${o.C.toFixed(2)} ${o.h.toFixed(1)}°`;
     }
-    default: return color.toHEXString();
+    default:
+      return color.toHEXString();
   }
 }

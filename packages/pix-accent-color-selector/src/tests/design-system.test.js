@@ -4,10 +4,7 @@ import { describe, test } from 'node:test';
 
 describe('Design system', () => {
   test('DS tokens use pix-galaxy @layer', async () => {
-    const cssText = await readFile(
-      new URL('../shared/_ds-tokens.css', import.meta.url),
-      'utf8'
-    );
+    const cssText = await readFile(new URL('../shared/_ds-tokens.css', import.meta.url), 'utf8');
 
     assert.ok(cssText.includes('@layer pix-galaxy'));
     assert.ok(cssText.includes('@layer design-system'));

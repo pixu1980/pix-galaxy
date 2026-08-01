@@ -1,8 +1,13 @@
+/**
+ * FILE: _default.css
+ * USAGE: Stylesheet for packages/pix-highlighter/src/components/PixHighlighter/styles/themes/_default.css.
+ * SCOPE: File-local selectors and pix-galaxy design tokens.
+ */
 @layer pix-galaxy {
   @layer pix-highlighter {
     @layer themes {
-      :root:not([data-pix-highlighter-theme]) pre[is="pix-highlighter"],
-      :root[data-pix-highlighter-theme="default"] pre[is="pix-highlighter"] {
+      :root:not([data-pix-highlighter-theme]) pre[is='pix-highlighter'],
+      :root[data-pix-highlighter-theme='default'] pre[is='pix-highlighter'] {
         --pix-highlighter--bg: light-dark(#f5f7fb, #0b0d10);
         --pix-highlighter--fg: light-dark(#182131, #e6e6e6);
         --pix-highlighter--kw: light-dark(#6d28d9, #c792ea);

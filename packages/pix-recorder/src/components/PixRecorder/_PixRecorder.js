@@ -15,26 +15,42 @@
 import componentCSS from './_PixRecorder.css?raw';
 
 const ELEMENT_NAME = 'pix-recorder';
-const SVG_RECORD = '<svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="6" fill="currentColor"/></svg>';
-const SVG_PAUSE = '<svg aria-hidden="true" viewBox="0 0 24 24"><rect x="6" y="5" width="4" height="14" rx="1" fill="currentColor"/><rect x="14" y="5" width="4" height="14" rx="1" fill="currentColor"/></svg>';
-const SVG_STOP = '<svg aria-hidden="true" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2" fill="currentColor"/></svg>';
-const SVG_DOWNLOAD = '<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13M8 12l4 4 4-4"/><path d="M4 19h16"/></svg>';
+const SVG_RECORD =
+  '<svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="6" fill="currentColor"/></svg>';
+const SVG_PAUSE =
+  '<svg aria-hidden="true" viewBox="0 0 24 24"><rect x="6" y="5" width="4" height="14" rx="1" fill="currentColor"/><rect x="14" y="5" width="4" height="14" rx="1" fill="currentColor"/></svg>';
+const SVG_STOP =
+  '<svg aria-hidden="true" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2" fill="currentColor"/></svg>';
+const SVG_DOWNLOAD =
+  '<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13M8 12l4 4 4-4"/><path d="M4 19h16"/></svg>';
 
 let componentStyleSheet = null;
 function adoptComponentStyles() {
-  if (typeof document === 'undefined' || !('adoptedStyleSheets' in document) || typeof CSSStyleSheet !== 'function') return null;
-  if (!componentStyleSheet) { componentStyleSheet = new CSSStyleSheet(); componentStyleSheet.replaceSync(componentCSS); }
-  if (!document.adoptedStyleSheets.includes(componentStyleSheet)) document.adoptedStyleSheets = [...document.adoptedStyleSheets, componentStyleSheet];
+  if (
+    typeof document === 'undefined' ||
+    !('adoptedStyleSheets' in document) ||
+    typeof CSSStyleSheet !== 'function'
+  )
+    return null;
+  if (!componentStyleSheet) {
+    componentStyleSheet = new CSSStyleSheet();
+    componentStyleSheet.replaceSync(componentCSS);
+  }
+  if (!document.adoptedStyleSheets.includes(componentStyleSheet))
+    document.adoptedStyleSheets = [...document.adoptedStyleSheets, componentStyleSheet];
   return componentStyleSheet;
 }
 
 class PixRecorder extends HTMLElement {
   static observedAttributes = ['max-duration', 'format', 'filename'];
 
-  static ensureComponentStyles() { return adoptComponentStyles(); }
+  static ensureComponentStyles() {
+    return adoptComponentStyles();
+  }
   static {
     this.ensureComponentStyles();
-    if (!globalThis.customElements?.get(ELEMENT_NAME)) globalThis.customElements.define(ELEMENT_NAME, this);
+    if (!globalThis.customElements?.get(ELEMENT_NAME))
+      globalThis.customElements.define(ELEMENT_NAME, this);
   }
 
   /* ── State ────────────────────────────────────────────────────── */
@@ -57,9 +73,16 @@ class PixRecorder extends HTMLElement {
 
   /* ── Bound handlers (stabili) ─────────────────────────────────── */
 
-  #onRecordClick = () => { if (this.#state === 'idle') this.#doRecord(); };
-  #onPauseClick = () => { if (this.#state === 'recording') this.#doPause(); else if (this.#state === 'paused') this.#doResume(); };
-  #onStopClick = () => { if (this.#state === 'recording' || this.#state === 'paused') this.#doStop(); };
+  #onRecordClick = () => {
+    if (this.#state === 'idle') this.#doRecord();
+  };
+  #onPauseClick = () => {
+    if (this.#state === 'recording') this.#doPause();
+    else if (this.#state === 'paused') this.#doResume();
+  };
+  #onStopClick = () => {
+    if (this.#state === 'recording' || this.#state === 'paused') this.#doStop();
+  };
   #onDownloadClick = () => this.#doDownload();
   #onKeyDown = this.#handleKeyDown.bind(this);
 
@@ -84,20 +107,34 @@ class PixRecorder extends HTMLElement {
 
   attributeChangedCallback(name, oldVal, newVal) {
     if (name === 'max-duration') this.#maxDuration = parseInt(newVal) || 0;
-    if (name === 'format') this.#format = (newVal === 'ogg') ? newVal : 'webm';
+    if (name === 'format') this.#format = newVal === 'ogg' ? newVal : 'webm';
     if (name === 'filename') this.#filename = newVal || 'recording';
   }
 
   /* ── Public API ───────────────────────────────────────────────── */
 
-  get state() { return this.#state; }
-  get duration() { return this.#elapsed(); }
-  get blob() { return this.#blob; }
+  get state() {
+    return this.#state;
+  }
+  get duration() {
+    return this.#elapsed();
+  }
+  get blob() {
+    return this.#blob;
+  }
 
-  start() { this.#doRecord(); }
-  pause() { this.#doPause(); }
-  resume() { this.#doResume(); }
-  stop() { this.#doStop(); }
+  start() {
+    this.#doRecord();
+  }
+  pause() {
+    this.#doPause();
+  }
+  resume() {
+    this.#doResume();
+  }
+  stop() {
+    this.#doStop();
+  }
 
   /* ── Render ───────────────────────────────────────────────────── */
 
@@ -200,7 +237,12 @@ class PixRecorder extends HTMLElement {
       this.#state = 'idle'; // permette un secondo tentativo
       this.#setStatus('Microphone access denied');
       this.#announce('Microphone access denied');
-      this.dispatchEvent(new CustomEvent('recorder-error', { detail: { message: 'Microphone access denied' }, bubbles: true }));
+      this.dispatchEvent(
+        new CustomEvent('recorder-error', {
+          detail: { message: 'Microphone access denied' },
+          bubbles: true,
+        })
+      );
       return;
     }
 
@@ -211,12 +253,17 @@ class PixRecorder extends HTMLElement {
     // Set up waveform
     this.#setupWaveform();
 
-    const mimeType = this.#format === 'ogg' ? 'audio/ogg; codecs=opus' :
-                     this.#format === 'wav' ? 'audio/wav' :
-                     'audio/webm; codecs=opus';
+    const mimeType =
+      this.#format === 'ogg'
+        ? 'audio/ogg; codecs=opus'
+        : this.#format === 'wav'
+          ? 'audio/wav'
+          : 'audio/webm; codecs=opus';
 
     try {
-      this.#mediaRecorder = new MediaRecorder(this.#stream, { mimeType: MediaRecorder.isTypeSupported(mimeType) ? mimeType : undefined });
+      this.#mediaRecorder = new MediaRecorder(this.#stream, {
+        mimeType: MediaRecorder.isTypeSupported(mimeType) ? mimeType : undefined,
+      });
     } catch {
       this.#mediaRecorder = new MediaRecorder(this.#stream);
     }
@@ -240,7 +287,12 @@ class PixRecorder extends HTMLElement {
   }
 
   #doPause() {
-    if (this.#state !== 'recording' || !this.#mediaRecorder || this.#mediaRecorder.state !== 'recording') return;
+    if (
+      this.#state !== 'recording' ||
+      !this.#mediaRecorder ||
+      this.#mediaRecorder.state !== 'recording'
+    )
+      return;
     this.#pauseStartTime = performance.now();
     this.#mediaRecorder.pause();
     this.#state = 'paused';
@@ -252,7 +304,8 @@ class PixRecorder extends HTMLElement {
   }
 
   #doResume() {
-    if (this.#state !== 'paused' || !this.#mediaRecorder || this.#mediaRecorder.state !== 'paused') return;
+    if (this.#state !== 'paused' || !this.#mediaRecorder || this.#mediaRecorder.state !== 'paused')
+      return;
     this.#pausedDuration += performance.now() - this.#pauseStartTime;
     this.#mediaRecorder.resume();
     this.#state = 'recording';
@@ -276,7 +329,11 @@ class PixRecorder extends HTMLElement {
 
   #doDownload() {
     if (!this.#blob) return;
-    const ext = this.#mediaRecorder?.mimeType.includes('ogg') ? 'ogg' : this.#mediaRecorder?.mimeType.includes('wav') ? 'wav' : 'webm';
+    const ext = this.#mediaRecorder?.mimeType.includes('ogg')
+      ? 'ogg'
+      : this.#mediaRecorder?.mimeType.includes('wav')
+        ? 'wav'
+        : 'webm';
     const url = URL.createObjectURL(this.#blob);
     const a = document.createElement('a');
     a.href = url;
@@ -321,7 +378,8 @@ class PixRecorder extends HTMLElement {
     const ctx = canvas.getContext('2d');
     const bufferLength = this.#analyserNode.frequencyBinCount;
     const dataArray = new Uint8Array(bufferLength);
-    const w = canvas.width, h = canvas.height;
+    const w = canvas.width,
+      h = canvas.height;
 
     const draw = () => {
       if (this.#state === 'done') return;
@@ -349,10 +407,11 @@ class PixRecorder extends HTMLElement {
 
     function lightDark(light, dark) {
       if (typeof document === 'undefined') return light;
-      return document.documentElement.dataset.colorScheme === 'dark' || 
+      return document.documentElement.dataset.colorScheme === 'dark' ||
         (document.documentElement.dataset.colorScheme !== 'light' &&
-         window.matchMedia?.('(prefers-color-scheme: dark)').matches)
-        ? dark : light;
+          window.matchMedia?.('(prefers-color-scheme: dark)').matches)
+        ? dark
+        : light;
     }
 
     draw();
@@ -396,7 +455,10 @@ class PixRecorder extends HTMLElement {
     if (pauseBtn) {
       pauseBtn.hidden = this.#state !== 'recording' && this.#state !== 'paused';
       pauseBtn.innerHTML = this.#state === 'paused' ? SVG_RECORD : SVG_PAUSE;
-      pauseBtn.setAttribute('aria-label', this.#state === 'paused' ? 'Resume recording' : 'Pause recording');
+      pauseBtn.setAttribute(
+        'aria-label',
+        this.#state === 'paused' ? 'Resume recording' : 'Pause recording'
+      );
       pauseBtn.title = pauseBtn.getAttribute('aria-label');
     }
     if (stopBtn) stopBtn.hidden = this.#state !== 'recording' && this.#state !== 'paused';
@@ -420,11 +482,15 @@ class PixRecorder extends HTMLElement {
     this.#setStatus('Recording complete');
 
     const total = this.#elapsed();
-    this.#announce(`Recording complete - ${Math.floor(total / 60)} minutes ${Math.floor(total % 60)} seconds`);
-    this.dispatchEvent(new CustomEvent('recorder-complete', {
-      detail: { blob: this.#blob, duration: total },
-      bubbles: true,
-    }));
+    this.#announce(
+      `Recording complete - ${Math.floor(total / 60)} minutes ${Math.floor(total % 60)} seconds`
+    );
+    this.dispatchEvent(
+      new CustomEvent('recorder-complete', {
+        detail: { blob: this.#blob, duration: total },
+        bubbles: true,
+      })
+    );
   }
 
   /* ── Keyboard ─────────────────────────────────────────────────── */

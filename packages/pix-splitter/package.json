@@ -61,32 +61,29 @@
   },
   "scripts": {
     "build": "pnpm build:lib && pnpm build:site",
-    "build:lib": "node ./scripts/build.mjs && pnpm build:types",
+    "build:lib": "node ../pix-core/scripts/build.mjs && pnpm build:types",
     "build:site": "pnpm docs:build && vite build --config ./vite.config.mjs",
-    "build:types": "tsc --project ./tsconfig.types.json && node ./scripts/finalize-types.mjs",
+    "build:types": "tsc --project ./tsconfig.types.json && node ../pix-core/scripts/finalize-types.mjs",
     "check": "pnpm test && pnpm build",
     "clean": "rm -rf artifact dist coverage .artifacts",
     "dev": "pnpm docs:build && node ../../scripts/dev.mjs --config ./vite.config.mjs --name spl",
-    "docs:build": "node ./scripts/docs.mjs",
-    "docs:watch": "node ./scripts/docs.mjs --watch",
+    "docs:build": "node ../pix-core/scripts/docs.mjs",
+    "docs:watch": "node ../pix-core/scripts/docs.mjs --watch",
     "pack:check": "pnpm pack --pack-destination ./.artifacts",
     "prepack": "pnpm build:lib",
     "prepublishOnly": "pnpm check && pnpm pack --pack-destination ./.artifacts",
     "preview": "vite preview --config ./vite.config.mjs",
     "release": "node ./scripts/release.mjs",
-    "test": "pnpm docs:build && node --test --import ./scripts/register-test-loader.mjs ./src/tests/*.test.js",
-    "test:coverage": "pnpm docs:build && c8 --reporter=text --reporter=lcov node --test --import ./scripts/register-test-loader.mjs ./src/tests/*.test.js",
+    "test": "pnpm docs:build && node --test --import ../pix-core/scripts/register-test-loader.mjs ./src/tests/*.test.js",
+    "test:coverage": "pnpm docs:build && c8 --reporter=text --reporter=lcov node --test --import ../pix-core/scripts/register-test-loader.mjs ./src/tests/*.test.js",
     "lint": "eslint src/",
     "typecheck": "tsc --project ./tsconfig.types.json --noEmit"
   },
   "dependencies": {
+    "@pix-galaxy/pix-color-scheme-selector": "workspace:*",
+    "@pix-galaxy/pix-highlighter": "workspace:*",
+    "@pix-galaxy/pix-core": "workspace:*",
     "@pix-galaxy/pix-foundations": "workspace:*"
-  },
-  "dependencies":   {
-      "@pix-galaxy/pix-color-scheme-selector": "workspace:*",
-      "@pix-galaxy/pix-highlighter": "workspace:*",
-      "@pix-galaxy/shared": "workspace:*",
-      "@pix-galaxy/pix-foundations": "workspace:*"
   },
   "devDependencies": {
     "c8": "11.0.0",

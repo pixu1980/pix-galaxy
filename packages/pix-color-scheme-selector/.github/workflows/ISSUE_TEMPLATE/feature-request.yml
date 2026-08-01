@@ -1,6 +1,6 @@
 name: Feature request
 description: Propose a new capability or improvement for pix-color-scheme-selector
-title: "[Feature]: "
+title: '[Feature]: '
 labels:
   - enhancement
   - needs-triage

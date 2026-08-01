@@ -461,11 +461,26 @@ describe('PixHighlighter', () => {
     ] = await Promise.all([
       readFile(new URL('../components/PixHighlighter/PixHighlighter.js', import.meta.url), 'utf8'),
       readFile(new URL('../components/PixHighlighter/PixHighlighter.css', import.meta.url), 'utf8'),
-      readFile(new URL('../components/PixHighlighter/styles/themes/_theme-defaults.css', import.meta.url), 'utf8'),
-      readFile(new URL('../components/PixHighlighter/styles/themes/_prism.css', import.meta.url), 'utf8'),
-      readFile(new URL('../components/PixHighlighter/styles/themes/_prettylights.css', import.meta.url), 'utf8'),
-      readFile(new URL('../components/PixHighlighter/styles/themes/_darcula.css', import.meta.url), 'utf8'),
-      readFile(new URL('../components/PixHighlighter/styles/themes/_cyberpunk.css', import.meta.url), 'utf8'),
+      readFile(
+        new URL('../components/PixHighlighter/styles/themes/_theme-defaults.css', import.meta.url),
+        'utf8'
+      ),
+      readFile(
+        new URL('../components/PixHighlighter/styles/themes/_prism.css', import.meta.url),
+        'utf8'
+      ),
+      readFile(
+        new URL('../components/PixHighlighter/styles/themes/_prettylights.css', import.meta.url),
+        'utf8'
+      ),
+      readFile(
+        new URL('../components/PixHighlighter/styles/themes/_darcula.css', import.meta.url),
+        'utf8'
+      ),
+      readFile(
+        new URL('../components/PixHighlighter/styles/themes/_cyberpunk.css', import.meta.url),
+        'utf8'
+      ),
     ]);
 
     assert.ok(componentSource.includes("import mainCSS from './PixHighlighter.css?raw';"));

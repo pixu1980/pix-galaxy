@@ -32,7 +32,7 @@ Contributors can propose and implement changes through issues and pull requests.
 ## Release Policy
 
 - Releases follow semantic versioning.
-- Tags in the form v*.*.* are the release trigger for npm publication.
+- Tags in the form v*.*.\* are the release trigger for npm publication.
 - The latest published minor in the active major line is the supported line unless documented otherwise in SECURITY.md.
 
 ## Governance Changes

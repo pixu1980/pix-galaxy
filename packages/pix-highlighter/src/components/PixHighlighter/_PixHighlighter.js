@@ -697,7 +697,9 @@ class PixHighlighter extends HTMLPreElement {
 
     try {
       this._themeList.hidePopover();
-    } catch {}
+    } catch {
+      /* Popover may already be closed or unavailable in partial DOM implementations. */
+    }
   }
 
   _scheduleThemeListPosition() {
@@ -733,7 +735,9 @@ class PixHighlighter extends HTMLPreElement {
     if (this._supportsThemeListPopover && !this._themeList.matches(':popover-open')) {
       try {
         this._themeList.showPopover();
-      } catch {}
+      } catch {
+        /* Popover may already be closed or unavailable in partial DOM implementations. */
+      }
     }
     this._scheduleThemeListPosition();
     this._themeMenuListenerTimer = window.setTimeout(() => {

@@ -56,32 +56,32 @@ JavaScript, TypeScript, CSS, JSON, HTML, Python, Rust, C, C++, PHP, C#, Go, Mark
 
 ## Available themes
 
-| Theme | Description |
-|-------|-------------|
-| `default` | Balanced light‑dark theme with muted tones |
-| `prism` | Inspired by the Prism.js default palette |
-| `prettylights` | GitHub Pretty Lights palette |
-| `darcula` | JetBrains Darcula-inspired dark theme |
-| `cyberpunk` | Neon‑accented dark theme |
-| `monokai` | Classic Monokai palette |
-| `nord` | Arctic, north-bluish color theme |
-| `aurora` | Cool blue‑purple gradients |
-| `atlas` | Warm earth tones with amber accents |
-| `ember` | Fiery orange‑red palette |
-| `paper` | Light, paper‑like theme |
-| `tide` | Ocean‑inspired blue‑green palette |
+| Theme          | Description                                |
+| -------------- | ------------------------------------------ |
+| `default`      | Balanced light‑dark theme with muted tones |
+| `prism`        | Inspired by the Prism.js default palette   |
+| `prettylights` | GitHub Pretty Lights palette               |
+| `darcula`      | JetBrains Darcula-inspired dark theme      |
+| `cyberpunk`    | Neon‑accented dark theme                   |
+| `monokai`      | Classic Monokai palette                    |
+| `nord`         | Arctic, north-bluish color theme           |
+| `aurora`       | Cool blue‑purple gradients                 |
+| `atlas`        | Warm earth tones with amber accents        |
+| `ember`        | Fiery orange‑red palette                   |
+| `paper`        | Light, paper‑like theme                    |
+| `tide`         | Ocean‑inspired blue‑green palette          |
 
 ## Package API
 
 ### Exports
 
-| Symbol | Description |
-|--------|-------------|
-| `PixHighlighter` | Component class (extends `HTMLPreElement`) |
-| `PIX_HIGHLIGHTER_THEME_OPTIONS` | Read-only array of `{ value, label }` theme definitions |
+| Symbol                          | Description                                                |
+| ------------------------------- | ---------------------------------------------------------- |
+| `PixHighlighter`                | Component class (extends `HTMLPreElement`)                 |
+| `PIX_HIGHLIGHTER_THEME_OPTIONS` | Read-only array of `{ value, label }` theme definitions    |
 | `enhancePixHighlighters(root?)` | Enhance all matching `<pre>` elements under the given root |
-| `normalizeLang(value?)` | Normalise language aliases (`"javascript"` → `"js"`) |
-| `lexJS`, `lexTS`, `lexCSS`, … | Individual language lexers |
+| `normalizeLang(value?)`         | Normalise language aliases (`"javascript"` → `"js"`)       |
+| `lexJS`, `lexTS`, `lexCSS`, …   | Individual language lexers                                 |
 
 ### Programmatic example
 
@@ -124,18 +124,19 @@ pnpm build
 
 Repo commands:
 
-| Command | Description |
-|---------|-------------|
-| `pnpm build:lib` | Build npm artifacts (ESM + CJS) |
-| `pnpm build:site` | Build docs site |
-| `pnpm build` | Build library and site |
-| `pnpm dev` | Start Vite docs dev server |
-| `pnpm test` | Run component and site tests |
-| `pnpm rel:patch` | Bump patch version and tag |
-| `pnpm rel:minor` | Bump minor version and tag |
-| `pnpm rel:major` | Bump major version and tag |
+| Command           | Description                     |
+| ----------------- | ------------------------------- |
+| `pnpm build:lib`  | Build npm artifacts (ESM + CJS) |
+| `pnpm build:site` | Build docs site                 |
+| `pnpm build`      | Build library and site          |
+| `pnpm dev`        | Start Vite docs dev server      |
+| `pnpm test`       | Run component and site tests    |
+| `pnpm rel:patch`  | Bump patch version and tag      |
+| `pnpm rel:minor`  | Bump minor version and tag      |
+| `pnpm rel:major`  | Bump major version and tag      |
 
 Library build outputs:
+
 - `artifact/index.js` - ESM
 - `artifact/index.cjs` - CommonJS
 - `artifact/index.d.ts` - TypeScript declarations

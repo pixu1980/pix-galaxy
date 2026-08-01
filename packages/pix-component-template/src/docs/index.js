@@ -1,5 +1,5 @@
 /** pix-component-template — documentation site entry. */
-import { createDocsSite, buildDocsPages } from '@pix-galaxy/shared/docs/docs-site.js';
+import { createDocsSite, buildDocsPages } from '@pix-galaxy/pix-core/docs/docs-site.js';
 
 const examples = [
   {
@@ -28,14 +28,23 @@ async function bootDocsSite() {
   if (!mount) return;
 
   const [
-    { default: gettingStarted }, { default: howItWorks }, { default: api },
-    { default: examplesMd }, { default: releasing },
-    { default: packageJson }, _componentModule, _pixHighlighter,
+    { default: gettingStarted },
+    { default: howItWorks },
+    { default: api },
+    { default: examplesMd },
+    { default: releasing },
+    { default: packageJson },
+    _componentModule,
+    _pixHighlighter,
   ] = await Promise.all([
-    import('./content/getting-started.md?raw'), import('./content/how-it-works.md?raw'),
-    import('./content/api.md?raw'), import('./content/examples.md?raw'),
-    import('./content/releasing.md?raw'), import('../../package.json'),
-    import('../index.js'), import('@pix-galaxy/pix-highlighter'),
+    import('./content/getting-started.md?raw'),
+    import('./content/how-it-works.md?raw'),
+    import('./content/api.md?raw'),
+    import('./content/examples.md?raw'),
+    import('./content/releasing.md?raw'),
+    import('../../package.json'),
+    import('../index.js'),
+    import('@pix-galaxy/pix-highlighter'),
   ]);
 
   void _componentModule;
@@ -58,7 +67,9 @@ async function bootDocsSite() {
       description: '{%COMPONENT_DESCRIPTION%}',
       liveHtml: '<{%ELEMENT_NAME%}></{%ELEMENT_NAME%}>',
     },
-    afterRender(root) { enhancePixHighlighters(root); },
+    afterRender(root) {
+      enhancePixHighlighters(root);
+    },
   });
 }
 

@@ -1,5 +1,5 @@
 /** pix-color — documentation site entry. */
-import { createDocsSite, buildDocsPages } from '@pix-galaxy/shared/docs/docs-site.js';
+import { createDocsSite, buildDocsPages } from '@pix-galaxy/pix-core/docs/docs-site.js';
 
 const examples = [
   {
@@ -73,7 +73,8 @@ async function bootDocsSite() {
       version: packageJson.version,
       componentName: 'pix-color',
       componentTag: 'pix-color',
-      description: 'Accessible OKLCH/HSL/RGB/HEX color picker Web Component with native form support and WCAG contrast checking.',
+      description:
+        'Accessible OKLCH/HSL/RGB/HEX color picker Web Component with native form support and WCAG contrast checking.',
       liveHtml: '<pix-color value="#6366F1"></pix-color>',
     },
     afterRender(root) {

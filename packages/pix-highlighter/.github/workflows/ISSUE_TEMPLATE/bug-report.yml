@@ -1,6 +1,6 @@
 name: Bug report
 description: Report a defect or regression in pix-highlighter
-title: "[Bug]: "
+title: '[Bug]: '
 labels:
   - bug
   - needs-triage

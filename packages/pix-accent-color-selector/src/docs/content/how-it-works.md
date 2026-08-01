@@ -16,11 +16,11 @@ const saved = localStorage.getItem('pix-accent-color');
 
 When an accent is selected, the component sets three CSS custom properties on the root `<html>` element:
 
-| Property | Description |
-|----------|-------------|
-| `--pix-accent-h` | Hue value (0-360) |
+| Property         | Description           |
+| ---------------- | --------------------- |
+| `--pix-accent-h` | Hue value (0-360)     |
 | `--pix-accent-s` | Saturation percentage |
-| `--pix-accent-l` | Lightness percentage |
+| `--pix-accent-l` | Lightness percentage  |
 
 This allows you to use the accent color anywhere in your CSS:
 
@@ -36,36 +36,35 @@ This allows you to use the accent color anywhere in your CSS:
 
 ## Accent options
 
-| Name | Hue | Saturation | Lightness | Preview |
-|------|-----|-----------|-----------|---------|
-| Coral | 16° | 95% | 58% | 🔴 |
-| Rose | 340° | 90% | 62% | 🩷 |
-| Lavender | 280° | 85% | 65% | 🟣 |
-| Sky | 200° | 85% | 62% | 🔵 |
-| Mint | 145° | 80% | 60% | 🟢 |
+| Name     | Hue  | Saturation | Lightness | Preview |
+| -------- | ---- | ---------- | --------- | ------- |
+| Coral    | 16°  | 95%        | 58%       | 🔴      |
+| Rose     | 340° | 90%        | 62%       | 🩷      |
+| Lavender | 280° | 85%        | 65%       | 🟣      |
+| Sky      | 200° | 85%        | 62%       | 🔵      |
+| Mint     | 145° | 80%        | 60%       | 🟢      |
 
 ## Events
 
 The component dispatches an `accent-changed` custom event whenever the accent changes:
 
 ```js
-document.querySelector('pix-accent-color-selector')
-  .addEventListener('accent-changed', (event) => {
-    console.log('New accent:', event.detail.accentId, event.detail.label);
-  });
+document.querySelector('pix-accent-color-selector').addEventListener('accent-changed', (event) => {
+  console.log('New accent:', event.detail.accentId, event.detail.label);
+});
 ```
 
 ## Keyboard navigation
 
 Inside the component, accent buttons follow the WAI-ARIA radiogroup pattern:
 
-| Key | Action |
-|-----|--------|
-| ArrowRight / ArrowDown | Next accent |
-| ArrowLeft / ArrowUp | Previous accent |
-| Home | First accent |
-| End | Last accent |
-| Space / Enter | Select current accent |
+| Key                    | Action                |
+| ---------------------- | --------------------- |
+| ArrowRight / ArrowDown | Next accent           |
+| ArrowLeft / ArrowUp    | Previous accent       |
+| Home                   | First accent          |
+| End                    | Last accent           |
+| Space / Enter          | Select current accent |
 
 ## Synchronised instances
 

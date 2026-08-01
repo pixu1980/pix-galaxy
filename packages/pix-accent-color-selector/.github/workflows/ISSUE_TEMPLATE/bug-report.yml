@@ -1,6 +1,6 @@
 name: Bug report
 description: Report a defect or regression in pix-accent-color-selector
-title: "[Bug]: "
+title: '[Bug]: '
 labels:
   - bug
   - needs-triage

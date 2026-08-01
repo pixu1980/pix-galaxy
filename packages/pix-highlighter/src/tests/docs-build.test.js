@@ -4,7 +4,7 @@ import { test } from 'node:test';
 
 test('docs build derives pages and release metadata from src/docs markdown sources', async () => {
   const [{ buildDocsManifest }, docEntries, packageJsonText] = await Promise.all([
-    import(new URL('../../scripts/docs.mjs', import.meta.url)),
+    import(new URL('../../../pix-core/scripts/docs.mjs', import.meta.url)),
     readdir(new URL('../docs/content/', import.meta.url)),
     readFile(new URL('../../package.json', import.meta.url), 'utf8'),
   ]);

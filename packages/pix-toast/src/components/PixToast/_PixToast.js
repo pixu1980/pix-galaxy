@@ -12,11 +12,16 @@ const ELEMENT_NAME = 'pix-toast';
 
 /* ── Icons ───────────────────────────────────────────────────────── */
 
-const INFO_ICON = '<svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M12 8v5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="16.5" r="1" fill="currentColor"/></svg>';
-const SUCCESS_ICON = '<svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M8 12.5 11 15.5 16 9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-const WARNING_ICON = '<svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M12 4 2 20h20L12 4Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M12 10v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="17" r="1" fill="currentColor"/></svg>';
-const ERROR_ICON = '<svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M9 9l6 6M15 9l-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>';
-const CLOSE_ICON = '<svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6l-12 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>';
+const INFO_ICON =
+  '<svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M12 8v5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="16.5" r="1" fill="currentColor"/></svg>';
+const SUCCESS_ICON =
+  '<svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M8 12.5 11 15.5 16 9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+const WARNING_ICON =
+  '<svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M12 4 2 20h20L12 4Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M12 10v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="17" r="1" fill="currentColor"/></svg>';
+const ERROR_ICON =
+  '<svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M9 9l6 6M15 9l-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>';
+const CLOSE_ICON =
+  '<svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6l-12 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>';
 
 const VARIANT_ICONS = {
   info: INFO_ICON,
@@ -71,7 +76,9 @@ class PixToast extends HTMLElement {
   #onPointerLeave = this.#handleResume.bind(this);
   #onFocusIn = this.#handlePause.bind(this);
   #onFocusOut = this.#handleResume.bind(this);
-  #onClick = (e) => { if (e.target.closest('[data-toast-dismiss]')) this.dismiss(); };
+  #onClick = (e) => {
+    if (e.target.closest('[data-toast-dismiss]')) this.dismiss();
+  };
   #leaving = false;
 
   constructor() {
@@ -168,15 +175,19 @@ class PixToast extends HTMLElement {
     this.#leaving = true;
     this.#clearTimer();
     this.dataset.leaving = '';
-    this.addEventListener('animationend', () => {
-      this.remove();
-      this.dispatchEvent(
-        new CustomEvent('toast-dismiss', {
-          detail: { id: this.#toastId },
-          bubbles: true,
-        })
-      );
-    }, { once: true });
+    this.addEventListener(
+      'animationend',
+      () => {
+        this.remove();
+        this.dispatchEvent(
+          new CustomEvent('toast-dismiss', {
+            detail: { id: this.#toastId },
+            bubbles: true,
+          })
+        );
+      },
+      { once: true }
+    );
 
     // Fallback: remove after animation timeout
     setTimeout(() => {
@@ -245,11 +256,16 @@ class PixToast extends HTMLElement {
     el.toastId = id;
     el.toastDuration = duration;
     el.setAttribute('role', variant === 'warning' || variant === 'error' ? 'alert' : 'status');
-    el.setAttribute('aria-live', variant === 'warning' || variant === 'error' ? 'assertive' : 'polite');
+    el.setAttribute(
+      'aria-live',
+      variant === 'warning' || variant === 'error' ? 'assertive' : 'polite'
+    );
     el.setAttribute('aria-atomic', 'true');
 
     const titleHtml = config.title ? `<div data-toast-title>${escapeHtml(config.title)}</div>` : '';
-    const messageHtml = config.message ? `<div data-toast-message>${escapeHtml(config.message)}</div>` : '';
+    const messageHtml = config.message
+      ? `<div data-toast-message>${escapeHtml(config.message)}</div>`
+      : '';
 
     el.innerHTML = `
       <span data-toast-icon>${icon}</span>

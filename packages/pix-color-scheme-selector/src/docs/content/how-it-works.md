@@ -16,11 +16,11 @@ const saved = localStorage.getItem('pix-color-scheme');
 
 The component creates or updates a `<meta name="color-scheme">` tag in the document `<head>`. This tells the browser which color schemes the page supports, enabling native browser UI theming (scrollbars, form controls, etc.).
 
-| Scheme | Meta content    |
-|--------|-----------------|
-| light  | `light`         |
-| dark   | `dark`          |
-| system | `light dark`    |
+| Scheme | Meta content |
+| ------ | ------------ |
+| light  | `light`      |
+| dark   | `dark`       |
+| system | `light dark` |
 
 ## Attribute & style injection
 
@@ -32,7 +32,7 @@ On the `<html>` element, the component sets:
 This allows your CSS to hook into the scheme with an attribute selector:
 
 ```css
-:root[data-color-scheme="dark"] {
+:root[data-color-scheme='dark'] {
   --bg: #1a1a2e;
   --text: #e0e0e0;
 }

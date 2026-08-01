@@ -6,15 +6,15 @@
     pix-toast {
       display: grid;
       grid-template-columns: auto 1fr auto;
-      gap: 0.125rem 0.75rem;
+      gap: var(--pix--s--2xs) var(--pix-ds-space-3);
       align-items: start;
-      padding: 0.75rem 0.875rem;
-      border-radius: var(--pix-toast--radius, 10px);
-      background: var(--pix-toast--bg, light-dark(oklch(0.98 0.005 85), oklch(0.16 0.01 260)));
-      border: 1px solid var(--pix-toast--border, light-dark(oklch(from gray 0.85 0.01 0 / 0.5), oklch(from gray 0.28 0.01 0 / 0.5)));
+      padding: var(--pix-ds-space-3) var(--pix-ds-space-3);
+      border-radius: var(--pix-toast--radius);
+      background: var(--pix-toast--bg);
+      border: 1px solid var(--pix-toast--border);
       box-shadow:
-        0 4px 16px light-dark(oklch(from black 0 0 0 / 0.1), oklch(from black 0 0 0 / 0.35)),
-        0 1px 4px light-dark(oklch(from black 0 0 0 / 0.06), oklch(from black 0 0 0 / 0.2));
+        0 0.25rem 1rem light-dark(oklch(from black 0 0 0 / 0.1), oklch(from black 0 0 0 / 0.35)),
+        0 1px 0.25rem light-dark(oklch(from black 0 0 0 / 0.06), oklch(from black 0 0 0 / 0.2));
       position: relative;
       overflow: hidden;
       pointer-events: auto;
@@ -76,7 +76,7 @@
       content: '';
       position: absolute;
       inset: 0;
-      border-radius: inherit;
+      border-radius: var(--pix--r--inherit);
       border-left: 3px solid var(--pix-toast--accent);
       background: var(--pix-toast--accent-bg);
       pointer-events: none;
@@ -108,16 +108,11 @@
     }
 
     pix-toast [data-toast-title] {
-      font-size: 0.875rem;
-      font-weight: 600;
-      color: var(--pix-toast--fg, light-dark(oklch(0.18 0.012 60), oklch(0.88 0.01 85)));
-      line-height: 1.4;
+      color: var(--pix-toast--fg);
     }
 
     pix-toast [data-toast-message] {
-      font-size: 0.8125rem;
-      color: var(--pix-toast--fg-secondary, light-dark(oklch(0.38 0.01 60), oklch(0.72 0.01 85)));
-      line-height: 1.4;
+      color: var(--pix-toast--fg-secondary);
       margin-top: 0.0625rem;
     }
 
@@ -128,25 +123,20 @@
       grid-row: 1;
       width: 1.25rem;
       height: 1.25rem;
-      padding: 0;
+      padding: var(--pix--s--0);
       border: 0;
       background: transparent;
       cursor: pointer;
-      color: var(--pix-toast--fg-muted, light-dark(oklch(0.55 0.01 60), oklch(0.5 0.01 85)));
+      color: var(--pix-toast--fg-muted);
       display: flex;
       align-items: center;
       justify-content: center;
-      border-radius: 4px;
+      border-radius: var(--pix--r--sm);
       transition: color 120ms ease;
     }
 
     pix-toast [data-toast-dismiss]:hover {
-      color: var(--pix-toast--fg, light-dark(oklch(0.18 0.012 60), oklch(0.88 0.01 85)));
-    }
-
-    pix-toast [data-toast-dismiss]:focus-visible {
-      outline: 2px solid var(--pix-toast--accent);
-      outline-offset: 1px;
+      color: var(--pix-toast--fg);
     }
 
     pix-toast [data-toast-dismiss] svg {
@@ -159,12 +149,12 @@
     pix-toast[data-timer] [data-toast-progress] {
       grid-column: 1 / -1;
       height: 2px;
-      border-radius: 0 0 inherit inherit;
+      border-radius: var(--pix--s--0) var(--pix--s--0) inherit inherit;
       background: var(--pix-toast--accent);
       opacity: 0.3;
       margin-top: 0.5rem;
       transform-origin: left;
-      animation: pix-toast-timer var(--pix-toast--duration, 5000ms) linear forwards;
+      animation: pix-toast-timer var(--pix-toast--duration) linear forwards;
     }
 
     pix-toast[data-variant='error'] {
@@ -177,8 +167,12 @@
     }
 
     @keyframes pix-toast-timer {
-      from { transform: scaleX(1); }
-      to { transform: scaleX(0); }
+      from {
+        transform: scaleX(1);
+      }
+      to {
+        transform: scaleX(0);
+      }
     }
 
     /* ── Stack container ─────────────────────────────────────────── */
@@ -188,9 +182,9 @@
       z-index: 2147483646;
       display: flex;
       flex-direction: column;
-      gap: 0.5rem;
+      gap: var(--pix--s--sm);
       pointer-events: none;
-      max-width: min(400px, calc(100vw - 2rem));
+      max-width: min(25rem, calc(100vw - 2rem));
       max-height: calc(100vh - 2rem);
       overflow-y: auto;
     }

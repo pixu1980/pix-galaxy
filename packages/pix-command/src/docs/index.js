@@ -1,5 +1,5 @@
 /** pix-command — documentation site entry. */
-import { createDocsSite, buildDocsPages } from '@pix-galaxy/shared/docs/docs-site.js';
+import { createDocsSite, buildDocsPages } from '@pix-galaxy/pix-core/docs/docs-site.js';
 
 const examples = [
   {
@@ -75,7 +75,8 @@ async function bootDocsSite() {
       version: packageJson.version,
       componentName: 'pix-command',
       componentTag: 'pix-command',
-      description: 'Accessible command palette Web Component with fuzzy search, keyboard navigation, and category grouping.',
+      description:
+        'Accessible command palette Web Component with fuzzy search, keyboard navigation, and category grouping.',
       liveHtml: `
         <pix-color-scheme-selector></pix-color-scheme-selector>
         <div style="display:flex;gap:0.5rem;align-items:center;margin-top:0.5rem;">
@@ -92,10 +93,31 @@ async function bootDocsSite() {
       if (livePreview && !livePreview.querySelector('pix-command')) {
         const cmd = document.createElement('pix-command');
         cmd.items = [
-          { id: 'open-home', label: 'Open Home', description: 'Navigate to home', category: 'Navigation' },
-          { id: 'search', label: 'Search', description: 'Search the documentation', category: 'Navigation' },
-          { id: 'theme', label: 'Toggle Theme', description: 'Switch between light and dark', category: 'Appearance' },
-          { id: 'share', label: 'Share Page', description: 'Copy link to clipboard', category: 'Actions', shortcut: 'Mod+Shift+C' },
+          {
+            id: 'open-home',
+            label: 'Open Home',
+            description: 'Navigate to home',
+            category: 'Navigation',
+          },
+          {
+            id: 'search',
+            label: 'Search',
+            description: 'Search the documentation',
+            category: 'Navigation',
+          },
+          {
+            id: 'theme',
+            label: 'Toggle Theme',
+            description: 'Switch between light and dark',
+            category: 'Appearance',
+          },
+          {
+            id: 'share',
+            label: 'Share Page',
+            description: 'Copy link to clipboard',
+            category: 'Actions',
+            shortcut: 'Mod+Shift+C',
+          },
         ];
         livePreview.append(cmd);
       }

@@ -1,7 +1,12 @@
+/**
+ * FILE: _cyberpunk.css
+ * USAGE: Stylesheet for packages/pix-highlighter/src/components/PixHighlighter/styles/themes/_cyberpunk.css.
+ * SCOPE: File-local selectors and pix-galaxy design tokens.
+ */
 @layer pix-galaxy {
   @layer pix-highlighter {
     @layer themes {
-      :root[data-pix-highlighter-theme="cyberpunk"] pre[is="pix-highlighter"] {
+      :root[data-pix-highlighter-theme='cyberpunk'] pre[is='pix-highlighter'] {
         --pix-highlighter--bg: light-dark(#fff4fd, #090412);
         --pix-highlighter--fg: light-dark(#2f1140, #f9f7ff);
         --pix-highlighter--kw: light-dark(#c026d3, #ff4fd8);
@@ -30,7 +35,7 @@
         --pix-highlighter--mdimg: light-dark(#0284c7, #4cc9f0);
         --pix-highlighter--tab-size: 2;
         --pix-highlighter--line-height: 1.55;
-        --pix-highlighter--text-shadow: light-dark(none, 0 0 18px rgba(255, 79, 216, 0.18));
+        --pix-highlighter--text-shadow: light-dark(none, 0 0 1.125rem rgba(255, 79, 216, 0.18));
       }
     }
   }

@@ -1,7 +1,12 @@
+/**
+ * FILE: _aurora.css
+ * USAGE: Stylesheet for packages/pix-highlighter/src/components/PixHighlighter/styles/themes/_aurora.css.
+ * SCOPE: File-local selectors and pix-galaxy design tokens.
+ */
 @layer pix-galaxy {
   @layer pix-highlighter {
     @layer themes {
-      :root[data-pix-highlighter-theme="aurora"] pre[is="pix-highlighter"] {
+      :root[data-pix-highlighter-theme='aurora'] pre[is='pix-highlighter'] {
         --pix-highlighter--bg: light-dark(#f5fbff, #09161d);
         --pix-highlighter--fg: light-dark(#183042, #e8f7ff);
         --pix-highlighter--kw: light-dark(#0284c7, #80d4ff);

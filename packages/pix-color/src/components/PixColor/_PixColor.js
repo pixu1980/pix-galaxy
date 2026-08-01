@@ -13,17 +13,23 @@ import componentCSS from './_PixColor.css?raw';
 
 const ELEMENT_NAME = 'pix-color';
 const FORMATS = ['HEX', 'RGB', 'HSL', 'OKLCH'];
-const SVG_ARROW = '<svg aria-hidden="true" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-const SVG_COPY = '<svg aria-hidden="true" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5.5" y="5.5" width="8" height="8" rx="1"/><path d="M10.5 3.5h-5a2 2 0 00-2 2v5"/></svg>';
-const SVG_CHECK = '<svg aria-hidden="true" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3.5 8.5L6 11l6.5-6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+const SVG_ARROW =
+  '<svg aria-hidden="true" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+const SVG_COPY =
+  '<svg aria-hidden="true" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5.5" y="5.5" width="8" height="8" rx="1"/><path d="M10.5 3.5h-5a2 2 0 00-2 2v5"/></svg>';
+const SVG_CHECK =
+  '<svg aria-hidden="true" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3.5 8.5L6 11l6.5-6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 
 let componentStyleSheet = null;
 
 function adoptComponentStyles() {
-  if (typeof document === 'undefined' ||
+  if (
+    typeof document === 'undefined' ||
     !('adoptedStyleSheets' in document) ||
     typeof CSSStyleSheet !== 'function' ||
-    typeof CSSStyleSheet.prototype.replaceSync !== 'function') return null;
+    typeof CSSStyleSheet.prototype.replaceSync !== 'function'
+  )
+    return null;
 
   if (!componentStyleSheet) {
     componentStyleSheet = new CSSStyleSheet();
@@ -39,7 +45,9 @@ class PixColor extends HTMLElement {
   static formAssociated = true;
   static observedAttributes = ['value', 'name'];
 
-  static ensureComponentStyles() { return adoptComponentStyles(); }
+  static ensureComponentStyles() {
+    return adoptComponentStyles();
+  }
 
   static {
     this.ensureComponentStyles();
@@ -70,7 +78,11 @@ class PixColor extends HTMLElement {
 
   /* ── Bound handlers (stabili, mai inline) ─────────────────────── */
 
-  #onColorInput = (e) => { const hex = e.target.value; this.#color = new Color(hex); this.#updateDisplay(); };
+  #onColorInput = (e) => {
+    const hex = e.target.value;
+    this.#color = new Color(hex);
+    this.#updateDisplay();
+  };
   #onBarClick = (e) => {
     if (e.target.closest('[data-part="native-input"]')) return;
     this.expanded = !this.#expanded;
@@ -117,10 +129,16 @@ class PixColor extends HTMLElement {
 
   /* ── Public API ────────────────────────────────────────────────── */
 
-  get value() { return this.#color.toHEXString(); }
-  set value(v) { this.setAttribute('value', v); }
+  get value() {
+    return this.#color.toHEXString();
+  }
+  set value(v) {
+    this.setAttribute('value', v);
+  }
 
-  get expanded() { return this.#expanded; }
+  get expanded() {
+    return this.#expanded;
+  }
   set expanded(v) {
     this.#expanded = Boolean(v);
     if (this.#expanded) {
@@ -153,7 +171,10 @@ class PixColor extends HTMLElement {
     this.#bar.setAttribute('tabindex', '0');
     this.#bar.setAttribute('aria-haspopup', 'dialog');
     this.#bar.setAttribute('aria-expanded', 'false');
-    this.#bar.setAttribute('aria-label', 'Color picker. Current value: ' + this.#color.toHEXString());
+    this.#bar.setAttribute(
+      'aria-label',
+      'Color picker. Current value: ' + this.#color.toHEXString()
+    );
 
     this.#swatch = document.createElement('span');
     this.#swatch.setAttribute('data-part', 'swatch');
@@ -218,7 +239,10 @@ class PixColor extends HTMLElement {
       const onKeydown = (e) => this.#handleTabKeydown(e, fmt);
       tab.addEventListener('click', onClick);
       tab.addEventListener('keydown', onKeydown);
-      this.#tabCleanup.push(() => { tab.removeEventListener('click', onClick); tab.removeEventListener('keydown', onKeydown); });
+      this.#tabCleanup.push(() => {
+        tab.removeEventListener('click', onClick);
+        tab.removeEventListener('keydown', onKeydown);
+      });
       if (fmt === this.#activeFormat) tab.setAttribute('data-active', '');
       this.#tabs.append(tab);
     }
@@ -288,10 +312,12 @@ class PixColor extends HTMLElement {
     this.#renderValues();
     this.#renderSliders();
     this.#renderContrast();
-    this.dispatchEvent(new CustomEvent('color-change', {
-      detail: { hex: this.#color.toHEXString(), rgb: this.#color.rgb },
-      bubbles: true,
-    }));
+    this.dispatchEvent(
+      new CustomEvent('color-change', {
+        detail: { hex: this.#color.toHEXString(), rgb: this.#color.rgb },
+        bubbles: true,
+      })
+    );
   }
 
   #renderValues() {
@@ -303,9 +329,12 @@ class PixColor extends HTMLElement {
       ['HSL', `${Math.round(c.hsl.h)}° ${Math.round(c.hsl.s)}% ${Math.round(c.hsl.l)}%`],
       ['OKLCH', `${c.oklch.L.toFixed(1)}% ${c.oklch.C.toFixed(2)} ${c.oklch.h.toFixed(0)}°`],
     ];
-    this.#valuesEl.innerHTML = rows.map(([label, val]) =>
-      `<span data-part="value-label">${label}</span><span data-part="value-text">${val}</span>`
-    ).join('');
+    this.#valuesEl.innerHTML = rows
+      .map(
+        ([label, val]) =>
+          `<span data-part="value-label">${label}</span><span data-part="value-text">${val}</span>`
+      )
+      .join('');
   }
 
   /* ── Format switching ─────────────────────────────────────────── */
@@ -326,11 +355,20 @@ class PixColor extends HTMLElement {
     const idx = tabs.indexOf(this.#activeFormat);
     let next = idx;
     switch (event.key) {
-      case 'ArrowLeft': next = (idx - 1 + tabs.length) % tabs.length; break;
-      case 'ArrowRight': next = (idx + 1) % tabs.length; break;
-      case 'Home': next = 0; break;
-      case 'End': next = tabs.length - 1; break;
-      default: return;
+      case 'ArrowLeft':
+        next = (idx - 1 + tabs.length) % tabs.length;
+        break;
+      case 'ArrowRight':
+        next = (idx + 1) % tabs.length;
+        break;
+      case 'Home':
+        next = 0;
+        break;
+      case 'End':
+        next = tabs.length - 1;
+        break;
+      default:
+        return;
     }
     event.preventDefault();
     this.#switchFormat(tabs[next]);
@@ -365,12 +403,41 @@ class PixColor extends HTMLElement {
       case 'HSL': {
         const hsl = c.hsl;
         const channels = [
-          { id: 'h', label: 'H', min: 0, max: 360, val: hsl.h, grad: `linear-gradient(to right, hsl(0,${hsl.s}%,${hsl.l}%),hsl(60,${hsl.s}%,${hsl.l}%),hsl(120,${hsl.s}%,${hsl.l}%),hsl(180,${hsl.s}%,${hsl.l}%),hsl(240,${hsl.s}%,${hsl.l}%),hsl(300,${hsl.s}%,${hsl.l}%),hsl(360,${hsl.s}%,${hsl.l}%))` },
-          { id: 's', label: 'S', min: 0, max: 100, val: hsl.s, grad: `linear-gradient(to right, hsl(${hsl.h},0%,${hsl.l}%),hsl(${hsl.h},100%,${hsl.l}%))` },
-          { id: 'l', label: 'L', min: 0, max: 100, val: hsl.l, grad: `linear-gradient(to right, hsl(${hsl.h},${hsl.s}%,0%),hsl(${hsl.h},${hsl.s}%,50%),hsl(${hsl.h},${hsl.s}%,100%))` },
+          {
+            id: 'h',
+            label: 'H',
+            min: 0,
+            max: 360,
+            val: hsl.h,
+            grad: `linear-gradient(to right, hsl(0,${hsl.s}%,${hsl.l}%),hsl(60,${hsl.s}%,${hsl.l}%),hsl(120,${hsl.s}%,${hsl.l}%),hsl(180,${hsl.s}%,${hsl.l}%),hsl(240,${hsl.s}%,${hsl.l}%),hsl(300,${hsl.s}%,${hsl.l}%),hsl(360,${hsl.s}%,${hsl.l}%))`,
+          },
+          {
+            id: 's',
+            label: 'S',
+            min: 0,
+            max: 100,
+            val: hsl.s,
+            grad: `linear-gradient(to right, hsl(${hsl.h},0%,${hsl.l}%),hsl(${hsl.h},100%,${hsl.l}%))`,
+          },
+          {
+            id: 'l',
+            label: 'L',
+            min: 0,
+            max: 100,
+            val: hsl.l,
+            grad: `linear-gradient(to right, hsl(${hsl.h},${hsl.s}%,0%),hsl(${hsl.h},${hsl.s}%,50%),hsl(${hsl.h},${hsl.s}%,100%))`,
+          },
         ];
         for (const ch of channels) {
-          html += this.#sliderHTML(ch.label, ch.id, ch.min, ch.max, Math.round(ch.val), ch.grad, fmt);
+          html += this.#sliderHTML(
+            ch.label,
+            ch.id,
+            ch.min,
+            ch.max,
+            Math.round(ch.val),
+            ch.grad,
+            fmt
+          );
         }
         break;
       }
@@ -378,12 +445,45 @@ class PixColor extends HTMLElement {
         const oklch = c.oklch;
         const hex = c.toHEXString();
         const channels = [
-          { id: 'L', label: 'L', min: 0, max: 100, val: oklch.L, step: 0.1, grad: `linear-gradient(to right, #000, ${hex}, #fff)` },
-          { id: 'C', label: 'C', min: 0, max: 40, val: oklch.C, step: 0.01, grad: `linear-gradient(to right, #888, ${hex})` },
-          { id: 'h', label: 'H', min: 0, max: 360, val: oklch.h, step: 1, grad: `linear-gradient(to right, hsl(0,100%,50%),hsl(60,100%,50%),hsl(120,100%,50%),hsl(180,100%,50%),hsl(240,100%,50%),hsl(300,100%,50%),hsl(360,100%,50%))` },
+          {
+            id: 'L',
+            label: 'L',
+            min: 0,
+            max: 100,
+            val: oklch.L,
+            step: 0.1,
+            grad: `linear-gradient(to right, #000, ${hex}, #fff)`,
+          },
+          {
+            id: 'C',
+            label: 'C',
+            min: 0,
+            max: 40,
+            val: oklch.C,
+            step: 0.01,
+            grad: `linear-gradient(to right, #888, ${hex})`,
+          },
+          {
+            id: 'h',
+            label: 'H',
+            min: 0,
+            max: 360,
+            val: oklch.h,
+            step: 1,
+            grad: `linear-gradient(to right, hsl(0,100%,50%),hsl(60,100%,50%),hsl(120,100%,50%),hsl(180,100%,50%),hsl(240,100%,50%),hsl(300,100%,50%),hsl(360,100%,50%))`,
+          },
         ];
         for (const ch of channels) {
-          html += this.#sliderHTML(ch.label, ch.id, ch.min, ch.max, ch.val, ch.grad, fmt, ch.step || 1);
+          html += this.#sliderHTML(
+            ch.label,
+            ch.id,
+            ch.min,
+            ch.max,
+            ch.val,
+            ch.grad,
+            fmt,
+            ch.step || 1
+          );
         }
         break;
       }
@@ -416,7 +516,8 @@ class PixColor extends HTMLElement {
   }
 
   #sliderHTML(label, id, min, max, val, grad, fmt, step) {
-    const displayVal = typeof val === 'number' ? (step && step < 1 ? val.toFixed(2) : Math.round(val)) : val;
+    const displayVal =
+      typeof val === 'number' ? (step && step < 1 ? val.toFixed(2) : Math.round(val)) : val;
     const stepAttr = step ? `step="${step}"` : 'step="1"';
     const gradAttr = grad ? `data-grad="${this.#escapeAttr(grad)}"` : '';
     return `
@@ -440,7 +541,9 @@ class PixColor extends HTMLElement {
     const val = parseFloat(slider.value);
     // Update the displayed value
     const valueSpan = slider.parentElement.querySelector('[data-part="slider-value"]');
-    if (valueSpan) valueSpan.textContent = typeof val === 'number' ? (val % 1 !== 0 ? val.toFixed(2) : Math.round(val)) : val;
+    if (valueSpan)
+      valueSpan.textContent =
+        typeof val === 'number' ? (val % 1 !== 0 ? val.toFixed(2) : Math.round(val)) : val;
 
     switch (fmt) {
       case 'RGB': {

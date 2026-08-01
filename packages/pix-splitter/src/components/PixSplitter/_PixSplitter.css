@@ -3,9 +3,9 @@
   @layer pix-splitter {
     pix-splitter {
       display: grid;
-      --pix-splitter--handle-size: 8px;
-      --pix-splitter--hover-size: 24px;
-      --pix-splitter--min: 100px;
+      --pix-splitter--handle-size: 0.5rem;
+      --pix-splitter--hover-size: 1.5rem;
+      --pix-splitter--min: 6.25rem;
     }
 
     pix-splitter[data-orientation='horizontal'] {
@@ -26,20 +26,15 @@
       position: relative;
       z-index: 1;
       flex-shrink: 0;
-      background: var(--pix-splitter--handle-bg, var(--pix-ds-line-soft, oklch(from gray 0.7 0 0 / 0.3)));
-      transition: background var(--pix-ds-duration-fast, 140ms) var(--pix-ds-ease-standard, ease);
+      background: var(--pix-splitter--handle-bg);
+      transition: background var(--pix-ds-duration-fast) var(--pix-ds-ease-standard);
       user-select: none;
       -webkit-user-select: none;
     }
 
     pix-splitter [data-splitter-handle]:hover,
     pix-splitter [data-splitter-handle][data-active] {
-      background: var(--pix-splitter--handle-hover, var(--pix-ds-accent-primary, oklch(0.71 0.13 228)));
-    }
-
-    pix-splitter [data-splitter-handle]:focus-visible {
-      outline: 2px solid var(--pix-splitter--handle-hover, var(--pix-ds-accent-primary, oklch(0.71 0.13 228)));
-      outline-offset: -2px;
+      background: var(--pix-splitter--handle-hover);
     }
 
     pix-splitter[data-orientation='horizontal'] [data-splitter-handle] {
@@ -58,18 +53,14 @@
       content: '';
       position: absolute;
       display: block;
-      border-radius: 2px;
-      background: var(--pix-splitter--thumb, var(--pix-ds-text-muted, oklch(0.5 0.014 62)));
+      border-radius: var(--pix--s--2px);
+      background: var(--pix-splitter--thumb);
       opacity: 0;
-      transition: opacity var(--pix-ds-duration-fast, 140ms) var(--pix-ds-ease-standard, ease);
+      transition: opacity var(--pix-ds-duration-fast) var(--pix-ds-ease-standard);
     }
 
     pix-splitter [data-splitter-handle]:hover::before,
     pix-splitter [data-splitter-handle][data-active]::before,
-    pix-splitter [data-splitter-handle]:focus-visible::before {
-      opacity: 0.6;
-    }
-
     pix-splitter[data-orientation='horizontal'] [data-splitter-handle]::before {
       width: 2px;
       height: 2rem;
@@ -97,14 +88,14 @@
 
     pix-splitter[data-orientation='horizontal'] [data-splitter-handle]::after {
       top: 0;
-      left: calc((var(--pix-splitter--handle-size) - var(--pix-splitter--hover-size)) / 2);
+      left: calc((var(--pix-splitter--handle-size) - var(--pix-splitter--hover-size) / 2));
       width: var(--pix-splitter--hover-size);
       height: 100%;
     }
 
     pix-splitter[data-orientation='vertical'] [data-splitter-handle]::after {
       left: 0;
-      top: calc((var(--pix-splitter--handle-size) - var(--pix-splitter--hover-size)) / 2);
+      top: calc((var(--pix-splitter--handle-size) - var(--pix-splitter--hover-size) / 2));
       height: var(--pix-splitter--hover-size);
       width: 100%;
     }
