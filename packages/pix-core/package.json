@@ -1,7 +1,7 @@
 {
-  "name": "@pix-galaxy/shared",
+  "name": "@pix-galaxy/pix-core",
   "version": "0.1.0",
-  "description": "Shared runtime helpers and docs templates for the pix-galaxy suite.",
+  "description": "Core runtime helpers, docs templates, and shared build scripts for the pix-galaxy suite.",
   "type": "module",
   "private": true,
   "sideEffects": false,
@@ -15,6 +15,8 @@
   },
   "dependencies": {
     "marked": "18.0.5",
-    "@pix-galaxy/pix-color-scheme-selector": "workspace:*"
-  }
+    "@pix-galaxy/pix-color-scheme-selector": "workspace:*",
+    "esbuild": "0.28.1"
+  },
+  "scripts": {}
 }

@@ -7,7 +7,7 @@
  *   if (typeof CSSStyleSheet !== 'function') return null;
  *
  * This module exposes them once so components can do:
- *   import { adoptStyles, safeDefine } from '@pix-galaxy/shared/dom/ssr-safe.js';
+ *   import { adoptStyles, safeDefine } from '@pix-galaxy/pix-core/dom/ssr-safe.js';
  */
 
 /**
@@ -18,7 +18,11 @@ let _adopted = null;
 export function adoptStyles(cssText) {
   if (typeof document === 'undefined') return null;
   if (!_adopted) {
-    if (typeof CSSStyleSheet !== 'function' || typeof CSSStyleSheet.prototype.replaceSync !== 'function') return null;
+    if (
+      typeof CSSStyleSheet !== 'function' ||
+      typeof CSSStyleSheet.prototype.replaceSync !== 'function'
+    )
+      return null;
     _adopted = new CSSStyleSheet();
     _adopted.replaceSync(cssText);
   }
@@ -32,7 +36,11 @@ export function adoptStyles(cssText) {
  * Define a custom element if we're in a browser environment.
  */
 export function safeDefine(name, cls) {
-  if (typeof document !== 'undefined' && typeof customElements !== 'undefined' && !customElements.get(name)) {
+  if (
+    typeof document !== 'undefined' &&
+    typeof customElements !== 'undefined' &&
+    !customElements.get(name)
+  ) {
     customElements.define(name, cls);
   }
 }
@@ -41,13 +49,17 @@ export function safeDefine(name, cls) {
  * Check if the component can adopt stylesheets.
  */
 export function canAdoptStyles() {
-  return typeof document !== 'undefined' &&
+  return (
+    typeof document !== 'undefined' &&
     'adoptedStyleSheets' in document &&
     typeof CSSStyleSheet === 'function' &&
-    typeof CSSStyleSheet.prototype.replaceSync === 'function';
+    typeof CSSStyleSheet.prototype.replaceSync === 'function'
+  );
 }
 
 /**
  * Reset the cached stylesheet (useful for testing).
  */
-export function _resetAdopted() { _adopted = null; }
+export function _resetAdopted() {
+  _adopted = null;
+}
