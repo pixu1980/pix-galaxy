@@ -13,7 +13,5 @@ export default defineConfig({
     headless: true,
     viewport: { width: 1280, height: 720 },
   },
-  webServer: [
-    { command: 'pnpm dev:all', port: 3011, reuseExistingServer: true, timeout: 30000 },
-  ],
+  webServer: [{ command: 'pnpm dev:all', port: 3011, reuseExistingServer: true, timeout: 30000 }],
 });
