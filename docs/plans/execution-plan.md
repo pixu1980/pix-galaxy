@@ -45,15 +45,16 @@
 - [ ] typedef `DisplayPreferences` in `a11y-panel/src/index.types.js`: alias + deprecation o rename breaking
 - [ ] `e2e/results.json` + `test-results/.last-run.json`: aggiungere a .gitignore
 
-### Fase 1 — Commit logici
-- [ ] Commit rename `pix-display-preferences` → `pix-a11y-panel`
-- [ ] Commit consolidamento `pix-foundations` (tokens, focus, typography, controls)
-- [ ] Commit `pix-core` (shared → pix-core, script centralizzati)
-- [ ] Commit scripts/build tooling
-- [ ] Commit docs + portal (components.json, CSS, JS)
-- [ ] Commit config (package.json, pnpm-workspace, eslint, prettier, CI)
-- [ ] Commit `.agents/` (separato, verificare pertinenza)
-- [ ] Commit e2e/test-results aggiornati
+### Fase 1 — Commit logici ✅ FATTA
+- [x] Commit `feat(pix-foundations)` — 21 file, token + controls
+- [x] Commit `feat(pix-core)` — shared → pix-core, script centralizzati
+- [x] Commit `refactor(pix-a11y-panel)` — rename da display-preferences + typedef deprecato
+- [x] Commit `refactor(packages)` — 10 package + highlighter → pix-core, CSS tokenizzato
+- [x] Commit `chore(root)` — tooling config (13 file)
+- [x] Commit `chore(scripts)` — dev/release/scaffold
+- [x] Commit `docs` — handoff + architecture-review + HANDOFF-LLM
+- [x] Untrack test artifacts (e2e/results.json, test-results/.last-run.json)
+- [ ] **A CONFERMA**: `.agents/` (53 file) + `.github/ISSUE_TEMPLATE/` (2 file) — formatting + import rename
 
 ### Fase 2 — ADR consolidation
 - [ ] Creare `docs/adr/` con ADR numerati e indicizzati (001–018)
