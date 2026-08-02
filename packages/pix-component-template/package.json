@@ -65,8 +65,7 @@
     "release": "node ./scripts/release.mjs",
     "test": "pnpm docs:build && node --test --import ../pix-core/scripts/register-test-loader.mjs ./src/tests/*.test.js",
     "test:coverage": "pnpm docs:build && c8 --reporter=text --reporter=lcov node --test --import ../pix-core/scripts/register-test-loader.mjs ./src/tests/*.test.js",
-    "lint": "eslint src/",
-    "typecheck": "tsc --project ./tsconfig.types.json --noEmit"
+    "lint": "eslint src/"
   },
   "dependencies": {
     "@pix-galaxy/pix-color-scheme-selector": "workspace:*",
