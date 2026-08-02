@@ -8,7 +8,8 @@
   "homepage": "https://pixu1980.github.io/pix-command/",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/pixu1980/pix-command.git"
+    "url": "git+https://github.com/pixu1980/pix-galaxy.git",
+    "directory": "packages/pix-command"
   },
   "bugs": {
     "url": "https://github.com/pixu1980/pix-command/issues"

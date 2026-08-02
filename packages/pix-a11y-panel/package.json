@@ -8,7 +8,8 @@
   "homepage": "https://pixu1980.github.io/pix-a11y-panel/",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/pixu1980/pix-a11y-panel.git"
+    "url": "git+https://github.com/pixu1980/pix-galaxy.git",
+    "directory": "packages/pix-a11y-panel"
   },
   "bugs": {
     "url": "https://github.com/pixu1980/pix-a11y-panel/issues"

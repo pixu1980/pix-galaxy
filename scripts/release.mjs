@@ -4,7 +4,7 @@
  * release.mjs — pix-galaxy monorepo release orchestration
  *
  * Discover non-private packages in packages/, release those with changes
- * since last git tag (standard-version bump + pnpm publish).
+ * since last git tag (commit-and-tag-version bump + pnpm publish).
  *
  * Usage:
  *   node scripts/release.mjs
@@ -16,6 +16,7 @@ import { readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { execSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
+import { standardVersionCommand } from './release-helpers.mjs';
 
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
 const ROOT = join(__dirname, '..');
@@ -74,9 +75,10 @@ if (!isWorkingTreeClean()) {
 }
 
 try {
-  execSync('standard-version --version', { stdio: 'pipe' });
+  execSync('commit-and-tag-version --version', { stdio: 'pipe' });
 } catch {
-  console.log('standard-version not found globally — installing via npx.\n');
+  console.log('commit-and-tag-version not found — run pnpm install first.\n');
+  process.exit(1);
 }
 
 const packages = readdirSync(PKG_DIR, { withFileTypes: true })
@@ -131,15 +133,16 @@ for (const pkg of packages) {
 
   // ── Release ──
   const prefix = `${name}@`;
+  const firstRelease = !tagExists(tag);
   if (isDryRun) {
-    console.log(`   [dry-run] standard-version --tag-prefix "${prefix}"`);
-    execIn(pkgPath, `npx standard-version --dry-run --tag-prefix "${prefix}"`, {
+    console.log(`   [dry-run] commit-and-tag-version --tag-prefix "${prefix}"`);
+    execIn(pkgPath, standardVersionCommand(ROOT, name, true, firstRelease), {
       stdio: 'inherit',
     });
     console.log(`   [dry-run] pnpm publish (skipped)`);
   } else {
     try {
-      execIn(pkgPath, `npx standard-version --no-verify --tag-prefix "${prefix}"`, {
+      execIn(pkgPath, standardVersionCommand(ROOT, name, false, firstRelease), {
         stdio: 'inherit',
       });
       execIn(pkgPath, `git push --follow-tags origin main 2>/dev/null || true`, {

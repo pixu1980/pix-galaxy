@@ -8,7 +8,8 @@
   "homepage": "https://pixu1980.github.io/pix-toast/",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/pixu1980/pix-toast.git"
+    "url": "git+https://github.com/pixu1980/pix-galaxy.git",
+    "directory": "packages/pix-toast"
   },
   "bugs": {
     "url": "https://github.com/pixu1980/pix-toast/issues"

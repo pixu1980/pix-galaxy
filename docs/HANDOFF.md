@@ -510,23 +510,16 @@ The script:
 
 1. Ensures clean working tree
 2. Discovers all non-private packages in `packages/`
-3. For each: checks if changes exist since last `@pix-galaxy/pkg@version` tag
-4. Runs `standard-version --tag-prefix "@pix-galaxy/pkg@"` for semver bump + CHANGELOG + tag
+3. For each: checks if changes exist since last `@pix-galaxy/pkg@version` tag (or if no tag exists — first release)
+4. Runs `commit-and-tag-version --tag-prefix "@pix-galaxy/pkg@"` (ADR-018, fork mantenuto di standard-version) for semver bump + CHANGELOG + tag
 5. Runs `pnpm publish --access public`
 6. Pushes tags
 
 ### CI/CD (GitHub Actions)
 
-Triggered by tag push matching `@pix-galaxy/*@*`. Workflow in `.github/workflows/release.yml`:
+Triggered by tag push matching `@pix-galaxy/*@*`. The workflow in `.github/workflows/release.yml` is a **quality gate** (ADR-018): it no longer publishes to npm with a token. It runs typecheck + tests + build for the tagged package, since publishing happens **locally** via `pnpm release`.
 
-1. Checks out repo
-2. Extracts package name from tag
-3. Builds library
-4. Publishes to npm with provenance
-
-**Required secrets:**
-
-- `NPM_TOKEN` — npm automation token with publish access to `@pix-galaxy/*`
+**No secrets required** — releases use local npm auth.
 
 ---
 

@@ -1,16 +1,25 @@
 name: Release
 
+# NOTE (ADR-018): releases are published LOCALLY via `pnpm release`.
+# This workflow no longer publishes to npm with a NPM_TOKEN secret.
+# It exists only to run a release-quality gate when a release tag is
+# pushed: typecheck, tests, and library build for the tagged package.
+#
+# Local release flow:
+#   pnpm release          # bump + CHANGELOG + tag + publish
+#   pnpm release:dry      # preview only
+
 on:
   push:
     tags:
       - '@pix-galaxy/*@*'
 
 jobs:
-  publish:
+  gate:
+    name: Release quality gate
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      id-token: write
 
     steps:
       - uses: actions/checkout@v6
@@ -22,7 +31,6 @@ jobs:
         with:
           node-version: 24
           cache: pnpm
-          registry-url: https://registry.npmjs.org
       - run: pnpm install --frozen-lockfile
 
       # Extract package directory from tag: @pix-galaxy/pix-command@0.2.0 → packages/pix-command
@@ -35,12 +43,14 @@ jobs:
           echo "name=$NAME" >> $GITHUB_OUTPUT
           echo "dir=$DIR" >> $GITHUB_OUTPUT
 
+      - name: Typecheck package
+        working-directory: ${{ steps.pkg.outputs.dir }}
+        run: pnpm typecheck
+
+      - name: Test package
+        working-directory: ${{ steps.pkg.outputs.dir }}
+        run: pnpm test
+
       - name: Build library
         working-directory: ${{ steps.pkg.outputs.dir }}
         run: pnpm build:lib
-
-      - name: Publish to npm
-        working-directory: ${{ steps.pkg.outputs.dir }}
-        run: pnpm publish --access public --provenance
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
