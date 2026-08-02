@@ -55,3 +55,18 @@ pre[is='pix-highlighter'] {
 [data-part='example-card'] pre[is='pix-highlighter'] {
   border-radius: var(--pix-ds--r--md) !important;
 }
+
+/* ── Usage tag: ensure WCAG 2.2 AA contrast (4.5:1) on the code chip ── */
+
+[data-part='use-tag'] code {
+  /* Overrides per-site accent-colored chips that fail contrast checks.
+     Keeps the accent-tinted background but forces readable text. */
+  color: var(--pix-ds-text-strong) !important;
+  background: color-mix(
+    in srgb,
+    var(--pix-ds-accent-primary) 12%,
+    var(--pix-ds-surface-page)
+  ) !important;
+  border: 1px solid color-mix(in srgb, var(--pix-ds-accent-primary) 30%, transparent) !important;
+  font-weight: 500;
+}

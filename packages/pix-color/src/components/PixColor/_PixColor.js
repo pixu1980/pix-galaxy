@@ -157,12 +157,15 @@ class PixColor extends HTMLElement {
 
     this.innerHTML = '';
 
-    // Hidden native input
+    // Native color input: kept as a sibling (NOT nested inside the bar) so
+    // axe does not flag nested-interactive. It is visually hidden and
+    // pointer-events:none (CSS) so it never bypasses the custom OKLCH panel.
     this.#colorInput = document.createElement('input');
     this.#colorInput.setAttribute('data-part', 'native-input');
     this.#colorInput.type = 'color';
     this.#colorInput.value = this.#color.toHEXString();
     this.#colorInput.setAttribute('tabindex', '-1');
+    this.#colorInput.setAttribute('aria-label', 'Color picker');
     this.#colorInput.addEventListener('input', this.#onColorInput);
 
     this.#bar = document.createElement('div');
@@ -188,8 +191,8 @@ class PixColor extends HTMLElement {
     arrow.setAttribute('data-part', 'arrow');
     arrow.innerHTML = SVG_ARROW;
 
-    this.#bar.append(this.#colorInput, this.#swatch, this.#hexVal, arrow);
-    this.append(this.#bar);
+    this.#bar.append(this.#swatch, this.#hexVal, arrow);
+    this.append(this.#colorInput, this.#bar);
 
     // Events (usando handler stabili - niente inline arrow)
     this.#bar.addEventListener('click', this.#onBarClick);

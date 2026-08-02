@@ -37,6 +37,6 @@
 
   /* Feedback */
   --pix-ds--c--success: light-dark(oklch(0.5 0.2 150), oklch(0.6 0.18 150));
-  --pix-ds--c--warning: light-dark(oklch(0.58 0.18 80), oklch(0.68 0.15 80));
+  --pix-ds--c--warning: light-dark(oklch(0.52 0.18 80), oklch(0.68 0.15 80));
   --pix-ds--c--danger: light-dark(oklch(0.52 0.2 25), oklch(0.62 0.18 25));
 }

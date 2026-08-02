@@ -21,6 +21,8 @@ const isDev = typeof import.meta !== 'undefined' && import.meta.env && import.me
  * Falls back to computing the port from the component index when
  * the server was started independently (without dev-all.mjs).
  */
+import { devPortFor } from '../../scripts/port-map.mjs';
+
 function getDevPort(compName) {
   // Try VITE_DEV_PORTS first (set by dev-all.mjs)
   try {
@@ -33,24 +35,8 @@ function getDevPort(compName) {
     /* fall through */
   }
 
-  // Fallback: compute port from order (same algorithm as dev-all.mjs)
-  const order = [
-    'pix-galaxy',
-    'pix-accent-color-selector',
-    'pix-color',
-    'pix-color-scheme-selector',
-    'pix-command',
-    'pix-a11y-panel',
-    'pix-foundations',
-    'pix-highlighter',
-    'pix-recorder',
-    'pix-sortable',
-    'pix-splitter',
-    'pix-toast',
-  ];
-  const idx = order.indexOf(compName);
-  if (idx >= 0) return 3000 + idx;
-  return null;
+  // Fallback: canonical order shared with dev-all.mjs
+  return devPortFor(compName);
 }
 
 const ICONS = Object.freeze({
@@ -89,6 +75,7 @@ async function bootPortal() {
       return `
         <a
           data-part="card"
+          role="listitem"
           data-component-accent="${escapeAttr(comp.accent)}"
           href="${escapeAttr(docUrl)}"
           ${isComingSoon ? '' : 'target="_blank" rel="noopener noreferrer"'}

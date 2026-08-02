@@ -66,6 +66,8 @@ async function bootDocsSite() {
       componentTag: 'pix-sortable',
       description:
         'Accessible sortable list with drag & drop, touch, and full keyboard navigation.',
+      liveHtml:
+        '<pix-sortable style="max-width:24rem;"><div data-sortable-value="1">First item</div><div data-sortable-value="2">Second item</div><div data-sortable-value="3">Third item</div></pix-sortable>',
     },
     afterRender(root) {
       enhancePixHighlighters(root);

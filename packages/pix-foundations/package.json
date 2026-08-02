@@ -10,5 +10,10 @@
     "./foundations.css": "./lib/foundations.css",
     "./lib/foundations.css": "./lib/foundations.css"
   },
-  "scripts": {}
+  "scripts": {},
+  "devDependencies": {
+    "@pix-galaxy/pix-color-scheme-selector": "workspace:*",
+    "@pix-galaxy/pix-core": "workspace:*",
+    "@pix-galaxy/pix-highlighter": "workspace:*"
+  }
 }

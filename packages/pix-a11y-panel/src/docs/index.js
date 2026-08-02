@@ -359,6 +359,10 @@ export async function loadDocsData() {
     siteMeta: Object.freeze({
       version: packageJson.version,
       releaseTag: `v${packageJson.version}`,
+      componentName: 'pix-a11y-panel',
+      componentTag: 'pix-a11y-panel',
+      description: 'Accessibility, typography, and radius preferences popover.',
+      liveHtml: '<pix-a11y-panel></pix-a11y-panel>',
     }),
   };
 }

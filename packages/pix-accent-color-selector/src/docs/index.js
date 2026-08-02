@@ -224,6 +224,10 @@ export async function loadDocsData() {
     siteMeta: Object.freeze({
       version: packageJson.version,
       releaseTag: `v${packageJson.version}`,
+      componentName: 'pix-accent-color-selector',
+      componentTag: 'pix-accent-color-selector',
+      description: 'Accent color selector synced with the system.',
+      liveHtml: '<pix-accent-color-selector></pix-accent-color-selector>',
     }),
   };
 }

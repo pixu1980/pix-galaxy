@@ -219,6 +219,10 @@ export async function loadDocsData() {
     siteMeta: Object.freeze({
       version: packageJson.version,
       releaseTag: `v${packageJson.version}`,
+      componentName: 'pix-color-scheme-selector',
+      componentTag: 'pix-color-scheme-selector',
+      description: 'Light / dark / system color scheme toggle.',
+      liveHtml: '<pix-color-scheme-selector></pix-color-scheme-selector>',
     }),
   };
 }

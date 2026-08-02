@@ -79,14 +79,25 @@
 - [x] **Typecheck strict completato**: creati `index.types.js` mancanti (pix-color, pix-sortable, pix-recorder) con typedef API pubbliche; typecheck ora passa su 10/10 package; root `typecheck` + aggiunto a `pnpm quality` (ADR-023)
 - [x] Template: rimosso script typecheck (placeholder {%...%} non compilabili, come per prettier/eslint)
 
-### Fase 4 — Testing
+### Fase 4 — Testing ✅ FATTA
 
-- [ ] Unit test per ogni componente (registrazione, render, eventi, cleanup) — node:test + jsdom
-- [ ] Guardie per API non supportate da jsdom (adoptedStyleSheets, setFormValue, Highlight API)
-- [ ] E2E espanso (interazioni reali, keyboard, temi)
-- [ ] Audit axe-core su portal + docs sites (Playwright)
-- [ ] Visual regression con snapshot Playwright
-- [ ] Aggiornare/estendere `pnpm quality` (format:check + lint + typecheck)
+- [x] **Audit axe-core (WCAG 2.2 AA)**: nuovo `e2e/a11y.spec.mjs` — 12/12 su portal + 11 docs sites
+- [x] **E2E espanso**: nuovo `e2e/interactions.spec.mjs` — 15 test (interazioni reali + audit componenti live)
+- [x] **49/49 e2e** totali (22 portal + 12 a11y + 15 interactions)
+- [x] **Fix a11y reali scoperti dall'audit**:
+  - pix-color: nested-interactive (input color dentro role=button) + label mancante → input spostato a sibling
+  - pix-sortable: aria-required-children → live region spostata fuori dal listbox (wrapper interno)
+  - pix-toast-stack: aria-prohibited → aggiunto role=region
+  - Portal: role=listitem sulle card, contrasto text-muted (ink-600→950) e footer link (sky-700)
+  - foundations: warning token scurito (contrasto 4.5+)
+  - docs template: `pre` scrollabile → tabindex=0; placeholder live rotto → testo statico
+- [x] **Fix bug sistemici trovati**:
+  - **port-map disallineata**: dev-all (ordine alfabetico) vs portal fallback (ordine hardcoded) → nuovo `scripts/port-map.mjs` condiviso
+  - **index.html con title sbagliato** in recorder/sortable/splitter (copia-incolla "pix-color docs")
+  - **foundations docs 500**: mancava pix-core tra le devDeps
+- [x] **Docs sites migliorati**: aggiunto `liveHtml` (componente live montato) a 6 docs che non lo avevano
+- [x] CI: aggiunto job e2e Playwright (chromium + dev:all via webServer)
+- [x] `pnpm test:e2e` script root; `pnpm quality` già copre format+lint+typecheck
 
 ### Fase 5 — Docs & Portal
 

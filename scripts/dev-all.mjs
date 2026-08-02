@@ -48,9 +48,16 @@ const fallbackPalette = [
  * Discover servers dynamically:
  * 1. pix-galaxy (root portal) is always first
  * 2. Any directory under ./packages/ with a vite.config.mjs is included
+ *
+ * Order follows the canonical DEV_PORT_ORDER (scripts/port-map.mjs) so the
+ * portal's dev-port links always match. Unknown packages are appended in
+ * alphabetical order after the canonical list.
  */
+import { DEV_PORT_ORDER } from './port-map.mjs';
+
 function discoverServers() {
-  const servers = [{ name: 'pix-galaxy', config: './vite.config.mjs' }];
+  const byName = new Map();
+  byName.set('pix-galaxy', { name: 'pix-galaxy', config: './vite.config.mjs' });
 
   const packagesDir = resolve(projectRoot, 'packages');
   if (existsSync(packagesDir)) {
@@ -60,16 +67,21 @@ function discoverServers() {
       if (statSync(pkgDir).isDirectory()) {
         const viteConfigPath = join(pkgDir, 'vite.config.mjs');
         if (existsSync(viteConfigPath)) {
-          servers.push({
-            name: entry,
-            config: `./packages/${entry}/vite.config.mjs`,
-          });
+          byName.set(entry, { name: entry, config: `./packages/${entry}/vite.config.mjs` });
         }
       }
     }
   }
 
-  return servers;
+  // Canonical order first; any extras (not in DEV_PORT_ORDER) follow alphabetically.
+  const canonical = DEV_PORT_ORDER.filter((name) => byName.has(name)).map((name) =>
+    byName.get(name)
+  );
+  const extras = [...byName.keys()]
+    .filter((name) => !DEV_PORT_ORDER.includes(name))
+    .sort()
+    .map((name) => byName.get(name));
+  return [...canonical, ...extras];
 }
 
 const servers = discoverServers();
