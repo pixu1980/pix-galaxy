@@ -58,7 +58,7 @@ let PixColorSchemeSelector, SCHEMES, STORAGE_KEY, META_CONTENT;
 before(async () => {
   const mod = await import(
     new URL(
-      '../components/ColorSchemeSelector/ColorSchemeSelector.js?component-test',
+      '../components/ColorSchemeSelector/_ColorSchemeSelector.js?component-test',
       import.meta.url
     )
   );
@@ -129,11 +129,11 @@ describe('PixColorSchemeSelector', () => {
     mountSelector();
 
     const componentSource = await readFile(
-      new URL('../components/ColorSchemeSelector/ColorSchemeSelector.js', import.meta.url),
+      new URL('../components/ColorSchemeSelector/_ColorSchemeSelector.js', import.meta.url),
       'utf8'
     );
     const componentCss = await readFile(
-      new URL('../components/ColorSchemeSelector/ColorSchemeSelector.css', import.meta.url),
+      new URL('../components/ColorSchemeSelector/_ColorSchemeSelector.css', import.meta.url),
       'utf8'
     );
 
@@ -144,7 +144,7 @@ describe('PixColorSchemeSelector', () => {
       )
     );
     assert.ok(
-      componentSource.includes("import componentCSS from './ColorSchemeSelector.css?raw';")
+      componentSource.includes("import componentCSS from './_ColorSchemeSelector.css?raw';")
     );
     assert.ok(componentSource.includes('static {'));
     assert.ok(componentSource.includes('globalThis.customElements.define(ELEMENT_NAME, this)'));

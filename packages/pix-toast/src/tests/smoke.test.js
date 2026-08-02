@@ -25,20 +25,20 @@ globalThis.CustomEvent = dom.window.CustomEvent;
 
 describe('pix-toast', () => {
   it('defines custom element', async () => {
-    await import('../components/PixToast/PixToast.js');
+    await import('../components/PixToast/_PixToast.js');
     const Toast = customElements.get('pix-toast');
     assert.ok(Toast, 'pix-toast should be defined');
   });
 
   it('PixToast.render() creates a toast element', async () => {
-    const { PixToast } = await import('../components/PixToast/PixToast.js');
+    const { PixToast } = await import('../components/PixToast/_PixToast.js');
     const el = PixToast.render({ message: 'Test toast', variant: 'success' });
     assert.ok(el, 'should create element');
     assert.equal(el.dataset.variant, 'success');
   });
 
   it('defines pix-toast-stack', async () => {
-    await import('../components/PixToast/PixToastStack.js');
+    await import('../components/PixToast/_PixToastStack.js');
     const Stack = customElements.get('pix-toast-stack');
     assert.ok(Stack, 'pix-toast-stack should be defined');
   });

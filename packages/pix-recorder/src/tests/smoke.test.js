@@ -25,13 +25,13 @@ globalThis.CustomEvent = dom.window.CustomEvent;
 
 describe('pix-recorder', () => {
   it('defines custom element', async () => {
-    await import('../components/PixRecorder/PixRecorder.js');
+    await import('../components/PixRecorder/_PixRecorder.js');
     const el = customElements.get('pix-recorder');
     assert.ok(el, 'pix-recorder should be defined');
   });
 
   it('renders toolbar with buttons', async () => {
-    await import('../components/PixRecorder/PixRecorder.js');
+    await import('../components/PixRecorder/_PixRecorder.js');
     const el = document.createElement('pix-recorder');
     document.body.appendChild(el);
     assert.ok(el.querySelector('[data-part="toolbar"]'), 'should render toolbar');
@@ -40,7 +40,7 @@ describe('pix-recorder', () => {
   });
 
   it('state starts as idle', async () => {
-    await import('../components/PixRecorder/PixRecorder.js');
+    await import('../components/PixRecorder/_PixRecorder.js');
     const el = document.createElement('pix-recorder');
     assert.equal(el.state, 'idle');
   });

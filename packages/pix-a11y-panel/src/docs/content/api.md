@@ -18,8 +18,8 @@
 
 ### Properties
 
-| Property      | Type                 | Description                      |
-| ------------- | -------------------- | -------------------------------- |
+| Property      | Type                   | Description                                                              |
+| ------------- | ---------------------- | ------------------------------------------------------------------------ |
 | `preferences` | `A11yPanelPreferences` | The currently active preferences (alias `DisplayPreferences` deprecated) |
 
 ### Methods

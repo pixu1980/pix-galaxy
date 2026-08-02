@@ -29,13 +29,13 @@ globalThis.Node = dom.window.Node;
 
 describe('pix-color', () => {
   it('defines custom element', async () => {
-    await import('../components/PixColor/PixColor.js');
+    await import('../components/PixColor/_PixColor.js');
     const el = customElements.get('pix-color');
     assert.ok(el, 'pix-color should be defined');
   });
 
   it('renders bar with initial HEX', async () => {
-    await import('../components/PixColor/PixColor.js');
+    await import('../components/PixColor/_PixColor.js');
     const el = document.createElement('pix-color');
     el.setAttribute('value', '#FF0000');
     document.body.appendChild(el);
@@ -46,7 +46,7 @@ describe('pix-color', () => {
   });
 
   it('color-change event fires', async () => {
-    await import('../components/PixColor/PixColor.js');
+    await import('../components/PixColor/_PixColor.js');
     const el = document.createElement('pix-color');
     document.body.appendChild(el);
     let fired = false;
