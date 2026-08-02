@@ -20,8 +20,10 @@ Centralise the docs template in `@pix-galaxy/pix-core/docs/docs-site.js`. Each p
 
 ## Consequences
 
-- Legacy components (highlighter, accent-color-selector, color-scheme-selector) still use the inline template — migration pending (Phase 5)
+- Centralises the docs template in `@pix-galaxy/pix-core/docs/docs-site.js`; each package imports `createDocsSite()`, `buildDocsPages()`
+- All 11 component docs sites now use the shared template (migration completed in Phase 5, 2026-07-09)
 - Shared CSS in `packages/pix-core/docs/docs.css` adopted automatically
+- Docs sites gain the shared `pix-color-scheme-selector`, live component preview (`liveHtml`), and WCAG 2.2 AA compliance (axe-core audited)
 
 ## Tags
 

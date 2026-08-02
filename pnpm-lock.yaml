@@ -60,6 +60,9 @@ importers:
         specifier: workspace:*
         version: link:../pix-highlighter
     devDependencies:
+      '@pix-galaxy/pix-core':
+        specifier: workspace:*
+        version: link:../pix-core
       c8:
         specifier: 11.0.0
         version: 11.0.0
@@ -72,9 +75,6 @@ importers:
       jsdom:
         specifier: 29.1.1
         version: 29.1.1
-      marked:
-        specifier: 18.0.5
-        version: 18.0.5
       typescript:
         specifier: 6.0.3
         version: 6.0.3
@@ -91,6 +91,9 @@ importers:
         specifier: workspace:*
         version: link:../pix-highlighter
     devDependencies:
+      '@pix-galaxy/pix-core':
+        specifier: workspace:*
+        version: link:../pix-core
       c8:
         specifier: 11.0.0
         version: 11.0.0
@@ -103,9 +106,6 @@ importers:
       jsdom:
         specifier: 29.1.1
         version: 29.1.1
-      marked:
-        specifier: 18.0.5
-        version: 18.0.5
       typescript:
         specifier: 6.0.3
         version: 6.0.3
@@ -159,6 +159,9 @@ importers:
         specifier: workspace:*
         version: link:../pix-highlighter
     devDependencies:
+      '@pix-galaxy/pix-core':
+        specifier: workspace:*
+        version: link:../pix-core
       c8:
         specifier: 11.0.0
         version: 11.0.0
@@ -171,9 +174,6 @@ importers:
       jsdom:
         specifier: 29.1.1
         version: 29.1.1
-      marked:
-        specifier: 18.0.5
-        version: 18.0.5
       typescript:
         specifier: 6.0.3
         version: 6.0.3
@@ -285,6 +285,9 @@ importers:
         specifier: workspace:*
         version: link:../pix-foundations
     devDependencies:
+      '@pix-galaxy/pix-core':
+        specifier: workspace:*
+        version: link:../pix-core
       c8:
         specifier: 11.0.0
         version: 11.0.0
@@ -297,9 +300,6 @@ importers:
       jsdom:
         specifier: 29.1.1
         version: 29.1.1
-      marked:
-        specifier: 18.0.5
-        version: 18.0.5
       typescript:
         specifier: 6.0.3
         version: 6.0.3

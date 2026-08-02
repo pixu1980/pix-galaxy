@@ -54,7 +54,7 @@ test.describe('Component interactions', () => {
 
   test('accent color selector sets a root CSS variable', async ({ page }) => {
     await page.goto('http://localhost:3002', { waitUntil: 'networkidle' });
-    const swatch = page.locator('[data-part="accent-swatch"]').first();
+    const swatch = page.locator('[data-accent-button][data-accent="mint"]').first();
     await swatch.click();
     const h = await page.evaluate(() =>
       document.documentElement.style.getPropertyValue('--pix-accent-h')
