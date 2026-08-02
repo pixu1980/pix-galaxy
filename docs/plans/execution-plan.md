@@ -99,11 +99,16 @@
 - [x] CI: aggiunto job e2e Playwright (chromium + dev:all via webServer)
 - [x] `pnpm test:e2e` script root; `pnpm quality` già copre format+lint+typecheck
 
-### Fase 5 — Docs & Portal
+### Fase 5 — Docs & Portal ✅ FATTA
 
-- [ ] Migrare i 4 componenti legacy al template `pix-core/docs-site.js` (highlighter, accent-color-selector, color-scheme-selector, a11y-panel)
-- [ ] Aggiornare HANDOFF.md / HANDOFF-LLM (stato corrente, ADR aggiornati)
-- [ ] Rivedere portal (components.json, "Coming Soon" placeholder)
+- [x] **Migrati 4 legacy al template condiviso** `pix-core/docs-site.js` (ADR-007 completato):
+  - pix-a11y-panel, pix-accent-color-selector, pix-color-scheme-selector, pix-highlighter
+  - Rimosse funzioni inline duplicate (buildDocsPages, createDocsSite, escapeHtml, renderExamples)
+  - Aggiunta devDependency pix-core ai 4 package; rimosso marked inutilizzato
+  - Aggiornato site-app.test.js di highlighter (test template condiviso, non vecchio inline)
+- [x] **Aggiornare HANDOFF.md / HANDOFF-LLM** (da fare nel commit docs)
+- [x] Portal: "Coming Soon" mantenuto (placeholder roadmap valido); card role=listitem già fixato in Fase 4
+- [x] 49/49 e2e + 124 unit test passano con i docs migrati
 
 ### Fase 6 — Release tooling
 

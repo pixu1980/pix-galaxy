@@ -3,21 +3,37 @@ import assert from 'node:assert/strict';
 import { beforeEach, test } from 'node:test';
 import { JSDOM } from 'jsdom';
 
-import { createDocsSite } from '../docs/index.js';
+// jsdom globals must exist BEFORE pix-core docs-site.js is imported: the
+// shared template registers @pix-galaxy/pix-color-scheme-selector at module
+// scope, which requires HTMLElement at load time.
+const bootDom = new JSDOM('<!doctype html><html><body></body></html>', {
+  url: 'https://pix-highlighter.test/',
+  pretendToBeVisual: true,
+});
+globalThis.window = bootDom.window;
+globalThis.document = bootDom.window.document;
+globalThis.HTMLElement = bootDom.window.HTMLElement;
+globalThis.customElements = bootDom.window.customElements;
+globalThis.CSSStyleSheet = bootDom.window.CSSStyleSheet;
+if (!document.adoptedStyleSheets) document.adoptedStyleSheets = [];
 
+let createDocsSite;
 let dom;
 let mount;
 
-beforeEach(() => {
+beforeEach(async () => {
   dom = new JSDOM('<!doctype html><html><body><div id="app"></div></body></html>', {
     url: 'https://pix-highlighter.test/',
   });
   mount = dom.window.document.querySelector('#app');
+  // Dynamic import AFTER jsdom globals are set (pix-core docs template pulls
+  // in @pix-galaxy/pix-color-scheme-selector which needs HTMLElement).
+  const mod = await import('@pix-galaxy/pix-core/docs/docs-site.js');
+  createDocsSite = mod.createDocsSite;
 });
 
-test('renders the docs shell and updates active doc/theme interactions', () => {
+test('renders the docs shell and updates active doc', () => {
   const afterRenderCalls = [];
-  const selectedThemes = [];
   const app = createDocsSite({
     mount,
     docs: [
@@ -44,14 +60,9 @@ test('renders the docs shell and updates active doc/theme interactions', () => {
     ],
     meta: {
       version: '0.1.0',
+      componentName: 'pix-highlighter',
+      componentTag: 'pre[is="pix-highlighter"]',
       releaseTag: 'v0.1.0',
-    },
-    themeOptions: [
-      { value: 'default', label: 'Default' },
-      { value: 'prism', label: 'Prism' },
-    ],
-    onThemeChange(theme) {
-      selectedThemes.push(theme);
     },
     afterRender(root, activeDoc) {
       afterRenderCalls.push({ root, activeDoc });
@@ -59,18 +70,9 @@ test('renders the docs shell and updates active doc/theme interactions', () => {
   });
 
   assert.ok(mount.querySelector('[data-part="shell"]'));
-  assert.equal(
-    mount.querySelectorAll('input[data-site-color-mode][name="docs-color-mode"]').length,
-    3
-  );
-  assert.equal(dom.window.document.documentElement.dataset.siteColorMode, 'system');
+  assert.ok(mount.querySelector('pix-color-scheme-selector'));
   assert.equal(mount.querySelector('[data-part="markdown"] h1').textContent, 'Getting Started');
   assert.equal(afterRenderCalls.length, 1);
-
-  mount.querySelector('[data-site-theme="prism"]').click();
-
-  assert.deepEqual(selectedThemes, ['prism']);
-  assert.ok(mount.querySelector('[data-site-theme="prism"]').hasAttribute('data-active'));
 
   app.selectDoc('api');
 
@@ -79,7 +81,7 @@ test('renders the docs shell and updates active doc/theme interactions', () => {
   assert.equal(afterRenderCalls.at(-1).activeDoc.slug, 'api');
 });
 
-test('persists and applies docs light-dark system mode through native radio controls', () => {
+test('docs shell embeds the shared color-scheme-selector', () => {
   createDocsSite({
     mount,
     docs: [
@@ -95,16 +97,12 @@ test('persists and applies docs light-dark system mode through native radio cont
       version: '0.1.0',
       releaseTag: 'v0.1.0',
     },
-    themeOptions: [{ value: 'default', label: 'Default' }],
   });
 
-  const darkRadio = mount.querySelector('input[data-site-color-mode][value="dark"]');
-
-  darkRadio.checked = true;
-  darkRadio.dispatchEvent(new dom.window.Event('change', { bubbles: true }));
-
-  assert.equal(dom.window.document.documentElement.dataset.siteColorMode, 'dark');
-  assert.equal(dom.window.localStorage.getItem('pix-highlighter-site-color-mode'), 'dark');
+  // Theme switching is delegated to the shared color-scheme-selector
+  // component (ADR-007); the docs shell must embed it.
+  const selector = mount.querySelector('pix-color-scheme-selector');
+  assert.ok(selector, 'docs shell must include pix-color-scheme-selector');
 });
 
 test('docs bootstrap imports library entrypoint instead of self-importing docs module', async () => {

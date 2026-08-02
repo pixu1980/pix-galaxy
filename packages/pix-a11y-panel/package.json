@@ -80,15 +80,15 @@
   "dependencies": {
     "@pix-galaxy/pix-accent-color-selector": "workspace:*",
     "@pix-galaxy/pix-color-scheme-selector": "workspace:*",
-    "@pix-galaxy/pix-highlighter": "workspace:*",
-    "@pix-galaxy/pix-foundations": "workspace:*"
+    "@pix-galaxy/pix-foundations": "workspace:*",
+    "@pix-galaxy/pix-highlighter": "workspace:*"
   },
   "devDependencies": {
+    "@pix-galaxy/pix-core": "workspace:*",
     "c8": "11.0.0",
     "concurrently": "10.0.3",
     "esbuild": "0.28.1",
     "jsdom": "29.1.1",
-    "marked": "18.0.5",
     "typescript": "6.0.3",
     "vite": "8.1.3"
   }
