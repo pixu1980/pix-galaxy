@@ -364,6 +364,11 @@ export async function loadDocsData() {
     siteMeta: Object.freeze({
       version: packageJson.version,
       releaseTag: `v${packageJson.version}`,
+      componentName: 'pix-highlighter',
+      componentTag: 'pre[is="pix-highlighter"]',
+      description: 'Browser-native syntax highlighting via the CSS Highlight API.',
+      liveHtml:
+        '<pre is="pix-highlighter" data-lang="js"><code>const greeting = "hello";</code></pre>',
     }),
   };
 }

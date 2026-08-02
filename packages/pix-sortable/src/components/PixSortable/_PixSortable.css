@@ -8,9 +8,17 @@
       color: light-dark(oklch(0.18 0.012 60), oklch(0.88 0.01 85));
     }
 
+    /* Listbox wrapper: contains only role=option items. The live region
+       (role=status) is a sibling so axe aria-required-children passes. */
+    pix-sortable [data-part='listbox'] {
+      display: flex;
+      flex-direction: column;
+      gap: var(--pix--s--2px);
+    }
+
     /* ── Items ───────────────────────────────────────────────────── */
 
-    pix-sortable > [data-sortable-item] {
+    pix-sortable [data-sortable-item] {
       display: flex;
       align-items: center;
       gap: var(--pix--s--sm);
@@ -29,19 +37,19 @@
       position: relative;
     }
 
-    pix-sortable > [data-sortable-item][aria-selected='true'] {
+    pix-sortable [data-sortable-item][aria-selected='true'] {
       border-color: var(--pix-sortable--accent);
       background: light-dark(oklch(0.55 0.18 210 / 0.06), oklch(0.55 0.18 210 / 0.1));
     }
 
     /* ── Dragging state ──────────────────────────────────────────── */
 
-    pix-sortable > [data-sortable-item][data-dragging] {
+    pix-sortable [data-sortable-item][data-dragging] {
       opacity: 0.5;
       transform: scale(0.97);
     }
 
-    pix-sortable > [data-sortable-item][data-drag-over] {
+    pix-sortable [data-sortable-item][data-drag-over] {
       border-color: var(--pix-sortable--accent);
       box-shadow: 0 0 0 1px var(--pix-sortable--accent);
       transform: scale(1.02);
@@ -49,7 +57,7 @@
 
     /* ── Placeholder (ghost during drag) ─────────────────────────── */
 
-    pix-sortable > [data-sortable-item][data-placeholder] {
+    pix-sortable [data-sortable-item][data-placeholder] {
       border: 2px dashed light-dark(oklch(from gray 0.7 0 0 / 0.4), oklch(from gray 0.4 0 0 / 0.4));
       background: transparent;
       opacity: 0.6;
@@ -96,7 +104,7 @@
     }
 
     @media (prefers-reduced-motion: reduce) {
-      pix-sortable > [data-sortable-item] {
+      pix-sortable [data-sortable-item] {
         transition: none;
       }
     }

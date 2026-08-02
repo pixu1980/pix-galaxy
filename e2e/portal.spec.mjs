@@ -15,11 +15,11 @@ import { test, expect } from '@playwright/test';
 /* ── Helpers ────────────────────────────────────────────────────── */
 
 const COMPONENTS = [
-  { name: 'pix-accent-color-selector', port: 3001 },
-  { name: 'pix-color', port: 3002 },
-  { name: 'pix-color-scheme-selector', port: 3003 },
-  { name: 'pix-command', port: 3004 },
-  { name: 'pix-a11y-panel', port: 3005 },
+  { name: 'pix-a11y-panel', port: 3001 },
+  { name: 'pix-accent-color-selector', port: 3002 },
+  { name: 'pix-color', port: 3003 },
+  { name: 'pix-color-scheme-selector', port: 3004 },
+  { name: 'pix-command', port: 3005 },
   { name: 'pix-foundations', port: 3006 },
   { name: 'pix-highlighter', port: 3007 },
   { name: 'pix-recorder', port: 3008 },
@@ -100,9 +100,9 @@ test.describe('Component docs sites', () => {
   }
 
   test('color scheme selector is present on new-template docs', async ({ page }) => {
-    // Old-template sites (accent-color-selector, highlighter, etc.) use inline
-    // createDocsSite and don't get the shared color-scheme-selector — skip them.
-    const skip = new Set([3001, 3007]);
+    // Old-template sites (accent-color-selector, a11y-panel, highlighter, etc.)
+    // use inline createDocsSite and don't get the shared color-scheme-selector.
+    const skip = new Set([3001, 3002, 3007]);
     for (const comp of COMPONENTS) {
       if (skip.has(comp.port)) continue;
       await page.goto(`http://localhost:${comp.port}/`);

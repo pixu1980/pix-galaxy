@@ -51,6 +51,7 @@ class PixSortable extends HTMLElement {
   #keyboardMode = false;
   #touchDrag = null; // { element, clone, startY, startIndex }
   #observer = null;
+  #listbox = null;
 
   /* ── Bound handlers ───────────────────────────────────────────── */
 
@@ -85,21 +86,32 @@ class PixSortable extends HTMLElement {
   /* ── Init ─────────────────────────────────────────────────────── */
 
   #init() {
-    // Create live region
+    // Live region: sibling of the listbox (aria-live cannot be a child of
+    // role=listbox — axe flags aria-required-children otherwise).
     const announce = document.createElement('div');
     announce.setAttribute('data-part', 'announce');
     announce.setAttribute('role', 'status');
     announce.setAttribute('aria-live', 'polite');
     announce.setAttribute('aria-atomic', 'true');
-    this.append(announce);
+
+    // Listbox wrapper holds only role=option items.
+    const listbox = document.createElement('div');
+    listbox.setAttribute('data-part', 'listbox');
+    listbox.setAttribute('role', 'listbox');
+    listbox.setAttribute('aria-label', 'Sortable list');
+
+    // Move existing children (the user's items) into the listbox.
+    while (this.firstChild) {
+      listbox.appendChild(this.firstChild);
+    }
+    this.append(announce, listbox);
+    this.#listbox = listbox;
 
     // Observe children
     this.#observer = new MutationObserver(() => this.#rebuild());
-    this.#observer.observe(this, { childList: true });
+    this.#observer.observe(listbox, { childList: true });
 
     this.#rebuild();
-    this.setAttribute('role', 'listbox');
-    this.setAttribute('aria-label', 'Sortable list');
     this.setAttribute('tabindex', '0');
     document.addEventListener('keydown', this.#onKeyDown);
   }
@@ -109,10 +121,13 @@ class PixSortable extends HTMLElement {
     this.#observer?.takeRecords(); // svuota coda mutazioni pendenti
     this.#observer = null;
 
+    const listbox = this.#listbox;
+    if (!listbox) return;
+
     const announce = this.querySelector('[data-part="announce"]');
 
-    // Setup children as sortable items
-    const children = Array.from(this.children).filter((el) => !el.hasAttribute('data-part'));
+    // Setup children as sortable items (only within the listbox wrapper)
+    const children = Array.from(listbox.children).filter((el) => !el.hasAttribute('data-part'));
     this.#items = [];
 
     for (let i = 0; i < children.length; i++) {
@@ -121,14 +136,17 @@ class PixSortable extends HTMLElement {
       this.#items.push(child);
     }
 
-    this.#observer?.observe(this, { childList: true });
+    this.#observer?.observe(listbox, { childList: true });
   }
 
   #setupItem(el, index) {
     el.setAttribute('data-sortable-item', '');
     el.setAttribute('role', 'option');
     el.setAttribute('aria-posinset', String(index + 1));
-    el.setAttribute('aria-setsize', String(this.#items.length || this.children.length));
+    el.setAttribute(
+      'aria-setsize',
+      String(this.#items.length || this.#listbox?.children.length || 0)
+    );
     el.setAttribute('tabindex', '-1');
     el.draggable = true;
 

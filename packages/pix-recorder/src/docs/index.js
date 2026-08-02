@@ -72,6 +72,7 @@ async function bootDocsSite() {
       componentTag: 'pix-recorder',
       description:
         'Accessible audio recorder Web Component with waveform visualization, pause/resume, and download.',
+      liveHtml: '<pix-recorder max-duration="15" style="max-width:24rem;"></pix-recorder>',
     },
     afterRender(root) {
       enhancePixHighlighters(root);

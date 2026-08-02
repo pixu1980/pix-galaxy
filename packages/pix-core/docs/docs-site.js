@@ -50,7 +50,7 @@ function createMarked() {
       String(lang || 'text')
         .trim()
         .toLowerCase() || 'text';
-    return `<pre is="pix-highlighter" data-lang="${escapeHtml(language)}"><code>${escapeHtml(text)}</code></pre>`;
+    return `<pre is="pix-highlighter" tabindex="0" data-lang="${escapeHtml(language)}"><code>${escapeHtml(text)}</code></pre>`;
   };
 
   return new Marked({ renderer, gfm: true });
@@ -96,7 +96,7 @@ export function renderExamples(exampleEntries, cardPartName = 'example-card') {
             <h3>${escapeHtml(example.title)}</h3>
             <p>${escapeHtml(example.description)}</p>
           </section>
-          <pre is="pix-highlighter" data-lang="${escapeHtml(example.lang)}"><code>${escapeExampleCode(example.code)}</code></pre>
+          <pre is="pix-highlighter" tabindex="0" data-lang="${escapeHtml(example.lang)}"><code>${escapeExampleCode(example.code)}</code></pre>
         </article>
       `
     )
@@ -170,7 +170,7 @@ export function createDocsSite({ mount, docs, examples: exampleEntries, meta, af
             <pix-color-scheme-selector></pix-color-scheme-selector>
             <section data-part="live-preview">
               <p data-part="eyebrow">Live component</p>
-              ${meta.liveHtml || `<p style="color:var(--pix-ds-text-muted);font-size:0.875rem;"><${escapeHtml(componentTag)}> loaded</p>`}
+              ${meta.liveHtml || `<p style="color:var(--pix-ds-text-muted);font-size:0.875rem;">Live demo unavailable — open the docs site for this package.</p>`}
             </section>
           </section>
         </header>

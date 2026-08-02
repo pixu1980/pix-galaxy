@@ -66,6 +66,7 @@ class PixToastStack extends HTMLElement {
     this.#position = this.getAttribute('position') || 'top-right';
     this.dataset.position = this.#position;
     this.#maxVisible = parseInt(this.getAttribute('max-visible'), 10) || 5;
+    this.setAttribute('role', 'region');
     this.setAttribute('aria-label', 'Notifications');
   }
 
