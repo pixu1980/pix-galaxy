@@ -343,27 +343,27 @@ pnpm --filter @pix-galaxy/pix-a11y-panel build:lib
 
 All Architecture Decision Records from this session are consolidated in [`docs/adr/`](adr/README.md) (Nygard format).
 
-| Original (this doc) | Consolidated ADR | Decision |
-|---------------------|------------------|----------|
-| ADR-001 | [011](adr/0011-rename-a11y-panel.md) | Rename `pix-display-preferences` → `pix-a11y-panel` |
-| ADR-002 | [012](adr/0012-centralize-foundations.md) | Centralize design-system foundations in `pix-foundations` |
-| ADR-003 | [013](adr/0013-centralize-focus-ring.md) | Centralize focus ring in `pix-foundations` |
-| ADR-004 | [014](adr/0014-centralize-pix-core.md) | Centralize shared runtime and scripts in `pix-core` |
-| ADR-005 | [015](adr/0015-foundations-independent.md) | Keep `pix-foundations` independent of `pix-core` |
-| ADR-006 | [016](adr/0016-format-lint-scripts.md) | Root formatting and linting are reproducible scripts |
-| ADR-007 | [017](adr/0017-css-parser-validation.md) | Validate CSS with a real parser after automated refactors |
+| Original (this doc) | Consolidated ADR                           | Decision                                                  |
+| ------------------- | ------------------------------------------ | --------------------------------------------------------- |
+| ADR-001             | [011](adr/0011-rename-a11y-panel.md)       | Rename `pix-display-preferences` → `pix-a11y-panel`       |
+| ADR-002             | [012](adr/0012-centralize-foundations.md)  | Centralize design-system foundations in `pix-foundations` |
+| ADR-003             | [013](adr/0013-centralize-focus-ring.md)   | Centralize focus ring in `pix-foundations`                |
+| ADR-004             | [014](adr/0014-centralize-pix-core.md)     | Centralize shared runtime and scripts in `pix-core`       |
+| ADR-005             | [015](adr/0015-foundations-independent.md) | Keep `pix-foundations` independent of `pix-core`          |
+| ADR-006             | [016](adr/0016-format-lint-scripts.md)     | Root formatting and linting are reproducible scripts      |
+| ADR-007             | [017](adr/0017-css-parser-validation.md)   | Validate CSS with a real parser after automated refactors |
 
 New decisions recorded during the 2026-07-09 architect session:
 
-| ADR | Decision |
-|-----|----------|
+| ADR                                               | Decision                                                  |
+| ------------------------------------------------- | --------------------------------------------------------- |
 | [018](adr/0018-release-commit-and-tag-version.md) | Local release via `commit-and-tag-version`, no CI publish |
-| [019](adr/0019-modern-only-browsers.md) | Modern-only browser matrix |
-| [020](adr/0020-zero-dependencies.md) | Zero runtime dependencies is absolute |
-| [021](adr/0021-wcag-aa-requirement.md) | WCAG 2.2 AA is non-negotiable |
-| [022](adr/0022-branch-strategy.md) | `develop` trunk, `main` for releases |
-| [023](adr/0023-jsdoc-types-strict.md) | JSDoc types + strict typecheck, no TS migration |
-| [024](adr/0024-migrate-skills-to-mcp.md) | Migrate `.agents` skills to `pix-galaxy-mcp` |
+| [019](adr/0019-modern-only-browsers.md)           | Modern-only browser matrix                                |
+| [020](adr/0020-zero-dependencies.md)              | Zero runtime dependencies is absolute                     |
+| [021](adr/0021-wcag-aa-requirement.md)            | WCAG 2.2 AA is non-negotiable                             |
+| [022](adr/0022-branch-strategy.md)                | `develop` trunk, `main` for releases                      |
+| [023](adr/0023-jsdoc-types-strict.md)             | JSDoc types + strict typecheck, no TS migration           |
+| [024](adr/0024-migrate-skills-to-mcp.md)          | Migrate `.agents` skills to `pix-galaxy-mcp`              |
 
 ## 6. Recommended Next Steps
 

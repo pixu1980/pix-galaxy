@@ -37,20 +37,20 @@ Object.defineProperty(globalThis, 'navigator', {
 
 describe('pix-command', () => {
   it('defines custom element', async () => {
-    await import('../components/PixCommand/PixCommand.js');
+    await import('../components/PixCommand/_PixCommand.js');
     const el = customElements.get('pix-command');
     assert.ok(el, 'pix-command should be defined');
   });
 
   it('sets items programmatically', async () => {
-    await import('../components/PixCommand/PixCommand.js');
+    await import('../components/PixCommand/_PixCommand.js');
     const el = document.createElement('pix-command');
     el.items = [{ id: 'x', label: 'Test' }];
     assert.equal(el.items.length, 1, 'should accept items');
   });
 
   it('toggles open/close', async () => {
-    await import('../components/PixCommand/PixCommand.js');
+    await import('../components/PixCommand/_PixCommand.js');
     const el = document.createElement('pix-command');
     el.items = [{ id: 'x', label: 'Test' }];
     document.body.appendChild(el);

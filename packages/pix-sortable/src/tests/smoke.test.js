@@ -25,13 +25,13 @@ globalThis.CustomEvent = dom.window.CustomEvent;
 
 describe('pix-sortable', () => {
   it('defines custom element', async () => {
-    await import('../components/PixSortable/PixSortable.js');
+    await import('../components/PixSortable/_PixSortable.js');
     const el = customElements.get('pix-sortable');
     assert.ok(el, 'pix-sortable should be defined');
   });
 
   it('renders children as sortable items', async () => {
-    await import('../components/PixSortable/PixSortable.js');
+    await import('../components/PixSortable/_PixSortable.js');
     const el = document.createElement('pix-sortable');
     el.innerHTML = '<div data-sortable-value="1">One</div><div data-sortable-value="2">Two</div>';
     document.body.appendChild(el);
@@ -41,7 +41,7 @@ describe('pix-sortable', () => {
   });
 
   it('adds drag handles to items', async () => {
-    await import('../components/PixSortable/PixSortable.js');
+    await import('../components/PixSortable/_PixSortable.js');
     const el = document.createElement('pix-sortable');
     el.innerHTML = '<div>Item</div>';
     document.body.appendChild(el);

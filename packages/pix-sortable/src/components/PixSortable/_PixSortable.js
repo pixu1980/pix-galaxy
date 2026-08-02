@@ -77,6 +77,8 @@ class PixSortable extends HTMLElement {
   }
 
   disconnectedCallback() {
+    this.#observer?.disconnect();
+    this.#observer = null;
     document.removeEventListener('keydown', this.#onKeyDown);
   }
 
@@ -159,9 +161,10 @@ class PixSortable extends HTMLElement {
       el.appendChild(existingContent);
     }
 
-    // Re-init observer
-    this.#observer = new MutationObserver(() => this.#rebuild());
-    this.#observer.observe(this, { childList: true });
+    // NOTE: the MutationObserver is created once in #rebuild() after all
+    // child mutations are applied. Never re-create it here — doing so would
+    // stack observers per item and re-trigger #rebuild on the DOM writes
+    // above (prepend/append), risking an infinite loop.
 
     // Events
     el.removeEventListener('dragstart', this.#onDragStart);

@@ -25,13 +25,13 @@ globalThis.CustomEvent = dom.window.CustomEvent;
 
 describe('pix-splitter', () => {
   it('defines custom element', async () => {
-    await import('../components/PixSplitter/PixSplitter.js');
+    await import('../components/PixSplitter/_PixSplitter.js');
     const el = customElements.get('pix-splitter');
     assert.ok(el, 'pix-splitter should be defined');
   });
 
   it('renders handles between children', async () => {
-    await import('../components/PixSplitter/PixSplitter.js');
+    await import('../components/PixSplitter/_PixSplitter.js');
     const el = document.createElement('pix-splitter');
     el.innerHTML = '<div>Left</div><div>Right</div>';
     document.body.appendChild(el);
@@ -41,7 +41,7 @@ describe('pix-splitter', () => {
   });
 
   it('orientation attribute reflects property', async () => {
-    await import('../components/PixSplitter/PixSplitter.js');
+    await import('../components/PixSplitter/_PixSplitter.js');
     const el = document.createElement('pix-splitter');
     el.setAttribute('orientation', 'vertical');
     assert.equal(el.orientation, 'vertical');

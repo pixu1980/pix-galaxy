@@ -459,8 +459,11 @@ describe('PixHighlighter', () => {
       darculaCss,
       cyberpunkCss,
     ] = await Promise.all([
-      readFile(new URL('../components/PixHighlighter/PixHighlighter.js', import.meta.url), 'utf8'),
-      readFile(new URL('../components/PixHighlighter/PixHighlighter.css', import.meta.url), 'utf8'),
+      readFile(new URL('../components/PixHighlighter/_PixHighlighter.js', import.meta.url), 'utf8'),
+      readFile(
+        new URL('../components/PixHighlighter/_PixHighlighter.css', import.meta.url),
+        'utf8'
+      ),
       readFile(
         new URL('../components/PixHighlighter/styles/themes/_theme-defaults.css', import.meta.url),
         'utf8'
@@ -483,7 +486,7 @@ describe('PixHighlighter', () => {
       ),
     ]);
 
-    assert.ok(componentSource.includes("import mainCSS from './PixHighlighter.css?raw';"));
+    assert.ok(componentSource.includes("import mainCSS from './_PixHighlighter.css?raw';"));
     assert.ok(
       componentSource.includes("import prismThemeCSS from './styles/themes/_prism.css?raw';")
     );
@@ -492,17 +495,19 @@ describe('PixHighlighter', () => {
       componentSource.includes("registry.define('pix-highlighter', this, { extends: 'pre' });")
     );
     assert.ok(mainCss.includes('::highlight(pix-kw)'));
-    assert.ok(mainCss.includes('[data-theme-list]'));
-    assert.ok(mainCss.includes('max-height: min(25rem'));
-    assert.ok(mainCss.includes('overflow-y: auto'));
+    // Toolbar/theme/positioning rules moved to the theme-defaults sheet
+    // during the foundations consolidation (ADR-012).
+    assert.ok(themeDefaultsCss.includes('[data-theme-list]'));
+    assert.ok(themeDefaultsCss.includes('max-height: min(25rem'));
+    assert.ok(themeDefaultsCss.includes('overflow-y: auto'));
     assert.ok(!mainCss.includes('@import'));
     assert.ok(themeDefaultsCss.includes('[data-toolbar]'));
-    assert.ok(mainCss.includes('position-anchor'));
-    assert.ok(mainCss.includes('anchor(bottom)'));
-    assert.ok(prismCss.includes('data-pix-highlighter-theme="prism"'));
-    assert.ok(prettyLightsCss.includes('data-pix-highlighter-theme="prettylights"'));
-    assert.ok(darculaCss.includes('data-pix-highlighter-theme="darcula"'));
-    assert.ok(cyberpunkCss.includes('data-pix-highlighter-theme="cyberpunk"'));
+    assert.ok(themeDefaultsCss.includes('position-anchor'));
+    assert.ok(themeDefaultsCss.includes('anchor(bottom)'));
+    assert.ok(prismCss.includes("data-pix-highlighter-theme='prism'"));
+    assert.ok(prettyLightsCss.includes("data-pix-highlighter-theme='prettylights'"));
+    assert.ok(darculaCss.includes("data-pix-highlighter-theme='darcula'"));
+    assert.ok(cyberpunkCss.includes("data-pix-highlighter-theme='cyberpunk'"));
   });
 
   test('keeps lexer coverage across supported languages', () => {

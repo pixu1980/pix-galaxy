@@ -57,7 +57,7 @@ let {%COMPONENT_CLASS%}, STORAGE_KEY;
 
 before(async () => {
   const mod = await import(
-    new URL('../components/ComponentName/ComponentName.js?component-test', import.meta.url)
+    new URL('../components/ComponentName/_ComponentName.js?component-test', import.meta.url)
   );
   ({ {%COMPONENT_CLASS%}, STORAGE_KEY } = mod);
 });
@@ -93,11 +93,11 @@ describe('{%COMPONENT_CLASS%}', () => {
     mountComponent();
 
     const componentSource = await readFile(
-      new URL('../components/ComponentName/ComponentName.js', import.meta.url),
+      new URL('../components/ComponentName/_ComponentName.js', import.meta.url),
       'utf8'
     );
     const componentCss = await readFile(
-      new URL('../components/ComponentName/ComponentName.css', import.meta.url),
+      new URL('../components/ComponentName/_ComponentName.css', import.meta.url),
       'utf8'
     );
 

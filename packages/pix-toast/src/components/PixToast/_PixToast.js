@@ -71,7 +71,6 @@ class PixToast extends HTMLElement {
   #toastId = '';
   #duration = 5000;
   #dismissTimer = 0;
-  #onDismissClick = this.#handleDismiss.bind(this);
   #onPointerEnter = this.#handlePause.bind(this);
   #onPointerLeave = this.#handleResume.bind(this);
   #onFocusIn = this.#handlePause.bind(this);
@@ -236,10 +235,6 @@ class PixToast extends HTMLElement {
     if (this.#duration > 0) {
       this.#restartTimer();
     }
-  }
-
-  #handleDismiss() {
-    this.dismiss();
   }
 
   /* ── Render ────────────────────────────────────────────────────── */

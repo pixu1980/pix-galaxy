@@ -198,20 +198,20 @@ All Architecture Decision Records are consolidated in [`docs/adr/`](adr/README.m
 
 Key decisions that shape this document:
 
-| ADR | Decision |
-|-----|----------|
-| [001](adr/0001-light-dom-over-shadow-dom.md) | Light DOM over Shadow DOM |
-| [004](adr/0004-light-dark-fallback.md) | CSS fallback before `light-dark()` |
-| [007](adr/0007-shared-docs-template.md) | Shared docs template in `pix-core` |
-| [009](adr/0009-release-standard-version.md) | Release via standard-version — **superseded by [018](adr/0018-release-commit-and-tag-version.md)** |
-| [011](adr/0011-rename-a11y-panel.md) | Rename `pix-display-preferences` → `pix-a11y-panel` |
-| [012](adr/0012-centralize-foundations.md) | Centralize design foundations |
-| [014](adr/0014-centralize-pix-core.md) | Centralize shared runtime/scripts |
-| [018](adr/0018-release-commit-and-tag-version.md) | Local release via `commit-and-tag-version`, no CI publish |
-| [019](adr/0019-modern-only-browsers.md) | Modern-only browser matrix |
-| [020](adr/0020-zero-dependencies.md) | Zero runtime dependencies is absolute |
-| [022](adr/0022-branch-strategy.md) | `develop` trunk, `main` for releases |
-| [024](adr/0024-migrate-skills-to-mcp.md) | Migrate `.agents` skills to `pix-galaxy-mcp` |
+| ADR                                               | Decision                                                                                           |
+| ------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| [001](adr/0001-light-dom-over-shadow-dom.md)      | Light DOM over Shadow DOM                                                                          |
+| [004](adr/0004-light-dark-fallback.md)            | CSS fallback before `light-dark()`                                                                 |
+| [007](adr/0007-shared-docs-template.md)           | Shared docs template in `pix-core`                                                                 |
+| [009](adr/0009-release-standard-version.md)       | Release via standard-version — **superseded by [018](adr/0018-release-commit-and-tag-version.md)** |
+| [011](adr/0011-rename-a11y-panel.md)              | Rename `pix-display-preferences` → `pix-a11y-panel`                                                |
+| [012](adr/0012-centralize-foundations.md)         | Centralize design foundations                                                                      |
+| [014](adr/0014-centralize-pix-core.md)            | Centralize shared runtime/scripts                                                                  |
+| [018](adr/0018-release-commit-and-tag-version.md) | Local release via `commit-and-tag-version`, no CI publish                                          |
+| [019](adr/0019-modern-only-browsers.md)           | Modern-only browser matrix                                                                         |
+| [020](adr/0020-zero-dependencies.md)              | Zero runtime dependencies is absolute                                                              |
+| [022](adr/0022-branch-strategy.md)                | `develop` trunk, `main` for releases                                                               |
+| [024](adr/0024-migrate-skills-to-mcp.md)          | Migrate `.agents` skills to `pix-galaxy-mcp`                                                       |
 
 ## 4. Package Catalog
 

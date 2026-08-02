@@ -73,6 +73,11 @@ class PixToastStack extends HTMLElement {
     this.#queue = [];
     this.#activeToastIds.clear();
     this.#visibleCount = 0;
+    // Remove any rendered toasts so their listeners (and the stack's
+    // dismiss observers) are garbage-collected with the subtree.
+    while (this.firstChild) {
+      this.firstChild.remove();
+    }
   }
 
   attributeChangedCallback(name, oldValue, newValue) {
