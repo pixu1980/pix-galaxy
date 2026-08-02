@@ -1,6 +1,29 @@
 import { join } from 'node:path';
 
 /**
+ * Ensures npm authentication is available before publishing packages.
+ *
+ * @param {{ whoami: () => void, login: () => void, log?: (message: string) => void }} options
+ * @returns {void}
+ */
+export function ensureNpmAuthentication({ whoami, login, log = () => {} }) {
+  try {
+    whoami();
+
+    return;
+  } catch {
+    log('⚠  npm not authenticated. Starting npm login...');
+  }
+
+  try {
+    login();
+    whoami();
+  } catch (error) {
+    throw new Error('npm login failed.', { cause: error });
+  }
+}
+
+/**
  * Build the commit-and-tag-version command for a package.
  *
  * @param {string} root Project root.

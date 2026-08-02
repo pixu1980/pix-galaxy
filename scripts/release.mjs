@@ -4,7 +4,7 @@
  * release.mjs — pix-galaxy monorepo release orchestration
  *
  * Discover non-private packages in packages/, release those with changes
- * since last git tag (commit-and-tag-version bump + pnpm publish).
+ * since last git tag (commit-and-tag-version bump + npm publish).
  *
  * Usage:
  *   node scripts/release.mjs
@@ -16,7 +16,7 @@ import { readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { execSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
-import { standardVersionCommand } from './release-helpers.mjs';
+import { standardVersionCommand, ensureNpmAuthentication } from './release-helpers.mjs';
 
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
 const ROOT = join(__dirname, '..');
@@ -70,6 +70,22 @@ if (!isWorkingTreeClean()) {
     console.log('⚠  Working tree dirty — dry-run proceeds anyway.\n');
   } else {
     console.error('✗ Working tree not clean. Commit or stash first.');
+    process.exit(1);
+  }
+}
+
+if (!isDryRun) {
+  try {
+    ensureNpmAuthentication({
+      whoami: () => exec('npm whoami'),
+      login: () =>
+        execIn(ROOT, 'npm login', {
+          stdio: 'inherit',
+        }),
+      log: console.log,
+    });
+  } catch (err) {
+    console.error(`✗ ${err.message}`);
     process.exit(1);
   }
 }
@@ -139,7 +155,7 @@ for (const pkg of packages) {
     execIn(pkgPath, standardVersionCommand(ROOT, name, true, firstRelease), {
       stdio: 'inherit',
     });
-    console.log(`   [dry-run] pnpm publish (skipped)`);
+    console.log(`   [dry-run] npm publish --access public (skipped)`);
   } else {
     try {
       execIn(pkgPath, standardVersionCommand(ROOT, name, false, firstRelease), {
@@ -148,7 +164,7 @@ for (const pkg of packages) {
       execIn(pkgPath, `git push --follow-tags origin main 2>/dev/null || true`, {
         stdio: 'inherit',
       });
-      execIn(pkgPath, `pnpm publish --access public`, { stdio: 'inherit' });
+      execIn(pkgPath, `npm publish --access public`, { stdio: 'inherit' });
       released++;
       console.log(`   ✅ ${name} published!`);
     } catch (err) {
