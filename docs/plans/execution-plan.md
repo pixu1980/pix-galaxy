@@ -76,7 +76,8 @@
 - [x] **Fix test preesistenti**: 7 package con smoke test che importavano nomi pre-rinominazione (`PixColor.js` → `_PixColor.js` ecc.)
 - [x] **Aggiornati test obsoleti** post-ADR-012: highlighter (CSS spostato in theme-defaults, selettori tema con apici singoli, token reali)
 - [x] **Risultato: 124 test pass / 0 fail su 10 package**; lint e format puliti
-- [ ] Typecheck strict (JSDoc) in CI (posticipato — parte della pipeline CI della Fase 4)
+- [x] **Typecheck strict completato**: creati `index.types.js` mancanti (pix-color, pix-sortable, pix-recorder) con typedef API pubbliche; typecheck ora passa su 10/10 package; root `typecheck` + aggiunto a `pnpm quality` (ADR-023)
+- [x] Template: rimosso script typecheck (placeholder {%...%} non compilabili, come per prettier/eslint)
 
 ### Fase 4 — Testing
 
