@@ -8,7 +8,8 @@
   "homepage": "https://pixu1980.github.io/pix-splitter/",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/pixu1980/pix-splitter.git"
+    "url": "git+https://github.com/pixu1980/pix-galaxy.git",
+    "directory": "packages/pix-splitter"
   },
   "bugs": {
     "url": "https://github.com/pixu1980/pix-splitter/issues"

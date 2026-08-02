@@ -8,7 +8,8 @@
   "homepage": "https://pixu1980.github.io/pix-recorder/",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/pixu1980/pix-recorder.git"
+    "url": "git+https://github.com/pixu1980/pix-galaxy.git",
+    "directory": "packages/pix-recorder"
   },
   "keywords": [
     "pix-galaxy",

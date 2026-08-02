@@ -8,7 +8,8 @@
   "homepage": "https://pixu1980.github.io/pix-color/",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/pixu1980/pix-color.git"
+    "url": "git+https://github.com/pixu1980/pix-galaxy.git",
+    "directory": "packages/pix-color"
   },
   "bugs": {
     "url": "https://github.com/pixu1980/pix-color/issues"

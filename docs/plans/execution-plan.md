@@ -110,13 +110,15 @@
 - [x] Portal: "Coming Soon" mantenuto (placeholder roadmap valido); card role=listitem già fixato in Fase 4
 - [x] 49/49 e2e + 124 unit test passano con i docs migrati
 
-### Fase 6 — Release tooling
+### Fase 6 — Release tooling ✅ FATTA
 
-- [ ] Sostituire `standard-version` con `commit-and-tag-version`
-- [ ] Portare script `release.mjs` + `release-helpers.mjs` da `pi-coding-agent-extensions` (tag per-package `<name>@<version>`, `--first-release`, push su main)
-- [ ] Rimuovere/neutralizzare CI publish con NPM_TOKEN (release locale)
-- [ ] Verificare package.json per-package (files, publishConfig, repository URL)
-- [ ] Dry-run release (`pnpm release:dry`)
+- [x] `standard-version` → **`commit-and-tag-version@13.1.2** (root devDep)
+- [x] Portato `scripts/release-helpers.mjs` (standardVersionCommand con --first-release)
+- [x] `release.mjs` aggiornato: usa helper + commit-and-tag-version (no più npx)
+- [x] **CI publish neutralizzato** (ADR-018): release.yml ora è quality gate (typecheck+test+build), niente NPM_TOKEN
+- [x] **Package.json verificati**: files/publishConfig OK su 10 package; repository → monorepo + `directory` (era repo inesistente per-package)
+- [x] **Dry-run verificato**: `pnpm release:dry` genera CHANGELOG corretti per 10 package (first release)
+- [x] RELEASE.md e HANDOFF.md aggiornati (flusso locale, no token)
 
 ---
 

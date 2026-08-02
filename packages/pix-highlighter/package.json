@@ -8,7 +8,8 @@
   "homepage": "https://pixu1980.github.io/pix-highlighter/",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/pixu1980/pix-highlighter.git"
+    "url": "git+https://github.com/pixu1980/pix-galaxy.git",
+    "directory": "packages/pix-highlighter"
   },
   "bugs": {
     "url": "https://github.com/pixu1980/pix-highlighter/issues"

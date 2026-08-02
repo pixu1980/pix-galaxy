@@ -114,101 +114,64 @@ Packages to release (topological order):
 ### 3. Release
 
 ```sh
-node scripts/release.mjs
+pnpm release          # bump + CHANGELOG + tag + publish
+pnpm release:dry      # preview only (no changes)
+pnpm release --force  # release even without changes
 ```
 
-This will:
+The orchestrator (`scripts/release.mjs`):
 
-1. Verify the working tree is clean
-2. Detect packages with unreleased changes (path-filtered per package)
-3. Show a summary and ask for confirmation
-4. Process packages in topological order - for each changed package:
-   - Parse conventional commits since its last tag
-   - Determine the semver bump type (major/minor/patch)
-   - Update `package.json` version
-   - Update `CHANGELOG.md` with only relevant entries
-   - Create a release commit: `release(pix-highlighter): @pix-galaxy/pix-highlighter@0.2.0`
-   - Create a release tag: `@pix-galaxy/pix-highlighter@0.2.0`
-5. Print a final summary
+1. Verifies the working tree is clean (skipped in dry-run)
+2. Discovers non-private packages in `packages/`
+3. For each package with changes since its last tag (or no tag yet — first release):
+   - Runs `commit-and-tag-version --tag-prefix "@pix-galaxy/<pkg>@"` (with `--first-release` when no tag exists)
+   - Updates `package.json` version + `CHANGELOG.md`
+   - Creates a release commit and tag `@pix-galaxy/<pkg>@<version>`
+   - Pushes tags to `main`
+   - Publishes to npm with `pnpm publish --access public` (local npm auth)
+4. Prints a summary
+
+**ADR-018:** releases are LOCAL. No CI publish, no `NPM_TOKEN` secret.
 
 **Options:**
 
-| Flag            | Description                                      |
-| --------------- | ------------------------------------------------ |
-| `--dry-run`     | Preview only, no changes made                    |
-| `--yes`         | Skip confirmation prompts (for CI)               |
-| `--force <pkg>` | Release a specific package regardless of changes |
+| Flag        | Description                           |
+| ----------- | ------------------------------------- |
+| `--dry-run` | Preview only, no changes made         |
+| `--force`   | Release packages even without changes |
 
 ### 4. Push
 
-```sh
-git push origin main --follow-tags
-```
+The script pushes tags automatically (`git push --follow-tags origin main`). The `main` branch is the release branch (ADR-022); development happens on `develop`.
 
-### 5. CI publishes
+### 5. Release quality gate
 
-The GitHub Actions release workflow (`.github/workflows/release.yml`) is triggered by tags matching `@pix-galaxy/*@*`. It:
-
-1. Extracts the package name and version from the tag
-2. Runs `test`, `typecheck`, and `build:lib` for the matched package
-3. Publishes to **npm** (with provenance)
-4. Publishes to **GitHub Packages**
-5. Creates a **GitHub Release** with auto-generated release notes
+`.github/workflows/release.yml` is triggered by release tags but no longer publishes. It runs a quality gate on the tagged package (typecheck + test + build:lib) to catch broken releases before consumers install them.
 
 ---
 
 ## Release Orchestrator (root)
 
-**Script location:** `scripts/release.mjs`
+**Script location:** `scripts/release.mjs` (+ `scripts/release-helpers.mjs`)
 
-This is the entry point for releasing. It does NOT duplicate the release logic - it discovers changed packages and delegates to each package's own `scripts/release.mjs`.
+The orchestrator discovers changed packages and delegates the version bump to `commit-and-tag-version` (the maintained fork of `standard-version`, ADR-018).
 
 **How it detects changes:**
 
 ```
-git log @pix-galaxy/pix-highlighter@0.1.0..HEAD \
-  --oneline \
-  -- :(top)packages/pix-highlighter/
+git diff --quiet "@pix-galaxy/pix-highlighter@0.1.0" -- packages/pix-highlighter/
 ```
 
-The `:(top)` prefix ensures paths are resolved relative to the repository root, regardless of the current working directory.
-
-**Release order (topological sort):**
-
-```
-1. pix-highlighter           (no deps)
-2. pix-accent-color-selector (depends on highlighter)
-3. pix-color-scheme-selector (depends on highlighter)
-4. pix-a11y-panel   (depends on all of the above)
-```
-
----
+A missing tag means the package was never released — treated as a first release (`--first-release`, no version bump, CHANGELOG generated from all commits).
 
 ## Per-Package Release
 
-**Script location:** `packages/<name>/scripts/release.mjs`
-
-Each package has its own self-contained release script that can also be called directly:
+Packages do not carry their own release scripts anymore (they were removed when build scripts were centralised in `pix-core`). All releases run from the root orchestrator:
 
 ```sh
-cd packages/pix-highlighter
-pnpm release
+pnpm release        # all changed packages
+pnpm release:dry    # preview
 ```
-
-This is useful for:
-
-- Releasing a single package without the orchestrator
-- Testing the release logic in isolation
-- Working in the standalone repo (if the package is extracted)
-
-The per-package script:
-
-- Reads commits filtered to its own path: `-- :(top)packages/<name>/`
-- Parses conventional commits to determine the bump
-- Updates `package.json` version
-- Updates `CHANGELOG.md`
-- Creates a commit and a namespaced tag
-- Never publishes - that's the CI's job
 
 ---
 
@@ -284,19 +247,16 @@ Triggered on `push` to `main` and on `pull_request`:
 
 ### Release Workflow (`.github/workflows/release.yml`)
 
-Triggered on tags matching `@pix-galaxy/*@*` or via `workflow_dispatch`:
+Triggered on tags matching `@pix-galaxy/*@*`. It is a **quality gate** — it does NOT publish (ADR-018):
 
 1. Checkout + Install
 2. Extract package name from tag: `@pix-galaxy/pix-highlighter@0.2.0` → `pix-highlighter`
-3. Validate the package directory exists
-4. Run tests, typecheck, and build for the matched package
-5. Publish to **npm** (with `--provenance`)
-6. Publish to **GitHub Packages**
-7. Create a **GitHub Release** with release notes
+3. Run typecheck, tests, and `build:lib` for the matched package
+4. If the gate passes, the release is ready for consumers (publish happened locally)
 
 ### Pages Workflow (`.github/workflows/pages.yml`)
 
-Triggered manually (`workflow_dispatch`) or can be configured for branch pushes:
+Triggered manually (`workflow_dispatch`):
 
 - Builds all package libraries and docs sites
 - Aggregates them into a `site/` directory
@@ -314,27 +274,7 @@ https://registry.npmjs.org
 
 - All packages are scoped under `@pix-galaxy`
 - Published with `--access public`
-- Published with `--provenance` (sigstore)
-- Requires `NPM_TOKEN` secret in GitHub repository
-
-### Secondary: GitHub Packages
-
-```
-https://npm.pkg.github.com
-```
-
-- Published automatically with the same release workflow
-- Uses the auto-generated `GITHUB_TOKEN` - no additional configuration needed
-- Available to anyone with access to the `pixu1980` organisation
-
-### Other registries (not configured, but possible)
-
-| Registry       | URL                  | Notes                                                                 |
-| -------------- | -------------------- | --------------------------------------------------------------------- |
-| **JSR**        | `https://jsr.io`     | Modern JS registry, ESM-first. Would need an additional publish step. |
-| **pkg.pr.new** | `https://pkg.pr.new` | Instant preview from every PR. Useful for testing before release.     |
-
----
+- Published from **local** npm auth (ADR-018) — no CI token
 
 ## Prerequisites & Setup
 
@@ -349,31 +289,35 @@ pnpm install
 
 ### For publishing
 
-1. **npm token**: Create an automation token on [npmjs.com](https://www.npmjs.com/settings/pixu1980/tokens) with `publish` access to the `@pix-galaxy` organisation.
-2. **GitHub secret**: Add it as `NPM_TOKEN` in the repository settings → Secrets and variables → Actions.
-3. **Provenance**: Ensure "Allow GitHub Actions to create and approve pull requests" is enabled in the repository settings (optional but recommended for npm provenance).
+1. **npm auth**: Log in to npm locally so the publish account has access to the `@pix-galaxy` scope:
+   ```sh
+   npm login
+   ```
+2. Ensure the scope is public (`.npmrc` has `access=public`).
+3. Optional: enable npm provenance on your npm account for sigstore-signed releases.
 
 ### Verification
 
 ```sh
-node scripts/release.mjs --dry-run
+pnpm release:dry     # preview CHANGELOGs and bumps
 pnpm -r --if-present run test
 pnpm -r --if-present run typecheck
 pnpm -r --if-present run build:lib
+pnpm quality
 ```
 
 ---
 
 ## Troubleshooting
 
-| Problem                              | Solution                                                                                                                                 |
-| ------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------- |
-| `Working tree not clean`             | Commit or stash changes before releasing.                                                                                                |
-| `Tag already exists`                 | The tag was already created. If the release failed after the tag, delete it (`git tag -d <tagname>`) and retry.                          |
-| `npm publish` fails                  | Verify `NPM_TOKEN` is set and has publish access to `@pix-galaxy/*`. Check the GitHub Actions log for details.                           |
-| Package not detected as changed      | Ensure commits touch the package directory (`packages/<name>/`). Commits that only modify root files won't trigger that package.         |
-| Changelog includes unrelated commits | The `:(top)packages/<name>/` path filter ensures only relevant commits appear. If unrelated commits are shown, check the filter pattern. |
-| CI doesn't trigger on tag push       | Tags must match `@pix-galaxy/*@*`. Verify the tag format: `git tag -l '@pix-galaxy/*'`                                                   |
+| Problem                              | Solution                                                                                                                         |
+| ------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------- |
+| `Working tree not clean`             | Commit or stash changes before releasing.                                                                                        |
+| `Tag already exists`                 | The tag was already created. If the release failed after the tag, delete it (`git tag -d <tagname>`) and retry.                  |
+| `npm publish` fails                  | Verify local npm auth has publish access to `@pix-galaxy/*` (`npm whoami`, `npm login`).                                         |
+| Package not detected as changed      | Ensure commits touch the package directory (`packages/<name>/`). Commits that only modify root files won't trigger that package. |
+| Changelog includes unrelated commits | The tag-based path filter ensures only relevant commits appear (`git diff <tag> -- packages/<name>/`).                           |
+| Release gate doesn't trigger on tag  | Tags must match `@pix-galaxy/*@*`. Verify the tag format: `git tag -l '@pix-galaxy/*'`                                           |
 
 ---
 

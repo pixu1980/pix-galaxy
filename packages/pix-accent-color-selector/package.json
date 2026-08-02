@@ -8,7 +8,8 @@
   "homepage": "https://pixu1980.github.io/pix-accent-color-selector/",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/pixu1980/pix-accent-color-selector.git"
+    "url": "git+https://github.com/pixu1980/pix-galaxy.git",
+    "directory": "packages/pix-accent-color-selector"
   },
   "bugs": {
     "url": "https://github.com/pixu1980/pix-accent-color-selector/issues"
