@@ -1,0 +1,74 @@
+{
+  "name": "@pix-galaxy/pix-vanilla-reactive",
+  "version": "0.1.0",
+  "description": "Zero-dependency reactive UI framework: Proxy Store, fine-grained Signals, html`` template engine, and custom elements.",
+  "type": "module",
+  "author": "Emiliano Pisu",
+  "license": "MIT",
+  "homepage": "https://pixu1980.github.io/pix-vanilla-reactive/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pixu1980/pix-galaxy.git",
+    "directory": "packages/pix-vanilla-reactive"
+  },
+  "keywords": [
+    "pix-galaxy",
+    "pix-vanilla-reactive",
+    "reactive",
+    "signals",
+    "store",
+    "template-engine",
+    "custom-elements",
+    "zero-dependency",
+    "browser"
+  ],
+  "sideEffects": false,
+  "engines": {
+    "node": ">=20.11",
+    "pnpm": ">=10"
+  },
+  "packageManager": "pnpm@10.33.2",
+  "main": "./artifact/index.cjs",
+  "module": "./artifact/index.js",
+  "types": "./artifact/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./artifact/index.d.ts",
+      "import": "./artifact/index.js",
+      "require": "./artifact/index.cjs",
+      "default": "./artifact/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "artifact",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "pnpm build:lib && pnpm build:site",
+    "build:lib": "node ../pix-core/scripts/build.mjs && pnpm build:types",
+    "build:site": "pnpm docs:build && vite build --config ./vite.config.mjs",
+    "build:types": "tsc --project ./tsconfig.types.json && node ../pix-core/scripts/finalize-types.mjs",
+    "check": "pnpm test && pnpm build",
+    "clean": "rm -rf artifact dist coverage .artifacts",
+    "dev": "pnpm docs:build && node ../../scripts/dev.mjs --config ./vite.config.mjs --name pix-vanilla-reactive",
+    "docs:build": "node ../pix-core/scripts/docs.mjs",
+    "docs:watch": "node ../pix-core/scripts/docs.mjs --watch",
+    "lint": "eslint src/",
+    "test": "node --test --import ../pix-core/scripts/register-test-loader.mjs ./src/tests/*.test.js",
+    "test:coverage": "c8 --reporter=text --reporter=lcov node --test --import ../pix-core/scripts/register-test-loader.mjs ./src/tests/*.test.js",
+    "typecheck": "tsc --project ./tsconfig.types.json --noEmit"
+  },
+  "devDependencies": {
+    "@pix-galaxy/pix-color-scheme-selector": "workspace:*",
+    "@pix-galaxy/pix-core": "workspace:*",
+    "@pix-galaxy/pix-highlighter": "workspace:*",
+    "c8": "11.0.0",
+    "esbuild": "0.28.1",
+    "jsdom": "29.1.0",
+    "marked": "18.0.5",
+    "typescript": "6.0.3",
+    "vite": "8.0.10"
+  }
+}

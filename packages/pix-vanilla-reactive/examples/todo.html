@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>pix-vanilla-reactive — Todo example</title>
+    <style>
+      body {
+        font:
+          16px/1.6 system-ui,
+          sans-serif;
+        max-width: 34rem;
+        margin: 3rem auto;
+        padding: 0 1rem;
+      }
+      [data-part='row'] {
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
+        padding: 0.25rem 0;
+      }
+      [data-part='toggle'] {
+        cursor: pointer;
+      }
+      [data-part='title'] {
+        flex: 1;
+      }
+      [data-part='title'][data-state-done='true'] {
+        text-decoration: line-through;
+        opacity: 0.6;
+      }
+      [data-part='new'],
+      button {
+        font: inherit;
+        padding: 0.4rem 0.7rem;
+      }
+      [data-part='filter'] button {
+        margin-right: 0.3rem;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Todos</h1>
+    <p>
+      Store + <code>model</code> two-way binding + <code>&lt;for&gt;</code> string blocks. Filter
+      chips mutate the store.
+    </p>
+    <div id="app"></div>
+    <script type="module">
+      import {
+        Store,
+        Signal,
+        effect,
+        html,
+        render,
+        repeat,
+        createTickState,
+      } from '../src/index.js';
+
+      const store = new Store({
+        draft: '',
+        filter: 'all', // all | active | done
+        todos: [
+          { id: 1, title: 'Learn signals', done: true },
+          { id: 2, title: 'Write an example', done: false },
+        ],
+      });
+      let nextId = 3;
+      const tick = createTickState(store);
+
+      function addTodo() {
+        const title = store.state.draft.trim();
+        if (!title) return;
+        store.state.todos = [...store.state.todos, { id: nextId++, title, done: false }];
+        store.state.draft = '';
+      }
+
+      const view = new Signal.Computed(() => {
+        tick.get();
+        const { draft, filter } = store.snapshot();
+        // Read the list through the proxy so item handlers can mutate todos
+        // and the change propagates back into the store.
+        const visible = store.state.todos.filter((t) =>
+          filter === 'all' ? true : filter === 'done' ? t.done : !t.done
+        );
+        // Interactive items use repeat() (component mode) so handlers can close
+        // over the item. Static <for> string blocks use {{ }} instead.
+        const result = html`
+          <form
+            @submit=${(e) => {
+              e.preventDefault();
+              addTodo();
+            }}
+          >
+            <input
+              data-part="new"
+              model=${{
+                get: () => draft,
+                set: (v) => {
+                  store.state.draft = v;
+                },
+              }}
+              placeholder="What needs doing?"
+              aria-label="New todo"
+            />
+            <button type="submit">Add</button>
+          </form>
+          <p data-part="filter">
+            <button
+              @click=${() => {
+                store.state.filter = 'all';
+              }}
+            >
+              all
+            </button>
+            <button
+              @click=${() => {
+                store.state.filter = 'active';
+              }}
+            >
+              active
+            </button>
+            <button
+              @click=${() => {
+                store.state.filter = 'done';
+              }}
+            >
+              done
+            </button>
+          </p>
+          <ul>
+            ${repeat(
+              todos,
+              (todo) => todo.id,
+              (todo) => html`
+                <li data-part="row">
+                  <input
+                    data-part="toggle"
+                    type="checkbox"
+                    .checked=${todo.done}
+                    @change=${(e) => {
+                      todo.done = e.currentTarget.checked;
+                    }}
+                  />
+                  <span data-part="title" data-state-done="${todo.done}">${todo.title}</span>
+                  <button
+                    @click=${() => {
+                      store.state.todos = store.state.todos.filter((t) => t.id !== todo.id);
+                    }}
+                  >
+                    ✕
+                  </button>
+                </li>
+              `
+            )}
+          </ul>
+        `;
+        result._context = {};
+        return result;
+      });
+
+      effect(() => render(view.get(), document.querySelector('#app')));
+    </script>
+  </body>
+</html>

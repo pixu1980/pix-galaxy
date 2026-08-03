@@ -21,6 +21,7 @@ export const DEV_PORT_ORDER = [
   'pix-sortable',
   'pix-splitter',
   'pix-toast',
+  'pix-vanilla-reactive',
 ];
 
 export const DEV_PORT_BASE = 3000;

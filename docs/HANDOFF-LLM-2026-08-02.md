@@ -1,83 +1,90 @@
 # pix-galaxy — LLM Handoff
 
-**Date:** 2026-08-02
+**Date:** 2026-08-02 (end of session)
 **Audience:** future LLM/developer session
-**Scope:** project identity, full ADR log (24), recent commits, documentation status. Generated via `pix-galaxy-mcp handoff --compress`.
+**Scope:** new `@pix-galaxy/pix-vanilla-reactive` framework package, security hardening, stress tests, Explicit Resource Management. Generated via `pix-galaxy-mcp handoff`.
 
 ---
 
-## HANDOFF: pix-galaxy
+## Project Identity
 
-### Project Identity
-- Description: Monorepo for PixGalaxy ecosystem of zero-runtime-dependency vanilla JS Web Components
-- Version: 0.1.0
+Monorepo for the PixGalaxy ecosystem of zero-runtime-dependency vanilla JS Web Components. Branch: `develop` (trunk), `main` for releases only. Version 0.1.0.
 
-### ADR Log
+## Session Summary
 
-| # | Status | Title | Tags | Decision |
-|---|--------|-------|------|----------|
-| 024 | Accepted | Migrate .agents skills to pix-galaxy-mcp, remove .agents |  | - Migrate the two valuable skills to `pix-galaxy-mcp`:   - `pix-custom-element` → **`pix-frontend... |
-| 023 | Accepted | JSDoc types with strict typecheck, no TypeScript migration |  | Keep **vanilla JS + JSDoc types** and enforce **strict typecheck** in CI (`tsc --noEmit` with str... |
-| 022 | Accepted | Branch strategy — develop as trunk, main for releases |  | - **`develop`** is the trunk: all work lands here - **`main`** receives merges only for releases |
-| 021 | Accepted | WCAG 2.2 AA is a non-negotiable requirement |  | Every component must meet **WCAG 2.2 AA** — keyboard navigation, ARIA semantics, color contrast, ... |
-| 020 | Accepted | Zero runtime dependencies is an absolute rule |  | **Zero runtime dependencies** is an absolute, non-negotiable rule. No frameworks, no libraries, n... |
-| 019 | Accepted | Modern-only browser matrix with light-dark fallback kept |  | Target **modern-only** browsers (last ~2 years):  |
-| 018 | Accepted | Local release via `commit-and-tag-version`, no CI publish |  | - Replace `standard-version` with **`commit-and-tag-version`** - Adopt the release orchestration ... |
-| 017 | Accepted | Validate CSS with a real parser after automated refactors |  | Use the `lightningcss` parser validation after any broad CSS transformation.  |
-| 016 | Accepted | Root formatting and linting are reproducible scripts |  | Root `package.json` exposes:  |
-| 015 | Accepted | Keep `pix-foundations` independent of `pix-core` |  | Remove the `pix-core` dependency from `pix-foundations`.  |
-| 014 | Accepted | Centralize shared runtime and scripts in `pix-core` |  | Rename `packages/shared` to `packages/pix-core` and move shared build/test/docs scripts there. Up... |
-| 013 | Accepted | Centralize focus ring in `pix-foundations` |  | Only `packages/pix-foundations/lib/_focus.css` manages the focus ring. Focus selectors in compone... |
-| 012 | Accepted | Centralize design-system foundations in `pix-foundations` |  | Move foundational tokens and global rules into `packages/pix-foundations/lib/`:  |
-| 011 | Accepted | Rename `pix-display-preferences` to `pix-a11y-panel` |  | Rename package, custom element, class, CSS selectors, storage key, docs, tests, and portal refere... |
-| 010 | Accepted | Single test runner suite over scattered tests |  | Use Playwright for e2e tests (22 tests covering portal + all docs sites). Each component has a mi... |
-| 009 | Superseded | Release via standard-version |  | Use `standard-version` for semver bump, CHANGELOG generation, and git tag creation. Single orches... |
-| 008 | Accepted | `ElementInternals` for form association |  | Use the `ElementInternals` API (`static formAssociated = true`, `attachInternals()`, `setFormValu... |
-| 007 | Accepted | Shared docs template over per-package duplication |  | Centralise the docs template in `@pix-galaxy/pix-core/docs/docs-site.js`. Each package imports `c... |
-| 006 | Accepted | Oklch colour space |  | Use `oklch()` for all colour values. Provide HSL/HEX/RGB in the colour picker for compatibility.  |
-| 005 | Accepted | Private class fields for internal state |  | Use `#private` fields for all internal state, DOM references, and bound handlers. Public API via ... |
-| 004 | Accepted | CSS fallback before `light-dark()` |  | Always add a fallback value BEFORE the `light-dark()` declaration:  |
-| 003 | Accepted | `light-dark()` over CSS custom properties + media query t... |  | Use `light-dark()` CSS function instead of `@media (prefers-color-scheme)` or JavaScript toggle.  |
-| 002 | Accepted | `adoptedStyleSheets` over `<link>` or `<style>` |  | Use `document.adoptedStyleSheets` via a singleton `CSSStyleSheet` per component.  |
-| 001 | Accepted | Light DOM over Shadow DOM |  | All components use Light DOM + `document.adoptedStyleSheets`. No Shadow DOM, no `<template>` elem... |
+**Deliverable:** `packages/pix-vanilla-reactive/` — a zero-dependency reactive UI framework canonized from the `pix-frontend-vanilla-reactive` skill:
 
-### Recent Commits
+- **Store** — Proxy-based state container: `subscribe()`, `update()`, dot-path `get/set`, SSR-safe events target, `store:change` events, **prototype-pollution guard** (blocks `__proto__`/`prototype`/`constructor`).
+- **Signals** — `Signal.State` / `Signal.Computed` / `effect()`, collector stack, microtask-batched scheduler, `untrack`.
+- **Template engine** — `html` tagged templates, `render()` (mount/update/unmount), `{{ }}` expressions (escape-by-default, `| raw` hatch), `${ }` slots, `model` two-way binding, `repeat()` keyed lists, `<for>/<if>` string blocks, 22 filters.
+- **Bridge** — `createTickState(store)` converts store writes into signal notifications.
+- **Explicit Resource Management** — every disposable implements `.dispose()` + feature-detected `[Symbol.dispose]`; framework-owned `DisposableStack`/`AsyncDisposableStack` (use/adopt/defer/move, reverse-order disposal, `.suppressed` error aggregation). `using` works natively on ES2026 engines; Safari 17.5+ uses `.dispose()`.
+
+**Hardening this session (real bugs found & fixed):**
+1. XSS in `<for>/<if>` string templates (`{{ }}` now escaped; `| raw` is the explicit trusted-HTML hatch).
+2. Store prototype pollution via `__proto__` paths (blocked with TypeError).
+3. `{{ }}` in attribute values was broken (marker lost) — fixed.
+4. `${ }` after `attr=` in text misparsed as attribute — parser heuristic tightened.
+5. Memory leaks: repeat-block removal, template swap, and `render(null)` unmount now release all subscriptions (full `dispose()` chain).
+
+**Validation:** 92 node:test tests (signals, store, expressions, template, security, stress, disposables) · typecheck 0 errors (JSDoc + `// @ts-check`) · esbuild artifact ESM+CJS with full `.d.ts` · docs site (shared pix-core template) · 3 runnable examples in `examples/` (counter, todo, form — no build step) · Prettier clean.
+
+## ADR Log (24)
+
+| # | Status | Title |
+|---|--------|-------|
+| 024 | Accepted | Migrate .agents skills to pix-galaxy-mcp, remove .agents |
+| 023 | Accepted | JSDoc types with strict typecheck, no TypeScript migration |
+| 022 | Accepted | Branch strategy — develop as trunk, main for releases |
+| 021 | Accepted | WCAG 2.2 AA is a non-negotiable requirement |
+| 020 | Accepted | Zero runtime dependencies is an absolute rule |
+| 019 | Accepted | Modern-only browser matrix with light-dark fallback kept |
+| 018 | Accepted | Local release via `commit-and-tag-version`, no CI publish |
+| 017 | Accepted | Validate CSS with a real parser after automated refactors |
+| 016 | Accepted | Root formatting and linting are reproducible scripts |
+| 015 | Accepted | Keep `pix-foundations` independent of `pix-core` |
+| 014 | Accepted | Centralize shared runtime and scripts in `pix-core` |
+| 013 | Accepted | Centralize focus ring in `pix-foundations` |
+| 012 | Accepted | Centralize design-system foundations in `pix-foundations` |
+| 011 | Accepted | Rename `pix-display-preferences` → `pix-a11y-panel` |
+| 010 | Accepted | Single test runner suite over scattered tests |
+| 009 | Superseded | Release via standard-version (superseded by 018) |
+| 008 | Accepted | `ElementInternals` for form association |
+| 007 | Accepted | Shared docs template over per-package duplication |
+| 006 | Accepted | Oklch colour space |
+| 005 | Accepted | Private class fields for internal state |
+| 004 | Accepted | CSS fallback before `light-dark()` |
+| 003 | Accepted | `light-dark()` over CSS custom properties + media query |
+| 002 | Accepted | `adoptedStyleSheets` over `<link>` or `<style>` |
+| 001 | Accepted | Light DOM over Shadow DOM |
+
+## Working Tree Changes (committed this session)
+
+- `packages/pix-vanilla-reactive/` — the new framework package (61 source files)
+- `scripts/dev-all.mjs` — knownColors mint entry
+- `scripts/port-map.mjs` — DEV_PORT_ORDER (dev port 3012)
+- `src/docs/content/components.json` — portal card
+- `src/docs/index.js` — portal ICONS entry
+- `pnpm-lock.yaml` — workspace link
+- `docs/HANDOFF-LLM-2026-08-02.md` — this file
+
+## Recent Commits (HEAD)
 
 ```
-cd644e4 refactor(release): align release pipeline with pi-coding-agent-extensions
+feat(pix-vanilla-reactive): add reactive framework with store, signals, template engine, disposables
+050f4b1 refactor(release): align release pipeline with pi-coding-agent-extensions
 13093b2 feat(release): migrate to commit-and-tag-version, local-only publishing
 7a5e8cd docs: migrate 4 legacy docs sites to shared pix-core template
 2ef09ad test(e2e): add axe-core audit and interaction tests, fix a11y violations
-f7bcaa5 fix(types): add missing index.types.js and enable typecheck in quality
-c811df0 fix: address remaining critical issues and repair pre-existing test failures
-b33137a docs(adr): consolidate 24 ADRs into docs/adr with status
-e704b7c chore: remove .agents, migrate skills to pix-galaxy-mcp
-b25e06c docs: mark phase 0-1 complete in execution plan
-fd2d642 chore: untrack test result artifacts (now gitignored)
-b18b298 docs: update handoff, architecture review, and execution plan
 ```
 
-### Documentation Status
+## Documentation Status
 
-**Roadmaps:**
-- `docs/plans/execution-plan.md` (9530B, last modified: 2026-08-02)
+- Roadmap: `docs/plans/execution-plan.md` (modified 2026-08-02)
+- `docs/HANDOFF.md` (22617B)
+- `docs/HANDOFF-LLM-2026-07-08.md`
+- `docs/adr/` — 24 ADRs + README
 
-**Key documents:**
-- `docs/HANDOFF-LLM-2026-07-08.md` (12981B, 2026-08-02)
-- `docs/HANDOFF.md` (22617B, 2026-08-02)
-- `docs/adr/0007-shared-docs-template.md` (974B, 2026-08-02)
-- `docs/adr/README.md` (5237B, 2026-08-02)
-- `docs/adr/0001-light-dom-over-shadow-dom.md` (812B, 2026-08-01)
-- `docs/adr/0002-adopted-stylesheets.md` (711B, 2026-08-01)
-- `docs/adr/0003-light-dark.md` (792B, 2026-08-01)
-- `docs/adr/0004-light-dark-fallback.md` (796B, 2026-08-01)
-- `docs/adr/0005-private-class-fields.md` (800B, 2026-08-01)
-- `docs/adr/0006-oklch-colour-space.md` (657B, 2026-08-01)
+## Handoff Instruction
 
-### Handoff Instruction
-
-You are continuing work on **pix-galaxy**.
-ADR log and context snapshot capture everything decided so far.
-
-Review ADRs for architectural decisions. Review snapshot for configuration.
-Continue without re-asking answered questions.
+You are continuing work on **pix-galaxy** on branch `develop`. The `pix-vanilla-reactive` framework is complete and committed; a next logical step is consuming it in a component (e.g. wiring a reactive demo into the portal) or extending the docs. Follow the ADRs: zero runtime dependencies, light DOM, oklch, JSDoc + `@ts-check` with strict typecheck, `node:test`, shared pix-core build/docs scripts. Conventional commits with mandatory scope. Continue without re-asking answered questions.
