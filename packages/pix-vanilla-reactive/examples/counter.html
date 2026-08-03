@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>pix-vanilla-reactive — Counter example</title>
+    <style>
+      body {
+        font:
+          16px/1.6 system-ui,
+          sans-serif;
+        max-width: 34rem;
+        margin: 3rem auto;
+        padding: 0 1rem;
+      }
+      button {
+        font: inherit;
+        padding: 0.4rem 0.9rem;
+        margin-right: 0.4rem;
+        cursor: pointer;
+      }
+      output {
+        font-weight: 700;
+        display: inline-block;
+        min-width: 2.5rem;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Counter</h1>
+    <p>
+      Store + tick bridge + computed view + effect. Every click mutates the store; the view
+      re-renders on the microtask queue.
+    </p>
+    <div id="app"></div>
+    <script type="module">
+      import { Store, Signal, effect, html, render, createTickState } from '../src/index.js';
+
+      const store = new Store({ count: 0 });
+      const tick = createTickState(store);
+
+      const view = new Signal.Computed(() => {
+        tick.get(); // re-run when the store changes
+        const result = html`
+          <p>
+            <button
+              @click=${() => {
+                store.state.count -= 1;
+              }}
+            >
+              −
+            </button>
+            <output>{{ count }}</output>
+            <button
+              @click=${() => {
+                store.state.count += 1;
+              }}
+            >
+              +
+            </button>
+          </p>
+          <p>Double: <output>{{ double }}</output></p>
+        `;
+        result._context = {
+          count: store.state.count,
+          double: store.state.count * 2,
+        };
+        return result;
+      });
+
+      effect(() => render(view.get(), document.querySelector('#app')));
+    </script>
+  </body>
+</html>

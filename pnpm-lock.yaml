@@ -455,6 +455,36 @@ importers:
         specifier: 8.0.10
         version: 8.0.10(esbuild@0.28.0)(yaml@2.9.0)
 
+  packages/pix-vanilla-reactive:
+    devDependencies:
+      '@pix-galaxy/pix-color-scheme-selector':
+        specifier: workspace:*
+        version: link:../pix-color-scheme-selector
+      '@pix-galaxy/pix-core':
+        specifier: workspace:*
+        version: link:../pix-core
+      '@pix-galaxy/pix-highlighter':
+        specifier: workspace:*
+        version: link:../pix-highlighter
+      c8:
+        specifier: 11.0.0
+        version: 11.0.0
+      esbuild:
+        specifier: 0.28.1
+        version: 0.28.1
+      jsdom:
+        specifier: 29.1.0
+        version: 29.1.0
+      marked:
+        specifier: 18.0.5
+        version: 18.0.5
+      typescript:
+        specifier: 6.0.3
+        version: 6.0.3
+      vite:
+        specifier: 8.0.10
+        version: 8.0.10(esbuild@0.28.1)(yaml@2.9.0)
+
 packages:
 
   '@asamuzakjp/css-color@5.1.11':

@@ -27,6 +27,7 @@ const knownColors = {
   'pix-recorder': '38;5;45', // aqua
   'pix-sortable': '38;5;75', // sky (light blue)
   'pix-foundations': '38;5;214', // gold
+  'pix-vanilla-reactive': '38;5;79', // mint
   'pix-component-template': '90', // dark grey - hidden, not auto-started
 };
 

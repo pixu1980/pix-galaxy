@@ -70,6 +70,16 @@
     "keywords": ["audio", "recorder", "waveform", "microphone"]
   },
   {
+    "name": "pix-vanilla-reactive",
+    "packageName": "@pix-galaxy/pix-vanilla-reactive",
+    "title": "Vanilla Reactive",
+    "description": "Zero-dependency reactive UI framework: Proxy Store, fine-grained Signals, html`` template engine, and custom elements.",
+    "homepage": "https://pixu1980.github.io/pix-vanilla-reactive/",
+    "repo": "https://github.com/pixu1980/pix-galaxy",
+    "accent": "mint",
+    "keywords": ["reactive", "signals", "store", "template-engine", "framework"]
+  },
+  {
     "name": "pix-command",
     "packageName": "@pix-galaxy/pix-command",
     "title": "Pix Command",

@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "allowArbitraryExtensions": true,
+    "allowJs": true,
+    "checkJs": false,
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "outDir": "./artifact",
+    "rootDir": "./src",
+    "skipLibCheck": true,
+    "stripInternal": true,
+    "target": "ES2020"
+  },
+  "include": ["src/index.js", "src/index.types.js", "src/core/**/*.js"],
+  "exclude": ["src/docs/**", "src/tests/**"]
+}
