@@ -1,90 +1,88 @@
-# Guida alla configurazione manuale della sicurezza npm
+# Manual npm Security Setup Guide
 
-Questa guida elenca i passaggi da eseguire **una tantum** su GitHub e npmjs.com
-per completare l'hardening della supply chain di pix-galaxy. I workflow CI e la
-configurazione `pnpm` sono già stati aggiornati — queste sono le azioni che
-richiedono accesso amministrativo alle impostazioni web.
+This guide lists the one-time steps to perform on GitHub and npmjs.com
+to complete the supply-chain hardening of pix-galaxy. The CI workflows and
+`pnpm` configuration are already updated — these actions require
+administrative access to the web settings.
 
 ---
 
-## 1. GitHub — Tag protection (solo admin creano tag)
+## 1. GitHub — Tag protection (admins only)
 
-Impedisce a chiunque tranne gli admin di repository di creare tag. La release
-di pix-galaxy parte proprio da un tag (`@pix-galaxy/<pkg>@<version>`), quindi
-proteggere i tag è fondamentale per evitare rilasci non autorizzati.
+Prevents anyone except repository admins from creating tags. pix-galaxy
+releases start from a tag (`@pix-galaxy/<pkg>@<version>`), so protecting
+tags is critical to prevent unauthorized releases.
 
-**URL diretto:**
+**Direct URL:**
 https://github.com/pixu1980/pix-galaxy/settings/rules
 
-**Procedura:**
+**Steps:**
 
-1. Clicca **New ruleset** → seleziona **New tag ruleset**
-2. Compila i campi:
+1. Click **New ruleset** → select **New tag ruleset**
+2. Fill in the fields:
 
-   | Campo | Valore |
+   | Field | Value |
    |---|---|
    | Ruleset Name | `Tags only by admins` |
    | Enforcement status | `Active` |
    | Bypass list | `Repository admins` |
    | Target tags | `Include all tags` |
 
-3. In **Tag rules**, abilita **Restrict creations**
-4. Clicca **Create**
+3. Under **Tag rules**, enable **Restrict creations**
+4. Click **Create**
 
-Verifica: prova a creare un tag da un account non-admin — deve essere bloccato.
+Verify: try creating a tag from a non-admin account — it should be blocked.
 
 ---
 
 ## 2. GitHub — Immutable Releases
 
-Impedisce che i rilasci già pubblicati vengano modificati o cancellati.
+Prevents published releases from being modified or deleted.
 
-**URL diretto:**
+**Direct URL:**
 https://github.com/pixu1980/pix-galaxy/settings
 
-(scrolla fino alla sezione **Releases**)
+(scroll down to the **Releases** section)
 
-**Procedura:**
+**Steps:**
 
-1. Nella pagina Settings generale del repo (assicurati di essere sul tab
-   _General_ in alto a sinistra, non sul menu laterale)
-2. Scorri fino alla sezione **Releases**
-3. Attiva il toggle **Immutable Releases**
+1. On the repo's General Settings page (make sure you're on the
+   _General_ tab at the top-left, not the sidebar menu)
+2. Scroll down to the **Releases** section
+3. Toggle on **Immutable Releases**
 
 ---
 
-## 3. GitHub Organization — 2FA obbligatoria
+## 3. GitHub Organization — Mandatory 2FA
 
-Richiede che tutti i membri dell'organizzazione abbiano l'autenticazione
-a due fattori attiva.
+Requires all organization members to have two-factor authentication enabled.
 
-**URL diretto:**
+**Direct URL:**
 https://github.com/organizations/pixu1980/settings/security
 
-**Procedura:**
+**Steps:**
 
-1. Vai alla sezione **Authentication security**
-2. Attiva **Require two-factor authentication for everyone**
-3. GitHub invierà una notifica ai membri che non hanno ancora la 2FA
-   configurata
+1. Go to the **Authentication security** section
+2. Enable **Require two-factor authentication for everyone**
+3. GitHub will notify members who haven't set up 2FA yet
 
-Nota: se sei l'unico membro e hai già la 2FA, l'opzione è comunque
-consigliata come enforcement per il futuro.
+Note: even if you're the only member and already have 2FA, this option
+is still recommended as enforcement for future contributors.
 
 ---
 
-## 4. npm — Publishing access per ogni pacchetto pubblico
+## 4. npm — Publishing access for each public package
 
-Per ogni pacchetto `@pix-galaxy/*` pubblicato, bisogna:
+For every published `@pix-galaxy/*` package:
 
-1. Revocare tutti i token di pubblicazione esistenti (così nessun token
-   rubato può essere usato per pubblicare)
-2. Richiedere la 2FA per la pubblicazione (il publish locale con `npm login`
-   interattivo la soddisfa già)
+1. Revoke all existing publish tokens (so no stolen token can be used
+   to publish)
+2. Require 2FA for publishing (local publish with interactive `npm login`
+   already satisfies this)
 
-### Elenco dei pacchetti pubblici
+### Public package list
 
-| Pacchetto | URL impostazioni |
+| Package | Settings URL |
 |---|---|
 | `@pix-galaxy/pix-a11y-panel` | https://www.npmjs.com/package/@pix-galaxy/pix-a11y-panel/settings |
 | `@pix-galaxy/pix-accent-color-selector` | https://www.npmjs.com/package/@pix-galaxy/pix-accent-color-selector/settings |
@@ -98,38 +96,38 @@ Per ogni pacchetto `@pix-galaxy/*` pubblicato, bisogna:
 | `@pix-galaxy/pix-toast` | https://www.npmjs.com/package/@pix-galaxy/pix-toast/settings |
 | `@pix-galaxy/pix-vanilla-reactive` | https://www.npmjs.com/package/@pix-galaxy/pix-vanilla-reactive/settings |
 
-### Procedura (uguale per ogni pacchetto):
+### Steps (same for every package):
 
-1. Apri l'URL delle impostazioni del pacchetto
-2. Nella sezione **Publishing access**:
-   - Disabilita eventuali token esistenti (se c'è un elenco di token,
-     revocali manualmente)
-   - Attiva **Require two-factor authentication or automation tokens
+1. Open the package settings URL
+2. In the **Publishing access** section:
+   - Disable any existing tokens (if there's a token list,
+     revoke them manually)
+   - Enable **Require two-factor authentication or automation tokens
      for publish**
-3. **Non** abilitare Trusted Publishing — le release continuano in locale
-   con `pnpm release`
+3. Do **not** enable Trusted Publishing — releases continue locally
+   via `pnpm release`
 
 ---
 
-## 5. Verifica finale
+## 5. Final verification
 
-Dopo aver completato i 4 passaggi, esegui un dry-run per confermare che
-la pipeline funzioni:
+After completing the 4 steps above, run a dry-run to confirm the
+pipeline works:
 
 ```bash
-# Test del meccanismo di release (senza pubblicare)
+# Test the release mechanism (without publishing)
 pnpm release:dry
 
-# Test del quality gate CI (pusha un tag fittizio, poi rimuovilo)
+# Test the CI quality gate (push a dummy tag, then delete it)
 git tag @pix-galaxy/pix-toast@0.0.0-test
 git push origin @pix-galaxy/pix-toast@0.0.0-test
-# controlla che il workflow release.yml giri su GitHub Actions
+# check that the release.yml workflow runs on GitHub Actions
 git push origin --delete @pix-galaxy/pix-toast@0.0.0-test
 ```
 
 ---
 
-## Riferimenti
+## References
 
 - [The secure way to release an npm package in 2026](https://evilmartians.com/chronicles/the-secure-way-to-release-an-npm-package-in-2026) — Evil Martians
 - [npm Trusted Publishing docs](https://docs.npmjs.com/generating-provenance-statements)
