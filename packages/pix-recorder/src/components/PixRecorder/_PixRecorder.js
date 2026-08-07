@@ -234,7 +234,7 @@ class PixRecorder extends HTMLElement {
     try {
       this.#stream = await navigator.mediaDevices.getUserMedia({ audio: true });
     } catch (err) {
-      this.#state = 'idle'; // permette un secondo tentativo
+      this.#state = 'idle'; // allows a second attempt
       this.#setStatus('Microphone access denied');
       this.#announce('Microphone access denied');
       this.dispatchEvent(

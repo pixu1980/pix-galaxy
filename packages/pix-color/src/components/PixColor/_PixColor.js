@@ -98,7 +98,7 @@ class PixColor extends HTMLElement {
   #onCopyClick = () => this.#copyValue();
   #onKeyDown = this.#handleKeyDown.bind(this);
 
-  // Per-tab handlers (creati al volo ma puliti in teardownPanel)
+  // Per-tab handlers (created on the fly, cleaned up in teardownPanel)
   #tabCleanup = [];
 
   #internals = null;
@@ -222,7 +222,7 @@ class PixColor extends HTMLElement {
     this.#renderValues();
     this.#panel.append(this.#valuesEl);
 
-    // Tabs - cleanup qualsiasi handler precedente
+    // Tabs - cleanup any previous handler
     for (const fn of this.#tabCleanup) fn();
     this.#tabCleanup = [];
 
@@ -275,13 +275,13 @@ class PixColor extends HTMLElement {
     this.#panel.append(actions);
     this.append(this.#panel);
 
-    // Outside click via overlay backdrop (nessun setTimeout, nessun document listener)
+    // Outside click via overlay backdrop (no setTimeout, no document listener)
     this.#panel.addEventListener('click', this.#onPanelClick);
     document.addEventListener('keydown', this.#onKeyDown);
   }
 
   #onPanelClick = (e) => {
-    // Click sul backdrop (panel stesso) chiude
+    // Click on backdrop (panel itself) closes
     if (e.target === this.#panel || e.target === this.#previewLarge) {
       this.expanded = false;
     }
