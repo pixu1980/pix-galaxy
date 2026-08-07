@@ -61,7 +61,7 @@ export class IfPart {
     const value = this.conditionSignal
       ? this.conditionSignal.get()
       : evaluateExpression(this.conditionParsed, this.ctx ?? {});
-    if (Boolean(value)) this.render();
+    if (value) this.render();
     else this.clear();
   }
 

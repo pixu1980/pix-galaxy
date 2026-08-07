@@ -45,7 +45,7 @@ export function renderInnerTemplate(template, ctx) {
     /<if\s+condition="([^"]*)">([\s\S]*?)<\/if>/gi,
     (_, condition, content) => {
       const value = evaluateExpression(parseExpression(condition), ctx);
-      return Boolean(value) ? content : '';
+      return value ? content : '';
     }
   );
   processed = processed.replace(/\{\{([^}]+)\}\}/g, (_, expr) => {
