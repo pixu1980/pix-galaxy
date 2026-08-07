@@ -1,4 +1,4 @@
-# Pix-Galaxy - Architectural Review
+# Pix-Galaxy — Architectural Review
 
 > **Author:** Senior UI Architect review  
 > **Date:** 2026-07-05  
@@ -8,43 +8,43 @@
 
 ## Quality Signal: 7213/10000
 
-| Dimensione              | Punteggio | Stato                          |
-| ----------------------- | --------- | ------------------------------ |
-| **Acyclicity**          | 0.86      | ⚠️ Buono (cicli solo in jsdom) |
-| **Depth**               | 1.0       | ✅ Ottimo                      |
-| **Equality**            | 0.25      | 🚨 **GOD FILES** (Gini 0.745)  |
-| **Redundancy**          | 0.89      | ⚠️ 11% dead code               |
-| **Modularity**          | 1.0       | ✅ Eccellente                  |
-| **Coverage discipline** | 1.0       | ✅                             |
+| Dimension               | Score  | Status                           |
+| ----------------------- | ------ | -------------------------------- |
+| **Acyclicity**          | 0.86   | ⚠️ Good (cycles only in jsdom)  |
+| **Depth**               | 1.0    | ✅ Excellent                     |
+| **Equality**            | 0.25   | 🚨 **GOD FILES** (Gini 0.745)   |
+| **Redundancy**          | 0.89   | ⚠️ 11% dead code                |
+| **Modularity**          | 1.0    | ✅ Excellent                     |
+| **Coverage discipline** | 1.0    | ✅                               |
 
-> Il quality signal `7213/10000` è trainato verso il basso dalla **disuguaglianza estrema** (Gini 0.745) - pochi file concentrano la maggior parte della complessità.
+> The quality signal `7213/10000` is dragged down by **extreme inequality** (Gini 0.745) — a few files concentrate most of the complexity.
 
 ---
 
-## 🔴 CRITICAL - 6 problemi strutturali
+## 🔴 CRITICAL — 6 structural issues
 
-### 1. Memory leak: event listener inline arrow functions mai rimossi
+### 1. Memory leak: event listener inline arrow functions never removed
 
-**Coinvolge:** `pix-color`, `pix-recorder`, `pix-command` (parziale)
+**Affects:** `pix-color`, `pix-recorder`, `pix-command` (partial)
 
-Ogni componente che usa **inline arrow function** in `addEventListener` perde quei listener quando il componente viene rimosso dal DOM.
+Every component that uses **inline arrow functions** in `addEventListener` leaks those listeners when the component is removed from the DOM.
 
 ```js
-// pix-color: righe 128, 158, 168 - MAI rimossi in disconnectedCallback
+// pix-color: lines 128, 158, 168 — NEVER removed in disconnectedCallback
 this.#colorInput.addEventListener('input', (e) => { ... });
 this.#bar.addEventListener('click', (e) => { ... });
 this.#bar.addEventListener('keydown', (e) => { ... });
 
-// pix-recorder: righe 113–132 - IDEM
+// pix-recorder: lines 113–132 — SAME
 recordBtn.addEventListener('click', () => { ... });
 pauseBtn.addEventListener('click', () => { ... });
 stopBtn.addEventListener('click', () => { ... });
 downloadBtn.addEventListener('click', () => this.#doDownload());
 ```
 
-**Impatto:** In una SPA con routing, ogni mount/unmount accumula listener. I riferimenti chiusi (`this`, `#expanded`, `#state`) impediscono al GC di raccogliere il componente.
+**Impact:** In a SPA with routing, each mount/unmount accumulates listeners. Closed-over references (`this`, `#expanded`, `#state`) prevent the GC from collecting the component.
 
-**Fix:** Usare private field pre-assigned:
+**Fix:** Use pre-assigned private fields:
 
 ```js
 #onBarClick = (e) => { ... };
@@ -60,16 +60,16 @@ disconnectedCallback() {
 
 ---
 
-### 2. `.bind()` senza referenza stabile - leak garantito
+### 2. `.bind()` without stable reference — guaranteed leak
 
-**Coinvolge:** `pix-toast`
+**Affects:** `pix-toast`
 
 ```js
 // pix-toast/src/components/PixToast/PixToast.js:90
 this.addEventListener('click', this.#handleContainerClick.bind(this));
 ```
 
-`disconnectedCallback` **non rimuove** questo listener, e non potrebbe perché `.bind(this)` crea una nuova funzione ogni volta. Ogni `connectedCallback` aggiunge un leak.
+`disconnectedCallback` **does not remove** this listener, and it can't because `.bind(this)` creates a new function each time. Every `connectedCallback` adds a leak.
 
 **Fix:**
 
@@ -81,19 +81,19 @@ this.addEventListener('click', this.#handleContainerClick.bind(this));
 
 ---
 
-### 3. Pix-color: global listener con setTimeout race condition
+### 3. Pix-color: global listener with setTimeout race condition
 
-**Coinvolge:** `pix-color`
+**Affects:** `pix-color`
 
 ```js
 // pix-color/src/components/PixColor/PixColor.js:245
 setTimeout(() => document.addEventListener('click', this.#onDocumentClick), 0);
 ```
 
-1. Se il componente viene smontato durante quei 0ms, il listener viene registrato su un componente morto.
-2. Se `#teardownPanel()` viene chiamata mentre un timeout è in sospeso, i listener vengono rimossi ma un nuovo `setTimeout` in una successiva `#renderPanel()` aggiunge nuovi listener.
+1. If the component is unmounted during those 0ms, the listener is registered on a dead component.
+2. If `#teardownPanel()` is called while a timeout is pending, listeners are removed but a new `setTimeout` in a subsequent `#renderPanel()` adds new listeners.
 
-**Fix:** Sostituire con event delegation sull'overlay:
+**Fix:** Replace with event delegation on the overlay:
 
 ```js
 this.#overlay.addEventListener('click', (e) => {
@@ -103,18 +103,18 @@ this.#overlay.addEventListener('click', (e) => {
 
 ---
 
-### 4. Pix-splitter modifica `document.body.dataset` - side effect globale
+### 4. Pix-splitter modifies `document.body.dataset` — global side effect
 
-**Coinvolge:** `pix-splitter`
+**Affects:** `pix-splitter`
 
 ```js
 document.body.dataset.splitterResizing = '';
 document.body.dataset.splitterOrientation = this.orientation;
 ```
 
-Due splitter sulla stessa pagina: un resize su uno lascia `data-splitter-orientation` sul body anche dopo che l'altro ha finito. Conflitto con librerie che usano dataset sul body.
+Two splitters on the same page: a resize on one leaves `data-splitter-orientation` on the body even after the other finishes. Conflict with libraries that use body dataset.
 
-**Fix:** Usare `this.style.cursor` sul componente:
+**Fix:** Use `this.style.cursor` on the component:
 
 ```js
 #handlePointerDown() { this.style.cursor = 'col-resize'; }
@@ -125,28 +125,28 @@ Due splitter sulla stessa pagina: un resize su uno lascia `data-splitter-orienta
 
 ### 5. Pix-sortable: MutationObserver loop
 
-**Coinvolge:** `pix-sortable`
+**Affects:** `pix-sortable`
 
-Stesso pattern di pix-splitter: `#init()` setup un `MutationObserver` su `childList`, poi `#rebuild()` modifica i figli triggerando l'observer.
+Same pattern as pix-splitter: `#init()` sets up a `MutationObserver` on `childList`, then `#rebuild()` modifies children triggering the observer.
 
-**Fix:** Usare `MutationObserver.takeRecords()` all'inizio di `#rebuild()`:
+**Fix:** Use `MutationObserver.takeRecords()` at the start of `#rebuild()`:
 
 ```js
 #rebuild() {
   this.#observer?.disconnect();
-  this.#observer?.takeRecords(); // svuota coda
+  this.#observer?.takeRecords(); // drain queue
   // ... rebuild ...
 }
 ```
 
 ---
 
-### 6. Pix-recorder: ciclo vita incompleto
+### 6. Pix-recorder: incomplete lifecycle
 
-**Coinvolge:** `pix-recorder`
+**Affects:** `pix-recorder`
 
-- Se `disconnectedCallback` viene chiamato durante una registrazione, `#stopMedia()` ferma lo stream ma non chiama `mediaRecorder.stop()`, lasciando chunk in sospeso.
-- Se l'utente nega il permesso microfono, nessun recovery possibile.
+- If `disconnectedCallback` is called during a recording, `#stopMedia()` stops the stream but does not call `mediaRecorder.stop()`, leaving pending chunks.
+- If the user denies microphone permission, no recovery is possible.
 
 **Fix:**
 
@@ -162,17 +162,17 @@ disconnectedCallback() {
 
 ---
 
-## 🟡 MODERATE - 8 problemi
+## 🟡 MODERATE — 8 issues
 
-### 7. `light-dark()` senza fallback per browser vecchi
+### 7. `light-dark()` without fallback for older browsers
 
-**Coinvolge:** **Tutti i componenti**
+**Affects:** **All components**
 
-`light-dark()` è supportato da Chrome 119+, Safari 17.5+, Firefox 120+. Su browser più vecchi, l'intera dichiarazione CSS viene scartata - il componente diventa invisibile.
+`light-dark()` is supported by Chrome 119+, Safari 17.5+, Firefox 120+. On older browsers, the entire CSS declaration is discarded — the component becomes invisible.
 
 ```css
 --pix-command--fg: light-dark(oklch(0.18 0.012 60), oklch(0.88 0.01 85));
-/* Su Safari 16: --pix-command--fg NON VIENE DEFINITO */
+/* On Safari 16: --pix-command--fg IS NOT DEFINED */
 ```
 
 **Fix:**
@@ -184,124 +184,124 @@ disconnectedCallback() {
 
 ---
 
-### 8. `adoptedStyleSheets` ordering - conflitto potenziale
+### 8. `adoptedStyleSheets` ordering — potential conflict
 
-**Coinvolge:** **Tutti i componenti**
+**Affects:** **All components**
 
-Ogni componente pusha il proprio CSS in `document.adoptedStyleSheets`. L'ultimo adottato vince in caso di specificità identica.
+Each component pushes its own CSS into `document.adoptedStyleSheets`. The last one adopted wins in case of identical specificity.
 
-**Mitigazione:** I `@layer pix-galaxy { @layer pix-component { ... } }` isolano le regole. Ma se due componenti definiscono regole sullo stesso selettore, l'ordine conta.
-
----
-
-### 9. Pix-recorder: microfono - nessun recovery
-
-**Coinvolge:** `pix-recorder`
-
-L'utente che nega il permesso vede "Microphone access denied" ma non può riprovare.
-
-**Fix:** Dispatchare `recorder-error` + permettere un secondo tentativo.
+**Mitigation:** `@layer pix-galaxy { @layer pix-component { ... } }` isolates the rules. But if two components define rules on the same selector, order matters.
 
 ---
 
-### 10. Pix-command: lista risultati dinamici senza `aria-live`
+### 9. Pix-recorder: microphone — no recovery
 
-**Coinvolge:** `pix-command`
+**Affects:** `pix-recorder`
 
-Quando l'utente digita, i risultati vengono filtrati ma non c'è annuncio screen reader.
+The user who denies permission sees "Microphone access denied" but cannot retry.
 
-**WCAG SC 4.1.3 (Status Messages):** Violato. I cambiamenti di contenuto senza focus devono essere annunciati.
-
-**Fix:** Aggiungere `aria-live="polite"` al footer.
+**Fix:** Dispatch `recorder-error` + allow a second attempt.
 
 ---
 
-### 11. Incoerenza `_property` vs `#property`
+### 10. Pix-command: dynamic result list without `aria-live`
 
-**Coinvolge:** **Tutti i componenti**
+**Affects:** `pix-command`
 
-| Componente        | Pattern                   | Accessibile da subclass |
-| ----------------- | ------------------------- | ----------------------- |
-| Componenti vecchi | `this._onChange` (public) | ✅                      |
-| Componenti nuovi  | `this.#items` (private)   | ❌                      |
+When the user types, results are filtered but there is no screen reader announcement.
 
-**Raccomandazione:** `#private` per campi interni (timer, observer), `_protected` per metodi estendibili.
+**WCAG SC 4.1.3 (Status Messages):** Violated. Content changes without focus must be announced.
+
+**Fix:** Add `aria-live="polite"` to the footer.
 
 ---
 
-### 12. Pix-color: `<input type="color">` nativo bypassa UI
+### 11. `_property` vs `#property` inconsistency
 
-Il native input hidden apre il picker colore nativo del browser se cliccato direttamente, bypassando l'UI OKLCH/HSL/RGB.
+**Affects:** **All components**
 
-**Fix:** `pointer-events: none` sul native input.
+| Component       | Pattern                   | Subclass-accessible |
+| --------------- | ------------------------- | ------------------- |
+| Older components | `this._onChange` (public) | ✅                  |
+| Newer components | `this.#items` (private)   | ❌                  |
+
+**Recommendation:** `#private` for internal fields (timers, observers), `_protected` for extensible methods.
+
+---
+
+### 12. Pix-color: native `<input type="color">` bypasses UI
+
+The hidden native input opens the browser's native color picker when clicked directly, bypassing the OKLCH/HSL/RGB UI.
+
+**Fix:** `pointer-events: none` on the native input.
 
 ---
 
 ### 13. Pix-sortable: touch drag threshold
 
-Il timeout di 150ms confligge con lo scroll su mobile.
+The 150ms timeout conflicts with mobile scrolling.
 
-**Fix:** Aggiungere threshold di spostamento > 10px per distinguere scroll da long-press.
-
----
-
-### 14. `ElementInternals` non implementato
-
-Pix-color e pix-sortable dichiarano form association ma non chiamano `attachInternals()`.
+**Fix:** Add a movement threshold > 10px to distinguish scroll from long-press.
 
 ---
 
-## 🟢 MINOR - 10 note
+### 14. `ElementInternals` not implemented
 
-### 15. `innerHTML` - escape parziale
-
-Pix-color non fa escapeHTML sui gradient backgrounds (riga 347-349). Rischio XSS teorico se un valore slider viene manipolato.
-
-### 16. Pix-recorder: `format="wav"` non implementato
-
-La codifica WAV richiede encoder PCM manuale assente.
-
-### 17. Pix-color: gradient slider non aggiornato
-
-Il gradiente OKLCH usa `hex` corrente ma non viene ricalcolato su `updateDisplay()`, solo su `switchFormat()`.
-
-### 18. `performance.now()` precisione
-
-`DOMHighResTimeStamp` perde risoluzione dopo ~104 giorni di uptime. Documentare per registrazioni lunghe.
-
-### 19. Pix-sortable: `draggable: true` su contenuti interattivi
-
-Link e pulsanti dentro item sortable non sono cliccabili. Rendere `data-sortable-handle` obbligatorio.
-
-### 20. Pix-command: `isMetaOrCtrl()` - comportamento corretto
-
-CMD+K su Mac, Ctrl+K su Windows. Volutamente inclusivo, nessuna ambiguità.
-
-### 21. `@layer` ordering non documentato
-
-Layer innestati `pix-galaxy > pix-component`. L'ultimo stylesheet adottato vince. Documentare il comportamento.
-
-### 22. Pix-component-template: dipendenze mancanti
-
-Mancano `@pix-galaxy/pix-core`, `@pix-galaxy/pix-color-scheme-selector`, `@pix-galaxy/pix-highlighter` nel package.json del template.
-
-### 23. Zero test coverage sui nuovi componenti
-
-| Componente                                                                              | Test |
-| --------------------------------------------------------------------------------------- | ---- |
-| `pix-accent-color-selector`                                                             | ✅ 3 |
-| `pix-highlighter`                                                                       | ✅ 4 |
-| `pix-command`, `pix-color`, `pix-recorder`, `pix-sortable`, `pix-splitter`, `pix-toast` | ❌ 0 |
-
-### 24. Boilerplate SSR ridondante
-
-`typeof document === 'undefined'` e `CSSStyleSheet` guards identiche in ogni componente. Centralizzare in `@pix-galaxy/pix-core/dom/ssr-safe.js`.
+Pix-color and pix-sortable declare form association but do not call `attachInternals()`.
 
 ---
 
-## Raccomandazioni architetturali chiave
+## 🟢 MINOR — 10 notes
 
-### 1. Centralizzare cleanup event listener
+### 15. `innerHTML` — partial escaping
+
+Pix-color does not escapeHTML on gradient backgrounds (line 347-349). Theoretical XSS risk if a slider value is manipulated.
+
+### 16. Pix-recorder: `format="wav"` not implemented
+
+WAV encoding requires a manual PCM encoder which is absent.
+
+### 17. Pix-color: gradient slider not updated
+
+The OKLCH gradient uses `hex` but is not recalculated on `updateDisplay()`, only on `switchFormat()`.
+
+### 18. `performance.now()` precision
+
+`DOMHighResTimeStamp` loses resolution after ~104 days of uptime. Document for long recordings.
+
+### 19. Pix-sortable: `draggable: true` on interactive content
+
+Links and buttons inside sortable items are not clickable. Make `data-sortable-handle` mandatory.
+
+### 20. Pix-command: `isMetaOrCtrl()` — correct behavior
+
+CMD+K on Mac, Ctrl+K on Windows. Deliberately inclusive, no ambiguity.
+
+### 21. `@layer` ordering not documented
+
+Nested layers `pix-galaxy > pix-component`. The last adopted stylesheet wins. Document the behavior.
+
+### 22. Pix-component-template: missing dependencies
+
+Missing `@pix-galaxy/pix-core`, `@pix-galaxy/pix-color-scheme-selector`, `@pix-galaxy/pix-highlighter` in the template's package.json.
+
+### 23. Zero test coverage on newer components
+
+| Component                                                                              | Tests |
+| -------------------------------------------------------------------------------------- | ----- |
+| `pix-accent-color-selector`                                                            | ✅ 3  |
+| `pix-highlighter`                                                                      | ✅ 4  |
+| `pix-command`, `pix-color`, `pix-recorder`, `pix-sortable`, `pix-splitter`, `pix-toast` | ❌ 0  |
+
+### 24. Redundant SSR boilerplate
+
+`typeof document === 'undefined'` and `CSSStyleSheet` guards are identical in every component. Centralize in `@pix-galaxy/pix-core/dom/ssr-safe.js`.
+
+---
+
+## Key architectural recommendations
+
+### 1. Centralize event listener cleanup
 
 ```js
 class PixElement extends HTMLElement {
@@ -319,49 +319,49 @@ class PixElement extends HTMLElement {
 }
 ```
 
-### 2. Standardizzare `light-dark()` con fallback
+### 2. Standardize `light-dark()` with fallback
 
 ```css
 --pix-component-color: oklch(0.18 0.012 60);
 --pix-component-color: light-dark(oklch(0.18 0.012 60), oklch(0.88 0.01 85));
 ```
 
-### 3. Unificare `_` vs `#`
+### 3. Unify `_` vs `#`
 
-- `#private` per campi interni (timer, observer, riferimenti DOM)
-- `_protected` per metodi estendibili da subclass
+- `#private` for internal fields (timers, observers, DOM references)
+- `_protected` for methods extensible by subclasses
 
-### 4. Test coverage minimo
+### 4. Minimum test coverage
 
-1 test per componente che verifichi: registrazione custom element, render iniziale, evento change, cleanup disconnectedCallback.
+1 test per component verifying: custom element registration, initial render, change event, disconnectedCallback cleanup.
 
-### 5. Fixare pix-component-template package.json
+### 5. Fix pix-component-template package.json
 
-Aggiungere dipendenze mancanti.
+Add missing dependencies.
 
 ---
 
-## Riepilogo per priorità
+## Priority summary
 
-| Priorità    | Issue                               | Componente                         | Impatto |
-| ----------- | ----------------------------------- | ---------------------------------- | ------- |
-| 🔴 CRITICAL | Memory leak inline listeners        | pix-color, pix-recorder, pix-toast | Alto    |
-| 🔴 CRITICAL | `.bind()` senza riferimento         | pix-toast                          | Alto    |
-| 🔴 CRITICAL | Global listener race condition      | pix-color                          | Medio   |
-| 🔴 CRITICAL | `document.body.dataset` side effect | pix-splitter                       | Medio   |
-| 🔴 CRITICAL | MutationObserver loop risk          | pix-sortable                       | Medio   |
-| 🔴 CRITICAL | disconnectedCallback incompleto     | pix-toast-stack, pix-recorder      | Alto    |
-| 🟡 MODERATE | `light-dark()` senza fallback       | Tutti                              | Alto    |
-| 🟡 MODERATE | `adoptedStyleSheets` ordering       | Tutti                              | Basso   |
-| 🟡 MODERATE | Microfono recovery                  | pix-recorder                       | Medio   |
-| 🟡 MODERATE | `aria-live` mancante                | pix-command                        | Medio   |
-| 🟡 MODERATE | `_` vs `#` incoerenza               | Tutti                              | Basso   |
-| 🟡 MODERATE | Native input bypass                 | pix-color                          | Basso   |
-| 🟡 MODERATE | Touch drag threshold                | pix-sortable                       | Medio   |
-| 🟡 MODERATE | ElementInternals non implementato   | pix-color, pix-sortable            | Basso   |
-| 🟢 MINOR    | innerHTML escape                    | pix-color                          | Basso   |
-| 🟢 MINOR    | WAV format non implementato         | pix-recorder                       | Basso   |
-| 🟢 MINOR    | Gradient slider statico             | pix-color                          | Basso   |
-| 🟢 MINOR    | Template shared dep mancante        | pix-component-template             | Alto    |
-| 🟢 MINOR    | Zero test coverage                  | 5 componenti nuovi                 | Alto    |
-| 🟢 MINOR    | SSR boilerplate duplicato           | Tutti                              | Basso   |
+| Priority    | Issue                               | Component                          | Impact |
+| ----------- | ----------------------------------- | ---------------------------------- | ------ |
+| 🔴 CRITICAL | Memory leak inline listeners        | pix-color, pix-recorder, pix-toast | High   |
+| 🔴 CRITICAL | `.bind()` without reference         | pix-toast                          | High   |
+| 🔴 CRITICAL | Global listener race condition      | pix-color                          | Medium |
+| 🔴 CRITICAL | `document.body.dataset` side effect | pix-splitter                       | Medium |
+| 🔴 CRITICAL | MutationObserver loop risk          | pix-sortable                       | Medium |
+| 🔴 CRITICAL | Incomplete disconnectedCallback     | pix-toast-stack, pix-recorder      | High   |
+| 🟡 MODERATE | `light-dark()` without fallback     | All                                | High   |
+| 🟡 MODERATE | `adoptedStyleSheets` ordering       | All                                | Low    |
+| 🟡 MODERATE | Microphone recovery                 | pix-recorder                       | Medium |
+| 🟡 MODERATE | Missing `aria-live`                 | pix-command                        | Medium |
+| 🟡 MODERATE | `_` vs `#` inconsistency            | All                                | Low    |
+| 🟡 MODERATE | Native input bypass                 | pix-color                          | Low    |
+| 🟡 MODERATE | Touch drag threshold                | pix-sortable                       | Medium |
+| 🟡 MODERATE | ElementInternals not implemented    | pix-color, pix-sortable            | Low    |
+| 🟢 MINOR    | innerHTML escape                    | pix-color                          | Low    |
+| 🟢 MINOR    | WAV format not implemented          | pix-recorder                       | Low    |
+| 🟢 MINOR    | Static gradient slider              | pix-color                          | Low    |
+| 🟢 MINOR    | Template missing shared deps        | pix-component-template             | High   |
+| 🟢 MINOR    | Zero test coverage                  | 5 newer components                 | High   |
+| 🟢 MINOR    | Duplicate SSR boilerplate           | All                                | Low    |
