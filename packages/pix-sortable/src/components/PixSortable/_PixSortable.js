@@ -87,7 +87,7 @@ class PixSortable extends HTMLElement {
 
   #init() {
     // Live region: sibling of the listbox (aria-live cannot be a child of
-    // role=listbox — axe flags aria-required-children otherwise).
+    // role=listbox - axe flags aria-required-children otherwise).
     const announce = document.createElement('div');
     announce.setAttribute('data-part', 'announce');
     announce.setAttribute('role', 'status');
@@ -118,7 +118,7 @@ class PixSortable extends HTMLElement {
 
   #rebuild() {
     this.#observer?.disconnect();
-    this.#observer?.takeRecords(); // svuota coda mutazioni pendenti
+    this.#observer?.takeRecords(); // drain pending mutation queue
     this.#observer = null;
 
     const listbox = this.#listbox;
@@ -180,7 +180,7 @@ class PixSortable extends HTMLElement {
     }
 
     // NOTE: the MutationObserver is created once in #rebuild() after all
-    // child mutations are applied. Never re-create it here — doing so would
+    // child mutations are applied. Never re-create it here - doing so would
     // stack observers per item and re-trigger #rebuild on the DOM writes
     // above (prepend/append), risking an infinite loop.
 
@@ -293,7 +293,7 @@ class PixSortable extends HTMLElement {
   #handleTouchMove(event) {
     if (!this.#touchDrag) return;
 
-    // Movement threshold: se l'utente ha spostato il dito > 10px, è scroll, non drag
+    // Movement threshold: if the user moved their finger > 10px, it's a scroll, not a drag
     const dx = Math.abs(event.touches[0].clientX - this.#touchDrag.startX);
     const dy = Math.abs(event.touches[0].clientY - this.#touchDrag.startY);
     if (!this.#touchDrag.active && (dx > 10 || dy > 10)) {
