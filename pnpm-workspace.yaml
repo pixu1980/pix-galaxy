@@ -1,4 +1,16 @@
 packages:
   - 'packages/*'
+  # Scaffold template: contains {%...%} placeholders, not a runnable workspace package.
+  - '!packages/pix-component-template'
 allowBuilds:
   esbuild: true
+minimumReleaseAgeExclude:
+  - vite@8.2.1
+
+# Supply-chain overrides: force patched versions of transitive deps flagged by
+# GitHub Dependabot (brace-expansion DoS, js-yaml omap CPU) until upstream
+# ranges resolve them. Scoped by declared range so different majors coexist.
+overrides:
+  'brace-expansion@^1.1.7': '1.1.18'
+  'brace-expansion@^5.0.5': '5.0.9'
+  'js-yaml@^4.2.2': '4.3.1'
