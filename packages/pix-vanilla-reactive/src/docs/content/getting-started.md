@@ -52,4 +52,4 @@ effect(() => render(view.get(), document.querySelector('#app')));
 | Template | `html\`\``, `render()`, `model`, `repeat`     | DOM rendering with incremental updates             |
 | Bridge   | `createTickState(store)`                      | Store → signals notification                       |
 
-Works with plain custom elements — see the How It Works page.
+Works with plain custom elements - see the How It Works page.

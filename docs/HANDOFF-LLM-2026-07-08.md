@@ -1,4 +1,4 @@
-# pix-galaxy — LLM Handoff
+# pix-galaxy - LLM Handoff
 
 **Date:** 2026-07-08  
 **Audience:** future LLM/developer session  
@@ -367,8 +367,8 @@ New decisions recorded during the 2026-07-09 architect session:
 
 ## 6. Recommended Next Steps
 
-1. ~~Review large git diff carefully.~~ Done — split into logical commits (2026-07-09).
-2. ~~Decide whether to commit `.agents/` changes~~ Done — skills migrated to `pix-galaxy-mcp` ([ADR-024](adr/0024-migrate-skills-to-mcp.md)), `.agents/` removed.
+1. ~~Review large git diff carefully.~~ Done - split into logical commits (2026-07-09).
+2. ~~Decide whether to commit `.agents/` changes~~ Done - skills migrated to `pix-galaxy-mcp` ([ADR-024](adr/0024-migrate-skills-to-mcp.md)), `.agents/` removed.
 3. Add formal `lint:css` script using `lightningcss` parser check.
 4. Clean remaining ESLint warnings when convenient.
 5. Consider storage migration from old `pix-display-preferences` key.

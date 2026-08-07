@@ -1,6 +1,6 @@
 # Releasing
 
-This package is private — part of the pix-galaxy monorepo. No npm publish.
+This package is private - part of the pix-galaxy monorepo. No npm publish.
 
 ```bash
 # Validate CSS layer structure

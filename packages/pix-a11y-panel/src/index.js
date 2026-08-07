@@ -1,2 +1,2 @@
-/** pix-a11y-panel — public entry point. */
+/** pix-a11y-panel - public entry point. */
 export * from './components/index.js';

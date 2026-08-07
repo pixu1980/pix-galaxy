@@ -1,4 +1,4 @@
-/** pix-highlighter — documentation site entry. */
+/** pix-highlighter - documentation site entry. */
 import { createDocsSite, buildDocsPages } from '@pix-galaxy/pix-core/docs/docs-site.js';
 
 export const examples = Object.freeze([

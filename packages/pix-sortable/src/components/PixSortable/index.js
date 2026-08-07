@@ -1,2 +1,2 @@
-/** PixSortable — barrel. */
+/** PixSortable - barrel. */
 export * from './_PixSortable.js';

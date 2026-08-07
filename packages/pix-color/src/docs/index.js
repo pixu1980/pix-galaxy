@@ -1,4 +1,4 @@
-/** pix-color — documentation site entry. */
+/** pix-color - documentation site entry. */
 import { createDocsSite, buildDocsPages } from '@pix-galaxy/pix-core/docs/docs-site.js';
 
 const examples = [

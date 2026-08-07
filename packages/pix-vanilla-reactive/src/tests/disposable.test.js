@@ -3,7 +3,7 @@
  * DisposableStack / AsyncDisposableStack semantics.
  *
  * The framework targets Safari 17.5+ where `using` syntax and
- * `Symbol.dispose` may be absent — so every feature here must also work
+ * `Symbol.dispose` may be absent - so every feature here must also work
  * through the plain `.dispose()` / `.dispose()`-stack API.
  */
 import { describe, it } from 'node:test';

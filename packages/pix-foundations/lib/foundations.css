@@ -1,4 +1,4 @@
-/* pix-foundations — entry point
+/* pix-foundations - entry point
  *
  * Import order: reset → helpers → foundations tokens → typography
  *
@@ -24,5 +24,5 @@
 
 /* Focus ring is intentionally UNLAYERED so it beats all component CSS.
  * WCAG 2.2 SC 2.4.7 requires the focus indicator to always be visible
- * regardless of component-specific styles — unlayered > all layered.    */
+ * regardless of component-specific styles - unlayered > all layered.    */
 @import './_focus.css';

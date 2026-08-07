@@ -14,7 +14,7 @@ Accepted
 
 - Replace `standard-version` with **`commit-and-tag-version`**
 - Adopt the release orchestration from `pi-coding-agent-extensions` (`scripts/release.mjs`): per-package semver bump, CHANGELOG, tag `<name>@<version>`, `--first-release` support
-- Releases run **locally** (`pnpm release`), publishing with the developer's npm auth — no CI publish with `NPM_TOKEN`
+- Releases run **locally** (`pnpm release`), publishing with the developer's npm auth - no CI publish with `NPM_TOKEN`
 - Remove/neutralize `.github/workflows/release.yml` NPM_TOKEN publish path
 
 ## Consequences

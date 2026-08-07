@@ -1,2 +1,2 @@
-/** pix-highlighter — public entry point. */
+/** pix-highlighter - public entry point. */
 export * from './components/index.js';

@@ -6,7 +6,7 @@
 import { Store } from '@pix-galaxy/pix-vanilla-reactive';
 
 const store = new Store(initialState, { eventsTarget });
-store.state; // reactive proxy — mutate directly
+store.state; // reactive proxy - mutate directly
 store.get(path); // read by dot-path
 store.set(path, value); // write by dot-path
 store.update(path, fn); // (current) => next

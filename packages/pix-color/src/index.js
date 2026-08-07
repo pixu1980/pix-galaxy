@@ -1,2 +1,2 @@
-/** pix-color — public entry point. */
+/** pix-color - public entry point. */
 export * from './components/index.js';

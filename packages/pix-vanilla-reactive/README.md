@@ -14,7 +14,7 @@ trusted-HTML escape hatch. The Store blocks prototype-chain keys
 
 ## Examples
 
-Open `examples/` with any static server — no build step:
+Open `examples/` with any static server - no build step:
 
 ```bash
 npx serve examples/     # then open /counter.html, /todo.html, /form.html
@@ -71,12 +71,12 @@ effect(() => render(view.get(), document.querySelector('#app')));
 
 ## How it works
 
-- **Store** — a `Proxy`-wrapped state tree; mutations fire `store:change`.
-- **Signals** — `State` (writable), `Computed` (lazy derived), `effect`
+- **Store** - a `Proxy`-wrapped state tree; mutations fire `store:change`.
+- **Signals** - `State` (writable), `Computed` (lazy derived), `effect`
   (auto-tracked side effects), batched on the microtask queue.
-- **Template engine** — `html\`\``results render incrementally into the DOM
+- **Template engine** - `html\`\``results render incrementally into the DOM
 via parts;`{{ expr | filter }}`for data,`${value}` for JS values.
-- **Bridge** — `createTickState` converts store writes into signal
+- **Bridge** - `createTickState` converts store writes into signal
   notifications, so computed views re-render on any mutation.
 
 ## Docs

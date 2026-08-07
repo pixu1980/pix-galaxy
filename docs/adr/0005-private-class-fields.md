@@ -20,8 +20,8 @@ Use `#private` fields for all internal state, DOM references, and bound handlers
 
 ## Consequences
 
-- Cannot be accessed by subclass — use `_protected` convention for extensible methods
-- Legacy components (accent-color-selector, highlighter) still use `_` prefix — migration pending
+- Cannot be accessed by subclass - use `_protected` convention for extensible methods
+- Legacy components (accent-color-selector, highlighter) still use `_` prefix - migration pending
 - Event listeners must be pre-bound private fields (never inline arrows or `.bind()`) to allow removal in `disconnectedCallback`
 
 ## Tags

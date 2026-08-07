@@ -1,5 +1,5 @@
 /**
- * Store unit tests — uses the Node 20+ global CustomEvent / EventTarget.
+ * Store unit tests - uses the Node 20+ global CustomEvent / EventTarget.
  */
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';

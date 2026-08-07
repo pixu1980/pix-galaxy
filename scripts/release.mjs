@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * release.mjs — pix-galaxy monorepo release orchestration
+ * release.mjs - pix-galaxy monorepo release orchestration
  *
  * Discover non-private packages in packages/, release those with changes
  * since last git tag (commit-and-tag-version bump + npm publish).
@@ -11,7 +11,7 @@
  * to poll the registry until the package is confirmed available.
  *
  * Packages declaring dual-use content (contentPolicy in package.json)
- * must be published with a 2FA-enforced method — local `npm publish`
+ * must be published with a 2FA-enforced method - local `npm publish`
  * satisfies this as long as the npm session is 2FA-authenticated.
  *
  * Usage:
@@ -100,14 +100,14 @@ function verifyNpmAvailability(
         return;
       }
     } catch {
-      // not yet available — scan still running
+      // not yet available - scan still running
     }
 
     if (waited >= maxWaitMs) {
       const elapsed = Math.round(waited / 1000);
       console.log(
         `   ⚠  ${name}@${version} not available after ${elapsed}s ` +
-          `— may still be scanning. Check https://www.npmjs.com/package/${name}`,
+          `- may still be scanning. Check https://www.npmjs.com/package/${name}`,
       );
       return;
     }
@@ -122,7 +122,7 @@ function verifyNpmAvailability(
 }
 
 console.log('═══════════════════════════════════════════');
-console.log('  pix-galaxy — monorepo release');
+console.log('  pix-galaxy - monorepo release');
 console.log(`  dry-run: ${isDryRun ? '✓' : '✗'}`);
 console.log(`  force:   ${isForced ? '✓' : '✗'}`);
 console.log(`  verify:  ${isVerify ? '✓' : '✗'}`);
@@ -130,7 +130,7 @@ console.log('══════════════════════�
 
 if (!isWorkingTreeClean()) {
   if (isDryRun) {
-    console.log('⚠  Working tree dirty — dry-run proceeds anyway.\n');
+    console.log('⚠  Working tree dirty - dry-run proceeds anyway.\n');
   } else {
     console.error('✗ Working tree not clean. Commit or stash first.');
     process.exit(1);
@@ -156,7 +156,7 @@ if (!isDryRun) {
 try {
   execSync('commit-and-tag-version --version', { stdio: 'pipe' });
 } catch {
-  console.log('commit-and-tag-version not found — run pnpm install first.\n');
+  console.log('commit-and-tag-version not found - run pnpm install first.\n');
   process.exit(1);
 }
 
@@ -197,7 +197,7 @@ for (const pkg of packages) {
 
   // Check for dual-use content declaration (npm contentPolicy)
   if (pkgJson.contentPolicy != null) {
-    console.log(`   ⚐  contentPolicy declared — 2FA-enforced publish required`);
+    console.log(`   ⚐  contentPolicy declared - 2FA-enforced publish required`);
     console.log(`   ⚐  ensure npm session is 2FA-authenticated and DISCLOSURE file present`);
   }
 
@@ -213,7 +213,7 @@ for (const pkg of packages) {
       }
     }
   } else {
-    console.log(`   ⚑ no tag found — first release`);
+    console.log(`   ⚑ no tag found - first release`);
   }
 
   // ── Release ──
@@ -239,7 +239,7 @@ for (const pkg of packages) {
       // npm now runs malware scanning at publish time (~5 min delay)
       console.log(`   ✅ ${name} published!`);
       console.log(
-        `   ℹ  npm malware scan — available in ~5 min (check Staged Packages on npm)`,
+        `   ℹ  npm malware scan - available in ~5 min (check Staged Packages on npm)`,
       );
 
       if (isVerify) {

@@ -6,7 +6,7 @@ Accepted
 
 ## Context
 
-`light-dark()` unsupported on older browsers — the declaration is completely dropped, not partially applied.
+`light-dark()` unsupported on older browsers - the declaration is completely dropped, not partially applied.
 
 ## Decision
 

@@ -1,4 +1,4 @@
-/** pix-color-scheme-selector — documentation site entry. */
+/** pix-color-scheme-selector - documentation site entry. */
 import { createDocsSite, buildDocsPages } from '@pix-galaxy/pix-core/docs/docs-site.js';
 
 export const examples = Object.freeze([

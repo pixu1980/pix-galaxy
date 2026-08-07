@@ -1,4 +1,4 @@
-var e=Object.defineProperty,t=(t,n,r)=>n in t?e(t,n,{enumerable:!0,configurable:!0,writable:!0,value:r}):t[n]=r,n=(e,n,r)=>t(e,typeof n==`symbol`?n:n+``,r),r=`/** PixHighlighter — pix-highlighter component styles. */
+var e=Object.defineProperty,t=(t,n,r)=>n in t?e(t,n,{enumerable:!0,configurable:!0,writable:!0,value:r}):t[n]=r,n=(e,n,r)=>t(e,typeof n==`symbol`?n:n+``,r),r=`/** PixHighlighter - pix-highlighter component styles. */
 @layer pix-galaxy {
   @layer pix-highlighter {
     ::highlight(pix-kw),
@@ -683,7 +683,7 @@ var e=Object.defineProperty,t=(t,n,r)=>n in t?e(t,n,{enumerable:!0,configurable:
     }
   }
 }
-`,f=`/* pix-foundations — entry point
+`,f=`/* pix-foundations - entry point
  *
  * Import order: reset → helpers → foundations tokens → typography
  *
@@ -709,7 +709,7 @@ var e=Object.defineProperty,t=(t,n,r)=>n in t?e(t,n,{enumerable:!0,configurable:
 
 /* Focus ring is intentionally UNLAYERED so it beats all component CSS.
  * WCAG 2.2 SC 2.4.7 requires the focus indicator to always be visible
- * regardless of component-specific styles — unlayered > all layered.    */
+ * regardless of component-specific styles - unlayered > all layered.    */
 @import "./_focus.css";
 
 `,p=Object.freeze([`kw`,`str`,`num`,`com`,`id`,`fn`,`op`,`tag`,`attr`,`key`,`var`,`mac`,`pp`,`prop`,`type`,`mdh`,`mde`,`mds`,`mdc`,`mdl`,`mdbq`,`mdli`,`mdhr`,`mdimg`]);function m(e){let t=(e||``).toLowerCase().trim();return new Map([[`javascript`,`js`],[`mjs`,`js`],[`cjs`,`js`],[`typescript`,`ts`],[`tsx`,`ts`],[`py`,`python`],[`rs`,`rust`],[`c++`,`cpp`],[`hpp`,`cpp`],[`h++`,`cpp`],[`cs`,`csharp`],[`md`,`markdown`],[`yaml`,`yml`],[`shell`,`bash`],[`zsh`,`bash`],[`scss`,`css`],[`sass`,`css`]]).get(t)||t||`js`}var h=m;function g(e){return(t,n,r)=>{r>n&&e.push({type:t,start:n,end:r})}}function _(e,t,n,r={}){let i=e.length,a=t+1;for(r.includePrefix&&t--;a<i;){let t=e[a];if(t===`\\`){a+=2;continue}if(t===n){a++;break}a++}return[t,a]}function v(e,t){let n=t;if(e[n]===`-`&&n++,e.startsWith(`0x`,n)){for(n+=2;/[0-9a-fA-F_]/.test(e[n]);)n++;return[t,n]}if(e.startsWith(`0b`,n)){for(n+=2;/[01_]/.test(e[n]);)n++;return[t,n]}if(e.startsWith(`0o`,n)){for(n+=2;/[0-7_]/.test(e[n]);)n++;return[t,n]}for(;/[0-9_]/.test(e[n]);)n++;if(e[n]===`.`&&/[0-9]/.test(e[n+1]||``))for(n++;/[0-9_]/.test(e[n]);)n++;if((e[n]||``).toLowerCase()===`e`){let t=n+1;if((e[t]===`+`||e[t]===`-`)&&t++,/[0-9]/.test(e[t]||``))for(n=t+1;/[0-9_]/.test(e[n]);)n++}for(;/[a-zA-Z]/.test(e[n]||``);)n++;return[t,n]}function y(e,t){for(;/\s/.test(e[t]||``);)t++;return t}function b(e){return/[A-Za-z_$]/.test(e)}function x(e){return/[\w$-]/.test(e)}function S(e){let t=new Set([`if`,`then`,`elif`,`else`,`fi`,`for`,`in`,`do`,`done`,`case`,`esac`,`while`,`until`,`function`,`select`,`time`,`coproc`]),n=[],r=g(n),i=0,a=e.length;for(;i<a;){let n=e[i];if(i===0&&e.startsWith(`#!`,0)){let t=0;for(;t<a&&e[t]!==`

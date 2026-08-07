@@ -1,3 +1,3 @@
-/** Barrel — pix-toast components. */
+/** Barrel - pix-toast components. */
 export * from './PixToast/index.js';
 export * from './PixToast/index.js';

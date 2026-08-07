@@ -1,11 +1,11 @@
 # Examples
 
-Runnable HTML examples live in `examples/` — open them with any static
-server (e.g. `npx serve examples/`) — no build step needed:
+Runnable HTML examples live in `examples/` - open them with any static
+server (e.g. `npx serve examples/`) - no build step needed:
 
-- `examples/counter.html` — Store + tick bridge + computed view
-- `examples/todo.html` — `model` bindings, `repeat()` with interactive items
-- `examples/form.html` — Store-driven form with validation and `aria-live`
+- `examples/counter.html` - Store + tick bridge + computed view
+- `examples/todo.html` - `model` bindings, `repeat()` with interactive items
+- `examples/form.html` - Store-driven form with validation and `aria-live`
 
 ## Reactive list with filtering
 

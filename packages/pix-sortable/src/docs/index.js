@@ -1,4 +1,4 @@
-/** pix-sortable — documentation site entry. */
+/** pix-sortable - documentation site entry. */
 import { createDocsSite, buildDocsPages } from '@pix-galaxy/pix-core/docs/docs-site.js';
 
 const examples = [

@@ -1,4 +1,4 @@
-/** pix-component-template — documentation site entry. */
+/** pix-component-template - documentation site entry. */
 import { createDocsSite, buildDocsPages } from '@pix-galaxy/pix-core/docs/docs-site.js';
 
 const examples = [

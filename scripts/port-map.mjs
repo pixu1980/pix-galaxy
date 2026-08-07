@@ -1,5 +1,5 @@
 /**
- * port-map.mjs — canonical dev-port order for pix-galaxy.
+ * port-map.mjs - canonical dev-port order for pix-galaxy.
  *
  * Single source of truth shared by:
  *   - scripts/dev-all.mjs  (assigns VITE_DEV_PORTS)

@@ -46,7 +46,7 @@ function withContext(context) {
   };
 }
 
-describe('XSS — ${} slots and {{ }} expressions', () => {
+describe('XSS - ${} slots and {{ }} expressions', () => {
   it('${} slots render values as text nodes', () => {
     const container = withContext({})`<p>${XSS_PAYLOAD}</p>`;
     assert.equal(container.querySelector('img'), null);
@@ -68,7 +68,7 @@ describe('XSS — ${} slots and {{ }} expressions', () => {
   });
 });
 
-describe('XSS — <for>/<if> string blocks', () => {
+describe('XSS - <for>/<if> string blocks', () => {
   it('{{ }} inside <for> is escaped by default', () => {
     const container = withContext({ todos: [{ id: 1, title: XSS_PAYLOAD }] })`
       <ul><for each="todo in todos"><li>{{ todo.title }}</li></for></ul>`;
@@ -96,7 +96,7 @@ describe('XSS — <for>/<if> string blocks', () => {
   });
 });
 
-describe('Store — prototype pollution guard', () => {
+describe('Store - prototype pollution guard', () => {
   it('store.set blocks __proto__/prototype/constructor paths', () => {
     const store = new Store({});
     for (const path of [

@@ -18,7 +18,7 @@ template engine parses each unique template once (cached) and drives live
 
 | Syntax                   | Part type  | Behavior                                              |
 | ------------------------ | ---------- | ----------------------------------------------------- |
-| `${expr}`                | child slot | JS value — handler, signal, iterable, directive       |
+| `${expr}`                | child slot | JS value - handler, signal, iterable, directive       |
 | `{{ expr }}`             | expression | Data read + filter pipes, e.g. `{{ title \| upper }}` |
 | `@click=${fn}`           | event      | Event listener                                        |
 | `.value=${v}`            | property   | DOM property assignment                               |
@@ -39,12 +39,12 @@ re-run effects on the microtask queue (multiple changes collapse into one run).
 
 ## Store rules
 
-1. Mutate `store.state` directly — Proxy traps fire `store:change`.
+1. Mutate `store.state` directly - Proxy traps fire `store:change`.
 2. Replace arrays/objects immutably: `store.state.todos = [...todos, next]`.
 3. Computed signals that read store state **must also read** `tick.get()`.
 4. Use `store.snapshot()` / `deepClone()` before handing state outside.
 5. Reserved keys (`__proto__`, `prototype`, `constructor`) are **blocked** in
-   every path — writes throw a `TypeError` (prototype-pollution guard).
+   every path - writes throw a `TypeError` (prototype-pollution guard).
 
 ## Security model
 
@@ -59,27 +59,27 @@ re-run effects on the microtask queue (multiple changes collapse into one run).
 
 ## Pitfalls
 
-1. **`${}` after `attr=`** — a slot directly after `name=` in _text_ is parsed
+1. **`${}` after `attr=`** - a slot directly after `name=` in _text_ is parsed
    as an attribute. Use `{{ }}` (or add a space) for text like `<p>n={{ n }}</p>`.
 2. **Item handlers need proxy items.** `store.snapshot()` returns plain clones;
    mutating them does nothing. Read lists through the proxy
    (`store.state.todos`) so handlers like `todo.done = true` propagate.
-3. **Forget `tick.get()` in computeds** that read store state — the view never
+3. **Forget `tick.get()` in computeds** that read store state - the view never
    re-renders.
-4. **Forget `result._context`** — `{{ }}` expressions resolve to nothing.
+4. **Forget `result._context`** - `{{ }}` expressions resolve to nothing.
 5. **`<for>` string mode is static.** `{{ }}` works, but `${}` handlers cannot
    reference the loop item. Use `repeat()` for interactive items.
 
 ## Unmounting and Explicit Resource Management
 
 `render(null, container)` releases every subscription held by the mounted view
-and empties the container. `effect()` returns a disposer — call it when
+and empties the container. `effect()` returns a disposer - call it when
 removing a component to stop its re-renders.
 
 Every disposable in the framework implements **both** cleanup protocols:
 
-- `.dispose()` — works on every supported engine (including Safari 17.5)
-- `[Symbol.dispose]()` — attached when the engine defines the symbol
+- `.dispose()` - works on every supported engine (including Safari 17.5)
+- `[Symbol.dispose]()` - attached when the engine defines the symbol
   (Chrome 125+, Firefox 141+, Node 18.18+, Safari 26.4+)
 
 | Thing                      | Disposer                             | Disposes                     |
@@ -128,6 +128,6 @@ ones attached as `.suppressed` (SuppressedError-compatible shape).
 
 The `using`/`await using` declaration is native only on ES2026 engines
 (Chrome 134+, Firefox 141+, Node 24+). pix-galaxy targets Safari 17.5+, where
-the syntax is a parse error — so the framework ships the symbol-based
+the syntax is a parse error - so the framework ships the symbol-based
 protocol (feature-detected) and the stacks instead, and consumers opt into
 `using` on the engines that support it.

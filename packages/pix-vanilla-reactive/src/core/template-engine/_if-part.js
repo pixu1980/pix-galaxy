@@ -11,7 +11,7 @@ import { renderInnerTemplate } from './_inner-template.js';
 
 /**
  * Renders the inner template only while the condition is truthy. The
- * condition expression may resolve to a signal — the block then toggles
+ * condition expression may resolve to a signal - the block then toggles
  * automatically.
  */
 export class IfPart {

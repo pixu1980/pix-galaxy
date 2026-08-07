@@ -1,4 +1,4 @@
-/** Lexer — Php syntax tokens. */
+/** Lexer - Php syntax tokens. */
 import { isIdentStart, makePusher, readNumber, readString } from './_Utils.js';
 
 // biome-ignore lint/complexity/noExcessiveCognitiveComplexity: lexer scanners are intentionally branch-heavy.

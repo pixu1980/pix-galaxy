@@ -61,7 +61,7 @@ export class AttributePart extends Part {
         this.value = value;
         return;
       }
-      // Accept a raw `{ get, set, signal }` config object — the documented
+      // Accept a raw `{ get, set, signal }` config object - the documented
       // `model=${{ get, set }}` shorthand.
       const rawConfig =
         value && typeof value === 'object' ? /** @type {Partial<ModelConfig>} */ (value) : null;
