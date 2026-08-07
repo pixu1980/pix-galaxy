@@ -1,5 +1,5 @@
 /**
- * Template engine tests — DOM via jsdom.
+ * Template engine tests - DOM via jsdom.
  */
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';

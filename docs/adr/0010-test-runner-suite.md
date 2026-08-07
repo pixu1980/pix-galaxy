@@ -23,7 +23,7 @@ Use Playwright for e2e tests (22 tests covering portal + all docs sites). Each c
 - Tests depend on dev servers running (12 servers)
 - CI needs dev server setup
 - Portal card count test must be kept in sync with `components.json`
-- Unit tests per component planned (Phase 4) — registration, render, events, cleanup
+- Unit tests per component planned (Phase 4) - registration, render, events, cleanup
 
 ## Tags
 

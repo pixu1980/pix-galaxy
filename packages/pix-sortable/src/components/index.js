@@ -1,2 +1,2 @@
-/** Barrel — pix-sortable components. */
+/** Barrel - pix-sortable components. */
 export * from './PixSortable/index.js';

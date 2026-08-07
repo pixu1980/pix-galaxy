@@ -1,4 +1,4 @@
-# pix-galaxy — Handoff Document
+# pix-galaxy - Handoff Document
 
 > **Author:** Senior Software/Product Engineer  
 > **Date:** 2026-07-07  
@@ -107,7 +107,7 @@ packages/pix-<name>/
 │   ├── raw-text-loader.mjs
 │   ├── raw-text-plugin.mjs
 │   ├── register-test-loader.mjs
-│   └── release.mjs               # DEPRECATED — removed, use root script
+│   └── release.mjs               # DEPRECATED - removed, use root script
 ├── src/
 │   ├── index.js                  # Re-exports from components/
 │   ├── index.types.js            # JSDoc typedefs
@@ -203,7 +203,7 @@ Key decisions that shape this document:
 | [001](adr/0001-light-dom-over-shadow-dom.md)      | Light DOM over Shadow DOM                                                                          |
 | [004](adr/0004-light-dark-fallback.md)            | CSS fallback before `light-dark()`                                                                 |
 | [007](adr/0007-shared-docs-template.md)           | Shared docs template in `pix-core`                                                                 |
-| [009](adr/0009-release-standard-version.md)       | Release via standard-version — **superseded by [018](adr/0018-release-commit-and-tag-version.md)** |
+| [009](adr/0009-release-standard-version.md)       | Release via standard-version - **superseded by [018](adr/0018-release-commit-and-tag-version.md)** |
 | [011](adr/0011-rename-a11y-panel.md)              | Rename `pix-display-preferences` → `pix-a11y-panel`                                                |
 | [012](adr/0012-centralize-foundations.md)         | Centralize design foundations                                                                      |
 | [014](adr/0014-centralize-pix-core.md)            | Centralize shared runtime/scripts                                                                  |
@@ -242,7 +242,7 @@ Key decisions that shape this document:
 
 - **URL:** http://localhost:3000
 - **Source:** `src/docs/`
-- **Content:** `src/docs/content/components.json` — includes a "Coming Soon..." placeholder card
+- **Content:** `src/docs/content/components.json` - includes a "Coming Soon..." placeholder card
 
 ### Workspace Port Map
 
@@ -362,8 +362,8 @@ Drag handle auto-added. Keyboard: Alt+Arrow, Enter, Escape. Touch: long-press wi
 | Method         | Returns | Description           |
 | -------------- | ------- | --------------------- |
 | `add(config)`  | string  | Add toast, returns ID |
-| `dismiss(id)`  | —       | Dismiss by ID         |
-| `dismissAll()` | —       | Dismiss all           |
+| `dismiss(id)`  | -       | Dismiss by ID         |
+| `dismissAll()` | -       | Dismiss all           |
 
 Config: `{ id?, title?, message, variant, duration, dismissible }`. Smart queuing (max-visible=5), dedup by ID.
 
@@ -441,10 +441,10 @@ const SHEET = [foundationsCSS, mainCSS].join('\n');
 **Never use inline arrow functions in `addEventListener`:**
 
 ```js
-// ❌ BAD — leaks on every mount/unmount
+// ❌ BAD - leaks on every mount/unmount
 this.#bar.addEventListener('click', (e) => { ... });
 
-// ✅ GOOD — stable reference
+// ✅ GOOD - stable reference
 #onBarClick = (e) => { ... };
 this.#bar.addEventListener('click', this.#onBarClick);
 disconnectedCallback() { this.#bar.removeEventListener('click', this.#onBarClick); }
@@ -453,10 +453,10 @@ disconnectedCallback() { this.#bar.removeEventListener('click', this.#onBarClick
 **Never use `.bind()` in `addEventListener`:**
 
 ```js
-// ❌ BAD — new reference every time, cannot remove
+// ❌ BAD - new reference every time, cannot remove
 this.addEventListener('click', this.#handleClick.bind(this));
 
-// ✅ GOOD — pre-bound via private field
+// ✅ GOOD - pre-bound via private field
 #onClick = (e) => this.#handleClick(e);
 ```
 
@@ -510,7 +510,7 @@ The script:
 
 1. Ensures clean working tree
 2. Discovers all non-private packages in `packages/`
-3. For each: checks if changes exist since last `@pix-galaxy/pkg@version` tag (or if no tag exists — first release)
+3. For each: checks if changes exist since last `@pix-galaxy/pkg@version` tag (or if no tag exists - first release)
 4. Runs `commit-and-tag-version --tag-prefix "@pix-galaxy/pkg@"` (ADR-018, fork mantenuto di standard-version) for semver bump + CHANGELOG + tag
 5. Runs `pnpm publish --access public`
 6. Pushes tags
@@ -519,7 +519,7 @@ The script:
 
 Triggered by tag push matching `@pix-galaxy/*@*`. The workflow in `.github/workflows/release.yml` is a **quality gate** (ADR-018): it no longer publishes to npm with a token. It runs typecheck + tests + build for the tagged package, since publishing happens **locally** via `pnpm release`.
 
-**No secrets required** — releases use local npm auth.
+**No secrets required** - releases use local npm auth.
 
 ---
 
@@ -540,7 +540,7 @@ Triggered by tag push matching `@pix-galaxy/*@*`. The workflow in `.github/workf
 
 ### Low Priority
 
-- **Console.log in docs examples:** Code examples in docs use `console.log` — fine for examples, not a real issue.
+- **Console.log in docs examples:** Code examples in docs use `console.log` - fine for examples, not a real issue.
 - **Scaffold script needs `.DS_Store` exclusion:** Copying template includes `.DS_Store` files on macOS.
 - **dev-all.mjs port conflict:** If port range 3000–3011 is occupied, servers shift silently.
 
@@ -550,10 +550,10 @@ Triggered by tag push matching `@pix-galaxy/*@*`. The workflow in `.github/workf
 
 ### Next Components (from architectural review)
 
-1. **pix-combobox** — Accessible autocomplete with `aria-activedescendant`, fuzzy filtering, remote data
-2. **pix-tabs** — Tab panel with `role="tablist"`, keyboard navigation, orientation
-3. **pix-tooltip** — CSS anchor-positioning based tooltip with `role="tooltip"`
-4. **pix-tree** — Tree view with async loading, checkbox support, keyboard navigation
+1. **pix-combobox** - Accessible autocomplete with `aria-activedescendant`, fuzzy filtering, remote data
+2. **pix-tabs** - Tab panel with `role="tablist"`, keyboard navigation, orientation
+3. **pix-tooltip** - CSS anchor-positioning based tooltip with `role="tooltip"`
+4. **pix-tree** - Tree view with async loading, checkbox support, keyboard navigation
 
 ### Infrastructure
 

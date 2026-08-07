@@ -1,10 +1,10 @@
-/* pix-foundations — form controls
+/* pix-foundations - form controls
  *
  * Unified sizing, borders, colors, and typography for ALL interactive
  * form elements: buttons, inputs, selects, textareas, and checkbox/radio
  * label wrappers.
  *
- * Heights: sm=3.6rem / md=4rem (default) / lg=4.4rem — set via
+ * Heights: sm=3.6rem / md=4rem (default) / lg=4.4rem - set via
  *          data-size="sm|md|lg" attribute or the unset default (md).
  *
  * Button variants: data-variant="primary" (filled accent bg + border)
@@ -18,7 +18,7 @@
   /* ─── tokens ───────────────────────────────────────────── */
 
   :root {
-    /* Height scale — default md */
+    /* Height scale - default md */
     --pix-ds--ctrl--h-sm: 3.6rem;
     --pix-ds--ctrl--h-md: 4rem;
     --pix-ds--ctrl--h-lg: 4.4rem;
@@ -38,14 +38,14 @@
     --pix-ds--ctrl--color-muted: var(--pix-ds--c--text-muted);
     --pix-ds--ctrl--placeholder: var(--pix-ds--c--text-muted);
 
-    /* Primary variant — filled accent */
+    /* Primary variant - filled accent */
     --pix-ds--ctrl--primary-bg: var(--pix-ds--c--accent);
     --pix-ds--ctrl--primary-border: var(--pix-ds--c--accent);
     --pix-ds--ctrl--primary-color: var(--pix-ds--c--text-inverse);
     --pix-ds--ctrl--primary-bg-hover: var(--pix-ds--c--accent);
     --pix-ds--ctrl--primary-border-hover: var(--pix-ds--c--accent);
 
-    /* Secondary variant — accent border */
+    /* Secondary variant - accent border */
     --pix-ds--ctrl--secondary-bg: transparent;
     --pix-ds--ctrl--secondary-border: 1px solid var(--pix-ds--c--accent);
     --pix-ds--ctrl--secondary-color: var(--pix-ds--c--accent);

@@ -3,7 +3,7 @@
  * @module core/store/_store
  * Proxy-based state container.
  *
- * Mutate `store.state` directly — Proxy traps fire `store:change` events and
+ * Mutate `store.state` directly - Proxy traps fire `store:change` events and
  * notify per-store subscribers. Replace arrays/objects immutably
  * (`store.state.todos = [...]`) rather than pushing into existing arrays.
  *
@@ -20,7 +20,7 @@ import { makeDisposable } from '../disposable/index.js';
 export const STORE_CHANGE_EVENT = 'store:change';
 
 /**
- * Keys that must never be read-through or written by the store — they could
+ * Keys that must never be read-through or written by the store - they could
  * reach `Object.prototype` and enable prototype pollution.
  * @type {Set<string>}
  */
@@ -165,7 +165,7 @@ export class Store {
    * @param {(detail: StoreChangeDetail) => void} fn Listener receiving the
    *   change detail (`{ path, oldValue, newValue }`).
    * @returns {import('../disposable/_make-disposable.js').DisposableHandle & (() => void)}
-   *   Unsubscribe — callable for back-compat and `[Symbol.dispose]`-ready on
+   *   Unsubscribe - callable for back-compat and `[Symbol.dispose]`-ready on
    *   modern engines.
    */
   subscribe(fn) {
@@ -176,7 +176,7 @@ export class Store {
   }
 
   /**
-   * Read a value by dot-path. Nested objects are returned as proxies — clone
+   * Read a value by dot-path. Nested objects are returned as proxies - clone
    * them (`store.snapshot()` / `deepClone`) before handing them out.
    * @param {string | string[]} path
    * @returns {unknown}

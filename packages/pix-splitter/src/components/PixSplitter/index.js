@@ -1,2 +1,2 @@
-/** PixSplitter — barrel. */
+/** PixSplitter - barrel. */
 export * from './_PixSplitter.js';

@@ -1,4 +1,4 @@
-/* pix-foundations — radii
+/* pix-foundations - radii
  *
  * Single source of truth for border radius. Unit policy:
  * px only for tiny values up to 3px; rem for everything larger.

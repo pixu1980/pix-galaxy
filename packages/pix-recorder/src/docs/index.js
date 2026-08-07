@@ -1,4 +1,4 @@
-/** pix-recorder — documentation site entry. */
+/** pix-recorder - documentation site entry. */
 import { createDocsSite, buildDocsPages } from '@pix-galaxy/pix-core/docs/docs-site.js';
 
 const examples = [

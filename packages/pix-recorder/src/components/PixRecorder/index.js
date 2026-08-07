@@ -1,2 +1,2 @@
-/** PixRecorder — barrel. */
+/** PixRecorder - barrel. */
 export * from './_PixRecorder.js';

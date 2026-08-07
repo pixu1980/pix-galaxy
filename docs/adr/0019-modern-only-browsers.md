@@ -16,7 +16,7 @@ Target **modern-only** browsers (last ~2 years):
 - Safari 17.5+
 - Firefox 120+
 
-Despite the modern target, the `light-dark()` fallback pattern (ADR-004) is **kept** as cheap defence-in-depth — no new fallbacks are added elsewhere.
+Despite the modern target, the `light-dark()` fallback pattern (ADR-004) is **kept** as cheap defence-in-depth - no new fallbacks are added elsewhere.
 
 ## Consequences
 

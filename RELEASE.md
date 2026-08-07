@@ -123,7 +123,7 @@ The orchestrator (`scripts/release.mjs`):
 
 1. Verifies the working tree is clean (skipped in dry-run)
 2. Discovers non-private packages in `packages/`
-3. For each package with changes since its last tag (or no tag yet — first release):
+3. For each package with changes since its last tag (or no tag yet - first release):
    - Runs `commit-and-tag-version --tag-prefix "@pix-galaxy/<pkg>@"` (with `--first-release` when no tag exists)
    - Updates `package.json` version + `CHANGELOG.md`
    - Creates a release commit and tag `@pix-galaxy/<pkg>@<version>`
@@ -162,7 +162,7 @@ The orchestrator discovers changed packages and delegates the version bump to `c
 git diff --quiet "@pix-galaxy/pix-highlighter@0.1.0" -- packages/pix-highlighter/
 ```
 
-A missing tag means the package was never released — treated as a first release (`--first-release`, no version bump, CHANGELOG generated from all commits).
+A missing tag means the package was never released - treated as a first release (`--first-release`, no version bump, CHANGELOG generated from all commits).
 
 ## Per-Package Release
 
@@ -247,7 +247,7 @@ Triggered on `push` to `main` and on `pull_request`:
 
 ### Release Workflow (`.github/workflows/release.yml`)
 
-Triggered on tags matching `@pix-galaxy/*@*`. It is a **quality gate** — it does NOT publish (ADR-018):
+Triggered on tags matching `@pix-galaxy/*@*`. It is a **quality gate** - it does NOT publish (ADR-018):
 
 1. Checkout + Install
 2. Extract package name from tag: `@pix-galaxy/pix-highlighter@0.2.0` → `pix-highlighter`
@@ -274,7 +274,7 @@ https://registry.npmjs.org
 
 - All packages are scoped under `@pix-galaxy`
 - Published with `--access public`
-- Published from **local** npm auth (ADR-018) — no CI token
+- Published from **local** npm auth (ADR-018) - no CI token
 
 ## Prerequisites & Setup
 

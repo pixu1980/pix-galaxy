@@ -1,4 +1,4 @@
-/* pix-foundations — spacing scale
+/* pix-foundations - spacing scale
  *
  * Single source of truth for gap, padding, and margin.
  * Unit policy: px only for <= 3px; rem for spacing tokens.

@@ -1,4 +1,4 @@
-/** pix-toast — documentation site entry. */
+/** pix-toast - documentation site entry. */
 import { createDocsSite, buildDocsPages } from '@pix-galaxy/pix-core/docs/docs-site.js';
 
 const examples = [

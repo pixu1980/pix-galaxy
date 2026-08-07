@@ -1,4 +1,4 @@
-/** Lexer — CSS syntax tokens. */
+/** Lexer - CSS syntax tokens. */
 import { isIdent, isIdentStart, makePusher, readNumber, readString, skipSpace } from './_Utils.js';
 
 // biome-ignore lint/complexity/noExcessiveCognitiveComplexity: lexer scanners are intentionally branch-heavy.

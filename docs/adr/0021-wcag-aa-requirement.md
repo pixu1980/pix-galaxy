@@ -10,7 +10,7 @@ Accessibility is core to the library's value proposition.
 
 ## Decision
 
-Every component must meet **WCAG 2.2 AA** — keyboard navigation, ARIA semantics, color contrast, visible focus, screen-reader announcements (including `aria-live` for dynamic content). This is a hard requirement even when it slows development.
+Every component must meet **WCAG 2.2 AA** - keyboard navigation, ARIA semantics, color contrast, visible focus, screen-reader announcements (including `aria-live` for dynamic content). This is a hard requirement even when it slows development.
 
 ## Consequences
 

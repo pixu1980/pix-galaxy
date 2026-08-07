@@ -1,2 +1,2 @@
-/** A11yPanel — barrel. */
+/** A11yPanel - barrel. */
 export * from './_A11yPanel.js';

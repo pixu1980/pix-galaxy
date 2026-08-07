@@ -170,7 +170,7 @@ export function createDocsSite({ mount, docs, examples: exampleEntries, meta, af
             <pix-color-scheme-selector></pix-color-scheme-selector>
             <section data-part="live-preview">
               <p data-part="eyebrow">Live component</p>
-              ${meta.liveHtml || `<p style="color:var(--pix-ds-text-muted);font-size:0.875rem;">Live demo unavailable — open the docs site for this package.</p>`}
+              ${meta.liveHtml || `<p style="color:var(--pix-ds-text-muted);font-size:0.875rem;">Live demo unavailable - open the docs site for this package.</p>`}
             </section>
           </section>
         </header>

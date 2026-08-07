@@ -3,7 +3,7 @@
  * @module core/disposable/_symbols
  * Feature-detected well-known symbols for Explicit Resource Management
  * (ES2026). The symbols exist in Chrome 125+, Firefox 141+, Node 18.18+ and
- * Safari 26.4+ — but pix-galaxy targets Safari 17.5+, so the framework must
+ * Safari 26.4+ - but pix-galaxy targets Safari 17.5+, so the framework must
  * NOT use the `using`/`await using` syntax or assume the symbols exist.
  * Everything here degrades to plain `.dispose()` calls on older engines.
  */
@@ -46,7 +46,7 @@ export const HAS_ASYNC_DISPOSE = typeof ASYNC_DISPOSE === 'symbol';
 export function defineDisposable(cls) {
   if (!DISPOSE) return;
   const proto = /** @type {Record<PropertyKey, unknown>} */ (cls.prototype);
-  // Alias only the class's OWN dispose — subclasses overriding dispose() get
+  // Alias only the class's OWN dispose - subclasses overriding dispose() get
   // their own alias instead of inheriting the parent's.
   if (Object.prototype.hasOwnProperty.call(proto, 'dispose')) {
     Object.defineProperty(proto, DISPOSE, {

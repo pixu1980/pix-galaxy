@@ -1,7 +1,7 @@
 // @ts-check
 /**
  * @module core/signals/_state-signal
- * Writable state signal — the primitive behind `Signal.State`.
+ * Writable state signal - the primitive behind `Signal.State`.
  */
 
 import { BaseSignal } from './_base-signal.js';

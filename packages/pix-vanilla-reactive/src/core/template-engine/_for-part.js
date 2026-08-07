@@ -23,7 +23,7 @@ import { ChildNodePart } from './_child-node-part.js';
 
 /**
  * Renders a `<for each="item in items">` block with keyed reconciliation.
- * The `items` expression may resolve to a signal — the list then re-renders
+ * The `items` expression may resolve to a signal - the list then re-renders
  * on signal changes.
  */
 export class ForPart {

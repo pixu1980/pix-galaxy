@@ -1,5 +1,5 @@
 /**
- * Expression parser + filter tests — pure, no DOM.
+ * Expression parser + filter tests - pure, no DOM.
  */
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';

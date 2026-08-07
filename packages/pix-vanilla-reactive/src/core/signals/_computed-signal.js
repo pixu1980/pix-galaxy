@@ -1,7 +1,7 @@
 // @ts-check
 /**
  * @module core/signals/_computed-signal
- * Lazy derived signal — the primitive behind `Signal.Computed`.
+ * Lazy derived signal - the primitive behind `Signal.Computed`.
  */
 
 import { BaseSignal } from './_base-signal.js';

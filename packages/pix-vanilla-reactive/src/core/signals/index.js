@@ -69,7 +69,7 @@ export const Signal = {
  * @template T
  * @param {() => T} fn Effect body.
  * @returns {import('../disposable/_make-disposable.js').DisposableHandle & (() => void)}
- *   Disposer — stops the effect and frees dependencies. Callable for
+ *   Disposer - stops the effect and frees dependencies. Callable for
  *   back-compat and `[Symbol.dispose]`-ready on modern engines.
  * @example
  * const dispose = effect(() => render(root, store.state.todos));

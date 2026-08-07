@@ -4,7 +4,7 @@
  * Framework-owned DisposableStack / AsyncDisposableStack.
  *
  * Mirrors the ES2026 Explicit Resource Management stacks (`use`, `adopt`,
- * `defer`, `move`, `dispose`) but works on every supported engine — no
+ * `defer`, `move`, `dispose`) but works on every supported engine - no
  * dependency on the native `using` declaration or `Symbol.dispose`.
  *
  * Disposal runs in **reverse registration order** and, like `SuppressedError`,

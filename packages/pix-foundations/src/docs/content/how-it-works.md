@@ -17,9 +17,9 @@ Foundations is a pure CSS package. No JavaScript. No component registration. No 
 | `pix.foundations.colors`     | `--pix-ds--c--*` tokens with `light-dark()` |
 | `pix.foundations.elevations` | `--pix-ds--e--*` box-shadow tokens          |
 
-## Focus ring — unlayered
+## Focus ring - unlayered
 
-`_focus.css` is intentionally imported **outside** all layers. This guarantees WCAG 2.2 SC 2.4.7 compliance — the focus ring always shows regardless of component CSS.
+`_focus.css` is intentionally imported **outside** all layers. This guarantees WCAG 2.2 SC 2.4.7 compliance - the focus ring always shows regardless of component CSS.
 
 ## Theme switching
 

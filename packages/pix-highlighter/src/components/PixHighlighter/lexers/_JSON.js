@@ -1,4 +1,4 @@
-/** Lexer — JSON syntax tokens. */
+/** Lexer - JSON syntax tokens. */
 import { makePusher, readNumber, readString, skipSpace } from './_Utils.js';
 
 // biome-ignore lint/complexity/noExcessiveCognitiveComplexity: lexer scanners are intentionally branch-heavy.

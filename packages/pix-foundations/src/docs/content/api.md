@@ -2,7 +2,7 @@
 
 All tokens are CSS custom properties on `:root`, grouped by prefix.
 
-## Radii — `--pix-ds--r--*`
+## Radii - `--pix-ds--r--*`
 
 | Token               | Value | Use                     |
 | ------------------- | ----- | ----------------------- |
@@ -13,7 +13,7 @@ All tokens are CSS custom properties on `:root`, grouped by prefix.
 | `--pix-ds--r--xl`   | 16px  | Page sections           |
 | `--pix-ds--r--pill` | 999px | Pills, chips, nav-links |
 
-## Spacing — `--pix-ds--s--*`
+## Spacing - `--pix-ds--s--*`
 
 Scale ratio 1.25, base 1rem.
 
@@ -26,7 +26,7 @@ Scale ratio 1.25, base 1rem.
 | `--pix-ds--s--xl`  | 2rem    | 32px |
 | `--pix-ds--s--2xl` | 3rem    | 48px |
 
-## Colors — `--pix-ds--c--*`
+## Colors - `--pix-ds--c--*`
 
 All color tokens use `light-dark()` for automatic light/dark mode.
 
@@ -44,7 +44,7 @@ All color tokens use `light-dark()` for automatic light/dark mode.
 | `--pix-ds--c--warning`        | Warning feedback          |
 | `--pix-ds--c--danger`         | Error feedback            |
 
-## Focus — `--pix-ds--f--*`
+## Focus - `--pix-ds--f--*`
 
 Applied globally via `:focus-visible`. Override per component:
 
@@ -56,7 +56,7 @@ Applied globally via `:focus-visible`. Override per component:
 }
 ```
 
-## Elevations — `--pix-ds--e--*`
+## Elevations - `--pix-ds--e--*`
 
 | Token             | Use case                   |
 | ----------------- | -------------------------- |
@@ -64,7 +64,7 @@ Applied globally via `:focus-visible`. Override per component:
 | `--pix-ds--e--md` | Floating panels, dropdowns |
 | `--pix-ds--e--lg` | Modals, dialogs            |
 
-## Typography — `--pix-ds--t--*`
+## Typography - `--pix-ds--t--*`
 
 | Token                            | Value                           |
 | -------------------------------- | ------------------------------- |

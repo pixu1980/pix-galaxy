@@ -26,7 +26,7 @@ const templateCache = new WeakMap();
 const VAL_MARKER_RE = /^val:(\d+)$/;
 const EXPR_MARKER_RE = /^expr:(\d+)$/;
 // Attribute position only when the name is preceded by whitespace (or chunk
-// start) — a `${}` directly after `>` or text is a child value, not an
+// start) - a `${}` directly after `>` or text is a child value, not an
 // attribute (`<p>n=${x}` is text, `<input value=${x}>` is an attribute).
 const ATTR_END_RE = /(^|[\s])([.@]?[-\w:]+)\s*=\s*(?:"|'|)?$/;
 
@@ -228,7 +228,7 @@ export function getTemplate(strings) {
       for (const attr of [...element.attributes]) {
         const attrValue = attr.value;
         // `{{ expr }}` in an attribute value was already replaced by Step 3
-        // with a `<!--expr:N-->` marker — resolve it here.
+        // with a `<!--expr:N-->` marker - resolve it here.
         const attrExprMarker = attrValue.match(/^<!--expr:(\d+)-->$/);
         if (attrExprMarker) {
           const idx = Number(attrExprMarker[1]);

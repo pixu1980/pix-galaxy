@@ -54,10 +54,10 @@ export function isDirective(value, name) {
 /**
  * Template result: a tagged-template payload to be rendered by {@link render}.
  *
- * Not a real DOM template — packages the static string chunks and the
+ * Not a real DOM template - packages the static string chunks and the
  * interpolated values. Two expression systems:
- * - `${expr}` — JS values (handlers, signals, iterables, directives)
- * - `{{ expr }}` — data expressions with filter pipes
+ * - `${expr}` - JS values (handlers, signals, iterables, directives)
+ * - `{{ expr }}` - data expressions with filter pipes
  *
  * @param {TemplateStringsArray} strings Static string chunks.
  * @param {unknown[]} values Interpolated values.

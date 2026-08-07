@@ -1,4 +1,4 @@
-# ADR-022: Branch strategy — develop as trunk, main for releases
+# ADR-022: Branch strategy - develop as trunk, main for releases
 
 ## Status
 

@@ -2,7 +2,7 @@
  * Stress tests: scale, batching and leak regression.
  *
  * These assert correctness at scale and that subscriptions are released when
- * dynamic parts are removed — the two things that break silently in reactive
+ * dynamic parts are removed - the two things that break silently in reactive
  * UIs. Timing assertions use generous bounds to stay non-flaky.
  */
 import { describe, it } from 'node:test';

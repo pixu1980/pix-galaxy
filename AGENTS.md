@@ -1,11 +1,11 @@
-# pix-galaxy — Agent Instructions
+# pix-galaxy - Agent Instructions
 
 pix-galaxy is a monorepo of **zero-runtime-dependency vanilla JavaScript Web Components** (Custom Elements v1, Light DOM, `adoptedStyleSheets`, `light-dark()`, `oklch()`), managed with pnpm workspaces.
 
 ## Core rules
 
 - Use **pnpm** only. Never npm, yarn, bun, lerna, nx, turbo, or rush.
-- **Zero runtime dependencies** and **no frameworks** (React, Vue, Svelte, Lit, Stencil, Angular, etc.) — this is the project's DNA.
+- **Zero runtime dependencies** and **no frameworks** (React, Vue, Svelte, Lit, Stencil, Angular, etc.) - this is the project's DNA.
 - **No Shadow DOM**, no `<template>` elements. Light DOM + `document.adoptedStyleSheets` only.
 - Keep source readable and unbundled: source in `src/`, build output in `artifact/`/`dist/`.
 - Use `// @ts-check` and **JSDoc** for all public APIs; TypeScript only for type checking (`--noEmit`) and `.d.ts` generation.
@@ -18,8 +18,8 @@ pix-galaxy is a monorepo of **zero-runtime-dependency vanilla JavaScript Web Com
 ## Architecture
 
 - Monorepo packages in `packages/`, each a self-contained `@pix-galaxy/*` workspace package.
-- Shared runtime and build scripts live in `packages/pix-core/` — never duplicate per-package.
-- Design tokens, focus ring, typography, radii, spacings, and control styles live in `packages/pix-foundations/` — components must consume tokens, not redefine primitives.
+- Shared runtime and build scripts live in `packages/pix-core/` - never duplicate per-package.
+- Design tokens, focus ring, typography, radii, spacings, and control styles live in `packages/pix-foundations/` - components must consume tokens, not redefine primitives.
 - Docs template is shared via `packages/pix-core/docs/docs-site.js`.
 - Portal (component browser) in `src/docs/`; content catalog in `src/docs/content/components.json`.
 
@@ -36,7 +36,7 @@ pnpm release      # local release (commit-and-tag-version)
 
 ## Branch strategy
 
-- `develop` is the trunk — all work lands here.
+- `develop` is the trunk - all work lands here.
 - `main` receives merges only for releases.
 - Releases are tagged per-package (`@pix-galaxy/<pkg>@<version>`) and published from local (`pnpm release`), no CI publish.
 

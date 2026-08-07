@@ -1,4 +1,4 @@
-/** pix-foundations — documentation site entry. */
+/** pix-foundations - documentation site entry. */
 import { createDocsSite, buildDocsPages } from '@pix-galaxy/pix-core/docs/docs-site.js';
 
 const examples = [

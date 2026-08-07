@@ -1,5 +1,5 @@
 /**
- * Signals unit tests — no DOM required.
+ * Signals unit tests - no DOM required.
  */
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';

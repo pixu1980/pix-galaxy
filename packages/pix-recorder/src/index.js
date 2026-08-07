@@ -1,2 +1,2 @@
-/** pix-recorder — public entry point. */
+/** pix-recorder - public entry point. */
 export * from './components/index.js';

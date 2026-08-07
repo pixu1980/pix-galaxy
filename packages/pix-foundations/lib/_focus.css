@@ -1,9 +1,9 @@
-/* pix-foundations — focus ring
+/* pix-foundations - focus ring
  *
  * WCAG 2.2 SC 2.4.7: visible focus indicator.
  * outline: 2px solid; outline-offset: 2px
  * Colour is consistently var(--pix-ds--f--color) across ALL interactive
- * elements — no more currentColor which varies by context.
+ * elements - no more currentColor which varies by context.
  *
  * Applied to all interactive elements globally.
  * Component-specific focus styles should use these variables for consistency.
@@ -16,7 +16,7 @@
   --pix-ds--f--color: var(--pix-ds--c--accent, oklch(0.55 0.18 260));
 }
 
-/* Universal focus ring — uses :focus-visible (not :where) for normal specificity,
+/* Universal focus ring - uses :focus-visible (not :where) for normal specificity,
  * so it can hold its own even when layered.                                  */
 :focus-visible {
   outline: var(--pix-ds--f--width) var(--pix-ds--f--style) var(--pix-ds--f--color);

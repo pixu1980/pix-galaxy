@@ -1,4 +1,4 @@
-/** Lexer — JavaScript syntax tokens. */
+/** Lexer - JavaScript syntax tokens. */
 import { isIdent, isIdentStart, makePusher, readNumber, readString } from './_Utils.js';
 
 // biome-ignore lint/complexity/noExcessiveCognitiveComplexity: lexer scanners are intentionally branch-heavy.
