@@ -22,6 +22,7 @@ const COMPONENTS = [
   { name: 'pix-sortable', port: 3009, tag: 'pix-sortable' },
   { name: 'pix-splitter', port: 3010, tag: 'pix-splitter' },
   { name: 'pix-toast', port: 3011, tag: 'pix-toast' },
+  { name: 'pix-vanilla-reactive', port: 3012, tag: 'pix-vanilla-reactive' },
 ];
 
 /**

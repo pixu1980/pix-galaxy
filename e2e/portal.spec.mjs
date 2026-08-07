@@ -26,6 +26,7 @@ const COMPONENTS = [
   { name: 'pix-sortable', port: 3009 },
   { name: 'pix-splitter', port: 3010 },
   { name: 'pix-toast', port: 3011 },
+  { name: 'pix-vanilla-reactive', port: 3012 },
 ];
 
 /* ── 1. Portal smoke tests ──────────────────────────────────────── */

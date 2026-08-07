@@ -111,7 +111,7 @@ async function bootDocsSite() {
         'Zero-dependency reactive UI framework: Proxy Store, fine-grained Signals, html`` template engine, and custom elements.',
       liveHtml: `
         <pix-color-scheme-selector></pix-color-scheme-selector>
-        <div style="margin-top:0.5rem;font-size:0.875rem;">Signals · Store · html`` templates</div>
+        <div style="margin-top:0.5rem;font-size:0.875rem;">Signals · Store · html\`\` templates</div>
       `,
     },
     afterRender(root) {
