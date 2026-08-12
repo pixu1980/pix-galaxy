@@ -16,7 +16,7 @@
   "dependencies": {
     "marked": "18.0.5",
     "@pix-galaxy/pix-color-scheme-selector": "workspace:*",
-    "esbuild": "0.28.1"
+    "esbuild": "0.28.2"
   },
   "scripts": {}
 }
