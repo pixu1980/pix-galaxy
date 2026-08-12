@@ -46,7 +46,7 @@
     "@pix-galaxy/pix-a11y-panel": "workspace:*",
     "@pix-galaxy/pix-color-scheme-selector": "workspace:*",
     "@pix-galaxy/pix-foundations": "workspace:*",
-    "@playwright/test": "^1.61.1",
+    "@playwright/test": "^1.62.1",
     "commit-and-tag-version": "13.1.2",
     "concurrently": "9.2.1",
     "eslint": "9.24.0",
