@@ -50,7 +50,7 @@
     "commit-and-tag-version": "13.1.2",
     "concurrently": "9.2.1",
     "eslint": "9.24.0",
-    "prettier": "3.5.3",
+    "prettier": "3.9.6",
     "typescript": "6.0.3",
     "vite": "8.0.10"
   },
