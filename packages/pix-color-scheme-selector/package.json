@@ -82,7 +82,7 @@
   },
   "devDependencies": {
     "@pix-galaxy/pix-core": "workspace:*",
-    "c8": "11.0.0",
+    "c8": "12.0.0",
     "concurrently": "10.0.3",
     "esbuild": "0.28.1",
     "jsdom": "29.1.1",
