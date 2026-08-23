@@ -53,8 +53,7 @@
     "SUPPORT.md"
   ],
   "publishConfig": {
-    "access": "public",
-    "provenance": true
+    "access": "public"
   },
   "scripts": {
     "build": "pnpm build:lib && pnpm build:site",
@@ -70,12 +69,13 @@
     "prepack": "pnpm build:lib",
     "prepublishOnly": "pnpm check && pnpm pack --pack-destination ./.artifacts",
     "preview": "vite preview --config ./vite.config.mjs",
-    "release": "node ./scripts/release.mjs",
+    "release": "node ../../scripts/release.mjs",
     "test": "pnpm docs:build && node --test --import ../pix-core/scripts/register-test-loader.mjs ./src/tests/*.test.js",
     "test:coverage": "pnpm docs:build && c8 --reporter=text --reporter=lcov node --test --import ../pix-core/scripts/register-test-loader.mjs ./src/tests/*.test.js",
     "test:site": "pnpm docs:build && node --test --import ../pix-core/scripts/register-test-loader.mjs ./src/tests/docs-build.test.js ./src/tests/site-app.test.js",
     "lint": "eslint src/",
-    "typecheck": "tsc --project ./tsconfig.types.json --noEmit"
+    "typecheck": "tsc --project ./tsconfig.types.json --noEmit",
+    "release:dry": "node ../../scripts/release.mjs --dry-run"
   },
   "devDependencies": {
     "@pix-galaxy/pix-core": "workspace:*",

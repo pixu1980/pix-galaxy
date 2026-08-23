@@ -81,7 +81,7 @@ function isWorkingTreeClean() {
 function verifyNpmAvailability(
   name,
   version,
-  { maxWaitMs = 600_000, pollIntervalMs = 15_000 } = {},
+  { maxWaitMs = 600_000, pollIntervalMs = 15_000 } = {}
 ) {
   const start = Date.now();
   console.log(`   🔍 Verifying ${name}@${version} on npm registry…`);
@@ -90,10 +90,11 @@ function verifyNpmAvailability(
   while (true) {
     const waited = Date.now() - start;
     try {
-      const result = execSync(
-        `npm view "${name}@${version}" version --json 2>/dev/null`,
-        { cwd: ROOT, stdio: 'pipe', encoding: 'utf-8' },
-      ).trim();
+      const result = execSync(`npm view "${name}@${version}" version --json 2>/dev/null`, {
+        cwd: ROOT,
+        stdio: 'pipe',
+        encoding: 'utf-8',
+      }).trim();
       if (result) {
         const elapsed = Math.round(waited / 1000);
         console.log(`   ✅ ${name}@${version} available after ${elapsed}s`);
@@ -107,7 +108,7 @@ function verifyNpmAvailability(
       const elapsed = Math.round(waited / 1000);
       console.log(
         `   ⚠  ${name}@${version} not available after ${elapsed}s ` +
-          `- may still be scanning. Check https://www.npmjs.com/package/${name}`,
+          `- may still be scanning. Check https://www.npmjs.com/package/${name}`
       );
       return;
     }
@@ -123,9 +124,10 @@ function verifyNpmAvailability(
 
 console.log('═══════════════════════════════════════════');
 console.log('  pix-galaxy - monorepo release');
-console.log(`  dry-run: ${isDryRun ? '✓' : '✗'}`);
-console.log(`  force:   ${isForced ? '✓' : '✗'}`);
-console.log(`  verify:  ${isVerify ? '✓' : '✗'}`);
+console.log(`  dry-run:  ${isDryRun ? '✓' : '✗'}`);
+console.log(`  force:    ${isForced ? '✓' : '✗'}`);
+console.log(`  verify:   ${isVerify ? '✓' : '✗'}`);
+
 console.log('═══════════════════════════════════════════\n');
 
 if (!isWorkingTreeClean()) {
@@ -154,7 +156,9 @@ if (!isDryRun) {
 }
 
 try {
-  execSync('commit-and-tag-version --version', { stdio: 'pipe' });
+  execSync(`"${join(ROOT, 'node_modules', '.bin', 'commit-and-tag-version')}" --version`, {
+    stdio: 'pipe',
+  });
 } catch {
   console.log('commit-and-tag-version not found - run pnpm install first.\n');
   process.exit(1);
@@ -230,17 +234,17 @@ for (const pkg of packages) {
       execIn(pkgPath, standardVersionCommand(ROOT, name, false, firstRelease), {
         stdio: 'inherit',
       });
-      execIn(pkgPath, `git push --follow-tags origin main 2>/dev/null || true`, {
-        stdio: 'inherit',
-      });
+      // Push release commit + tag to the trunk (ADR-022: develop). The tag
+      // triggers the release quality gate (release.yml).
+      execIn(pkgPath, `git push --follow-tags origin develop`, { stdio: 'inherit' });
+      // Publish locally using the user's npm credentials (same local model
+      // as pi-coding-agent-extensions: no CI publish, no provenance).
       execIn(pkgPath, `npm publish --access public`, { stdio: 'inherit' });
       released++;
 
       // npm now runs malware scanning at publish time (~5 min delay)
       console.log(`   ✅ ${name} published!`);
-      console.log(
-        `   ℹ  npm malware scan - available in ~5 min (check Staged Packages on npm)`,
-      );
+      console.log(`   ℹ  npm malware scan - available in ~5 min (check Staged Packages on npm)`);
 
       if (isVerify) {
         // Read bumped version from package.json (commit-and-tag-version already wrote it)
@@ -259,11 +263,7 @@ console.log(`  Summary:`);
 console.log(`  • released: ${released}`);
 console.log(`  • skipped:  ${skipped}`);
 if (released > 0 && !isDryRun && !isVerify) {
-  console.log(
-    `\n  ℹ  npm scans published packages for malware (~5 min).`,
-  );
-  console.log(
-    `     Use --verify to wait for availability confirmation.`,
-  );
+  console.log(`\n  ℹ  npm scans published packages for malware (~5 min).`);
+  console.log(`     Use --verify to wait for availability confirmation.`);
 }
 console.log('═══════════════════════════════════════════\n');
