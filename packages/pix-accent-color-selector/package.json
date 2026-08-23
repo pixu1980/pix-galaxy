@@ -76,12 +76,10 @@
     "lint": "eslint src/",
     "typecheck": "tsc --project ./tsconfig.types.json --noEmit"
   },
-  "dependencies": {
-    "@pix-galaxy/pix-foundations": "workspace:*",
-    "@pix-galaxy/pix-highlighter": "workspace:*"
-  },
   "devDependencies": {
     "@pix-galaxy/pix-core": "workspace:*",
+    "@pix-galaxy/pix-foundations": "workspace:*",
+    "@pix-galaxy/pix-highlighter": "workspace:*",
     "c8": "11.0.0",
     "concurrently": "10.0.4",
     "esbuild": "0.28.1",
