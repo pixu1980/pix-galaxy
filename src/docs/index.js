@@ -67,7 +67,28 @@ async function bootPortal() {
   /** @type {Array<import('./content/components.json')>} */
   const { default: components } = await import('./content/components.json');
 
-  const cardsHtml = components
+  // Release readiness gate: the portal shows only components whose package
+  // is marked releaseStatus: "ready" (single source of truth = each
+  // packages/*/package.json). Catalog-only placeholders without a package
+  // (e.g. "coming-soon") are always shown.
+  const PACKAGE_JSON = import.meta.glob('../../packages/*/package.json', {
+    eager: true,
+    import: 'default',
+  });
+  const readyPackages = new Set(
+    Object.entries(PACKAGE_JSON)
+      .map(([path, pkg]) => ({
+        name: path.match(/packages\/([^/]+)\/package\.json$/)?.[1],
+        ready: typeof pkg === 'object' && pkg !== null && pkg.releaseStatus === 'ready',
+      }))
+      .filter(({ name, ready }) => name && ready)
+      .map(({ name }) => name)
+  );
+  const visibleComponents = components.filter(
+    (comp) => !comp.packageName || readyPackages.has(comp.name)
+  );
+
+  const cardsHtml = visibleComponents
     .map((comp) => {
       const devPort = getDevPort(comp.name);
       const docUrl = isDev && devPort ? `http://localhost:${devPort}/` : comp.homepage || '#';
@@ -115,7 +136,7 @@ async function bootPortal() {
           Accessible, performant, and built for the modern web platform.
         </p>
         <p data-part="hero-meta">
-          <span data-part="meta-pill">${components.length} components</span>
+          <span data-part="meta-pill">${visibleComponents.length} components</span>
           <span data-part="meta-pill">Custom Elements v1</span>
           <span data-part="meta-pill">WCAG 2.2 AA</span>
         </p>

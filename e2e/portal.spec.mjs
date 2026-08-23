@@ -1,7 +1,10 @@
 /**
  * pix-galaxy · End-to-end test suite
  *
- * Prerequisite: all 12 dev servers running (pnpm dev:all).
+ * Prerequisite: dev servers for the packages marked releaseStatus "ready"
+ * running (pnpm dev:all). WIP packages are neither published nor shown on
+ * the portal/site, so they are excluded from these specs automatically
+ * (single source of truth: each package's package.json).
  *
  * Run:
  *   npx playwright test
@@ -11,23 +14,36 @@
  */
 
 import { test, expect } from '@playwright/test';
+import { readdirSync, readFileSync } from 'node:fs';
+import { join } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { devPortFor } from '../scripts/port-map.mjs';
 
 /* ── Helpers ────────────────────────────────────────────────────── */
 
-const COMPONENTS = [
-  { name: 'pix-a11y-panel', port: 3001 },
-  { name: 'pix-accent-color-selector', port: 3002 },
-  { name: 'pix-color', port: 3003 },
-  { name: 'pix-color-scheme-selector', port: 3004 },
-  { name: 'pix-command', port: 3005 },
-  { name: 'pix-foundations', port: 3006 },
-  { name: 'pix-highlighter', port: 3007 },
-  { name: 'pix-recorder', port: 3008 },
-  { name: 'pix-sortable', port: 3009 },
-  { name: 'pix-splitter', port: 3010 },
-  { name: 'pix-toast', port: 3011 },
-  { name: 'pix-vanilla-reactive', port: 3012 },
-];
+const PKGS_DIR = fileURLToPath(new URL('../packages/', import.meta.url));
+
+// Derive the ready set from packages/*/package.json: only non-private
+// packages marked releaseStatus: "ready" are part of the released surface.
+const READY = readdirSync(PKGS_DIR, { withFileTypes: true })
+  .filter((entry) => entry.isDirectory())
+  .map((entry) => {
+    let pkg = {};
+    try {
+      pkg = JSON.parse(readFileSync(join(PKGS_DIR, entry.name, 'package.json'), 'utf8'));
+    } catch {
+      /* ignore */
+    }
+    return pkg;
+  })
+  .filter((pkg) => pkg && pkg.name && !pkg.private && pkg.releaseStatus === 'ready')
+  .map((pkg) => {
+    const name = pkg.name.replace(/^@pix-galaxy\//, '');
+    return { name, port: devPortFor(name) };
+  })
+  .filter((comp) => comp.port != null);
+
+const highlighterReady = READY.some((comp) => comp.name === 'pix-highlighter');
 
 /* ── 1. Portal smoke tests ──────────────────────────────────────── */
 
@@ -36,7 +52,7 @@ test.describe('Portal (http://localhost:3000)', () => {
     await page.goto('/');
     await page.waitForSelector('[data-part="grid"]', { timeout: 8000 });
     const cards = page.locator('[data-part="card"]');
-    await expect(cards).toHaveCount(COMPONENTS.length + 1);
+    await expect(cards).toHaveCount(READY.length + 1);
   });
 
   test('each real card has a valid href pointing to localhost', async ({ page }) => {
@@ -53,6 +69,7 @@ test.describe('Portal (http://localhost:3000)', () => {
   });
 
   test('clicking pix-highlighter card opens its docs page', async ({ page, context }) => {
+    test.skip(!highlighterReady, 'pix-highlighter is marked wip');
     await page.goto('/');
     await page.waitForSelector('[data-part="card"]');
 
@@ -91,7 +108,7 @@ test.describe('Portal (http://localhost:3000)', () => {
 /* ── 2. Component docs sites ───────────────────────────────────── */
 
 test.describe('Component docs sites', () => {
-  for (const comp of COMPONENTS) {
+  for (const comp of READY) {
     test(`${comp.name} docs loads at :${comp.port}`, async ({ page }) => {
       await page.goto(`http://localhost:${comp.port}/`);
       await page.waitForSelector('[data-part="shell"]', { timeout: 10000 });
@@ -104,7 +121,7 @@ test.describe('Component docs sites', () => {
     // Old-template sites (accent-color-selector, a11y-panel, highlighter, etc.)
     // use inline createDocsSite and don't get the shared color-scheme-selector.
     const skip = new Set([3001, 3002, 3007]);
-    for (const comp of COMPONENTS) {
+    for (const comp of READY) {
       if (skip.has(comp.port)) continue;
       await page.goto(`http://localhost:${comp.port}/`);
       await page.waitForSelector('pix-color-scheme-selector', {
@@ -116,7 +133,7 @@ test.describe('Component docs sites', () => {
   });
 
   test('nav links are present on all docs', async ({ page }) => {
-    for (const comp of COMPONENTS) {
+    for (const comp of READY) {
       await page.goto(`http://localhost:${comp.port}/`);
       await page.waitForSelector('[data-part="nav-link"]', { timeout: 10000 });
       const count = await page.locator('[data-part="nav-link"]').count();
@@ -128,6 +145,8 @@ test.describe('Component docs sites', () => {
 /* ── 3. pix-highlighter specific ────────────────────────────────── */
 
 test.describe('Pix Highlighter', () => {
+  test.skip(!highlighterReady, 'pix-highlighter is marked wip');
+
   test('code blocks show toolbar', async ({ page }) => {
     await page.goto('http://localhost:3007/');
     await page.waitForSelector('pre[is="pix-highlighter"]', { timeout: 8000 });

@@ -200,14 +200,17 @@ console.log(`\n  ─────────────────────
 console.log(`  ✅  ${className} scaffolded successfully!`);
 console.log(``);
 console.log(`  Next steps:`);
-console.log(`    1. Add to portal:`);
+console.log(`    1. Mark release readiness:`);
+console.log(`       - packages/${elementName}/package.json -> set "releaseStatus": "ready"`);
+console.log(`         once the component is ready (default: "wip")`);
+console.log(`    2. Add to portal:`);
 console.log(`       - src/docs/content/components.json (add card entry)`);
 console.log(`       - scripts/dev-all.mjs (add to knownColors)`);
 console.log(`       - src/docs/index.js (add icon to ICONS)`);
 console.log(`       - src/docs/index.css (add accent color palette)`);
-console.log(`    2. cd packages/${elementName}`);
-console.log(`    3. pnpm run dev  # start dev server`);
-console.log(`    4. Open http://localhost:${3000 + /* guess */ 0}`);
+console.log(`    3. cd packages/${elementName}`);
+console.log(`    4. pnpm run dev  # start dev server`);
+console.log(`    5. Open http://localhost:${3000 + /* guess */ 0}`);
 console.log(`  ────────────────────────────────────────────────\n`);
 
 /* ── Helper: recursive copy ─────────────────────────────────────── */

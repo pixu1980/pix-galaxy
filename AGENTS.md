@@ -40,6 +40,15 @@ pnpm release      # local release (commit-and-tag-version)
 - `main` receives merges only for releases.
 - Releases are tagged per-package (`@pix-galaxy/<pkg>@<version>`) and published from local (`pnpm release`), no CI publish.
 
+## Release readiness
+
+- Every package carries `releaseStatus: "wip" | "ready"` in its `package.json` (single source of
+  truth). Only `"ready"` packages are released (`pnpm release`) and shown on the pix-galaxy
+  site/portal (`pages.yml` aggregation, `src/docs/index.js`, e2e specs).
+- New components scaffold with `"wip"` by default — flip to `"ready"` only when the component is
+  publishable. Private packages (`pix-core`, `pix-foundations`) are never published, but can be
+  shown on the site if marked `"ready"`.
+
 ## Docs & conventions
 
 - Architecture decisions are recorded in `docs/adr/` (Nygard format).

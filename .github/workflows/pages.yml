@@ -61,16 +61,24 @@ jobs:
       - name: Build docs sites
         run: pnpm -r --if-present run build:site
 
-      - name: Aggregate docs into site/
+      - name: Aggregate ready docs into site/
         run: |
-          mkdir -p site
+          set -euo pipefail
+
+          # Only packages marked releaseStatus: "ready" appear on the site.
+          list=""
           for dir in packages/pix-*; do
-            if [ -d "$dir/dist" ]; then
-              pkg=$(basename "$dir")
-              cp -r "$dir/dist" "site/$pkg"
-            fi
+            [ -f "$dir/package.json" ] || continue
+            status="$(node -p "require('./${dir#./}/package.json').releaseStatus || ''")"
+            [ "$status" = "ready" ] || continue
+            [ -d "$dir/dist" ] || continue
+            pkg="$(basename "$dir")"
+            cp -r "$dir/dist" "site/$pkg"
+            list="$list<li><a href=\"$pkg/\">$pkg</a></li>"
           done
-          cat > site/index.html << 'EOF'
+
+          mkdir -p site
+          cat > site/index.html << EOF
           <!DOCTYPE html>
           <meta charset="utf-8">
           <meta name="viewport" content="width=device-width">
@@ -85,10 +93,7 @@ jobs:
           <h1>pix-galaxy</h1>
           <p>Zero-runtime-dependency vanilla JavaScript Web Components.</p>
           <ul>
-            <li><a href="pix-accent-color-selector/">pix-accent-color-selector</a></li>
-            <li><a href="pix-color-scheme-selector/">pix-color-scheme-selector</a></li>
-            <li><a href="pix-a11y-panel/">pix-a11y-panel</a></li>
-            <li><a href="pix-highlighter/">pix-highlighter</a></li>
+          $list
           </ul>
           <hr>
           <p><a href="https://github.com/pixu1980/pix-galaxy">GitHub</a></p>
