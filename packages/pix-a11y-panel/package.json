@@ -1,6 +1,7 @@
 {
   "name": "@pix-galaxy/pix-a11y-panel",
   "version": "0.1.0",
+  "releaseStatus": "ready",
   "description": "Display preferences popover Web Component for the pix-galaxy suite.",
   "type": "module",
   "author": "Emiliano Pisu",

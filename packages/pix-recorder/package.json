@@ -1,6 +1,7 @@
 {
   "name": "@pix-galaxy/pix-recorder",
   "version": "0.1.0",
+  "releaseStatus": "wip",
   "description": "Accessible audio recorder Web Component with waveform visualization for the pix-galaxy suite.",
   "type": "module",
   "author": "Emiliano Pisu",

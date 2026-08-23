@@ -1,6 +1,7 @@
 {
   "name": "@pix-galaxy/pix-vanilla-reactive",
   "version": "0.1.0",
+  "releaseStatus": "wip",
   "description": "Zero-dependency reactive UI framework: Proxy Store, fine-grained Signals, html`` template engine, and custom elements.",
   "type": "module",
   "author": "Emiliano Pisu",

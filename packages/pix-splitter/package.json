@@ -1,6 +1,7 @@
 {
   "name": "@pix-galaxy/pix-splitter",
   "version": "0.1.0",
+  "releaseStatus": "wip",
   "description": "Accessible resizable panel splitter Web Component for the pix-galaxy suite.",
   "type": "module",
   "author": "Emiliano Pisu",

@@ -1,6 +1,7 @@
 {
   "name": "@pix-galaxy/pix-foundations",
   "version": "0.1.0",
+  "releaseStatus": "wip",
   "description": "Design foundations (radii, spacing, typography, colors, focus, elevations) for the pix-galaxy suite.",
   "type": "module",
   "private": true,

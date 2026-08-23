@@ -19,6 +19,7 @@
  *   node scripts/release.mjs --dry-run   # preview only
  *   node scripts/release.mjs --force     # release even without changes
  *   node scripts/release.mjs --verify    # wait & confirm package availability
+ *   node scripts/release.mjs --package pix-highlighter   # release ONLY that package
  */
 
 import { readdirSync, readFileSync } from 'node:fs';
@@ -34,6 +35,21 @@ const PKG_DIR = join(ROOT, 'packages');
 const isDryRun = process.argv.includes('--dry-run') || process.argv.includes('-n');
 const isForced = process.argv.includes('--force') || process.argv.includes('-f');
 const isVerify = process.argv.includes('--verify') || process.argv.includes('-V');
+
+// ── Package filter: release only specific package(s) ──────────────────
+// Accepts `--package <name>` or `--package=<name>` (repeatable, comma-
+// separated). Matches the directory name ("pix-highlighter") or the
+// scoped name ("@pix-galaxy/pix-highlighter").
+const requestedPackages = process.argv
+  .reduce((acc, arg, i, argv) => {
+    if (arg === '--package' && argv[i + 1]) acc.push(argv[i + 1]);
+    else if (arg.startsWith('--package=')) acc.push(arg.slice('--package='.length));
+    return acc;
+  }, [])
+  .flatMap((v) => v.split(','))
+  .map((v) => v.trim())
+  .filter(Boolean)
+  .map((v) => v.replace(/^@pix-galaxy\//, ''));
 
 function exec(cmd, opts = {}) {
   return execSync(cmd, { cwd: ROOT, stdio: 'pipe', encoding: 'utf-8', ...opts });
@@ -127,7 +143,9 @@ console.log('  pix-galaxy - monorepo release');
 console.log(`  dry-run:  ${isDryRun ? '✓' : '✗'}`);
 console.log(`  force:    ${isForced ? '✓' : '✗'}`);
 console.log(`  verify:   ${isVerify ? '✓' : '✗'}`);
-
+console.log(
+  `  packages: ${requestedPackages.length ? requestedPackages.join(', ') : '(all with changes)'}`
+);
 console.log('═══════════════════════════════════════════\n');
 
 if (!isWorkingTreeClean()) {
@@ -172,6 +190,16 @@ const packages = readdirSync(PKG_DIR, { withFileTypes: true })
 let released = 0,
   skipped = 0;
 
+// Validate the package filter before doing anything.
+if (requestedPackages.length) {
+  const missing = requestedPackages.filter((r) => !packages.includes(r));
+  if (missing.length) {
+    console.error(`✗ Package(s) not found in packages/: ${missing.join(', ')}`);
+    console.error(`  Available: ${packages.join(', ')}`);
+    process.exit(1);
+  }
+}
+
 for (const pkg of packages) {
   const pkgPath = join(PKG_DIR, pkg);
   const pkgJsonPath = join(pkgPath, 'package.json');
@@ -187,6 +215,26 @@ for (const pkg of packages) {
 
   if (pkgJson.private) {
     console.log(`⏭  ${pkgJson.name || pkg}: private, skipped`);
+    skipped++;
+    continue;
+  }
+
+  // Release readiness gate: only packages marked releaseStatus: "ready"
+  // are released. Anything else (wip, missing) stays unpublished.
+  const releaseStatus = pkgJson.releaseStatus ?? 'wip';
+  if (releaseStatus !== 'ready') {
+    console.log(`⏭  ${pkgJson.name || pkg}: releaseStatus "${releaseStatus}", not released`);
+    skipped++;
+    continue;
+  }
+
+  // Apply the --package filter (match by dir name or bare scoped name).
+  if (
+    requestedPackages.length &&
+    !requestedPackages.includes(pkg) &&
+    !requestedPackages.includes(String(pkgJson.name || '').replace(/^@pix-galaxy\//, ''))
+  ) {
+    console.log(`⏭  ${pkgJson.name || pkg}: not in --package filter, skipped`);
     skipped++;
     continue;
   }

@@ -1,6 +1,7 @@
 {
   "name": "@pix-galaxy/pix-toast",
   "version": "0.1.0",
+  "releaseStatus": "wip",
   "description": "Accessible toast notification system with smart queuing for the pix-galaxy suite.",
   "type": "module",
   "author": "Emiliano Pisu",

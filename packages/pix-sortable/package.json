@@ -1,6 +1,7 @@
 {
   "name": "@pix-galaxy/pix-sortable",
   "version": "0.1.0",
+  "releaseStatus": "wip",
   "description": "Accessible sortable list Web Component with drag & drop, touch, keyboard for the pix-galaxy suite.",
   "type": "module",
   "author": "Emiliano Pisu",

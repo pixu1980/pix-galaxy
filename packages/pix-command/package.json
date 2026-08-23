@@ -1,6 +1,7 @@
 {
   "name": "@pix-galaxy/pix-command",
   "version": "0.1.0",
+  "releaseStatus": "wip",
   "description": "Accessible command palette Web Component for the pix-galaxy suite.",
   "type": "module",
   "author": "Emiliano Pisu",
