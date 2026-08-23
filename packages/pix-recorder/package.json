@@ -51,8 +51,7 @@
     "SUPPORT.md"
   ],
   "publishConfig": {
-    "access": "public",
-    "provenance": true
+    "access": "public"
   },
   "scripts": {
     "build": "pnpm build:lib && pnpm build:site",
@@ -66,10 +65,11 @@
     "docs:watch": "node ../pix-core/scripts/docs.mjs --watch",
     "prepack": "pnpm build:lib",
     "preview": "vite preview --config ./vite.config.mjs",
-    "release": "node ./scripts/release.mjs",
+    "release": "node ../../scripts/release.mjs",
     "test": "pnpm docs:build && node --test --import ../pix-core/scripts/register-test-loader.mjs ./src/tests/*.test.js",
     "lint": "eslint src/",
-    "typecheck": "tsc --project ./tsconfig.types.json --noEmit"
+    "typecheck": "tsc --project ./tsconfig.types.json --noEmit",
+    "release:dry": "node ../../scripts/release.mjs --dry-run"
   },
   "devDependencies": {
     "@pix-galaxy/pix-color-scheme-selector": "workspace:*",
