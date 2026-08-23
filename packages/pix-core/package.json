@@ -1,6 +1,7 @@
 {
   "name": "@pix-galaxy/pix-core",
   "version": "0.1.0",
+  "releaseStatus": "wip",
   "description": "Core runtime helpers, docs templates, and shared build scripts for the pix-galaxy suite.",
   "type": "module",
   "private": true,

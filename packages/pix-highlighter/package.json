@@ -1,6 +1,7 @@
 {
   "name": "@pix-galaxy/pix-highlighter",
   "version": "0.1.0",
+  "releaseStatus": "ready",
   "description": "Syntax-highlighting Web Component for the pix-galaxy suite.",
   "type": "module",
   "author": "Emiliano Pisu",

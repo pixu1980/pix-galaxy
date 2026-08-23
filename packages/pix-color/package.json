@@ -1,6 +1,7 @@
 {
   "name": "@pix-galaxy/pix-color",
   "version": "0.1.0",
+  "releaseStatus": "wip",
   "description": "Accessible OKLCH/HSL/RGB/HEX color picker Web Component for the pix-galaxy suite.",
   "type": "module",
   "author": "Emiliano Pisu",
