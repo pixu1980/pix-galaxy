@@ -43,8 +43,9 @@ pnpm release      # local release (commit-and-tag-version)
 ## Release readiness
 
 - Every package carries `releaseStatus: "wip" | "ready"` in its `package.json` (single source of
-  truth). Only `"ready"` packages are released (`pnpm release`) and shown on the pix-galaxy
-  site/portal (`pages.yml` aggregation, `src/docs/index.js`, e2e specs).
+  truth). Only `"ready"` packages are released (`pnpm release`) and shown on the production
+  pix-galaxy site (`pages.yml` aggregation, `src/docs/index.js` ready filter). The **dev** portal
+  shows the full catalog so every component can be navigated locally.
 - New components scaffold with `"wip"` by default — flip to `"ready"` only when the component is
   publishable. Private packages (`pix-core`, `pix-foundations`) are never published, but can be
   shown on the site if marked `"ready"`.

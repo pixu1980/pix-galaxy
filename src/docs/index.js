@@ -84,9 +84,11 @@ async function bootPortal() {
       .filter(({ name, ready }) => name && ready)
       .map(({ name }) => name)
   );
-  const visibleComponents = components.filter(
-    (comp) => !comp.packageName || readyPackages.has(comp.name)
-  );
+  // Dev: show the full catalog so every component can be navigated from
+  // the portal. Production: only release-ready packages (+ placeholders).
+  const visibleComponents = isDev
+    ? components
+    : components.filter((comp) => !comp.packageName || readyPackages.has(comp.name));
 
   const cardsHtml = visibleComponents
     .map((comp) => {
