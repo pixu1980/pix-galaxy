@@ -72,7 +72,7 @@
   {
     "name": "pix-vanilla-reactive",
     "packageName": "@pix-galaxy/pix-vanilla-reactive",
-    "title": "Vanilla Reactive",
+    "title": "Pix Vanilla Reactive",
     "description": "Zero-dependency reactive UI framework: Proxy Store, fine-grained Signals, html`` template engine, and custom elements.",
     "homepage": "https://pixu1980.github.io/pix-vanilla-reactive/",
     "repo": "https://github.com/pixu1980/pix-galaxy",
