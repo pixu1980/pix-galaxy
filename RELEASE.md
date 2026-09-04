@@ -16,7 +16,7 @@ This document describes the complete release workflow for all packages in the pi
   - [2. Preview Changes](#2-preview-changes)
   - [3. Release](#3-release)
   - [4. Push](#4-push)
-  - [5. CI publishes](#5-ci-publishes)
+  - [5. Release quality gate](#5-release-quality-gate)
 - [Release Orchestrator (root)](#release-orchestrator-root)
 - [Per-Package Release](#per-package-release)
 - [Versioning Strategy](#versioning-strategy)
@@ -37,6 +37,8 @@ This document describes the complete release workflow for all packages in the pi
 - **Topological order** - dependencies are always released before their dependents.
 - **Only changed packages** - if a package has no new commits since its last tag, it is skipped.
 - **Commit-based detection** - releases are based on merged commits, not file timestamps or manual selection.
+- **CHANGELOG-only changes don't trigger a release** - the auto-generated `CHANGELOG.md` is excluded from release-worthy files (same model as pi-coding-agent-extensions).
+- **Dual-use validation** - packages declaring `contentPolicy: "dual-use"` must ship a `DISCLOSURE` file or the release aborts (2FA-enforced publish).
 
 ---
 
@@ -44,26 +46,38 @@ This document describes the complete release workflow for all packages in the pi
 
 | Package                   | npm name                                | Status             | Path                                  |
 | ------------------------- | --------------------------------------- | ------------------ | ------------------------------------- |
-| pix-highlighter           | `@pix-galaxy/pix-highlighter`           | Publishable        | `packages/pix-highlighter/`           |
-| pix-accent-color-selector | `@pix-galaxy/pix-accent-color-selector` | Publishable        | `packages/pix-accent-color-selector/` |
-| pix-color-scheme-selector | `@pix-galaxy/pix-color-scheme-selector` | Publishable        | `packages/pix-color-scheme-selector/` |
-| pix-a11y-panel            | `@pix-galaxy/pix-a11y-panel`            | Publishable        | `packages/pix-a11y-panel/`            |
+| pix-foundations           | `@pix-galaxy/pix-foundations`           | Private (tokens)   | `packages/pix-foundations/`           |
+| pix-color                 | `@pix-galaxy/pix-color`                 | wip                | `packages/pix-color/`                 |
+| pix-vanilla-reactive      | `@pix-galaxy/pix-vanilla-reactive`      | wip                | `packages/pix-vanilla-reactive/`      |
+| pix-color-scheme-selector | `@pix-galaxy/pix-color-scheme-selector` | Ready              | `packages/pix-color-scheme-selector/` |
+| pix-accent-color-selector | `@pix-galaxy/pix-accent-color-selector` | Ready              | `packages/pix-accent-color-selector/` |
+| pix-toast                 | `@pix-galaxy/pix-toast`                 | wip                | `packages/pix-toast/`                 |
+| pix-sortable              | `@pix-galaxy/pix-sortable`              | wip                | `packages/pix-sortable/`              |
+| pix-command               | `@pix-galaxy/pix-command`               | wip                | `packages/pix-command/`               |
+| pix-splitter              | `@pix-galaxy/pix-splitter`              | wip                | `packages/pix-splitter/`              |
+| pix-highlighter           | `@pix-galaxy/pix-highlighter`           | Ready              | `packages/pix-highlighter/`           |
+| pix-recorder              | `@pix-galaxy/pix-recorder`              | wip                | `packages/pix-recorder/`              |
+| pix-a11y-panel            | `@pix-galaxy/pix-a11y-panel`            | Ready              | `packages/pix-a11y-panel/`            |
 | pix-component-template    | -                                       | Private (template) | `packages/pix-component-template/`    |
 
 ---
 
 ## Dependency Graph
 
+Runtime library dependencies between public packages (devDependencies are build-time only):
+
 ```
 pix-a11y-panel
-  ├── pix-accent-color-selector
-  │     └── pix-highlighter
-  ├── pix-color-scheme-selector
-  │     └── pix-highlighter
-  └── pix-highlighter
+  └── pix-accent-color-selector (bundled into the artifact)
+
+pix-core
+  └── pix-color-scheme-selector
+
+pix-component-template (private)
+  └── pix-color-scheme-selector, pix-core, pix-foundations, pix-highlighter
 ```
 
-This determines the **release order**: dependencies first, dependents last.
+All public components are otherwise independent. Internal deps use the `workspace:*` protocol; publishable packages bundle or declare their runtime deps.
 
 ---
 
@@ -127,22 +141,25 @@ The orchestrator (`scripts/release.mjs`):
    - Runs `commit-and-tag-version --tag-prefix "@pix-galaxy/<pkg>@"` (with `--first-release` when no tag exists)
    - Updates `package.json` version + `CHANGELOG.md`
    - Creates a release commit and tag `@pix-galaxy/<pkg>@<version>`
-   - Pushes tags to `main`
-   - Publishes to npm with `pnpm publish --access public` (local npm auth)
+   - Pushes tags to `develop` (trunk, ADR-022)
+   - Publishes to npm with `npm publish --access public` (local npm auth)
 4. Prints a summary
 
 **ADR-018:** releases are LOCAL. No CI publish, no `NPM_TOKEN` secret.
 
 **Options:**
 
-| Flag        | Description                           |
-| ----------- | ------------------------------------- |
-| `--dry-run` | Preview only, no changes made         |
-| `--force`   | Release packages even without changes |
+| Flag        | Description                                                                           |
+| ----------- | ------------------------------------------------------------------------------------- |
+| `--dry-run` | Preview only, no changes made                                                         |
+| `--force`   | Release packages even without changes                                                 |
+| `--verify`  | Poll the npm registry until each published package is available (~5 min malware scan) |
+| `--package` | Release only the listed package(s) (repeatable, comma-separated)                      |
 
 ### 4. Push
 
-The script pushes tags automatically (`git push --follow-tags origin main`). The `main` branch is the release branch (ADR-022); development happens on `develop`.
+The script pushes tags automatically (`git push --follow-tags origin develop`).
+`develop` is the trunk (ADR-022); `main` receives merges only for releases.
 
 ### 5. Release quality gate
 

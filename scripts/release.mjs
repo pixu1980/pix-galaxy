@@ -22,11 +22,15 @@
  *   node scripts/release.mjs --package pix-highlighter   # release ONLY that package
  */
 
-import { readdirSync, readFileSync } from 'node:fs';
+import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { execSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
-import { standardVersionCommand, ensureNpmAuthentication } from './release-helpers.mjs';
+import {
+  standardVersionCommand,
+  ensureNpmAuthentication,
+  changedFilesSinceTag,
+} from './release-helpers.mjs';
 
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
 const ROOT = join(__dirname, '..');
@@ -65,15 +69,6 @@ function tagExists(tag) {
     return true;
   } catch {
     return false;
-  }
-}
-
-function hasChangesSinceTag(tag, pkgRel) {
-  try {
-    exec(`git diff --quiet "${tag}" -- "${pkgRel}"`, { stdio: 'pipe' });
-    return false;
-  } catch {
-    return true;
   }
 }
 
@@ -135,6 +130,67 @@ function verifyNpmAvailability(
     }
 
     execSync(`sleep ${pollIntervalMs / 1000}`, { stdio: 'pipe' });
+  }
+}
+
+/**
+ * Compute the publish-time files that must exist before `npm publish`.
+ * The artifact (main/module/types + `files` entries) is gitignored, so a
+ * release from a clean checkout would otherwise ship a tarball without the
+ * bundled code — unlike pi-coding-agent-extensions, whose shipped files are
+ * committed source. Non-glob entries must exist verbatim; glob entries only
+ * have their static directory prefix verified.
+ *
+ * @param {string} pkg Package directory name.
+ * @param {object} pkgJson Parsed package.json.
+ * @returns {string[]} Missing entries (empty when publishable).
+ */
+function missingPublishFiles(pkg, pkgJson) {
+  const pkgPath = join(PKG_DIR, pkg);
+  const required = [
+    pkgJson.main,
+    pkgJson.module,
+    pkgJson.types,
+    ...(pkgJson.files || []),
+  ].filter(Boolean);
+
+  return required.filter((entry) => {
+    if (entry.includes('*')) {
+      // Glob pattern — verify only the static directory prefix.
+      const star = entry.indexOf('*');
+      const prefix = entry.slice(0, entry.lastIndexOf('/', star));
+      return Boolean(prefix) && !existsSync(join(pkgPath, prefix));
+    }
+    return !existsSync(join(pkgPath, entry));
+  });
+}
+
+/**
+ * Ensure a package is publishable: if any publish-time file is missing,
+ * build it first via the package's own `build:lib` script, then re-check.
+ * Fails with a clear message when the build does not produce the artifact.
+ *
+ * @param {string} pkg Package directory name.
+ * @param {object} pkgJson Parsed package.json.
+ */
+function ensurePublishable(pkg, pkgJson) {
+  let missing = missingPublishFiles(pkg, pkgJson);
+  if (missing.length === 0) return;
+
+  console.log(`   🏗  publish files missing (${missing.join(', ')}) - running build:lib first`);
+  try {
+    execIn(join(PKG_DIR, pkg), 'pnpm run build:lib', { stdio: 'inherit' });
+  } catch (err) {
+    console.error(`   ❌ ${pkg}: build:lib failed. Fix the build before releasing.`);
+    process.exit(1);
+  }
+
+  missing = missingPublishFiles(pkg, pkgJson);
+  if (missing.length > 0) {
+    console.error(
+      `   ❌ ${pkg}: publish files still missing after build:lib: ${missing.join(', ')}`
+    );
+    process.exit(1);
   }
 }
 
@@ -247,22 +303,41 @@ for (const pkg of packages) {
   console.log(`\n── ${name} ────────────────────────────────`);
   console.log(`   current: ${version}`);
 
-  // Check for dual-use content declaration (npm contentPolicy)
-  if (pkgJson.contentPolicy != null) {
-    console.log(`   ⚐  contentPolicy declared - 2FA-enforced publish required`);
-    console.log(`   ⚐  ensure npm session is 2FA-authenticated and DISCLOSURE file present`);
+  // Check for dual-use content declaration (npm contentPolicy) — same
+  // validation model as pi-coding-agent-extensions.
+  if (pkgJson.contentPolicy === 'dual-use') {
+    const disclosurePath = join(pkgPath, 'DISCLOSURE');
+    if (!existsSync(disclosurePath)) {
+      console.error(`✗ ${pkgJson.name}: contentPolicy=dual-use but DISCLOSURE not found.`);
+      console.error(`  Create packages/${pkg}/DISCLOSURE and try again.`);
+      process.exit(1);
+    }
+    console.log(`   🔒 dual-use: DISCLOSURE present ✓`);
+    if (!isDryRun) {
+      console.log(`   ⚠  Dual-use publishing requires npm authentication with 2FA.`);
+      console.log(`   Make sure the npm account has 2FA enabled.`);
+    }
   }
 
   if (tagExists(tag)) {
     console.log(`   tag: ${tag}`);
-    if (!hasChangesSinceTag(tag, pkgRel)) {
+
+    const changedFiles = changedFilesSinceTag(tag, pkgRel, exec);
+    const hasChanges = changedFiles !== null && changedFiles.length > 0;
+
+    if (!hasChanges) {
       if (isForced) {
-        console.log(`   ⚑ no changes but --force, releasing anyway`);
+        console.log(`   ⚑ no release-worthy changes but --force present, proceeding anyway`);
       } else {
-        console.log(`   ✓ no changes, skipped`);
+        console.log(`   ✓ no release-worthy changes, skipped`);
         skipped++;
         continue;
       }
+    }
+
+    console.log(`   ↻ release-worthy changes detected (${changedFiles.length}):`);
+    for (const changedFile of changedFiles) {
+      console.log(`       ${changedFile}`);
     }
   } else {
     console.log(`   ⚑ no tag found - first release`);
@@ -276,6 +351,10 @@ for (const pkg of packages) {
     execIn(pkgPath, standardVersionCommand(ROOT, name, true, firstRelease), {
       stdio: 'inherit',
     });
+    const missing = missingPublishFiles(pkg, pkgJson);
+    console.log(
+      `   [dry-run] publish files: ${missing.length === 0 ? '✓ all present' : `✗ missing (${missing.join(', ')}) - would run build:lib`}`
+    );
     console.log(`   [dry-run] npm publish --access public (skipped)`);
   } else {
     try {
@@ -285,8 +364,10 @@ for (const pkg of packages) {
       // Push release commit + tag to the trunk (ADR-022: develop). The tag
       // triggers the release quality gate (release.yml).
       execIn(pkgPath, `git push --follow-tags origin develop`, { stdio: 'inherit' });
-      // Publish locally using the user's npm credentials (same local model
-      // as pi-coding-agent-extensions: no CI publish, no provenance).
+      // Build the artifact if needed, then publish locally using the user's
+      // npm credentials (same local model as pi-coding-agent-extensions: no
+      // CI publish, no provenance).
+      ensurePublishable(pkg, pkgJson);
       execIn(pkgPath, `npm publish --access public`, { stdio: 'inherit' });
       released++;
 
