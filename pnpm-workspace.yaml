@@ -3,7 +3,9 @@ packages:
   # Scaffold template: contains {%...%} placeholders, not a runnable workspace package.
   - '!packages/pix-component-template'
 allowBuilds:
+  '@vscode/vsce-sign': false
   esbuild: true
+  keytar: false
 minimumReleaseAgeExclude:
   - vite@8.2.1
 

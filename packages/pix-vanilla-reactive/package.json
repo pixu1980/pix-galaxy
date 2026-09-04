@@ -57,7 +57,8 @@
     "access": "public"
   },
   "scripts": {
-    "build": "pnpm build:lib && pnpm build:site",
+    "build": "pnpm build:lib && pnpm build:site && pnpm build:extension",
+    "build:extension": "cd ./extension/vanilla-reactive && vsce package --out ../../vsix/vanilla-reactive-0.1.0.vsix",
     "build:lib": "node ../pix-core/scripts/build.mjs && pnpm build:types",
     "build:site": "pnpm docs:build && vite build --config ./vite.config.mjs",
     "build:types": "tsc --project ./tsconfig.types.json && node ../pix-core/scripts/finalize-types.mjs",
@@ -74,6 +75,7 @@
     "typecheck": "tsc --project ./tsconfig.types.json --noEmit"
   },
   "devDependencies": {
+    "@vscode/vsce": "3.9.2",
     "@pix-galaxy/pix-color-scheme-selector": "workspace:*",
     "@pix-galaxy/pix-core": "workspace:*",
     "@pix-galaxy/pix-highlighter": "workspace:*",
