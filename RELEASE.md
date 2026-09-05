@@ -57,7 +57,7 @@ This document describes the complete release workflow for all packages in the pi
 | pix-splitter              | `@pix-galaxy/pix-splitter`              | wip                | `packages/pix-splitter/`              |
 | pix-highlighter           | `@pix-galaxy/pix-highlighter`           | Ready              | `packages/pix-highlighter/`           |
 | pix-recorder              | `@pix-galaxy/pix-recorder`              | wip                | `packages/pix-recorder/`              |
-| pix-a11y            | `@pix-galaxy/pix-a11y`            | wip                | `packages/pix-a11y/`            |
+| pix-a11y                  | `@pix-galaxy/pix-a11y`                  | wip                | `packages/pix-a11y/`                  |
 | pix-component-template    | -                                       | Private (template) | `packages/pix-component-template/`    |
 
 ---

@@ -21,7 +21,7 @@ Zero-runtime-dependency vanilla JavaScript Web Components, packaged as a pnpm wo
 | [@pix-galaxy/pix-splitter](./packages/pix-splitter)                           | Resizable panel splitter                                 | wip     |
 | [@pix-galaxy/pix-highlighter](./packages/pix-highlighter)                     | Browser-native syntax highlighting                       | ready   |
 | [@pix-galaxy/pix-recorder](./packages/pix-recorder)                           | Audio recorder with waveform                             | wip     |
-| [@pix-galaxy/pix-a11y](./packages/pix-a11y)                       | Display preferences popover                              | ready   |
+| [@pix-galaxy/pix-a11y](./packages/pix-a11y)                                   | Display preferences popover                              | ready   |
 
 Status reflects `releaseStatus` in each `package.json` (single source of truth, ADR-026):
 `ready` = quality gate passed, publishable; `wip` = in progress; `private` = never published.
