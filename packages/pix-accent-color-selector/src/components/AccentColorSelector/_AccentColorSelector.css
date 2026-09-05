@@ -25,6 +25,8 @@
       width: var(--pix-ds-space-5);
       height: var(--pix-ds-space-5);
       min-width: var(--pix-ds-space-5);
+      /* counter the global control min-height so swatches stay circles */
+      min-height: var(--pix-ds-space-5);
       padding: var(--pix--s--0);
       border: 2px solid var(--pix-ds-line-soft);
       border-radius: var(--pix--r--circle);
