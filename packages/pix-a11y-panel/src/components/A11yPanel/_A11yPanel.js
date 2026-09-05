@@ -7,7 +7,7 @@
  * changes to the document in real time.
  *
  * Integrates:
- *   - @pix-galaxy/pix-accent-color-selector – <accent-color-selector>
+ *   - @pix-galaxy/pix-accent-color-selector – <pix-accent-color-selector>
  */
 import '@pix-galaxy/pix-accent-color-selector';
 import componentCSS from './_A11yPanel.css?raw';
@@ -488,7 +488,7 @@ class PixA11yPanel extends ComponentBase {
               <p>Choose the palette used for links, actions, focus, and highlights.</p>
             </div>
             <div data-preferences-card-body>
-              <accent-color-selector></accent-color-selector>
+              <pix-accent-color-selector></pix-accent-color-selector>
             </div>
           </section>
 
