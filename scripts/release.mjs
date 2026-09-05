@@ -147,12 +147,9 @@ function verifyNpmAvailability(
  */
 function missingPublishFiles(pkg, pkgJson) {
   const pkgPath = join(PKG_DIR, pkg);
-  const required = [
-    pkgJson.main,
-    pkgJson.module,
-    pkgJson.types,
-    ...(pkgJson.files || []),
-  ].filter(Boolean);
+  const required = [pkgJson.main, pkgJson.module, pkgJson.types, ...(pkgJson.files || [])].filter(
+    Boolean
+  );
 
   return required.filter((entry) => {
     if (entry.includes('*')) {
