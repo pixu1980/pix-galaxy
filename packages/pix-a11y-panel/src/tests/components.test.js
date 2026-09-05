@@ -160,7 +160,7 @@ describe('PixA11yPanel - rendering & structure', () => {
     assert.ok(accentGroup);
     assert.equal(accentGroup.querySelector('h3').textContent.trim(), 'Accent color');
     assert.equal(accentGroup.querySelector('pix-color-scheme-selector'), null);
-    assert.ok(accentGroup.querySelector('accent-color-selector'));
+    assert.ok(accentGroup.querySelector('pix-accent-color-selector'));
   });
 
   test('renders three accessibility checkboxes', () => {
@@ -667,6 +667,131 @@ describe('PixA11yPanel - popover behaviour', () => {
   });
 });
 
+describe('PixA11yPanel - popover mode & edge branches', () => {
+  test('uses native popover mode when the API is available', () => {
+    const proto = window.HTMLElement.prototype;
+
+    // Simulate a browser with popover support so the next mount enters
+    // popover mode (protected by try/finally cleanup).
+    Object.defineProperty(proto, 'showPopover', { configurable: true, value: () => {} });
+    Object.defineProperty(proto, 'hidePopover', { configurable: true, value: () => {} });
+    try {
+      const element = mountPreferences();
+
+      // Panel not open yet.
+      assert.equal(element.isOpen(), false);
+
+      const panel = element.querySelector('[data-preferences-panel]');
+      Object.defineProperty(panel, 'matches', {
+        value: (sel) => sel === ':popover-open',
+      });
+      panel.dispatchEvent(new window.CustomEvent('toggle'));
+      assert.equal(element.dataset.open, 'true');
+
+      // The fallback toggle handler is a no-op in popover mode.
+      const click = new window.MouseEvent('click', { bubbles: true, cancelable: true });
+      element.querySelector('[data-preferences-toggle]').dispatchEvent(click);
+      assert.equal(click.defaultPrevented, false);
+
+      // Calling the fallback toggle directly returns early in popover mode.
+      let prevented = false;
+      element._onFallbackToggle({ preventDefault: () => (prevented = true) });
+      assert.equal(prevented, false);
+    } finally {
+      delete proto.showPopover;
+      delete proto.hidePopover;
+    }
+  });
+
+  test('Escape and outside pointerdown are no-ops while closed, Escape closes when open', () => {
+    const element = mountPreferences();
+
+    document.dispatchEvent(new window.KeyboardEvent('keydown', { key: 'Escape' }));
+    document.dispatchEvent(
+      new window.MouseEvent('pointerdown', { bubbles: true, clientX: 5, clientY: 5 })
+    );
+    assert.equal(element.isOpen(), false);
+
+    element.querySelector('[data-preferences-toggle]').click();
+    assert.equal(element.isOpen(), true);
+
+    document.dispatchEvent(new window.KeyboardEvent('keydown', { key: 'Escape' }));
+    assert.equal(element.isOpen(), false);
+  });
+
+  test('position update queue is skipped while closed', () => {
+    const element = mountPreferences();
+    element.queuePanelPositionUpdate();
+    assert.equal(element.isOpen(), false);
+  });
+
+  test('tolerates panels without scrollTo', () => {
+    const element = mountPreferences();
+    const panel = element.querySelector('[data-preferences-panel]');
+    if ('scrollTo' in panel) {
+      delete panel.scrollTo;
+    }
+    element.querySelector('[data-preferences-toggle]').click();
+    assert.equal(element.isOpen(), true);
+  });
+
+  test('uses requestAnimationFrame when available and positions the panel', () => {
+    const element = mountPreferences();
+    const originalRaf = window.requestAnimationFrame;
+    window.requestAnimationFrame = (cb) => {
+      cb();
+      return 0;
+    };
+    try {
+      const panel = element.querySelector('[data-preferences-panel]');
+      Object.defineProperty(panel, 'scrollTo', {
+        configurable: true,
+        value: () => {},
+      });
+      // Opening while a rAF is available runs updatePanelPosition once.
+      element.querySelector('[data-preferences-toggle]').click();
+      assert.equal(element.isOpen(), true);
+      assert.ok(panel.style.left || panel.style.top);
+    } finally {
+      window.requestAnimationFrame = originalRaf;
+    }
+  });
+
+  test('falls back to defaults when stored preferences are invalid JSON', () => {
+    window.localStorage.setItem(STORAGE_KEY, '{definitely not json');
+    const element = mountPreferences();
+    assert.equal(element.preferences.reduceMotion, false);
+    assert.equal(element.preferences.radiusPreset, 'rounded');
+    assert.equal(element.preferences.headingFont, 'editorial-serif');
+  });
+
+  test('keeps working when localStorage is unavailable', () => {
+    const descriptor = Object.getOwnPropertyDescriptor(window, 'localStorage');
+    try {
+      Object.defineProperty(window, 'localStorage', {
+        configurable: true,
+        get() {
+          throw new Error('storage denied');
+        },
+      });
+      const element = mountPreferences();
+      assert.equal(element.preferences.reduceMotion, false);
+    } finally {
+      Object.defineProperty(window, 'localStorage', descriptor);
+    }
+  });
+
+  test('ensureComponentStyles returns null without CSSStyleSheet support', () => {
+    const original = globalThis.CSSStyleSheet;
+    try {
+      globalThis.CSSStyleSheet = undefined;
+      assert.equal(PixA11yPanel.ensureComponentStyles(), null);
+    } finally {
+      globalThis.CSSStyleSheet = original;
+    }
+  });
+});
+
 /* ───────────────────────────────────────────────
    CSS & component styles
    ─────────────────────────────────────────────── */
@@ -694,7 +819,7 @@ describe('PixA11yPanel - CSS & component styles', () => {
     assert.ok(componentCss.includes('pix-a11y-panel [data-preferences-panel]'));
     assert.ok(componentCss.includes('pix-a11y-panel [data-preferences-choice]'));
     assert.ok(componentCss.includes('pix-a11y-panel [data-preferences-grid]'));
-    assert.ok(componentCss.includes('min-height: var(--pix--ctrl--h'));
+    assert.ok(componentCss.includes('min-height: var(--pix-ds--ctrl--h'));
     assert.ok(!componentCss.includes(':host'));
   });
 
@@ -788,5 +913,22 @@ describe('PixA11yPanel - docs site adaptation', () => {
 
     applyPreferencesToDocument({ ...DEFAULT_PREFERENCES, fontScale: '75%' });
     assert.equal(document.documentElement.style.fontSize, '75%');
+  });
+
+  test('imports safely without a DOM (SSR)', async () => {
+    const base = new URL('../components/A11yPanel/_A11yPanel.js', import.meta.url);
+    const original = {
+      HTMLElement: globalThis.HTMLElement,
+      customElements: globalThis.customElements,
+    };
+    try {
+      globalThis.HTMLElement = undefined;
+      globalThis.customElements = undefined;
+      const mod = await import(`${base.href}?ssr-smoke=${Date.now()}`);
+      assert.equal(typeof mod.default, 'function');
+    } finally {
+      globalThis.HTMLElement = original.HTMLElement;
+      globalThis.customElements = original.customElements;
+    }
   });
 });
