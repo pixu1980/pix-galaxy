@@ -9,7 +9,9 @@
   "exports": {
     "./foundations": "./lib/foundations.css",
     "./foundations.css": "./lib/foundations.css",
-    "./lib/foundations.css": "./lib/foundations.css"
+    "./lib/foundations.css": "./lib/foundations.css",
+    "./ds-tokens": "./src/shared/_ds-tokens.css",
+    "./ds-tokens.css": "./src/shared/_ds-tokens.css"
   },
   "scripts": {},
   "devDependencies": {
