@@ -1,7 +1,7 @@
 {
   "name": "@pix-galaxy/pix-accent-color-selector",
   "version": "0.1.0",
-  "releaseStatus": "ready",
+  "releaseStatus": "wip",
   "description": "Accent color selector Web Component for the pix-galaxy suite.",
   "type": "module",
   "author": "Emiliano Pisu",
