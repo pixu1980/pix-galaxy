@@ -17,9 +17,9 @@
       justify-content: center;
       gap: var(--pix--s--sm);
       min-width: var(--pix-ds-space-6);
-      min-height: var(--pix--ctrl--h);
+      min-height: var(--pix-ds--ctrl--h);
       padding: var(--pix--s--0) var(--pix-ds-space-3);
-      border: var(--pix--ctrl--border);
+      border: var(--pix-ds--ctrl--border);
       border-radius: var(--pix-ds--r--pill);
       background: var(--pix-ds-surface-elevated);
       color: var(--pix-ds-text-muted);
@@ -131,7 +131,8 @@
       min-width: 0;
       padding: var(--pix-ds-space-4);
       border: 1px solid var(--pix-ds-line-soft);
-      border-radius: var(--pix-ds--r--md);
+      /* pinned: the Corners chooser must not follow the selected preset */
+      border-radius: 0.5rem;
       background: color-mix(in srgb, var(--pix-ds-surface-panel) 82%, transparent);
     }
 
@@ -181,7 +182,8 @@
       min-width: 0;
       padding: var(--pix-ds-space-3);
       border: 1px solid var(--pix-ds-line-soft);
-      border-radius: var(--pix-ds--r--md);
+      /* pinned: the Corners chooser must not follow the selected preset */
+      border-radius: 0.5rem;
       background: color-mix(in srgb, var(--pix-ds-surface-elevated) 72%, transparent);
       color: var(--pix-ds-text-strong);
       cursor: pointer;
@@ -248,15 +250,15 @@
     }
 
     pix-a11y-panel [data-radius-preview='square'] span {
-      border-radius: var(--pix--s--0);
+      border-radius: 0;
     }
 
     pix-a11y-panel [data-radius-preview='rounded'] span {
-      border-radius: var(--pix--r--sm);
+      border-radius: 0.25rem;
     }
 
     pix-a11y-panel [data-radius-preview='squircle'] span {
-      border-radius: var(--pix--r--xl);
+      border-radius: 0.75rem;
     }
 
     @supports (corner-shape: squircle) {
@@ -285,15 +287,15 @@
       display: flex;
       align-items: center;
       gap: var(--pix-ds-space-3);
-      min-height: var(--pix--ctrl--h);
+      min-height: var(--pix-ds--ctrl--h);
       padding: var(--pix--s--0) var(--pix--s--xs);
       cursor: pointer;
     }
 
     pix-a11y-panel [data-preferences-checkbox] input {
-      width: var(--pix--ctrl--check-size);
-      height: var(--pix--ctrl--check-size);
-      accent-color: var(--pix--ctrl--check-accent);
+      width: var(--pix-ds--ctrl--check-size);
+      height: var(--pix-ds--ctrl--check-size);
+      accent-color: var(--pix-ds--ctrl--check-accent);
       flex-shrink: 0;
     }
 
@@ -326,7 +328,7 @@
     pix-a11y-panel [data-preferences-field] select {
       width: 100%;
       min-width: 0;
-      min-height: var(--pix--ctrl--h);
+      min-height: 3rem;
       max-width: 100%;
     }
 

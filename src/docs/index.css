@@ -84,11 +84,11 @@
   --pix-ds-space-8: 3rem;
   --pix-ds-space-9: 4rem;
 
-  --pix-ds--r--sm: var(--pix-ds--r--sm);
-  --pix-ds--r--md: var(--pix-ds--r--md);
-  --pix-ds--r--lg: var(--pix-ds--r--lg);
-  --pix-ds--r--xl: var(--pix-ds--r--xl);
-  --pix-ds--r--pill: var(--pix-ds--r--pill);
+  --pix-ds--r--sm: var(--pix--r--sm);
+  --pix-ds--r--md: var(--pix--r--md);
+  --pix-ds--r--lg: var(--pix--r--lg);
+  --pix-ds--r--xl: var(--pix--r--xl);
+  --pix-ds--r--pill: var(--pix--r--pill);
 
   --pix-ds-elevation-1: light-dark(
     0 0.75rem 1.75rem rgba(54, 39, 22, 0.08),
