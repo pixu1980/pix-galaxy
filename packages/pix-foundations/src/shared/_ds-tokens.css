@@ -22,6 +22,8 @@
       --pix-ds-color-sand-200: oklch(0.925 0.016 85);
       --pix-ds-color-sky-400: oklch(0.78 0.11 228);
       --pix-ds-color-sky-500: oklch(0.71 0.13 228);
+      --pix-ds-color-sky-600: oklch(0.48 0.12 228);
+      --pix-ds-color-sky-700: oklch(0.42 0.11 228);
       --pix-ds-color-sky-300: oklch(0.85 0.08 228);
       --pix-ds-color-mint-400: oklch(0.84 0.1 170);
       --pix-ds-color-mint-500: oklch(0.76 0.11 170);
@@ -76,6 +78,7 @@
       --pix-ds-text-md: var(--pix--t--size-md);
       --pix-ds-text-lg: var(--pix--t--size-lg);
       --pix-ds-text-xl: var(--pix--t--size-xl);
+      --pix-ds-text-2xl: var(--pix--t--size-2xl);
       --pix-ds-leading-tight: var(--pix--t--line-height-tight);
       --pix-ds-leading-normal: var(--pix--t--line-height);
       --pix-ds-leading-relaxed: var(--pix--t--line-height-relaxed);
