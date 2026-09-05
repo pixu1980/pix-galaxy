@@ -148,14 +148,12 @@ body {
 /* ─── 4. Hero ──────────────────────────────────────────────────── */
 
 [data-part='hero'] > pix-color-scheme-selector {
-  --pix-ctrl-h: 2.5rem;
   margin-inline-start: auto;
   margin-top: var(--pix--s--2xs);
   display: flex;
 }
 
 [data-part='hero'] > pix-a11y {
-  --pix-ctrl-h: 2.5rem;
   display: flex;
 }
 
