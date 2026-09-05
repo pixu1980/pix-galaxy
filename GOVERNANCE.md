@@ -1,6 +1,6 @@
 # Governance
 
-pix-galaxy is maintained as a public component suite.
+pix-galaxy is maintained as a public component suite under a **benevolent-dictator (BDFL)** governance model (ADR-026): the Owner acts as benevolent dictator with final authority on release, security, and governance decisions, while contributors are free to propose and implement changes.
 
 ## Project Goals
 
@@ -11,9 +11,15 @@ pix-galaxy is maintained as a public component suite.
 
 ## Roles
 
-### Owner
+### Owner (Benevolent Dictator)
 
-The repository owner is the final escalation point for release, security, and governance decisions.
+The repository owner is the **final decision authority** for release, security, and governance (BDFL model, ADR-026). The Owner:
+
+- Sets the long-term direction and public roadmap.
+- Decides when a package is promoted to `releaseStatus: "ready"` or published to npm.
+- Is the escalation point when lazy consensus fails or the decision is time-sensitive.
+
+Ownership is intended to be transferred or widened (core team) if the project outgrows single-maintainer operation.
 
 ### Maintainers
 
@@ -29,6 +35,16 @@ Contributors can propose and implement changes through issues and pull requests.
 - Larger changes use lazy consensus in the linked issue or pull request discussion.
 - If consensus is unclear or time-sensitive, the repository owner makes the final decision.
 
+## Quality Gate (pre-public status)
+
+Before any package is promoted to `releaseStatus: "ready"` or published (ADR-026):
+
+- `node:test` unit tests pass.
+- Playwright e2e passes.
+- `@axe-core/playwright` audit passes on the package docs site.
+- Visual regression baseline is green.
+- Test coverage is **>= 95%**.
+
 ## Release Policy
 
 - Releases follow semantic versioning.
@@ -39,3 +55,13 @@ Contributors can propose and implement changes through issues and pull requests.
 ## Governance Changes
 
 Changes to governance, contribution process, security policy, or code of conduct require maintainer approval and should be documented in a pull request.
+
+## Deprecation & EOL
+
+A package may be deprecated by the Owner when it is superseded, unmaintained, or replaced. Deprecation steps:
+
+1. `npm deprecate` a message on the latest published version.
+2. Mark the package status as `deprecated` in `package.json` and the portal catalog, and add a deprecation note to its README and docs site.
+3. The deprecating line keeps security fixes for **90 days** from the announcement (see SECURITY.md).
+
+Breaking API changes follow semver majors per package (ADR-018): a new major is the migration surface; the previous major is supported per the Release Policy above.
