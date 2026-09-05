@@ -27,7 +27,7 @@
       z-index: 1;
       flex-shrink: 0;
       background: var(--pix-splitter--handle-bg);
-      transition: background var(--pix-ds-duration-fast) var(--pix-ds-ease-standard);
+      transition: background var(--pix-m-duration-fast) var(--pix-m-ease-standard);
       user-select: none;
       -webkit-user-select: none;
     }
@@ -56,7 +56,7 @@
       border-radius: var(--pix--s--2px);
       background: var(--pix-splitter--thumb);
       opacity: 0;
-      transition: opacity var(--pix-ds-duration-fast) var(--pix-ds-ease-standard);
+      transition: opacity var(--pix-m-duration-fast) var(--pix-m-ease-standard);
     }
 
     pix-splitter [data-splitter-handle]:hover::before,

@@ -171,7 +171,7 @@ export function createDocsSite({ mount, docs, examples: exampleEntries, meta, af
         <section data-part="live-preview">
           <p data-part="eyebrow">Live component</p>
           <p data-part="use-tag">Usage: <code>&lt;${escapeHtml(componentTag)}&gt;</code></p>
-          ${meta.liveHtml || `<p style="color:var(--pix-ds-text-muted);font-size:0.875rem;">Live demo unavailable - open the docs site for this package.</p>`}
+          ${meta.liveHtml || `<p style="color:var(--pix-text-muted);font-size:0.875rem;">Live demo unavailable - open the docs site for this package.</p>`}
         </section>
 
         <main data-part="main">

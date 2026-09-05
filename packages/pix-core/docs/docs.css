@@ -1,157 +1,42 @@
-/* pix-galaxy - shared docs site styles
+/* pix-galaxy - shared docs site styles (minimal)
  *
- * Imported by every component's documentation site.
- * Centralises border-radius, borders, spacing, and interactive
- * element consistency so each package doesn't duplicate them.
+ * Structural CSS is in @pix-galaxy/pix-foundations/foundations.css.
+ * This file contains only overrides for the shared template
+ * (pix-core/docs/docs-site.js).
  *
  * Usage in each package's src/docs/index.css:
- *   @import '@pix-galaxy/pix-core/docs/docs.css';
+ *   @import '@pix-galaxy/pix-foundations/foundations.css';
  */
 
-/* ── Interactive element borders ─────────────────────────────────── */
+/* ── Nav panel background ──────────────────────────────────────── */
 
-a,
-button,
-input,
-select,
-textarea,
-[tabindex],
-[role='button'] {
-  border-radius: var(--pix-ds--r--md);
+[data-part='nav'] {
+  border: 1px solid var(--pix-line-soft);
+  background: var(--pix-surface-elevated);
 }
 
-pre,
-pre[is='pix-highlighter'] {
-  border: 1px solid var(--pix-ds--c--border);
-  border-radius: var(--pix-ds--r--md);
+[data-part='nav'] [data-part='eyebrow'] {
+  margin: 0 0 var(--pix-space-2);
+  color: var(--pix-text-muted);
+  font-size: var(--pix-t-sm);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
-/* ── Doc site shells ────────────────────────────────────────────── */
-
-[data-part='hero'],
-[data-part='main'],
-[data-part='examples'] {
-  border-radius: var(--pix-ds--r--xl) !important;
-  border: 1px solid var(--pix-ds--c--border);
-}
-
-[data-part='nav-link'] {
-  border-radius: var(--pix-ds--r--pill) !important;
-}
-
-[data-part='nav'],
-[data-part='content-panel'],
-[data-part='example-card'] {
-  border-radius: var(--pix-ds--r--lg) !important;
-}
-
-[data-part='meta-pill'] {
-  border-radius: var(--pix-ds--r--pill) !important;
-}
-
-/* ── Code blocks in markdown ────────────────────────────────────── */
-
-[data-part='markdown'] pre[is='pix-highlighter'],
-[data-part='example-card'] pre[is='pix-highlighter'] {
-  border-radius: var(--pix-ds--r--md) !important;
-}
-
-/* ── Usage tag: ensure WCAG 2.2 AA contrast (4.5:1) on the code chip ── */
-
-[data-part='use-tag'] code {
-  /* Overrides per-site accent-colored chips that fail contrast checks.
-     Keeps the accent-tinted background but forces readable text. */
-  color: var(--pix-ds-text-strong) !important;
-  background: color-mix(
-    in srgb,
-    var(--pix-ds-accent-primary) 12%,
-    var(--pix-ds-surface-page)
-  ) !important;
-  border: 1px solid color-mix(in srgb, var(--pix-ds-accent-primary) 30%, transparent) !important;
-  font-weight: 500;
-}
-
-/* ── Hero: identical to the portal header ───────────────────────── */
-/* The portal (src/docs) is the visual reference: gradient display title
-   with the theme toggle and a11y panel side by side at the top-right,
-   summary and meta pills full-width below. */
-
-[data-part='hero'] {
+[data-part='nav-links'] {
   display: flex;
-  flex-wrap: wrap;
-  align-items: flex-start;
-  gap: var(--pix-ds-space-4);
-  row-gap: var(--pix-ds-space-3);
-  padding: var(--pix-ds-space-6) var(--pix-ds-space-6) var(--pix-ds-space-7);
-  background: var(--pix-ds-surface-elevated);
-  box-shadow: var(--pix-ds-elevation-2);
+  flex-direction: column;
+  gap: var(--pix--s--2xs);
 }
 
-[data-part='hero'] > pix-color-scheme-selector {
-  --pix-ds--ctrl--h: 2.5rem; /* compact toolbar controls */
-  margin-inline-start: auto;
-  margin-top: var(--pix--s--2xs);
-  display: flex;
+/* ── Content panel padding ─────────────────────────────────────── */
+
+[data-part='content-panel'] {
+  border: 1px solid var(--pix-line-soft);
+  background: var(--pix-surface-elevated);
 }
 
-[data-part='hero'] > pix-a11y {
-  --pix-ds--ctrl--h: 2.5rem; /* match the color-scheme selector height */
-  display: flex;
-}
-
-[data-part='hero'] h1 {
-  margin: 0;
-  max-width: 13ch;
-  font-size: clamp(2.75rem, 5.5vw, 4.25rem);
-  font-weight: 700;
-  line-height: 1.05;
-  letter-spacing: -0.03em;
-  text-wrap: balance;
-}
-
-[data-part='hero'] h1 span {
-  /* Slight vertical pad so the gradient covers full glyphs (descenders are
-     clipped by the tight line-height otherwise); margin cancels the pad. */
-  display: inline-block;
-  padding-block: 0.13em;
-  margin-block: -0.13em;
-  background: linear-gradient(
-    135deg,
-    var(--pix-ds-color-sky-400),
-    var(--pix-ds-color-mint-400),
-    var(--pix-ds-color-coral-400),
-    var(--pix-ds-color-violet-400)
-  );
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-[data-part='hero-summary'] {
-  flex-basis: 100%;
-  margin: 0;
-  color: var(--pix-ds-text-muted);
-  font-size: var(--pix-ds-text-lg);
-  line-height: var(--pix-ds-leading-relaxed);
-  text-wrap: pretty;
-}
-
-[data-part='hero-meta'] {
-  flex-basis: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--pix-ds-space-2);
-  margin-top: var(--pix-ds-space-2);
-}
-
-[data-part='hero-meta'] [data-part='meta-pill'] {
-  display: inline-flex;
-  align-items: center;
-  min-height: 2rem;
-  padding: var(--pix--s--0) var(--pix-ds-space-3);
-  border: 1px solid var(--pix-ds-line-soft);
-  border-radius: var(--pix-ds--r--pill);
-  background: var(--pix-ds-surface-page);
-  color: var(--pix-ds-text-muted);
-  font-size: var(--pix-ds-text-sm);
+[data-part='markdown'] {
+  padding: var(--pix-space-5) var(--pix-space-6);
 }

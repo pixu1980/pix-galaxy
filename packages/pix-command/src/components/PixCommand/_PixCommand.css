@@ -118,7 +118,7 @@
     /* ── Group label ─────────────────────────────────────────────── */
 
     pix-command [data-command-group-label] {
-      padding: var(--pix--s--sm) var(--pix-ds-space-3) var(--pix--s--xs);
+      padding: var(--pix--s--sm) var(--pix-space-3) var(--pix--s--xs);
       color: var(--pix-command--muted);
       pointer-events: none;
     }
@@ -128,8 +128,8 @@
     pix-command [data-command-item] {
       display: flex;
       align-items: center;
-      gap: var(--pix-ds-space-3);
-      padding: var(--pix--s--sm) var(--pix-ds-space-3);
+      gap: var(--pix-space-3);
+      padding: var(--pix--s--sm) var(--pix-space-3);
       border-radius: var(--pix--r--md);
       cursor: pointer;
       scroll-margin: 0.25rem;
@@ -221,7 +221,7 @@
 
     pix-command [data-command-empty] {
       display: none;
-      padding: var(--pix-ds-space-7) var(--pix--s--md);
+      padding: var(--pix-space-7) var(--pix--s--md);
       text-align: center;
       color: var(--pix-command--muted);
     }
@@ -233,7 +233,7 @@
     /* ── Footer ──────────────────────────────────────────────────── */
 
     pix-command [data-command-footer] {
-      padding: var(--pix--s--sm) var(--pix-ds-space-3);
+      padding: var(--pix--s--sm) var(--pix-space-3);
       border-top: 1px solid var(--pix-command--border);
       color: var(--pix-command--muted);
       display: flex;

@@ -100,9 +100,9 @@ beforeEach(() => {
   document.documentElement.style.removeProperty('colorScheme');
   document.documentElement.style.removeProperty('color-scheme');
   document.documentElement.style.removeProperty('font-size');
-  document.documentElement.style.removeProperty('--pix-ds-font-display');
-  document.documentElement.style.removeProperty('--pix-ds-font-sans');
-  document.documentElement.style.removeProperty('--pix-ds-font-mono');
+  document.documentElement.style.removeProperty('--pix-t-display');
+  document.documentElement.style.removeProperty('--pix-t-sans');
+  document.documentElement.style.removeProperty('--pix-t-mono');
   document.documentElement.style.removeProperty('--pix-accent-h');
   document.documentElement.style.removeProperty('--pix-accent-s');
   document.documentElement.style.removeProperty('--pix-accent-l');
@@ -238,12 +238,12 @@ describe('PixA11y - document application & persistence', () => {
     assert.equal(document.documentElement.getAttribute('data-radius-preset'), 'rounded');
     assert.equal(document.documentElement.style.fontSize, '125%');
     assert.match(
-      document.documentElement.style.getPropertyValue('--pix-ds-font-display'),
+      document.documentElement.style.getPropertyValue('--pix-t-display'),
       /system-ui/i
     );
-    assert.match(document.documentElement.style.getPropertyValue('--pix-ds-font-sans'), /Georgia/i);
+    assert.match(document.documentElement.style.getPropertyValue('--pix-t-sans'), /Georgia/i);
     assert.match(
-      document.documentElement.style.getPropertyValue('--pix-ds-font-mono'),
+      document.documentElement.style.getPropertyValue('--pix-t-mono'),
       /ui-monospace/i
     );
   });
@@ -257,7 +257,7 @@ describe('PixA11y - document application & persistence', () => {
     assert.equal(document.documentElement.getAttribute('data-radius-preset'), 'rounded');
     assert.equal(document.documentElement.style.fontSize, '');
     assert.match(
-      document.documentElement.style.getPropertyValue('--pix-ds-font-sans'),
+      document.documentElement.style.getPropertyValue('--pix-t-sans'),
       /system-ui/i
     );
   });
@@ -313,15 +313,15 @@ describe('PixA11y - document application & persistence', () => {
     assert.equal(saved.codeFont, 'classic-mono');
     assert.equal('reduceAnimations' in saved, false);
     assert.match(
-      document.documentElement.style.getPropertyValue('--pix-ds-font-display'),
+      document.documentElement.style.getPropertyValue('--pix-t-display'),
       /Optima/i
     );
-    assert.match(document.documentElement.style.getPropertyValue('--pix-ds-font-sans'), /Charter/i);
+    assert.match(document.documentElement.style.getPropertyValue('--pix-t-sans'), /Charter/i);
     assert.match(
-      document.documentElement.style.getPropertyValue('--pix-ds-font-mono'),
+      document.documentElement.style.getPropertyValue('--pix-t-mono'),
       /Courier New/i
     );
-    assert.equal(document.documentElement.style.getPropertyValue('--pix-ds-leading-normal'), '1.8');
+    assert.equal(document.documentElement.style.getPropertyValue('--pix-t-leading-normal'), '1.8');
   });
 
   test('setting font scale back to default removes the inline font-size', () => {
@@ -539,12 +539,12 @@ describe('PixA11y - applyPreferencesToDocument', () => {
     });
 
     assert.match(
-      document.documentElement.style.getPropertyValue('--pix-ds-font-display'),
+      document.documentElement.style.getPropertyValue('--pix-t-display'),
       /Baskerville/i
     );
-    assert.match(document.documentElement.style.getPropertyValue('--pix-ds-font-sans'), /Charter/i);
+    assert.match(document.documentElement.style.getPropertyValue('--pix-t-sans'), /Charter/i);
     assert.match(
-      document.documentElement.style.getPropertyValue('--pix-ds-font-mono'),
+      document.documentElement.style.getPropertyValue('--pix-t-mono'),
       /Cascadia/i
     );
   });
@@ -570,11 +570,11 @@ describe('PixA11y - applyPreferencesToDocument', () => {
     });
 
     assert.match(
-      document.documentElement.style.getPropertyValue('--pix-ds-font-display'),
+      document.documentElement.style.getPropertyValue('--pix-t-display'),
       /OpenDyslexic/
     );
     assert.match(
-      document.documentElement.style.getPropertyValue('--pix-ds-font-sans'),
+      document.documentElement.style.getPropertyValue('--pix-t-sans'),
       /OpenDyslexic/
     );
   });
@@ -819,7 +819,7 @@ describe('PixA11y - CSS & component styles', () => {
     assert.ok(componentCss.includes('pix-a11y [data-preferences-panel]'));
     assert.ok(componentCss.includes('pix-a11y [data-preferences-choice]'));
     assert.ok(componentCss.includes('pix-a11y [data-preferences-grid]'));
-    assert.ok(componentCss.includes('min-height: var(--pix-ds--ctrl--h'));
+    assert.ok(componentCss.includes('min-height: var(--pix-ctrl-h'));
     assert.ok(!componentCss.includes(':host'));
   });
 
@@ -842,12 +842,12 @@ describe('PixA11y - CSS & component styles', () => {
       'utf8'
     );
 
-    assert.ok(componentCss.includes('var(--pix-ds-surface-elevated'));
-    assert.ok(componentCss.includes('var(--pix-ds-line-soft'));
-    assert.ok(componentCss.includes('var(--pix-ds-text-strong'));
-    assert.ok(componentCss.includes('var(--pix-ds-accent-primary'));
-    assert.ok(componentCss.includes('var(--pix-ds--r--lg'));
-    assert.ok(componentCss.includes('var(--pix-ds-space-4'));
+    assert.ok(componentCss.includes('var(--pix-surface-elevated'));
+    assert.ok(componentCss.includes('var(--pix-line-soft'));
+    assert.ok(componentCss.includes('var(--pix-text-strong'));
+    assert.ok(componentCss.includes('var(--pix-accent-primary'));
+    assert.ok(componentCss.includes('var(--pix-r-lg'));
+    assert.ok(componentCss.includes('var(--pix-space-4'));
     assert.doesNotMatch(componentCss, /--dout-/);
   });
 

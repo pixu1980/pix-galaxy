@@ -10,12 +10,12 @@ test('defines the shared token groups and consumes them in component and docs st
   ]);
 
   for (const token of [
-    '--pix-ds-color-ink-950',
-    '--pix-ds-font-display',
-    '--pix-ds-space-4',
-    '--pix-ds--r--lg',
-    '--pix-ds-elevation-2',
-    '--pix-ds-duration-fast',
+    '--pix-ink-950',
+    '--pix-t-display',
+    '--pix-space-4',
+    '--pix-r-lg',
+    '--pix-e-2',
+    '--pix-m-duration-fast',
   ]) {
     assert.ok(tokensCss.includes(token), `missing token ${token}`);
   }
@@ -24,7 +24,7 @@ test('defines the shared token groups and consumes them in component and docs st
   // live in the component layer; foundations owns global primitives).
   assert.ok(componentCss.includes('var(--pix-highlighter--'));
   assert.ok(tokensCss.includes('light-dark('));
+  // Docs site consumes foundations (structural CSS + tokens from there).
+  assert.ok(siteCss.includes("@import '@pix-galaxy/pix-foundations/foundations.css';"));
   assert.ok(siteCss.includes("@import '@pix-galaxy/pix-foundations/ds-tokens.css';"));
-  assert.ok(siteCss.includes('data-site-color-mode'));
-  assert.ok(siteCss.includes('var(--pix-ds-accent-primary)'));
 });

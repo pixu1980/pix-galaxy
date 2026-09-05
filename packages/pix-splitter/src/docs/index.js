@@ -79,9 +79,9 @@ async function bootDocsSite() {
         'Accessible resizable panel splitter Web Component. Supports horizontal and vertical layouts with keyboard navigation.',
       liveHtml: `
         <pix-color-scheme-selector></pix-color-scheme-selector>
-        <pix-splitter orientation="horizontal" style="height:120px;border:1px solid var(--pix-ds-line-soft);border-radius:8px;overflow:hidden;margin-top:0.5rem;">
-          <div style="padding:0.75rem;background:var(--pix-ds-surface);font-size:0.875rem;">← drag →</div>
-          <div style="padding:0.75rem;background:var(--pix-ds-surface-page);font-size:0.875rem;">panel</div>
+        <pix-splitter orientation="horizontal" style="height:120px;border:1px solid var(--pix-line-soft);border-radius:8px;overflow:hidden;margin-top:0.5rem;">
+          <div style="padding:0.75rem;background:var(--pix-surface);font-size:0.875rem;">← drag →</div>
+          <div style="padding:0.75rem;background:var(--pix-surface-page);font-size:0.875rem;">panel</div>
         </pix-splitter>
       `,
     },

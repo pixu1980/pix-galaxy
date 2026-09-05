@@ -1,528 +1,108 @@
 /**
  * FILE: index.css
- * USAGE: Stylesheet for src/docs/index.css.
- * SCOPE: File-local selectors and pix-galaxy design tokens.
+ * USAGE: Stylesheet for src/docs/index.css (portal).
+ * SCOPE: Portal-specific accent overrides only. All structural CSS
+ *        is consumed from @pix-galaxy/pix-foundations/foundations.css.
  */
 @import '@pix-galaxy/pix-foundations/foundations.css';
 @import '@pix-galaxy/pix-foundations/ds-tokens.css';
 
-/* ─── Accent colour palettes ─── */
+/* ─── Portal-specific: section accent colours ──────────────────── */
+/* The portal assigns a unique accent colour per catalog section.
+   These override --pix-component-badge/glow for each section. */
 
 [data-component-accent='sky'] {
-  --component-badge: light-dark(var(--pix-ds-color-sky-400), var(--pix-ds-color-sky-300));
-  --component-glow: light-dark(
-    color-mix(in srgb, var(--pix-ds-color-sky-400) 18%, transparent),
-    color-mix(in srgb, var(--pix-ds-color-sky-300) 12%, transparent)
+  --pix-component-badge: light-dark(var(--pix-sky-400), var(--pix-sky-300));
+  --pix-component-glow: light-dark(
+    color-mix(in srgb, var(--pix-sky-400) 18%, transparent),
+    color-mix(in srgb, var(--pix-sky-300) 12%, transparent)
   );
 }
 
 [data-component-accent='coral'] {
-  --component-badge: light-dark(var(--pix-ds-color-coral-400), var(--pix-ds-color-coral-300));
-  --component-glow: light-dark(
-    color-mix(in srgb, var(--pix-ds-color-coral-400) 18%, transparent),
-    color-mix(in srgb, var(--pix-ds-color-coral-300) 12%, transparent)
+  --pix-component-badge: light-dark(var(--pix-coral-400), var(--pix-coral-300));
+  --pix-component-glow: light-dark(
+    color-mix(in srgb, var(--pix-coral-400) 18%, transparent),
+    color-mix(in srgb, var(--pix-coral-300) 12%, transparent)
   );
 }
 
 [data-component-accent='mint'] {
-  --component-badge: light-dark(var(--pix-ds-color-mint-400), var(--pix-ds-color-mint-500));
-  --component-glow: light-dark(
-    color-mix(in srgb, var(--pix-ds-color-mint-400) 18%, transparent),
-    color-mix(in srgb, var(--pix-ds-color-mint-500) 12%, transparent)
+  --pix-component-badge: light-dark(var(--pix-mint-400), var(--pix-mint-500));
+  --pix-component-glow: light-dark(
+    color-mix(in srgb, var(--pix-mint-400) 18%, transparent),
+    color-mix(in srgb, var(--pix-mint-500) 12%, transparent)
   );
 }
 
 [data-component-accent='violet'] {
-  --component-badge: light-dark(var(--pix-ds-color-violet-400), var(--pix-ds-color-violet-300));
-  --component-glow: light-dark(
-    color-mix(in srgb, var(--pix-ds-color-violet-400) 18%, transparent),
-    color-mix(in srgb, var(--pix-ds-color-violet-300) 12%, transparent)
+  --pix-component-badge: light-dark(var(--pix-violet-400), var(--pix-violet-300));
+  --pix-component-glow: light-dark(
+    color-mix(in srgb, var(--pix-violet-400) 18%, transparent),
+    color-mix(in srgb, var(--pix-violet-300) 12%, transparent)
   );
 }
 
 [data-component-accent='indigo'] {
-  --component-badge: light-dark(oklch(0.6 0.18 260), oklch(0.7 0.15 260));
-  --component-glow: light-dark(
+  --pix-component-badge: light-dark(oklch(0.6 0.18 260), oklch(0.7 0.15 260));
+  --pix-component-glow: light-dark(
     color-mix(in srgb, oklch(0.6 0.18 260) 18%, transparent),
     color-mix(in srgb, oklch(0.7 0.15 260) 12%, transparent)
   );
 }
 
 [data-component-accent='amber'] {
-  --component-badge: light-dark(oklch(0.65 0.18 85), oklch(0.75 0.14 85));
-  --component-glow: light-dark(
+  --pix-component-badge: light-dark(oklch(0.65 0.18 85), oklch(0.75 0.14 85));
+  --pix-component-glow: light-dark(
     color-mix(in srgb, oklch(0.65 0.18 85) 18%, transparent),
     color-mix(in srgb, oklch(0.75 0.14 85) 12%, transparent)
   );
 }
 
 [data-component-accent='rose'] {
-  --component-badge: light-dark(oklch(0.6 0.18 10), oklch(0.7 0.14 10));
-  --component-glow: light-dark(
+  --pix-component-badge: light-dark(oklch(0.6 0.18 10), oklch(0.7 0.14 10));
+  --pix-component-glow: light-dark(
     color-mix(in srgb, oklch(0.6 0.18 10) 18%, transparent),
     color-mix(in srgb, oklch(0.7 0.14 10) 12%, transparent)
   );
 }
 
 [data-component-accent='emerald'] {
-  --component-badge: light-dark(oklch(0.55 0.18 160), oklch(0.65 0.15 160));
-  --component-glow: light-dark(
+  --pix-component-badge: light-dark(oklch(0.55 0.18 160), oklch(0.65 0.15 160));
+  --pix-component-glow: light-dark(
     color-mix(in srgb, oklch(0.55 0.18 160) 18%, transparent),
     color-mix(in srgb, oklch(0.65 0.15 160) 12%, transparent)
   );
 }
 
 [data-component-accent='aqua'] {
-  --component-badge: light-dark(oklch(0.55 0.15 210), oklch(0.65 0.12 210));
-  --component-glow: light-dark(
+  --pix-component-badge: light-dark(oklch(0.55 0.15 210), oklch(0.65 0.12 210));
+  --pix-component-glow: light-dark(
     color-mix(in srgb, oklch(0.55 0.15 210) 18%, transparent),
     color-mix(in srgb, oklch(0.65 0.12 210) 12%, transparent)
   );
 }
 
 [data-component-accent='gold'] {
-  --component-badge: light-dark(oklch(0.6 0.18 85), oklch(0.72 0.14 85));
-  --component-glow: light-dark(
+  --pix-component-badge: light-dark(oklch(0.6 0.18 85), oklch(0.72 0.14 85));
+  --pix-component-glow: light-dark(
     color-mix(in srgb, oklch(0.6 0.18 85) 18%, transparent),
     color-mix(in srgb, oklch(0.72 0.14 85) 12%, transparent)
   );
 }
 
 [data-component-accent='neutral'] {
-  --component-badge: light-dark(oklch(0.65 0.01 0), oklch(0.45 0.01 0));
-  --component-glow: light-dark(
+  --pix-component-badge: light-dark(oklch(0.65 0.01 0), oklch(0.45 0.01 0));
+  --pix-component-glow: light-dark(
     color-mix(in srgb, oklch(0.65 0.01 0) 12%, transparent),
     color-mix(in srgb, oklch(0.45 0.01 0) 8%, transparent)
   );
 }
 
-/* ─── Reset ─── */
-
-:root {
-  background: var(--pix-ds-surface-page);
-  color: var(--pix-ds-text-strong);
-}
-
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: var(--pix--s--0);
-  min-height: 100vh;
-}
-
-#app {
-  min-height: 100vh;
-}
-
-/* ─── Shell ─── */
-
-[data-part='shell'] {
-  width: min(64rem, calc(100vw - 2rem));
-  margin: var(--pix--s--0) auto;
-  padding: var(--pix-ds-space-5) 0 var(--pix-ds-space-8);
-  display: grid;
-  gap: var(--pix-ds-space-7);
-}
-
-/* ─── Hero ─── */
-
-/* Toolbar controls live inside the hero header */
-[data-part='hero'] > pix-color-scheme-selector {
-  --pix-ds--ctrl--h: 2.5rem; /* compact toolbar controls */
-  margin-inline-start: auto;
-  margin-top: var(--pix--s--2xs);
-  display: flex;
-}
-
-[data-part='hero'] > pix-a11y {
-  --pix-ds--ctrl--h: 2.5rem; /* match the color-scheme selector height */
-  display: flex;
-}
-
-/* Main content region holding the catalog sections */
-main {
-  display: grid;
-  gap: var(--pix-ds-space-7);
-}
-
-[data-part='hero'] {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-start;
-  gap: var(--pix-ds-space-4);
-  row-gap: var(--pix-ds-space-3);
-  padding: var(--pix-ds-space-6) var(--pix-ds-space-6) var(--pix-ds-space-7);
-  border: 1px solid var(--pix-ds-line-soft);
-  border-radius: var(--pix-ds--r--xl);
-  background: var(--pix-ds-surface-elevated);
-  box-shadow: var(--pix-ds-elevation-2);
-}
-
-[data-part='hero'] h1 {
-  margin: 0;
-  max-width: 13ch;
-  font-size: clamp(2.75rem, 5.5vw, 4.25rem);
-  font-weight: 700;
-  line-height: 1.05;
-  letter-spacing: -0.03em;
-  text-wrap: balance;
-}
-
-[data-part='hero'] h1 span {
-  /* Slight vertical pad so the gradient covers full glyphs (descenders are
-     clipped by the tight line-height otherwise); margin cancels the pad. */
-  display: inline-block;
-  padding-block: 0.13em;
-  margin-block: -0.13em;
-  background: linear-gradient(
-    135deg,
-    var(--pix-ds-color-sky-400),
-    var(--pix-ds-color-mint-400),
-    var(--pix-ds-color-coral-400),
-    var(--pix-ds-color-violet-400)
-  );
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-[data-part='hero-summary'] {
-  flex-basis: 100%;
-  max-width: 40rem;
-  margin: 0;
-  color: var(--pix-ds-text-muted);
-  font-size: var(--pix-ds-text-lg);
-  line-height: var(--pix-ds-leading-relaxed);
-  text-wrap: pretty;
-}
-
-[data-part='hero-meta'] {
-  flex-basis: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--pix-ds-space-2);
-  margin-top: var(--pix-ds-space-2);
-}
-
-[data-part='meta-pill'] {
-  display: inline-flex;
-  align-items: center;
-  min-height: 2rem;
-  padding: var(--pix--s--0) var(--pix-ds-space-3);
-  border: 1px solid var(--pix-ds-line-soft);
-  border-radius: var(--pix-ds--r--pill);
-  background: var(--pix-ds-surface-page);
-  color: var(--pix-ds-text-muted);
-  font-size: var(--pix-ds-text-sm);
-}
-
-/* ─── Catalog sections ─── */
-
-[data-part='section'] {
-  display: grid;
-  gap: var(--pix-ds-space-4);
-}
-
-[data-part='section-title'] {
-  display: flex;
-  align-items: center;
-  gap: var(--pix-ds-space-2);
-  margin: 0;
-  font-size: var(--pix-ds-text-sm);
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--pix-ds-text-muted);
-}
-
-[data-part='section-title']::after {
-  content: '';
-  flex: 1;
-  height: 1px;
-  background: var(--pix-ds-line-soft);
-  align-self: center;
-}
+/* ─── Portal-specific: section count accent ────────────────────── */
 
 [data-part='section-count'] {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 1.75rem;
-  height: 1.75rem;
-  padding: 0 var(--pix--s--xs);
-  border: 1px solid color-mix(in oklab, var(--pix-ds-accent-primary) 40%, transparent);
-  border-radius: var(--pix-ds--r--pill);
-  background: color-mix(in oklab, var(--pix-ds-accent-primary) 14%, transparent);
-  color: var(--pix-ds-text-strong);
-  font-size: var(--pix-ds-text-sm);
-  font-weight: 700;
-  font-variant-numeric: tabular-nums;
-  line-height: 1;
-}
-
-/* ─── Component grid (flex, sequential rows) ─── */
-
-[data-part='grid'] {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--pix-ds-space-5);
-}
-
-[data-part='grid'] [data-part='card'] {
-  flex: 1 1 min(100%, 20rem);
-  max-width: 100%;
-}
-
-/* absorb the free space of a partial last row so lone cards don't stretch */
-[data-part='grid']::after {
-  content: '';
-  flex: 999 1 min(100%, 20rem);
-}
-
-/* ─── Card ─── */
-
-[data-part='card'] {
-  position: relative;
-  display: grid;
-  grid-template-rows: auto 1fr auto;
-  gap: var(--pix-ds-space-3);
-  padding: var(--pix-ds-space-5);
-  border: 1px solid var(--pix-ds-line-soft);
-  border-radius: var(--pix-ds--r--xl);
-  background: var(--pix-ds-surface-elevated);
-  box-shadow: var(--pix-ds-elevation-1);
-  text-decoration: none;
-  color: inherit;
-  transition:
-    transform var(--pix-ds-duration-fast) var(--pix-ds-ease-emphasized),
-    border-color var(--pix-ds-duration-fast) var(--pix-ds-ease-standard),
-    box-shadow var(--pix-ds-duration-fast) var(--pix-ds-ease-standard);
-}
-
-[data-part='card']:hover {
-  transform: translateY(var(--pix-ds-lift-hover));
-  border-color: var(--pix-ds-line-strong);
-  box-shadow: var(--pix-ds-elevation-2);
-}
-
-[data-part='card']:active {
-  transform: scale(var(--pix-ds-scale-press));
-}
-
-[data-part='card']:focus-visible {
-  outline: 2px solid var(--pix-ds-focus);
-  outline-offset: 3px;
-}
-
-/* WIP cards: soft blur over the content, cleared on hover/focus */
-[data-part='card'][data-status='wip'] > :not([data-part='status-badge']) {
-  filter: blur(2.25px) saturate(0.3);
-  opacity: 0.9;
-  transition:
-    filter var(--pix-ds-duration-base) var(--pix-ds-ease-standard),
-    opacity var(--pix-ds-duration-base) var(--pix-ds-ease-standard);
-}
-
-[data-part='card'][data-status='wip']:hover > :not([data-part='status-badge']),
-[data-part='card'][data-status='wip']:focus-visible > :not([data-part='status-badge']) {
-  filter: none;
-  opacity: 1;
-}
-
-/* keep the WIP badge clear of the header title */
-[data-part='card'][data-status='wip'] [data-part='card-header'] {
-  padding-right: 3.25rem;
-}
-
-[data-part='card-header'] {
-  display: flex;
-  align-items: center;
-  gap: var(--pix-ds-space-3);
-}
-
-[data-part='card-badge'] {
-  width: 2.5rem;
-  height: 2.5rem;
-  border-radius: var(--pix-ds--r--md);
-  background: var(--component-glow);
-  border: 1px solid var(--component-badge);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-
-[data-part='card-badge'] svg {
-  width: 1.25rem;
-  height: 1.25rem;
-  color: var(--component-badge);
-}
-
-[data-part='card-title'] {
-  margin: var(--pix--s--0);
-}
-
-[data-part='card-desc'] {
-  margin: var(--pix--s--0);
-  color: var(--pix-ds-text-muted);
-}
-
-[data-part='card-footer'] {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--pix-ds-space-2);
-  padding-top: var(--pix-ds-space-2);
-  border-top: 1px solid var(--pix-ds-line-soft);
-}
-
-[data-part='card-tag'] {
-  padding: var(--pix--s--2xs) var(--pix--s--sm);
-  border: 1px solid var(--pix-ds-line-soft);
-  border-radius: var(--pix-ds--r--pill);
-  color: var(--pix-ds-text-muted);
-  background: var(--pix-ds-surface-panel);
-  max-width: 100%;
-  overflow-wrap: anywhere;
-}
-
-/* ─── WIP badge (pinned to the card's top-right corner) ─── */
-
-[data-part='status-badge'] {
-  position: absolute;
-  top: 0;
-  right: 0;
-  margin: var(--pix-ds-space-3);
-  z-index: 1;
-  display: inline-flex;
-  align-items: center;
-  gap: var(--pix--s--2xs);
-  padding: var(--pix--s--2xs) var(--pix-ds-space-2);
-  border-radius: var(--pix-ds--r--pill);
-  font-size: 0.6875rem;
-  font-weight: 600;
-  letter-spacing: 0.05em;
-  line-height: 1.2;
-  text-transform: uppercase;
-  white-space: nowrap;
-  --badge-c: light-dark(
-    color-mix(in srgb, var(--pix-ds-color-coral-400) 30%, var(--pix-ds-color-ink-950) 70%),
-    var(--pix-ds-color-coral-300)
-  );
-  color: var(--badge-c);
-  border: 1px solid color-mix(in oklab, var(--badge-c) 45%, transparent);
-  background: color-mix(in oklab, var(--badge-c) 14%, transparent);
-  backdrop-filter: blur(8px);
-}
-
-[data-part='status-badge']::before {
-  content: '';
-  width: 0.5rem;
-  height: 0.5rem;
-  border-radius: 50%;
-  background: currentColor;
-  flex-shrink: 0;
-}
-
-[data-part='meta-pill'][data-pill='wip'] {
-  --pill-c: light-dark(
-    color-mix(in srgb, var(--pix-ds-color-coral-400) 30%, var(--pix-ds-color-ink-950) 70%),
-    var(--pix-ds-color-coral-300)
-  );
-  color: var(--pill-c);
-  border-color: color-mix(in oklab, var(--pill-c) 40%, transparent);
-}
-
-/* ─── Footer ─── */
-
-[data-part='footer'] {
-  text-align: center;
-  color: var(--pix-ds-text-muted);
-  padding: var(--pix-ds-space-5) 0;
-}
-
-[data-part='footer'] a {
-  color: light-dark(var(--pix-ds-color-sky-700), var(--pix-ds-color-sky-300));
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-
-[data-part='footer'] a:hover {
-  text-decoration-thickness: 2px;
-}
-
-/* ─── Display preferences (consumed from pix-a11y) ─── */
-
-/* Typography follows the panel's font/line-height tokens */
-:root {
-  font-family: var(--pix-ds-font-sans);
-  line-height: var(--pix-ds-leading-normal);
-}
-
-[data-part='hero'] h1,
-[data-part='hero'] h1 span {
-  font-family: var(--pix-ds-font-display);
-}
-
-/* Accent color: the panel's accent selector drives every accent usage
-   (h/s/l are HSL channels, matching AccentColorSelector's values). */
-:root {
-  --pix-accent-hsl: hsl(var(--pix-accent-h, 200) var(--pix-accent-s, 85%) var(--pix-accent-l, 62%));
-  --pix-ds-accent-primary: var(--pix-accent-hsl);
-}
-
-/* Reduce motion */
-:root[data-reduce-motion='true'] *,
-:root[data-reduce-motion='true'] *::before,
-:root[data-reduce-motion='true'] *::after {
-  transition-duration: 0.01ms !important;
-  animation-duration: 0.01ms !important;
-  animation-iteration-count: 1 !important;
-  scroll-behavior: auto !important;
-}
-
-/* Increase contrast: stronger lines and full-strength text */
-:root[data-increase-contrast='true'] {
-  --pix-ds-line-soft: light-dark(
-    color-mix(in srgb, var(--pix-ds-color-ink-950) 36%, white 64%),
-    color-mix(in srgb, var(--pix-ds-color-ink-050) 60%, transparent)
-  );
-  --pix-ds-text-muted: var(--pix-ds-text-strong);
-}
-
-/* Reduce transparency: solid surfaces */
-:root[data-reduce-transparency='true'] {
-  --pix-ds-surface-panel: var(--pix-ds-surface-page);
-  --pix-ds-surface-elevated: var(--pix-ds-surface-page);
-}
-
-/* ─── Reduced motion ─── */
-
-@media (prefers-reduced-motion: reduce) {
-  [data-part='card'] {
-    transition: none;
-  }
-
-  [data-part='card']:hover,
-  [data-part='card']:active {
-    transform: none;
-  }
-
-  [data-part='card'][data-status='wip'] > :not([data-part='status-badge']) {
-    transition: none;
-  }
-}
-
-/* ─── Responsive ─── */
-
-@media (max-width: 48rem) {
-  [data-part='shell'] {
-    width: min(100vw - 1rem, 64rem);
-    padding-top: var(--pix-ds-space-4);
-  }
-
-  [data-part='hero'] {
-    border-radius: var(--pix-ds--r--lg);
-  }
+  border: 1px solid color-mix(in oklab, var(--pix-accent-primary) 40%, transparent);
+  background: color-mix(in oklab, var(--pix-accent-primary) 14%, transparent);
+  color: var(--pix-text-strong);
 }

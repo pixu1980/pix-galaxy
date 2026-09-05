@@ -6,9 +6,9 @@
     pix-toast {
       display: grid;
       grid-template-columns: auto 1fr auto;
-      gap: var(--pix--s--2xs) var(--pix-ds-space-3);
+      gap: var(--pix--s--2xs) var(--pix-space-3);
       align-items: start;
-      padding: var(--pix-ds-space-3) var(--pix-ds-space-3);
+      padding: var(--pix-space-3) var(--pix-space-3);
       border-radius: var(--pix-toast--radius);
       background: var(--pix-toast--bg);
       border: 1px solid var(--pix-toast--border);

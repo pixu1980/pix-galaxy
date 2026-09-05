@@ -3,14 +3,14 @@
  * Remove when all components are migrated.                          */
 :root {
   --dout--border-width: 1px;
-  --dout--radius-sm: var(--pix-ds--r--sm);
-  --dout--radius-md: var(--pix-ds--r--md);
-  --dout--radius-pill: var(--pix-ds--r--pill);
+  --dout--radius-sm: var(--pix-r-sm);
+  --dout--radius-md: var(--pix-r-md);
+  --dout--radius-pill: var(--pix-r-pill);
   --dout--blur-panel: 0.5rem;
   --dout--z-header: 100;
   --dout--motion-fast: 160ms;
   --dout--motion-ease: ease;
-  --dout--font-mono: var(--pix-ds--t--font-family-mono);
+  --dout--font-mono: var(--pix-t-font-mono);
   --dout--visually-hidden-size: 1px;
   --dout--visually-hidden-offset: -1px;
   --dout--lift-y: -1px;
@@ -64,9 +64,9 @@
       overflow: auto;
       tab-size: var(--pix-highlighter--tab-size);
       hyphens: none;
-      padding: var(--pix-ds-space-3) var(--pix--s--md) var(--pix--s--md);
+      padding: var(--pix-space-3) var(--pix--s--md) var(--pix--s--md);
       border: 1px solid var(--pix-highlighter--toolbar-border);
-      border-radius: var(--pix-ds--r--md);
+      border-radius: var(--pix-r-md);
       color: var(--pix-highlighter--fg);
       background-color: var(--pix-highlighter--bg);
 
@@ -98,7 +98,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        gap: var(--pix-ds-space-3);
+        gap: var(--pix-space-3);
         margin-block-end: 0.75rem;
         white-space: normal;
       }
@@ -114,9 +114,9 @@
         justify-content: center;
         gap: var(--pix--s--sm);
         min-height: 2.5rem;
-        padding: var(--pix--s--sm) var(--pix-ds-space-3);
+        padding: var(--pix--s--sm) var(--pix-space-3);
         border: 1px solid var(--pix-highlighter--toolbar-border);
-        border-radius: var(--pix-ds--r--md);
+        border-radius: var(--pix-r-md);
         background-color: var(--pix-highlighter--toolbar-surface);
         color: var(--pix-highlighter--toolbar-color);
         backdrop-filter: blur(var(--dout--blur-panel));
@@ -206,7 +206,7 @@
       margin: var(--pix--s--0);
       list-style: none;
       border: 1px solid var(--pix-highlighter--toolbar-border);
-      border-radius: var(--pix-ds--r--md);
+      border-radius: var(--pix-r-md);
       background: var(--pix-highlighter--toolbar-menu-bg);
       box-shadow: var(--pix-highlighter--toolbar-shadow);
       backdrop-filter: blur(var(--dout--blur-panel, 1rem));
@@ -230,9 +230,9 @@
         justify-content: space-between;
         align-items: center;
         width: 100%;
-        gap: var(--pix-ds-space-3);
+        gap: var(--pix-space-3);
         min-height: 2.25rem;
-        padding: var(--pix--s--sm) var(--pix-ds-space-3);
+        padding: var(--pix--s--sm) var(--pix-space-3);
         border: 1px solid transparent;
         border-radius: var(--radius-sm);
         background: transparent;

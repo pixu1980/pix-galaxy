@@ -8,9 +8,9 @@ describe('Design system', () => {
 
     assert.ok(cssText.includes('@layer pix-galaxy'));
     assert.ok(cssText.includes('@layer design-system'));
-    assert.ok(cssText.includes('--pix-ds-color-ink-950'));
-    assert.ok(cssText.includes('--pix-ds-font-sans'));
-    assert.ok(cssText.includes('--pix-ds-elevation-2'));
+    assert.ok(cssText.includes('--pix-ink-950'));
+    assert.ok(cssText.includes('--pix-t-sans'));
+    assert.ok(cssText.includes('--pix-e-2'));
     assert.ok(!cssText.includes('@import'));
   });
 });

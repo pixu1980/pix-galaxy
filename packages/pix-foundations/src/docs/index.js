@@ -6,25 +6,25 @@ const examples = [
     title: 'Use tokens in CSS',
     description: 'Consistent spacing, radii, and colors across components.',
     lang: 'css',
-    code: `.card {\n  padding: var(--pix-ds--s--md);\n  border-radius: var(--pix-ds--r--md);\n  background: var(--pix-ds--c--surface);\n  color: var(--pix-ds--c--text);\n  border: 1px solid var(--pix-ds--c--border);\n}\n\n/* Focus ring comes from pix-foundations. Do not redefine locally. */`,
+    code: `.card {\n  padding: var(--pix-scale-md);\n  border-radius: var(--pix-r-md);\n  background: var(--pix-color-surface);\n  color: var(--pix-color-text);\n  border: 1px solid var(--pix-color-border);\n}\n\n/* Focus ring comes from pix-foundations. Do not redefine locally. */`,
   },
   {
     title: 'Import in project',
     description: 'Add foundations once, use tokens everywhere.',
     lang: 'css',
-    code: `/* main.css */\n@import '@pix-galaxy/pix-foundations/foundations.css';\n\n/* Now use any --pix--* token */\nbody {\n  background: var(--pix-ds--c--page);\n  color: var(--pix-ds--c--text);\n}`,
+    code: `/* main.css */\n@import '@pix-galaxy/pix-foundations/foundations.css';\n\n/* Now use any --pix--* token */\nbody {\n  background: var(--pix-color-page);\n  color: var(--pix-color-text);\n}`,
   },
   {
     title: 'Theme-aware colors',
     description: 'light-dark() handles light/dark mode automatically.',
     lang: 'css',
-    code: `.box {\n  background: var(--pix-ds--c--surface);\n  color: var(--pix-ds--c--text);\n  border: 1px solid var(--pix-ds--c--border);\n}\n\n/* Switch theme via pix-color-scheme-selector → <html style=\"color-scheme: dark\">\n   light-dark() reads this, adapts all --pix-ds--c--* tokens automatically */`,
+    code: `.box {\n  background: var(--pix-color-surface);\n  color: var(--pix-color-text);\n  border: 1px solid var(--pix-color-border);\n}\n\n/* Switch theme via pix-color-scheme-selector → <html style=\"color-scheme: dark\">\n   light-dark() reads this, adapts all --pix-color-* tokens automatically */`,
   },
   {
     title: 'Override tokens per scope',
     description: 'Customize tokens inside a subtree.',
     lang: 'css',
-    code: `.dark-section {\n  --pix-ds--c--surface: oklch(0.18 0.01 260);\n  --pix-ds--c--text: oklch(0.88 0.01 85);\n  --pix-ds--c--border: oklch(from gray 0.3 0.01 0 / 0.5);\n}\n\n.dark-section .card {\n  background: var(--pix-ds--c--surface);\n  color: var(--pix-ds--c--text);\n}`,
+    code: `.dark-section {\n  --pix-color-surface: oklch(0.18 0.01 260);\n  --pix-color-text: oklch(0.88 0.01 85);\n  --pix-color-border: oklch(from gray 0.3 0.01 0 / 0.5);\n}\n\n.dark-section .card {\n  background: var(--pix-color-surface);\n  color: var(--pix-color-text);\n}`,
   },
 ];
 
@@ -68,14 +68,14 @@ async function bootDocsSite() {
       liveHtml: `
         <div style="display:flex;flex-direction:column;gap:0.5rem;font-size:0.75rem;margin-top:0.5rem;">
           <div style="display:flex;gap:0.5rem;">
-            <span style="padding:0.2rem 0.5rem;border:1px solid var(--pix-ds--c--border);border-radius:var(--pix-ds--r--md,8px);background:var(--pix-ds--c--surface);">radius md (8px)</span>
-            <span style="padding:0.2rem 0.5rem;border:1px solid var(--pix-ds--c--border);border-radius:var(--pix-ds--r--pill,999px);background:var(--pix-ds--c--surface);">radius pill</span>
+            <span style="padding:0.2rem 0.5rem;border:1px solid var(--pix-color-border);border-radius:var(--pix-r-md,8px);background:var(--pix-color-surface);">radius md (8px)</span>
+            <span style="padding:0.2rem 0.5rem;border:1px solid var(--pix-color-border);border-radius:var(--pix-r-pill,999px);background:var(--pix-color-surface);">radius pill</span>
           </div>
           <div style="display:flex;gap:0.5rem;">
-            <span style="padding:0.2rem 0.5rem;border:1px solid var(--pix-ds--c--border);border-radius:var(--pix-ds--r--md,8px);background:var(--pix-ds--c--accent);color:white;">accent</span>
-            <span style="padding:0.2rem 0.5rem;border:1px solid var(--pix-ds--c--border);border-radius:var(--pix-ds--r--md,8px);background:var(--pix-ds--c--success);color:white;">success</span>
-            <span style="padding:0.2rem 0.5rem;border:1px solid var(--pix-ds--c--border);border-radius:var(--pix-ds--r--md,8px);background:var(--pix-ds--c--warning);color:white;">warning</span>
-            <span style="padding:0.2rem 0.5rem;border:1px solid var(--pix-ds--c--border);border-radius:var(--pix-ds--r--md,8px);background:var(--pix-ds--c--danger);color:white;">danger</span>
+            <span style="padding:0.2rem 0.5rem;border:1px solid var(--pix-color-border);border-radius:var(--pix-r-md,8px);background:var(--pix-color-accent);color:white;">accent</span>
+            <span style="padding:0.2rem 0.5rem;border:1px solid var(--pix-color-border);border-radius:var(--pix-r-md,8px);background:var(--pix-color-success);color:white;">success</span>
+            <span style="padding:0.2rem 0.5rem;border:1px solid var(--pix-color-border);border-radius:var(--pix-r-md,8px);background:var(--pix-color-warning);color:white;">warning</span>
+            <span style="padding:0.2rem 0.5rem;border:1px solid var(--pix-color-border);border-radius:var(--pix-r-md,8px);background:var(--pix-color-danger);color:white;">danger</span>
           </div>
         </div>
       `,
