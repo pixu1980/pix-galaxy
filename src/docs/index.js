@@ -11,6 +11,11 @@
 
 import '@pix-galaxy/pix-color-scheme-selector';
 import '@pix-galaxy/pix-a11y-panel';
+// Register the accent swatches used inside the display-preferences panel
+// (the panel references them as a tag string only, so bundlers may drop it).
+import '@pix-galaxy/pix-accent-color-selector';
+
+import { buildReleaseStatus, groupSections, summarize } from './catalog.js';
 
 const GITHUB_ORG = 'pixu1980';
 const isDev = typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.DEV;
@@ -67,45 +72,52 @@ async function bootPortal() {
   /** @type {Array<import('./content/components.json')>} */
   const { default: components } = await import('./content/components.json');
 
-  // Release readiness gate: the portal shows only components whose package
-  // is marked releaseStatus: "ready" (single source of truth = each
-  // packages/*/package.json). Catalog-only placeholders without a package
-  // (e.g. "coming-soon") are always shown.
+  // Release status (single source of truth = each packages/*/package.json):
+  // drives the "WIP" badge on each card. Defaults to "wip" when unmarked.
   const PACKAGE_JSON = import.meta.glob('../../packages/*/package.json', {
     eager: true,
     import: 'default',
   });
-  const readyPackages = new Set(
-    Object.entries(PACKAGE_JSON)
-      .map(([path, pkg]) => ({
-        name: path.match(/packages\/([^/]+)\/package\.json$/)?.[1],
-        ready: typeof pkg === 'object' && pkg !== null && pkg.releaseStatus === 'ready',
-      }))
-      .filter(({ name, ready }) => name && ready)
-      .map(({ name }) => name)
-  );
-  // Dev: show the full catalog so every component can be navigated from
-  // the portal. Production: only release-ready packages (+ placeholders).
-  const visibleComponents = isDev
-    ? components
-    : components.filter((comp) => !comp.packageName || readyPackages.has(comp.name));
+  const packageEntries = Object.entries(PACKAGE_JSON)
+    .map(([path, pkg]) => [path.match(/packages\/([^/]+)\/package\.json$/)?.[1], pkg])
+    .filter(([name]) => name);
+  const releaseStatus = buildReleaseStatus(packageEntries);
 
-  const cardsHtml = visibleComponents
-    .map((comp) => {
-      const devPort = getDevPort(comp.name);
-      const docUrl = isDev && devPort ? `http://localhost:${devPort}/` : comp.homepage || '#';
-      const isComingSoon = !comp.homepage;
+  // Downloads snapshot produced at build time (may be absent in dev).
+  const downloadsJson = import.meta.glob('./content/downloads.json', {
+    eager: true,
+    import: 'default',
+  });
+  const downloads = Object.values(downloadsJson)[0] ?? {};
 
-      return `
+  // Sections are grouped/sorted by the shared, unit-tested catalog module:
+  // ready first, then npm popularity (build-time snapshot), then curated.
+  const isLibrary = (comp) => comp.kind === 'library';
+  const sections = groupSections(components, { releaseStatus, downloads, isLibrary });
+
+  // Summaries for the hero pills (placeholder entries have no packageName).
+  const { wipCount, totalCount } = summarize(sections, releaseStatus);
+
+  const cardsHtmlFor = (items) =>
+    items
+      .map((comp) => {
+        const devPort = getDevPort(comp.name);
+        const docUrl = isDev && devPort ? `http://localhost:${devPort}/` : comp.homepage || '#';
+        const isComingSoon = !comp.homepage;
+        const isWip = comp.packageName && (releaseStatus.get(comp.name) ?? 'wip') === 'wip';
+
+        return `
         <a
           data-part="card"
+          ${isWip ? 'data-status="wip"' : ''}
           role="listitem"
           data-component-accent="${escapeAttr(comp.accent)}"
           href="${escapeAttr(docUrl)}"
           ${isComingSoon ? '' : 'target="_blank" rel="noopener noreferrer"'}
-          aria-label="${escapeAttr(comp.title)}${isComingSoon ? '' : ' - opens documentation in new tab'}"
+          aria-label="${escapeAttr(comp.title)}${isComingSoon ? '' : ' - opens documentation in new tab'}${isWip ? ' (work in progress)' : ''}"
           ${isComingSoon ? 'style="cursor:default;opacity:0.6;"' : ''}
         >
+          ${isWip ? '<span data-part="status-badge">WIP</span>' : ''}
           <header data-part="card-header">
             <span data-part="card-badge" aria-hidden="true">${ICONS[comp.name] || ICONS[comp.accent] || ''}</span>
             <h2 data-part="card-title">${escapeHtml(comp.title)}</h2>
@@ -120,33 +132,46 @@ async function bootPortal() {
           </footer>
         </a>
       `;
-    })
-    .join('');
+      })
+      .join('');
 
   mount.innerHTML = `
     <section data-part="shell">
-      <div data-part="topbar">
-        <pix-color-scheme-selector></pix-color-scheme-selector>
-        <pix-a11y-panel></pix-a11y-panel>
-      </div>
       <header data-part="hero">
         <h1>
           <span>pix-galaxy</span>
         </h1>
+        <pix-color-scheme-selector></pix-color-scheme-selector>
+        <pix-a11y-panel></pix-a11y-panel>
         <p data-part="hero-summary">
           A suite of zero-runtime-dependency vanilla JS Web Components.
           Accessible, performant, and built for the modern web platform.
         </p>
         <p data-part="hero-meta">
-          <span data-part="meta-pill">${visibleComponents.length} components</span>
+          <span data-part="meta-pill">${totalCount} components</span>
           <span data-part="meta-pill">Custom Elements v1</span>
           <span data-part="meta-pill">WCAG 2.2 AA</span>
+          ${wipCount > 0 ? `<span data-part="meta-pill" data-pill="wip">${wipCount} in WIP</span>` : ''}
         </p>
       </header>
 
-      <section data-part="grid" role="list">
-        ${cardsHtml}
-      </section>
+      <main>
+        ${sections
+          .map(
+            (section) => `
+            <section data-part="section" aria-labelledby="${section.id}">
+              <h2 data-part="section-title" id="${section.id}">
+                <span>${escapeHtml(section.title)}</span>
+                <span data-part="section-count">${section.items.length}</span>
+              </h2>
+              <div data-part="grid" role="list">
+                ${cardsHtmlFor(section.items)}
+              </div>
+            </section>
+          `
+          )
+          .join('')}
+      </main>
 
       <footer data-part="footer">
         <a

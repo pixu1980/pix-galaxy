@@ -21,7 +21,7 @@
   "scripts": {
     "build": "pnpm build:portal && pnpm -r --if-present run build",
     "build:lib": "pnpm -r --if-present run build:lib",
-    "build:portal": "vite build --config ./vite.config.mjs",
+    "build:portal": "node scripts/fetch-downloads.mjs && vite build --config ./vite.config.mjs",
     "build:site": "pnpm build:portal && pnpm -r --if-present run build:site",
     "build:types": "pnpm -r --if-present run build:types",
     "clean": "pnpm -r --if-present run clean",
@@ -39,7 +39,9 @@
     "lint:format": "prettier --check '**/*.{js,mjs,cjs,css,html,md,json,yml,yaml}'",
     "typecheck": "pnpm -r --if-present run typecheck",
     "quality": "pnpm format:check && pnpm lint && pnpm typecheck",
+    "test:portal": "node --test src/docs/catalog.test.mjs",
     "test:ssr": "node scripts/ssr-smoke.mjs",
+    "test:coverage:portal": "c8 --reporter=text --check-coverage --lines=95 --functions=95 --branches=95 --statements=95 node --test src/docs/catalog.test.mjs"
   },
   "devDependencies": {
     "@axe-core/playwright": "4.12.1",
@@ -53,7 +55,9 @@
     "eslint": "10.8.0",
     "prettier": "3.9.6",
     "typescript": "7.0.2",
-    "vite": "8.2.1"
+    "vite": "8.2.1",
+    "@pix-galaxy/pix-accent-color-selector": "workspace:*",
+    "c8": "11.0.0"
   },
   "engines": {
     "node": ">=20.11",
