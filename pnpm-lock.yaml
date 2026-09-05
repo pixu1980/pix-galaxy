@@ -226,6 +226,9 @@ importers:
 
   packages/pix-core:
     dependencies:
+      '@pix-galaxy/pix-a11y':
+        specifier: workspace:*
+        version: link:../pix-a11y
       '@pix-galaxy/pix-color-scheme-selector':
         specifier: workspace:*
         version: link:../pix-color-scheme-selector

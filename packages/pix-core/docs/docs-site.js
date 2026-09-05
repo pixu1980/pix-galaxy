@@ -11,6 +11,9 @@ import { Marked, Renderer } from 'marked';
 /* ── Register pix-color-scheme-selector for all docs sites ──────── */
 import '@pix-galaxy/pix-color-scheme-selector';
 
+/* ── Register pix-a11y (display preferences) for all docs sites ─── */
+import '@pix-galaxy/pix-a11y';
+
 /* ── Adopt shared docs CSS on first import ──────────────────────── */
 
 (function adoptSharedDocsCSS() {
@@ -168,6 +171,7 @@ export function createDocsSite({ mount, docs, examples: exampleEntries, meta, af
           </section>
           <section data-part="hero-panel">
             <pix-color-scheme-selector></pix-color-scheme-selector>
+            <pix-a11y></pix-a11y>
             <section data-part="live-preview">
               <p data-part="eyebrow">Live component</p>
               ${meta.liveHtml || `<p style="color:var(--pix-ds-text-muted);font-size:0.875rem;">Live demo unavailable - open the docs site for this package.</p>`}
