@@ -19,7 +19,7 @@ import { discoverPorts, requirePorts } from './ports.mjs';
 /* ── Component map (non-private packages only) ────────────────── */
 
 const COMPONENTS = [
-  'pix-a11y-panel',
+  'pix-a11y',
   'pix-accent-color-selector',
   'pix-color',
   'pix-color-scheme-selector',

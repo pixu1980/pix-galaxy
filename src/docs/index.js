@@ -10,7 +10,7 @@
  */
 
 import '@pix-galaxy/pix-color-scheme-selector';
-import '@pix-galaxy/pix-a11y-panel';
+import '@pix-galaxy/pix-a11y';
 // Register the accent swatches used inside the display-preferences panel
 // (the panel references them as a tag string only, so bundlers may drop it).
 import '@pix-galaxy/pix-accent-color-selector';
@@ -54,7 +54,7 @@ const ICONS = Object.freeze({
   'pix-color': `<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M12 3a5 5 0 0 0-5 5c0 2 1 3 2 4l3 5 3-5c1-1 2-2 2-4a5 5 0 0 0-5-5Z" fill="currentColor" fill-opacity="0.15"/><circle cx="12" cy="8" r="1.5" fill="currentColor"/></svg>`,
   'pix-recorder': `<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4" fill="currentColor" fill-opacity="0.15"/><path d="M12 7v5l3 3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
   'pix-command': `<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="4" y="5" width="16" height="14" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M7 9l3 3-3 3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 15h3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><rect x="8" y="13" width="3" height="2" fill="currentColor" fill-opacity="0.15"/></svg>`,
-  'pix-a11y-panel': `<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.8"/><path d="M12 1v3M12 20v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M1 12h3M20 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="12" r="1" fill="currentColor" fill-opacity="0.15"/></svg>`,
+  'pix-a11y': `<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.8"/><path d="M12 1v3M12 20v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M1 12h3M20 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="12" r="1" fill="currentColor" fill-opacity="0.15"/></svg>`,
   'pix-accent-color-selector': `<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 3l4 4-4 4-4-4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 7h12v2H9z" fill="currentColor" fill-opacity="0.15"/><path d="M5 13l4 4-4 4-4-4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 17h12v2H9z" fill="currentColor" fill-opacity="0.15"/></svg>`,
   'pix-color-scheme-selector': `<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="1.8"/><path d="M12 1v3M12 20v3M1 12h3M20 12h3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="12" r="2" fill="currentColor" fill-opacity="0.15"/></svg>`,
   'pix-vanilla-reactive': `<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.8"/><path d="M12 1v4M12 19v4M1 12h4M19 12h4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M19.1 4.9l-2.8 2.8M7.7 16.3l-2.8 2.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="12" r="1.5" fill="currentColor" fill-opacity="0.15"/></svg>`,
@@ -142,7 +142,7 @@ async function bootPortal() {
           <span>pix-galaxy</span>
         </h1>
         <pix-color-scheme-selector></pix-color-scheme-selector>
-        <pix-a11y-panel></pix-a11y-panel>
+        <pix-a11y></pix-a11y>
         <p data-part="hero-summary">
           A suite of zero-runtime-dependency vanilla JS Web Components.
           Accessible, performant, and built for the modern web platform.

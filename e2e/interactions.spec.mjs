@@ -17,7 +17,7 @@ import { discoverPorts, requirePorts } from './ports.mjs';
 /* ── Component map (live ports, resolved in beforeAll) ────────── */
 
 const COMPONENTS = [
-  { name: 'pix-a11y-panel', tag: 'pix-a11y-panel' },
+  { name: 'pix-a11y', tag: 'pix-a11y' },
   { name: 'pix-accent-color-selector', tag: 'pix-accent-color-selector' },
   { name: 'pix-color', tag: 'pix-color' },
   { name: 'pix-color-scheme-selector', tag: 'pix-color-scheme-selector' },
@@ -134,7 +134,7 @@ test.describe('Component interactions', () => {
   test('corner preset previews keep fixed shapes while switching presets', async ({ page }) => {
     // The Corners chooser is the only UI that must NOT follow the selected
     // border-radius preset: its previews and cards stay constant.
-    await page.goto(urlFor('pix-a11y-panel'), { waitUntil: 'networkidle' });
+    await page.goto(urlFor('pix-a11y'), { waitUntil: 'networkidle' });
     const toggle = page.locator('[data-preferences-toggle]').first();
     if (await toggle.count()) {
       await toggle.click();

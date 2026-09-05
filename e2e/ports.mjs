@@ -8,7 +8,7 @@
  *
  * Titles seen in the wild:
  *   "pix-galaxy · Web Component suite"
- *   "pix-a11y-panel docs", "pix-color docs", …
+ *   "pix-a11y docs", "pix-color docs", …
  */
 
 const PORTAL_TITLE = 'pix-galaxy · Web Component suite';

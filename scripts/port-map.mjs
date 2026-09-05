@@ -10,7 +10,7 @@
  */
 export const DEV_PORT_ORDER = [
   'pix-galaxy',
-  'pix-a11y-panel',
+  'pix-a11y',
   'pix-accent-color-selector',
   'pix-color',
   'pix-color-scheme-selector',

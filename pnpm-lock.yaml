@@ -19,9 +19,9 @@ importers:
       '@eslint/js':
         specifier: 10.0.1
         version: 10.0.1(eslint@10.8.0(supports-color@10.2.2))
-      '@pix-galaxy/pix-a11y-panel':
+      '@pix-galaxy/pix-a11y':
         specifier: workspace:*
-        version: link:packages/pix-a11y-panel
+        version: link:packages/pix-a11y
       '@pix-galaxy/pix-accent-color-selector':
         specifier: workspace:*
         version: link:packages/pix-accent-color-selector
@@ -56,7 +56,7 @@ importers:
         specifier: 8.2.1
         version: 8.2.1(esbuild@0.28.1)(yaml@2.9.0)
 
-  packages/pix-a11y-panel:
+  packages/pix-a11y:
     devDependencies:
       '@pix-galaxy/pix-accent-color-selector':
         specifier: workspace:*

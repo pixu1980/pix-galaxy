@@ -17,7 +17,7 @@ const MAX_PORT = 6000;
 const knownColors = {
   'pix-galaxy': '36', // cyan
   'pix-highlighter': '34', // blue
-  'pix-a11y-panel': '38;5;208', // orange
+  'pix-a11y': '38;5;208', // orange
   'pix-accent-color-selector': '32', // green
   'pix-color-scheme-selector': '35', // violet
   'pix-command': '38;5;63', // indigo
