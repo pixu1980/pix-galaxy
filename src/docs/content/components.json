@@ -17,7 +17,8 @@
     "homepage": "https://pixu1980.github.io/pix-foundations/",
     "repo": "https://github.com/pixu1980/pix-foundations",
     "accent": "gold",
-    "keywords": ["design-tokens", "foundations", "css", "light-dark"]
+    "keywords": ["design-tokens", "foundations", "css", "light-dark"],
+    "kind": "library"
   },
   {
     "name": "pix-toast",
@@ -57,7 +58,8 @@
     "homepage": "https://pixu1980.github.io/pix-color/",
     "repo": "https://github.com/pixu1980/pix-color",
     "accent": "emerald",
-    "keywords": ["color-picker", "oklch", "contrast", "form"]
+    "keywords": ["color-picker", "oklch", "contrast", "form"],
+    "kind": "library"
   },
   {
     "name": "pix-recorder",
@@ -77,7 +79,8 @@
     "homepage": "https://pixu1980.github.io/pix-vanilla-reactive/",
     "repo": "https://github.com/pixu1980/pix-galaxy",
     "accent": "mint",
-    "keywords": ["reactive", "signals", "store", "template-engine", "framework"]
+    "keywords": ["reactive", "signals", "store", "template-engine", "framework"],
+    "kind": "library"
   },
   {
     "name": "pix-command",
