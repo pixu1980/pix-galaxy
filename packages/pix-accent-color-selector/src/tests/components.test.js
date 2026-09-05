@@ -204,3 +204,104 @@ describe('PixAccentColorSelector', () => {
     assert.deepEqual(ids, ['coral', 'rose', 'lavender', 'sky', 'mint']);
   });
 });
+
+describe('PixAccentColorSelector - keyboard & edge cases', () => {
+  test('full keyboard navigation: arrows wrap, Home/End, Enter and Space select', () => {
+    const element = mountSelector();
+    const buttons = element.querySelectorAll('[data-accent-button]');
+    const press = (key) =>
+      document.activeElement.dispatchEvent(
+        new window.KeyboardEvent('keydown', { bubbles: true, key })
+      );
+
+    // ArrowLeft from coral (first) wraps to mint (last).
+    buttons[0].focus();
+    press('ArrowLeft');
+    assert.equal(document.activeElement, buttons[4]);
+    assert.equal(window.localStorage.getItem(STORAGE_KEY), 'mint');
+
+    // Home jumps to the first option.
+    press('Home');
+    assert.equal(document.activeElement, buttons[0]);
+    assert.equal(window.localStorage.getItem(STORAGE_KEY), 'coral');
+
+    // End jumps to the last option.
+    press('End');
+    assert.equal(document.activeElement, buttons[4]);
+    assert.equal(window.localStorage.getItem(STORAGE_KEY), 'mint');
+
+    // ArrowDown from the last option wraps to the first.
+    press('ArrowDown');
+    assert.equal(document.activeElement, buttons[0]);
+    assert.equal(window.localStorage.getItem(STORAGE_KEY), 'coral');
+
+    // ArrowUp moves back one.
+    press('ArrowUp');
+    assert.equal(document.activeElement, buttons[4]);
+
+    // Space selects the focused (last) option.
+    press(' ');
+    assert.equal(window.localStorage.getItem(STORAGE_KEY), 'mint');
+
+    // Enter re-selects the focused option.
+    press('Enter');
+    assert.equal(window.localStorage.getItem(STORAGE_KEY), 'mint');
+
+    // Unknown keys are ignored (no crash, focus stays).
+    const before = document.activeElement;
+    press('F1');
+    assert.equal(document.activeElement, before);
+  });
+
+  test('starts from coral when a saved accent is invalid', () => {
+    window.localStorage.setItem(STORAGE_KEY, 'neon-punk');
+
+    const element = mountSelector();
+
+    assert.equal(element.currentAccent, 'coral');
+    assert.equal(
+      element.querySelector('[data-accent="coral"]').getAttribute('aria-checked'),
+      'true'
+    );
+  });
+
+  test('keeps working when localStorage is unavailable', () => {
+    const descriptor = Object.getOwnPropertyDescriptor(window, 'localStorage');
+    try {
+      Object.defineProperty(window, 'localStorage', {
+        configurable: true,
+        get() {
+          throw new Error('storage denied');
+        },
+      });
+
+      const element = mountSelector();
+      element.querySelector('[data-accent="sky"]').click();
+
+      assert.equal(element.currentAccent, 'sky');
+      assert.equal(document.documentElement.style.getPropertyValue('--pix-accent-h'), '200');
+    } finally {
+      Object.defineProperty(window, 'localStorage', descriptor);
+    }
+  });
+
+  test('imports safely without a DOM (SSR)', async () => {
+    const base = new URL(
+      '../components/AccentColorSelector/_AccentColorSelector.js',
+      import.meta.url
+    );
+    const original = {
+      HTMLElement: globalThis.HTMLElement,
+      customElements: globalThis.customElements,
+    };
+    try {
+      globalThis.HTMLElement = undefined;
+      globalThis.customElements = undefined;
+      const mod = await import(`${base.href}?ssr-smoke=${Date.now()}`);
+      assert.equal(typeof mod.default, 'function');
+    } finally {
+      globalThis.HTMLElement = original.HTMLElement;
+      globalThis.customElements = original.customElements;
+    }
+  });
+});
