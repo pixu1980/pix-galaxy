@@ -15,7 +15,9 @@
 @layer pix.reset, pix.foundations, pix.components;
 
 @import './_reset.css' layer(pix.reset);
-@import './_colors.css' layer(pix.foundations.colors);
+/* Palettes (light/dark, WCAG 2.2 AA) are UNLAYERED so the scheme
+ * custom properties always cascade to layered component CSS. */
+@import './_palettes.css';
 @import './_spacings.css' layer(pix.foundations.spacings);
 @import './_typography.css' layer(pix.foundations.typography);
 @import './_radii.css' layer(pix.foundations.radii);

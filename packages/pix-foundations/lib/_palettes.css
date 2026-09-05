@@ -1,0 +1,203 @@
+/* ═══════════════════════════════════════════════════════════════════
+ * pix-foundations · _palettes.css
+ *
+ * Calibrated color palettes — LIGHT and DARK schemes, both tuned to
+ * WCAG 2.2 AA contrast (SC 1.4.3 text ≥ 4.5:1, SC 1.4.11 UI bounds ≥ 3:1).
+ *
+ * Theming is driven by the pix-color-scheme-selector toggle, which sets
+ * `data-color-scheme="light|dark"` (and style.colorScheme) on <html>:
+ *   :root                     → light (default)
+ *   [data-color-scheme=dark]  → dark
+ *   @media prefers-color-scheme:dark + :not([data-color-scheme]) → dark
+ *                               (OS fallback while toggle = "system")
+ *
+ * pix-a11y increases contrast by overriding these CUSTOM PROPERTIES
+ * via [data-increase-contrast] (see end of file). All component styles
+ * must consume tokens defined here — never their own fixed colors.
+ *
+ * NOTE: scheme switching uses the data-color-scheme attribute and media
+ * queries instead of the light-dark CSS function inside custom properties,
+ * because the latter does not resolve in Chromium.
+ * ═══════════════════════════════════════════════════════════════════ */
+
+/* ─── LIGHT scheme (default + explicit) ─────────────────────────── */
+
+:root,
+:root[data-color-scheme='light'] {
+  color-scheme: light dark;
+
+  /* Palette */
+  --pix-ink-950: oklch(0.21 0.015 60);
+  --pix-ink-800: oklch(0.32 0.017 60);
+  --pix-ink-600: oklch(0.5 0.014 62);
+  --pix-ink-100: oklch(0.89 0.012 70);
+  --pix-ink-050: oklch(0.96 0.01 75);
+  --pix-sand-50: oklch(0.985 0.01 85);
+  --pix-sand-100: oklch(0.965 0.012 85);
+  --pix-sand-200: oklch(0.925 0.016 85);
+  --pix-sky-300: oklch(0.85 0.08 228);
+  --pix-sky-400: oklch(0.78 0.11 228);
+  --pix-sky-500: oklch(0.71 0.13 228);
+  --pix-sky-600: oklch(0.48 0.12 228);
+  --pix-sky-700: oklch(0.42 0.11 228);
+  --pix-mint-400: oklch(0.84 0.1 170);
+  --pix-mint-500: oklch(0.76 0.11 170);
+  --pix-coral-400: oklch(0.72 0.13 34);
+  --pix-coral-300: oklch(0.81 0.09 34);
+  --pix-violet-400: oklch(0.7 0.12 312);
+  --pix-violet-300: oklch(0.79 0.085 306);
+  --pix-gold-300: oklch(0.88 0.085 95);
+
+  /* Surfaces (text on page = 16:1) */
+  --pix-surface-page: var(--pix-sand-100);
+  --pix-surface-panel: var(--pix-sand-50);
+  --pix-surface-elevated: var(--pix-sand-50);
+  --pix-surface-strong: white;
+
+  /* Lines — ≥ 3:1 on all light surfaces (1.4.11) */
+  --pix-line-soft: oklch(0.6 0.015 60); /* 3.6:1 on page/panel */
+  --pix-line-strong: oklch(0.52 0.015 60); /* ≥ 4.5:1 */
+
+  /* Text — strong 16:1, muted 5.4:1 (≥ 4.5:1, 1.4.3) */
+  --pix-text-strong: var(--pix-ink-950);
+  --pix-text-muted: var(--pix-ink-600);
+
+  /* Focus ring (1.4.11): sky-700 = 7.2:1 on page */
+  --pix-focus: var(--pix-sky-700);
+
+  /* Accent — primary is link/accent TEXT (≥ 4.5:1): sky-600 = 5.5:1 */
+  --pix-accent-primary: var(--pix-sky-600);
+  --pix-accent-secondary: var(--pix-coral-400); /* decorative */
+  --pix-accent-tertiary: var(--pix-mint-500); /* decorative */
+
+  /* Semantic color tokens consumed by _controls.css / _focus.css */
+  --pix-color-page: var(--pix-sand-100);
+  --pix-color-surface: var(--pix-sand-50);
+  --pix-color-surface-raised: var(--pix-sand-50);
+  --pix-color-surface-overlay: var(--pix-sand-50);
+  --pix-color-text: var(--pix-ink-950);
+  --pix-color-text-muted: var(--pix-ink-600);
+  --pix-color-text-inverse: var(--pix-ink-050); /* on accent (sky-600): 5.5:1 */
+  --pix-color-border: var(--pix-line-soft);
+  --pix-color-border-strong: var(--pix-line-strong);
+  --pix-color-accent: var(--pix-sky-600);
+  --pix-color-accent-soft: color-mix(in srgb, var(--pix-sky-600) 10%, var(--pix-sand-50));
+  --pix-color-success: oklch(0.45 0.16 150);
+  --pix-color-warning: oklch(0.5 0.15 80);
+  --pix-color-danger: oklch(0.5 0.2 25);
+}
+
+/* ─── DARK scheme (explicit toggle) ─────────────────────────────── */
+
+:root[data-color-scheme='dark'] {
+  color-scheme: dark;
+
+  /* Night palette (dark blue surfaces) */
+  --pix-night-950: oklch(0.2 0.02 255);
+  --pix-night-900: oklch(0.24 0.024 252);
+  --pix-night-800: oklch(0.31 0.028 250);
+  --pix-night-600: oklch(0.62 0.022 250); /* line-soft ≥ 3:1 everywhere */
+
+  /* Surfaces (text on page = 16:1) */
+  --pix-surface-page: var(--pix-night-950);
+  --pix-surface-panel: var(--pix-night-900);
+  --pix-surface-elevated: var(--pix-night-800);
+  --pix-surface-strong: #111;
+
+  /* Lines — ≥ 3:1 on all dark surfaces */
+  --pix-line-soft: var(--pix-night-600); /* ~4:1 on page, ~3.2:1 on elevated */
+  --pix-line-strong: oklch(0.72 0.02 250); /* ≥ 5:1 */
+
+  /* Text — strong 16:1, muted 13:1 */
+  --pix-text-strong: var(--pix-ink-050);
+  --pix-text-muted: var(--pix-ink-100);
+
+  /* Focus ring (1.4.11): sky-400 = 9.3:1 on page */
+  --pix-focus: var(--pix-sky-400);
+
+  /* Accent — primary link/text: sky-300 = 11.7:1 */
+  --pix-accent-primary: var(--pix-sky-300);
+  --pix-accent-secondary: var(--pix-coral-300);
+  --pix-accent-tertiary: var(--pix-mint-400);
+
+  /* Semantic color tokens */
+  --pix-color-page: var(--pix-night-950);
+  --pix-color-surface: var(--pix-night-900);
+  --pix-color-surface-raised: var(--pix-night-800);
+  --pix-color-surface-overlay: var(--pix-night-900);
+  --pix-color-text: var(--pix-ink-050);
+  --pix-color-text-muted: var(--pix-ink-100);
+  --pix-color-text-inverse: var(--pix-ink-950); /* on pastel accent: ≥ 8:1 */
+  --pix-color-border: var(--pix-line-soft);
+  --pix-color-border-strong: var(--pix-line-strong);
+  --pix-color-accent: var(--pix-sky-400);
+  --pix-color-accent-soft: color-mix(in srgb, var(--pix-sky-400) 15%, var(--pix-night-900));
+  --pix-color-success: oklch(0.62 0.17 150);
+  --pix-color-warning: oklch(0.72 0.15 85);
+  --pix-color-danger: oklch(0.66 0.18 25);
+}
+
+/* ─── DARK scheme (OS fallback while toggle = "system") ─────────── */
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-color-scheme]) {
+    color-scheme: dark;
+
+    --pix-night-950: oklch(0.2 0.02 255);
+    --pix-night-900: oklch(0.24 0.024 252);
+    --pix-night-800: oklch(0.31 0.028 250);
+    --pix-night-600: oklch(0.62 0.022 250);
+
+    --pix-surface-page: var(--pix-night-950);
+    --pix-surface-panel: var(--pix-night-900);
+    --pix-surface-elevated: var(--pix-night-800);
+    --pix-surface-strong: #111;
+    --pix-line-soft: var(--pix-night-600);
+    --pix-line-strong: oklch(0.72 0.02 250);
+    --pix-text-strong: var(--pix-ink-050);
+    --pix-text-muted: var(--pix-ink-100);
+    --pix-focus: var(--pix-sky-400);
+    --pix-accent-primary: var(--pix-sky-300);
+    --pix-accent-secondary: var(--pix-coral-300);
+    --pix-accent-tertiary: var(--pix-mint-400);
+
+    --pix-color-page: var(--pix-night-950);
+    --pix-color-surface: var(--pix-night-900);
+    --pix-color-surface-raised: var(--pix-night-800);
+    --pix-color-surface-overlay: var(--pix-night-900);
+    --pix-color-text: var(--pix-ink-050);
+    --pix-color-text-muted: var(--pix-ink-100);
+    --pix-color-text-inverse: var(--pix-ink-950);
+    --pix-color-border: var(--pix-line-soft);
+    --pix-color-border-strong: var(--pix-line-strong);
+    --pix-color-accent: var(--pix-sky-400);
+    --pix-color-accent-soft: color-mix(in srgb, var(--pix-sky-400) 15%, var(--pix-night-900));
+    --pix-color-success: oklch(0.62 0.17 150);
+    --pix-color-warning: oklch(0.72 0.15 85);
+    --pix-color-danger: oklch(0.66 0.18 25);
+  }
+}
+
+/* ─── Increase contrast (pix-a11y modifies FOUNDATIONS properties) ─
+ * Generic increments that work in BOTH themes: muted text becomes
+ * strong text; soft lines become strong lines; strong lines become
+ * text. Applied on top of whichever scheme is active. ────────────── */
+
+:root[data-increase-contrast='true'] {
+  --pix-text-muted: var(--pix-text-strong);
+  --pix-line-soft: var(--pix-line-strong);
+  --pix-line-strong: var(--pix-text-strong);
+  --pix-color-text-muted: var(--pix-color-text);
+  --pix-color-border: var(--pix-color-text-muted);
+}
+
+/* ─── Reduce transparency (pix-a11y) ────────────────────────────── */
+
+:root[data-reduce-transparency='true'] {
+  --pix-surface-panel: var(--pix-surface-page);
+  --pix-surface-elevated: var(--pix-surface-page);
+  --pix-surface-strong: var(--pix-surface-page);
+  --pix-color-surface: var(--pix-color-page);
+  --pix-color-surface-raised: var(--pix-color-page);
+  --pix-color-surface-overlay: var(--pix-color-page);
+}
