@@ -6,5 +6,6 @@
  */
 @import '@pix-galaxy/pix-foundations/foundations.css';
 @import '@pix-galaxy/pix-foundations/ds-tokens.css';
+@import '@pix-galaxy/pix-core/docs/docs.css';
 
 /* pix-color-scheme-selector-specific overrides */

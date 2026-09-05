@@ -1,125 +1,143 @@
 /**
  * FILE: _ds-tokens.css
- * USAGE: Stylesheet for packages/pix-foundations/src/shared/_ds-tokens.css.
- * SCOPE: File-local selectors and pix-galaxy design tokens.
+ * USAGE: Design tokens for pix-galaxy docs sites.
+ * SCOPE: Unlayered — light-dark() does NOT work inside custom properties.
+ *        Dark mode overrides via prefers-color-scheme media query.
  */
-@layer pix-galaxy {
-  @layer design-system {
-    :root {
-      color-scheme: light dark;
 
-      --pix-ink-950: oklch(0.21 0.015 60);
-      --pix-ink-800: oklch(0.32 0.017 60);
-      --pix-ink-600: oklch(0.5 0.014 62);
-      --pix-ink-100: oklch(0.89 0.012 70);
-      --pix-ink-050: oklch(0.96 0.01 75);
-      --pix-night-950: oklch(0.2 0.02 255);
-      --pix-night-900: oklch(0.24 0.024 252);
-      --pix-night-800: oklch(0.31 0.028 250);
-      --pix-night-600: oklch(0.56 0.022 248);
-      --pix-sand-50: oklch(0.985 0.01 85);
-      --pix-sand-100: oklch(0.965 0.012 85);
-      --pix-sand-200: oklch(0.925 0.016 85);
-      --pix-sky-400: oklch(0.78 0.11 228);
-      --pix-sky-500: oklch(0.71 0.13 228);
-      --pix-sky-600: oklch(0.48 0.12 228);
-      --pix-sky-700: oklch(0.42 0.11 228);
-      --pix-sky-300: oklch(0.85 0.08 228);
-      --pix-mint-400: oklch(0.84 0.1 170);
-      --pix-mint-500: oklch(0.76 0.11 170);
-      --pix-coral-400: oklch(0.72 0.13 34);
-      --pix-coral-300: oklch(0.81 0.09 34);
-      --pix-violet-400: oklch(0.7 0.12 312);
-      --pix-violet-300: oklch(0.79 0.085 306);
-      --pix-gold-300: oklch(0.88 0.085 95);
+:root {
+  color-scheme: light dark;
 
-      --pix-surface-page: light-dark(
-        var(--pix-sand-100),
-        var(--pix-night-950)
-      );
-      --pix-surface-panel: light-dark(
-        color-mix(in srgb, var(--pix-sand-50) 82%, white 18%),
-        color-mix(in srgb, var(--pix-night-900) 88%, black 12%)
-      );
-      --pix-surface-elevated: light-dark(
-        color-mix(in srgb, var(--pix-sand-50) 92%, white 8%),
-        color-mix(in srgb, var(--pix-night-800) 90%, black 10%)
-      );
-      --pix-line-soft: light-dark(
-        color-mix(in srgb, var(--pix-ink-950) 12%, white 88%),
-        color-mix(in srgb, var(--pix-ink-050) 14%, transparent)
-      );
-      --pix-line-strong: light-dark(
-        color-mix(in srgb, var(--pix-ink-950) 24%, white 76%),
-        color-mix(in srgb, var(--pix-ink-050) 28%, transparent)
-      );
-      --pix-text-strong: light-dark(var(--pix-ink-950), var(--pix-ink-050));
-      --pix-text-muted: light-dark(var(--pix-ink-600), var(--pix-ink-100));
-      --pix-focus: light-dark(
-        color-mix(in srgb, var(--pix-sky-500) 54%, white 46%),
-        color-mix(in srgb, var(--pix-sky-300) 72%, white 28%)
-      );
-      --pix-accent-primary: light-dark(var(--pix-sky-500), var(--pix-sky-300));
-      --pix-accent-secondary: light-dark(
-        var(--pix-coral-400),
-        var(--pix-coral-300)
-      );
-      --pix-accent-tertiary: light-dark(
-        var(--pix-mint-500),
-        var(--pix-mint-400)
-      );
+  /* ── Palette ────────────────────────────────────────────────── */
 
-      --pix-t-sans: var(--pix--t--font-family);
-      --pix-t-display: var(--pix--t--font-family-display);
-      --pix-t-mono: var(--pix--t--font-family-mono);
+  --pix-ink-950: oklch(0.21 0.015 60);
+  --pix-ink-800: oklch(0.32 0.017 60);
+  --pix-ink-600: oklch(0.5 0.014 62);
+  --pix-ink-100: oklch(0.89 0.012 70);
+  --pix-ink-050: oklch(0.96 0.01 75);
+  --pix-night-950: oklch(0.2 0.02 255);
+  --pix-night-900: oklch(0.24 0.024 252);
+  --pix-night-800: oklch(0.31 0.028 250);
+  --pix-night-600: oklch(0.56 0.022 248);
+  --pix-sand-50: oklch(0.985 0.01 85);
+  --pix-sand-100: oklch(0.965 0.012 85);
+  --pix-sand-200: oklch(0.925 0.016 85);
+  --pix-sky-300: oklch(0.85 0.08 228);
+  --pix-sky-400: oklch(0.78 0.11 228);
+  --pix-sky-500: oklch(0.71 0.13 228);
+  --pix-sky-600: oklch(0.48 0.12 228);
+  --pix-sky-700: oklch(0.42 0.11 228);
+  --pix-mint-400: oklch(0.84 0.1 170);
+  --pix-mint-500: oklch(0.76 0.11 170);
+  --pix-coral-400: oklch(0.72 0.13 34);
+  --pix-coral-300: oklch(0.81 0.09 34);
+  --pix-violet-400: oklch(0.7 0.12 312);
+  --pix-violet-300: oklch(0.79 0.085 306);
+  --pix-gold-300: oklch(0.88 0.085 95);
 
-      --pix-t-xs: var(--pix--t--size-xs);
-      --pix-t-sm: var(--pix--t--size-sm);
-      --pix-t-md: var(--pix--t--size-md);
-      --pix-t-lg: var(--pix--t--size-lg);
-      --pix-t-xl: var(--pix--t--size-xl);
-      --pix-t-2xl: var(--pix--t--size-2xl);
-      --pix-t-leading-tight: var(--pix--t--line-height-tight);
-      --pix-t-leading-normal: var(--pix--t--line-height);
-      --pix-t-leading-relaxed: var(--pix--t--line-height-relaxed);
-      --pix-t-tracking-wide: var(--pix--t--tracking-wide);
+  /* ── Surfaces (light defaults) ──────────────────────────────── */
 
-      --pix-space-1: 0.25rem;
-      --pix-space-2: 0.5rem;
-      --pix-space-3: 0.75rem;
-      --pix-space-4: 1rem;
-      --pix-space-5: 1.5rem;
-      --pix-space-6: 2rem;
-      --pix-space-7: 2.5rem;
-      --pix-space-8: 3rem;
-      --pix-space-9: 4rem;
+  --pix-surface-page: var(--pix-sand-100);
+  --pix-surface-panel: color-mix(in srgb, var(--pix-sand-50) 82%, white 18%);
+  --pix-surface-elevated: color-mix(in srgb, var(--pix-sand-50) 92%, white 8%);
+  --pix-surface-strong: white;
 
-      --pix-r-sm: var(--pix--r--sm);
-      --pix-r-md: var(--pix--r--md);
-      --pix-r-lg: var(--pix--r--lg);
-      --pix-r-xl: var(--pix--r--xl);
-      --pix-r-pill: var(--pix--r--pill);
+  /* ── Lines ──────────────────────────────────────────────────── */
 
-      --pix-e-1: light-dark(
-        0 0.75rem 1.75rem rgba(54, 39, 22, 0.08),
-        0 1rem 2.125rem rgba(0, 0, 0, 0.34)
-      );
-      --pix-e-2: light-dark(
-        0 1.125rem 2.625rem rgba(54, 39, 22, 0.12),
-        0 1.375rem 3rem rgba(0, 0, 0, 0.42)
-      );
-      --pix-e-3: light-dark(
-        0 1.5rem 3.5rem rgba(54, 39, 22, 0.16),
-        0 1.625rem 4rem rgba(0, 0, 0, 0.5)
-      );
+  --pix-line-soft: color-mix(in srgb, var(--pix-ink-950) 12%, white 88%);
+  --pix-line-strong: color-mix(in srgb, var(--pix-ink-950) 24%, white 76%);
 
-      --pix-m-duration-fast: 140ms;
-      --pix-m-duration-base: 180ms;
-      --pix-m-duration-slow: 280ms;
-      --pix-m-ease-standard: cubic-bezier(0.2, 0.8, 0.2, 1);
-      --pix-m-ease-emphasized: cubic-bezier(0.16, 1, 0.3, 1);
-      --pix-m-lift-hover: -1px;
-      --pix-m-scale-press: 0.985;
-    }
+  /* ── Text ───────────────────────────────────────────────────── */
+
+  --pix-text-strong: var(--pix-ink-950);
+  --pix-text-muted: var(--pix-ink-600);
+
+  /* ── Focus ──────────────────────────────────────────────────── */
+
+  --pix-focus: color-mix(in srgb, var(--pix-sky-500) 54%, white 46%);
+
+  /* ── Accent ─────────────────────────────────────────────────── */
+
+  --pix-accent-primary: var(--pix-sky-500);
+  --pix-accent-secondary: var(--pix-coral-400);
+  --pix-accent-tertiary: var(--pix-mint-500);
+
+  /* ── Typography ─────────────────────────────────────────────── */
+
+  --pix-t-sans: var(--pix--t--font-family);
+  --pix-t-display: var(--pix--t--font-family-display);
+  --pix-t-mono: var(--pix--t--font-family-mono);
+  --pix-t-xs: var(--pix--t--size-xs);
+  --pix-t-sm: var(--pix--t--size-sm);
+  --pix-t-md: var(--pix--t--size-md);
+  --pix-t-lg: var(--pix--t--size-lg);
+  --pix-t-xl: var(--pix--t--size-xl);
+  --pix-t-2xl: var(--pix--t--size-2xl);
+  --pix-t-leading-tight: var(--pix--t--line-height-tight);
+  --pix-t-leading-normal: var(--pix--t--line-height);
+  --pix-t-leading-relaxed: var(--pix--t--line-height-relaxed);
+  --pix-t-tracking-wide: var(--pix--t--tracking-wide);
+
+  /* ── Spacing ────────────────────────────────────────────────── */
+
+  --pix-space-1: 0.25rem;
+  --pix-space-2: 0.5rem;
+  --pix-space-3: 0.75rem;
+  --pix-space-4: 1rem;
+  --pix-space-5: 1.5rem;
+  --pix-space-6: 2rem;
+  --pix-space-7: 2.5rem;
+  --pix-space-8: 3rem;
+  --pix-space-9: 4rem;
+
+  /* ── Radii ──────────────────────────────────────────────────── */
+
+  --pix-r-sm: var(--pix--r--sm);
+  --pix-r-md: var(--pix--r--md);
+  --pix-r-lg: var(--pix--r--lg);
+  --pix-r-xl: var(--pix--r--xl);
+  --pix-r-pill: var(--pix--r--pill);
+
+  /* ── Elevation ──────────────────────────────────────────────── */
+
+  --pix-e-1: 0 0.75rem 1.75rem rgba(54, 39, 22, 0.08);
+  --pix-e-2: 0 1.125rem 2.625rem rgba(54, 39, 22, 0.12);
+  --pix-e-3: 0 1.5rem 3.5rem rgba(54, 39, 22, 0.16);
+
+  /* ── Motion ─────────────────────────────────────────────────── */
+
+  --pix-m-duration-fast: 140ms;
+  --pix-m-duration-base: 180ms;
+  --pix-m-duration-slow: 280ms;
+  --pix-m-ease-standard: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --pix-m-ease-emphasized: cubic-bezier(0.16, 1, 0.3, 1);
+  --pix-m-lift-hover: -1px;
+  --pix-m-scale-press: 0.985;
+}
+
+/* ── Dark mode overrides ─────────────────────────────────────── */
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --pix-surface-page: var(--pix-night-950);
+    --pix-surface-panel: color-mix(in srgb, var(--pix-night-900) 88%, black 12%);
+    --pix-surface-elevated: color-mix(in srgb, var(--pix-night-800) 90%, black 10%);
+    --pix-surface-strong: #111;
+
+    --pix-line-soft: color-mix(in srgb, var(--pix-ink-050) 14%, transparent);
+    --pix-line-strong: color-mix(in srgb, var(--pix-ink-050) 28%, transparent);
+
+    --pix-text-strong: var(--pix-ink-050);
+    --pix-text-muted: var(--pix-ink-100);
+
+    --pix-focus: color-mix(in srgb, var(--pix-sky-300) 72%, white 28%);
+
+    --pix-accent-primary: var(--pix-sky-300);
+    --pix-accent-secondary: var(--pix-coral-300);
+    --pix-accent-tertiary: var(--pix-mint-400);
+
+    --pix-e-1: 0 1rem 2.125rem rgba(0, 0, 0, 0.34);
+    --pix-e-2: 0 1.375rem 3rem rgba(0, 0, 0, 0.42);
+    --pix-e-3: 0 1.625rem 4rem rgba(0, 0, 0, 0.5);
   }
 }

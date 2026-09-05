@@ -18,7 +18,6 @@
 @import './_colors.css' layer(pix.foundations.colors);
 @import './_spacings.css' layer(pix.foundations.spacings);
 @import './_typography.css' layer(pix.foundations.typography);
-@import './_elevations.css' layer(pix.foundations.elevations);
 @import './_radii.css' layer(pix.foundations.radii);
 @import './_controls.css' layer(pix.foundations.controls);
 @import './_docs-site.css' layer(pix.foundations.docs);
