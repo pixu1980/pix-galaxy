@@ -1,13 +1,13 @@
 /* pix-foundations - elevations (box-shadow)
  *
- * Usage:  box-shadow: var(--pix-ds--e--md);
+ * Usage:  box-shadow: var(--pix-e-md);
  */
 
 :root {
-  --pix-ds--e--sm: 0 1px 3px
+  --pix-e-sm: 0 1px 3px
     light-dark(oklch(from black 0 0 0 / 0.08), oklch(from black 0 0 0 / 0.2));
-  --pix-ds--e--md: 0 0.25rem 0.75rem
+  --pix-e-md: 0 0.25rem 0.75rem
     light-dark(oklch(from black 0 0 0 / 0.1), oklch(from black 0 0 0 / 0.3));
-  --pix-ds--e--lg: 0 0.5rem 1.5rem
+  --pix-e-lg: 0 0.5rem 1.5rem
     light-dark(oklch(from black 0 0 0 / 0.12), oklch(from black 0 0 0 / 0.35));
 }

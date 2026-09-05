@@ -22,7 +22,7 @@
       display: flex;
       align-items: center;
       gap: var(--pix--s--sm);
-      padding: var(--pix-ds-space-3) var(--pix-ds-space-3);
+      padding: var(--pix-space-3) var(--pix-space-3);
       border: 1px solid
         light-dark(oklch(from gray 0.85 0.01 0 / 0.5), oklch(from gray 0.3 0.01 0 / 0.5));
       border-radius: var(--pix--r--md);

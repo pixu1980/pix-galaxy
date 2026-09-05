@@ -15,11 +15,11 @@
   --pix--r--inherit: inherit;
 
   /* Compatibility aliases used by pix-galaxy components/docs. */
-  --pix-ds-radius-sm: var(--pix--r--sm);
-  --pix-ds-radius-md: var(--pix--r--md);
-  --pix-ds-radius-lg: var(--pix--r--lg);
-  --pix-ds-radius-xl: var(--pix--r--xl);
-  --pix-ds-radius-pill: var(--pix--r--pill);
+  --pix-r-sm: var(--pix--r--sm);
+  --pix-r-md: var(--pix--r--md);
+  --pix-r-lg: var(--pix--r--lg);
+  --pix-r-xl: var(--pix--r--xl);
+  --pix-r-pill: var(--pix--r--pill);
 }
 
 :root[data-radius-preset='square'] {

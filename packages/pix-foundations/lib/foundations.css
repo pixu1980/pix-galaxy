@@ -21,6 +21,7 @@
 @import './_elevations.css' layer(pix.foundations.elevations);
 @import './_radii.css' layer(pix.foundations.radii);
 @import './_controls.css' layer(pix.foundations.controls);
+@import './_docs-site.css' layer(pix.foundations.docs);
 
 /* Focus ring is intentionally UNLAYERED so it beats all component CSS.
  * WCAG 2.2 SC 2.4.7 requires the focus indicator to always be visible

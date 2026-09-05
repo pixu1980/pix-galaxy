@@ -33,19 +33,19 @@
   --pix--t--tracking-wide: 0.14em;
 
   /* Compatibility aliases used by existing pix-galaxy docs/components. */
-  --pix-ds-font-sans: var(--pix--t--font-family);
-  --pix-ds-font-display: var(--pix--t--font-family-display);
-  --pix-ds-font-mono: var(--pix--t--font-family-mono);
-  --pix-ds-text-xs: var(--pix--t--size-xs);
-  --pix-ds-text-sm: var(--pix--t--size-sm);
-  --pix-ds-text-md: var(--pix--t--size-md);
-  --pix-ds-text-lg: var(--pix--t--size-lg);
-  --pix-ds-text-xl: var(--pix--t--size-xl);
-  --pix-ds-text-2xl: var(--pix--t--size-2xl);
-  --pix-ds-leading-tight: var(--pix--t--line-height-tight);
-  --pix-ds-leading-normal: var(--pix--t--line-height);
-  --pix-ds-leading-relaxed: var(--pix--t--line-height-relaxed);
-  --pix-ds-tracking-wide: var(--pix--t--tracking-wide);
+  --pix-t-sans: var(--pix--t--font-family);
+  --pix-t-display: var(--pix--t--font-family-display);
+  --pix-t-mono: var(--pix--t--font-family-mono);
+  --pix-t-xs: var(--pix--t--size-xs);
+  --pix-t-sm: var(--pix--t--size-sm);
+  --pix-t-md: var(--pix--t--size-md);
+  --pix-t-lg: var(--pix--t--size-lg);
+  --pix-t-xl: var(--pix--t--size-xl);
+  --pix-t-2xl: var(--pix--t--size-2xl);
+  --pix-t-leading-tight: var(--pix--t--line-height-tight);
+  --pix-t-leading-normal: var(--pix--t--line-height);
+  --pix-t-leading-relaxed: var(--pix--t--line-height-relaxed);
+  --pix-t-tracking-wide: var(--pix--t--tracking-wide);
 }
 
 body {

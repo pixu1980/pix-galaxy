@@ -80,8 +80,8 @@ async function bootDocsSite() {
       liveHtml: `
         <pix-color-scheme-selector></pix-color-scheme-selector>
         <div style="display:flex;gap:0.5rem;align-items:center;margin-top:0.5rem;">
-          <button type="button" id="cmd-demo-btn" style="font:inherit;font-size:0.875rem;padding:0.4rem 0.75rem;border:1px solid var(--pix-ds-line-soft);border-radius:6px;background:var(--pix-ds-surface);cursor:pointer;">Open commands</button>
-          <span style="font-size:0.75rem;color:var(--pix-ds-text-muted);"><kbd>⌘K</kbd></span>
+          <button type="button" id="cmd-demo-btn" style="font:inherit;font-size:0.875rem;padding:0.4rem 0.75rem;border:1px solid var(--pix-line-soft);border-radius:6px;background:var(--pix-surface);cursor:pointer;">Open commands</button>
+          <span style="font-size:0.75rem;color:var(--pix-text-muted);"><kbd>⌘K</kbd></span>
         </div>
       `,
     },

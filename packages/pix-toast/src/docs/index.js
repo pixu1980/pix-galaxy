@@ -80,7 +80,7 @@ async function bootDocsSite() {
       liveHtml: `
         <pix-color-scheme-selector></pix-color-scheme-selector>
         <div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-top:0.5rem;">
-          <button type="button" id="demo-toast-btn" style="font:inherit;font-size:0.875rem;padding:0.4rem 0.75rem;border:1px solid var(--pix-ds-line-soft);border-radius:6px;background:var(--pix-ds-surface);cursor:pointer;">Show toast</button>
+          <button type="button" id="demo-toast-btn" style="font:inherit;font-size:0.875rem;padding:0.4rem 0.75rem;border:1px solid var(--pix-line-soft);border-radius:6px;background:var(--pix-surface);cursor:pointer;">Show toast</button>
         </div>
       `,
     },

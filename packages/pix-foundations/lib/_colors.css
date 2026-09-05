@@ -8,35 +8,35 @@
   color-scheme: light dark;
 
   /* Surfaces */
-  --pix-ds--c--page: light-dark(oklch(0.97 0.005 85), oklch(0.12 0.01 260));
-  --pix-ds--c--surface: light-dark(oklch(0.99 0.003 85), oklch(0.16 0.01 260));
-  --pix-ds--c--surface-raised: light-dark(oklch(0.98 0.005 85 / 0.9), oklch(0.2 0.015 260 / 0.9));
-  --pix-ds--c--surface-overlay: light-dark(
+  --pix-color-page: light-dark(oklch(0.97 0.005 85), oklch(0.12 0.01 260));
+  --pix-color-surface: light-dark(oklch(0.99 0.003 85), oklch(0.16 0.01 260));
+  --pix-color-surface-raised: light-dark(oklch(0.98 0.005 85 / 0.9), oklch(0.2 0.015 260 / 0.9));
+  --pix-color-surface-overlay: light-dark(
     oklch(0.99 0.003 85 / 0.85),
     oklch(0.14 0.01 260 / 0.85)
   );
 
   /* Text */
-  --pix-ds--c--text: light-dark(oklch(0.18 0.012 60), oklch(0.88 0.01 85));
-  --pix-ds--c--text-muted: light-dark(oklch(0.5 0.014 62), oklch(0.55 0.01 85));
-  --pix-ds--c--text-inverse: light-dark(oklch(0.92 0.01 85), oklch(0.18 0.012 60));
+  --pix-color-text: light-dark(oklch(0.18 0.012 60), oklch(0.88 0.01 85));
+  --pix-color-text-muted: light-dark(oklch(0.5 0.014 62), oklch(0.55 0.01 85));
+  --pix-color-text-inverse: light-dark(oklch(0.92 0.01 85), oklch(0.18 0.012 60));
 
   /* Borders */
-  --pix-ds--c--border: light-dark(
+  --pix-color-border: light-dark(
     oklch(from gray 0.85 0.01 0 / 0.45),
     oklch(from gray 0.3 0.01 0 / 0.45)
   );
-  --pix-ds--c--border-strong: light-dark(
+  --pix-color-border-strong: light-dark(
     oklch(from gray 0.75 0.01 0 / 0.5),
     oklch(from gray 0.4 0.01 0 / 0.5)
   );
 
   /* Accent */
-  --pix-ds--c--accent: light-dark(oklch(0.55 0.18 260), oklch(0.65 0.15 260));
-  --pix-ds--c--accent-soft: light-dark(oklch(0.55 0.18 260 / 0.1), oklch(0.65 0.15 260 / 0.12));
+  --pix-color-accent: light-dark(oklch(0.55 0.18 260), oklch(0.65 0.15 260));
+  --pix-color-accent-soft: light-dark(oklch(0.55 0.18 260 / 0.1), oklch(0.65 0.15 260 / 0.12));
 
   /* Feedback */
-  --pix-ds--c--success: light-dark(oklch(0.5 0.2 150), oklch(0.6 0.18 150));
-  --pix-ds--c--warning: light-dark(oklch(0.52 0.18 80), oklch(0.68 0.15 80));
-  --pix-ds--c--danger: light-dark(oklch(0.52 0.2 25), oklch(0.62 0.18 25));
+  --pix-color-success: light-dark(oklch(0.5 0.2 150), oklch(0.6 0.18 150));
+  --pix-color-warning: light-dark(oklch(0.52 0.18 80), oklch(0.68 0.15 80));
+  --pix-color-danger: light-dark(oklch(0.52 0.2 25), oklch(0.62 0.18 25));
 }

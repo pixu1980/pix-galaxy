@@ -19,21 +19,21 @@
   --pix--s--2xl: 3rem;
 
   /* Compatibility aliases. */
-  --pix-ds--s--ratio: 1.25;
-  --pix-ds--s--xs: var(--pix--s--xs);
-  --pix-ds--s--sm: var(--pix--s--sm);
-  --pix-ds--s--md: var(--pix--s--md);
-  --pix-ds--s--lg: var(--pix--s--lg);
-  --pix-ds--s--xl: var(--pix--s--xl);
-  --pix-ds--s--2xl: var(--pix--s--2xl);
+  --pix-scale-ratio: 1.25;
+  --pix-scale-xs: var(--pix--s--xs);
+  --pix-scale-sm: var(--pix--s--sm);
+  --pix-scale-md: var(--pix--s--md);
+  --pix-scale-lg: var(--pix--s--lg);
+  --pix-scale-xl: var(--pix--s--xl);
+  --pix-scale-2xl: var(--pix--s--2xl);
 
-  --pix-ds-space-1: var(--pix--s--xs);
-  --pix-ds-space-2: var(--pix--s--sm);
-  --pix-ds-space-3: 0.75rem;
-  --pix-ds-space-4: var(--pix--s--md);
-  --pix-ds-space-5: var(--pix--s--lg);
-  --pix-ds-space-6: var(--pix--s--xl);
-  --pix-ds-space-7: 2.5rem;
-  --pix-ds-space-8: var(--pix--s--2xl);
-  --pix-ds-space-9: 4rem;
+  --pix-space-1: var(--pix--s--xs);
+  --pix-space-2: var(--pix--s--sm);
+  --pix-space-3: 0.75rem;
+  --pix-space-4: var(--pix--s--md);
+  --pix-space-5: var(--pix--s--lg);
+  --pix-space-6: var(--pix--s--xl);
+  --pix-space-7: 2.5rem;
+  --pix-space-8: var(--pix--s--2xl);
+  --pix-space-9: 4rem;
 }

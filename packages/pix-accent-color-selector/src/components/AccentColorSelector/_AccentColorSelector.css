@@ -10,25 +10,25 @@
       align-items: center;
       gap: var(--pix--s--sm);
       padding: var(--pix--s--sm);
-      border: 1px solid var(--pix-ds-line-soft);
-      border-radius: var(--pix-ds--r--md);
-      background: var(--pix-ds-surface-strong);
+      border: 1px solid var(--pix-line-soft);
+      border-radius: var(--pix-r-md);
+      background: var(--pix-surface-strong);
     }
 
     pix-accent-color-selector [data-accent-selector-label] {
       padding: var(--pix--s--0) var(--pix--s--sm);
-      color: var(--pix-ds-text-muted);
+      color: var(--pix-text-muted);
       white-space: nowrap;
     }
 
     pix-accent-color-selector [data-accent-button] {
-      width: var(--pix-ds-space-5);
-      height: var(--pix-ds-space-5);
-      min-width: var(--pix-ds-space-5);
+      width: var(--pix-space-5);
+      height: var(--pix-space-5);
+      min-width: var(--pix-space-5);
       /* counter the global control min-height so swatches stay circles */
-      min-height: var(--pix-ds-space-5);
+      min-height: var(--pix-space-5);
       padding: var(--pix--s--0);
-      border: 2px solid var(--pix-ds-line-soft);
+      border: 2px solid var(--pix-line-soft);
       border-radius: var(--pix--r--circle);
       background: hsl(
         var(--pix-accent-preview-h),
@@ -37,21 +37,21 @@
       );
       cursor: pointer;
       transition:
-        transform var(--pix-ds-duration-fast) var(--pix-ds-ease-standard),
-        border-color var(--pix-ds-duration-fast) var(--pix-ds-ease-standard),
-        box-shadow var(--pix-ds-duration-fast) var(--pix-ds-ease-standard);
+        transform var(--pix-m-duration-fast) var(--pix-m-ease-standard),
+        border-color var(--pix-m-duration-fast) var(--pix-m-ease-standard),
+        box-shadow var(--pix-m-duration-fast) var(--pix-m-ease-standard);
       position: relative;
     }
 
     pix-accent-color-selector [data-accent-button]:hover {
       transform: scale(1.08);
-      border-color: var(--pix-ds-text-muted);
+      border-color: var(--pix-text-muted);
     }
 
     pix-accent-color-selector [data-accent-button][aria-checked='true'] {
-      border-color: var(--pix-ds-text-strong);
+      border-color: var(--pix-text-strong);
       border-width: 3px;
-      box-shadow: 0 0 0 2px var(--pix-ds-surface-strong);
+      box-shadow: 0 0 0 2px var(--pix-surface-strong);
       transform: scale(1.1);
     }
 

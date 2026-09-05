@@ -2,7 +2,7 @@
  *
  * WCAG 2.2 SC 2.4.7: visible focus indicator.
  * outline: 2px solid; outline-offset: 2px
- * Colour is consistently var(--pix-ds--f--color) across ALL interactive
+ * Colour is consistently var(--pix-focus-color) across ALL interactive
  * elements - no more currentColor which varies by context.
  *
  * Applied to all interactive elements globally.
@@ -10,15 +10,15 @@
  */
 
 :root {
-  --pix-ds--f--width: 3px;
-  --pix-ds--f--style: solid;
-  --pix-ds--f--offset: 3px;
-  --pix-ds--f--color: var(--pix-ds--c--accent, oklch(0.55 0.18 260));
+  --pix-focus-width: 3px;
+  --pix-focus-style: solid;
+  --pix-focus-offset: 3px;
+  --pix-focus-color: var(--pix-color-accent, oklch(0.55 0.18 260));
 }
 
 /* Universal focus ring - uses :focus-visible (not :where) for normal specificity,
  * so it can hold its own even when layered.                                  */
 :focus-visible {
-  outline: var(--pix-ds--f--width) var(--pix-ds--f--style) var(--pix-ds--f--color);
-  outline-offset: var(--pix-ds--f--offset);
+  outline: var(--pix-focus-width) var(--pix-focus-style) var(--pix-focus-color);
+  outline-offset: var(--pix-focus-offset);
 }
