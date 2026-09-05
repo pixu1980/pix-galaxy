@@ -1,70 +1,130 @@
-# Contributing
+# Contributing to pix-galaxy
 
-Thanks for contributing to pix-galaxy.
+Thanks for considering a contribution! pix-galaxy is a monorepo of
+zero-runtime-dependency vanilla JS Web Components. This guide describes the
+contribution flow, commands, and review expectations (ADR-022, ADR-026).
 
-## Local Setup
+> Please read [CODE_OF_CONDUCT.md](./CODE_OF_CONDUCT.md) and
+> [GOVERNANCE.md](./GOVERNANCE.md) before contributing.
 
-This repository targets Node.js 24 and pnpm 11.
+## Branch strategy
 
-```bash
-pnpm install
+- **`develop`** is the trunk. All work lands here.
+- **`main`** receives merges only for releases (per-package tags).
+
+Open feature/fix branches from `develop` and target `develop` in the pull
+request.
+
+## Local setup
+
+- Node.js >= 20.11 (CI runs 24)
+- pnpm >= 10
+
+```sh
+pnpm install            # installs the workspace
+pnpm dev:all            # portal + all package docs sites (ports 3000+)
 ```
 
-## Development Commands
+## Repository layout
 
-```bash
-pnpm test
-pnpm typecheck
-pnpm build
-pnpm validate
-pnpm docs:build
+- `packages/*` — one workspace package per component/library.
+- `packages/pix-core/` — shared runtime and build scripts (never duplicated).
+- `packages/pix-foundations/` — design tokens (radii, spacing, colors, focus).
+- `src/docs/` — the component portal.
+- `docs/` — ADRs, roadmap, design reviews, handoffs.
+- `docs/adr/` — architecture decision records (add one for significant decisions).
+
+## Commands
+
+From the repository root:
+
+| Command                              | Purpose                                         |
+| ------------------------------------ | ----------------------------------------------- |
+| `pnpm test`                          | Run all package tests (`node:test`)             |
+| `pnpm test:e2e`                      | Run Playwright e2e tests                        |
+| `pnpm quality`                       | `format:check` + `lint` + `typecheck`           |
+| `pnpm build:lib`                     | Build all package libraries (ESM + CJS + types) |
+| `pnpm build:site`                    | Build the portal + all package docs sites       |
+| `pnpm dev:all`                       | Start every docs site locally                   |
+| `pnpm release:dry`                   | Preview releases (dry-run, no changes)          |
+| `pnpm scaffold <Name> "Description"` | Create a new component package                  |
+
+Per-package:
+
+```sh
+pnpm --filter @pix-galaxy/pix-color run test
+pnpm --filter @pix-galaxy/pix-color run build:lib
+pnpm --filter @pix-galaxy/pix-color run dev
+pnpm --filter @pix-galaxy/pix-color run lint
+pnpm --filter @pix-galaxy/pix-color run typecheck
 ```
 
-Package-specific work stays under `packages/<name>/`. Shared runtime helpers live in `packages/pix-core/`.
+## Contribution flow
 
-## Contribution Expectations
+1. **File an issue first** for anything bigger than a one-line fix. This keeps
+   design work visible and avoids duplicated effort.
+2. Create a branch from `develop`:
+   ```sh
+   git checkout develop && git pull
+   git checkout -b feat/pix-color-oklch-export
+   ```
+3. Keep changes **focused** — no unrelated refactors in the same PR.
+4. Write tests for behavior changes (`node:test` in `packages/*/src/tests/`,
+   Playwright e2e under `e2e/`).
+5. Run the local checks before pushing:
+   ```sh
+   pnpm quality
+   pnpm test
+   pnpm --filter @pix-galaxy/<name> run build:lib
+   ```
+6. Open a pull request **against `develop`** and fill the template.
 
-- Keep changes focused and avoid unrelated refactors.
-- Preserve public API names unless a breaking change is intentional and documented.
-- Add or update tests for behavior changes.
-- Update README or package docs when user-facing behavior changes.
-- Do not edit `dist/` by hand. Release helpers regenerate tracked `packages/*/dist/` artifacts.
-- Keep source in `src/`, build output in `dist/`, and tests in `tests/`.
+## Commit style
 
-## Pull Requests
+Conventional Commits are required — the release flow and changelog generator
+use the commit subject directly (ADR-018):
 
-Before opening a pull request:
-
-1. Rebase or merge the latest default branch.
-2. Run `pnpm test`.
-3. Run `pnpm typecheck`.
-4. Run `pnpm build` if your change affects published packages.
-5. Confirm docs and governance files still reflect the current behavior.
-
-PRs should explain:
-
-- what changed
-- why the change is needed
-- how it was tested
-- whether the change is breaking
-
-## Release Maintainers Flow
-
-```bash
-pnpm rel:patch
-git push origin main --follow-tags
+```sh
+feat(pix-color): export oklch parsing helpers      # minor bump
+fix(pix-toast): deduplicate identical toasts       # patch bump
+feat(pix-color)!: rename parse() API               # major (breaking)
 ```
 
-Release helpers regenerate `CHANGELOG.md` from Conventional Commits, rebuild tracked `dist/` artifacts locally, create a release commit, and create a local tag. GitHub Actions publishes the committed artifacts without rebuilding packages.
+Scope = the package directory name (`packages/<name>/`). Commits that only
+touch root files (`docs/`, `src/docs/`, config) use `docs:`, `chore:`, `ci:`
+or `feat(portal):` where appropriate.
 
-## Issues First
+## Review criteria
 
-For larger changes, open or link an issue before implementation. This keeps design work visible and reduces duplicated effort.
+Maintainers review for:
 
-## Commit Style
+- correctness and API stability (public API changes must be intentional and documented),
+- test coverage, and the quality gate (ADR-026) when enforcing,
+- documentation: README + package docs updated for user-facing changes,
+- accessibility: WCAG 2.2 AA is non-negotiable for every component,
+- build hygiene: source in `src/`, output in `artifact/`/`dist/` regenerated by
+  `build:lib` — never hand-edit build output.
 
-Conventional Commits are strongly preferred because the release flow and changelog generator use commit subjects directly.
+## Release overview (maintainers)
 
-## Review Criteria
+```sh
+pnpm release:dry      # preview changelogs + bumps
+pnpm release          # local release: bump + CHANGELOG + tag + npm publish
+```
 
-Maintainers review for correctness, API stability, test coverage, documentation quality, package integrity, and long-term maintainability.
+Releases are **local** (ADR-018): no CI publish, no `NPM_TOKEN`. The script
+pushes `--follow-tags` to `develop`; tags trigger a quality gate
+(`.github/workflows/release.yml`). Read [RELEASE.md](./RELEASE.md) for details.
+
+## Governance decisions
+
+Significant architecture/process decisions are recorded as ADRs in
+`docs/adr/` (Nygard format). Adding an ADR requires maintainer review along
+with the change.
+
+## Good first contributions
+
+- Docs: consumer quickstarts, API reference pages, migration notes (ROADMAP §2).
+- Quality: axe audits, visual regression baselines, coverage (ROADMAP §4).
+- Behavior gaps: form association, i18n/RTL, SSR safety, focus-trap patterns
+  (ROADMAP §3).

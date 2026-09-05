@@ -6,6 +6,10 @@
 | ------- | --------- |
 | 0.x     | Yes       |
 
+The latest published minor in the active major line is the supported line;
+older minors are supported for security fixes for 90 days after the next
+minor ships (see GOVERNANCE.md Release Policy).
+
 ## Reporting a Vulnerability
 
 Please do not report security vulnerabilities in public issues.
@@ -21,6 +25,13 @@ Include:
 - reproduction steps or a proof of concept
 - impact assessment
 - any suggested mitigation
+
+## Scope
+
+All published `@pix-galaxy/*` npm packages, the component portal, and the
+build toolchain (release flows, CI workflows, dependency supply chain).
+Dependency and supply-chain reports (Dependabot, `pnpm audit`) are triaged
+under the same response targets.
 
 ## Response Targets
 

@@ -1,1 +1,38 @@
+# CODEOWNERS
+
+# Default reviewers: the project owner (BDFL, ADR-026).
 * @pixu1980
+
+# Governance, roadmap and process docs
+/docs @pixu1980
+/GOVERNANCE.md @pixu1980
+/ROADMAP.md @pixu1980
+/CONTRIBUTING.md @pixu1980
+/CODE_OF_CONDUCT.md @pixu1980
+/SECURITY.md @pixu1980
+/SUPPORT.md @pixu1980
+/RELEASE.md @pixu1980
+
+# Component portal
+/src/docs @pixu1980
+
+# Release orchestration
+/scripts @pixu1980
+/package.json @pixu1980
+/pnpm-workspace.yaml @pixu1980
+
+# Packages (single owner today; add reviewers per package as maintainers join)
+/packages/pix-foundations/ @pixu1980
+/packages/pix-core/ @pixu1980
+/packages/pix-color/ @pixu1980
+/packages/pix-vanilla-reactive/ @pixu1980
+/packages/pix-color-scheme-selector/ @pixu1980
+/packages/pix-accent-color-selector/ @pixu1980
+/packages/pix-toast/ @pixu1980
+/packages/pix-sortable/ @pixu1980
+/packages/pix-command/ @pixu1980
+/packages/pix-splitter/ @pixu1980
+/packages/pix-highlighter/ @pixu1980
+/packages/pix-recorder/ @pixu1980
+/packages/pix-a11y-panel/ @pixu1980
+/packages/pix-component-template/ @pixu1980
