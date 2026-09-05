@@ -3,80 +3,63 @@
   @layer pix-color-scheme-selector {
     pix-color-scheme-selector {
       display: inline-flex;
-      border-radius: var(--pix-ds--r--md);
     }
 
-    pix-color-scheme-selector [data-color-scheme-selector] {
-      display: inline-flex;
-      align-items: center;
-      gap: var(--pix--s--0);
-      border: var(--pix-ds--ctrl--border);
-      border-radius: var(--pix-ds--r--md);
-      overflow: hidden;
-      background: var(--pix-ds-surface-elevated);
-    }
-
-    pix-color-scheme-selector label {
+    /* Single light/dark toggle button ---------------------------------- */
+    pix-color-scheme-selector [data-color-scheme-toggle] {
       position: relative;
       display: inline-flex;
       align-items: center;
       justify-content: center;
+      gap: var(--pix--s--sm);
       min-height: var(--pix-ds--ctrl--h);
       padding: var(--pix--s--0) var(--pix-ds-space-3);
-      border-radius: var(--pix--s--0);
-      background: transparent;
+      border: var(--pix-ds--ctrl--border);
+      border-radius: var(--pix-ds--r--pill);
+      background: var(--pix-ds-surface-elevated);
       color: var(--pix-ds-text-strong);
       cursor: pointer;
       transition:
         background-color var(--pix-ds-duration-fast) var(--pix-ds-ease-standard),
-        color var(--pix-ds-duration-fast) var(--pix-ds-ease-standard);
+        color var(--pix-ds-duration-fast) var(--pix-ds-ease-standard),
+        border-color var(--pix-ds-duration-fast) var(--pix-ds-ease-standard);
       -webkit-user-select: none;
       user-select: none;
     }
 
-    pix-color-scheme-selector label:hover {
+    pix-color-scheme-selector [data-color-scheme-toggle]:hover {
       background: var(--pix-ds-surface-panel);
+      border-color: var(--pix-ds-line-strong);
     }
 
-    pix-color-scheme-selector label + label {
-      border-left: var(--pix-ds--ctrl--border);
-    }
-
-    pix-color-scheme-selector label:first-of-type {
-      border-start-start-radius: calc(var(--pix-ds--r--md) - 1px);
-      border-end-start-radius: calc(var(--pix-ds--r--md) - 1px);
-    }
-
-    pix-color-scheme-selector label:last-of-type {
-      border-start-end-radius: calc(var(--pix-ds--r--md) - 1px);
-      border-end-end-radius: calc(var(--pix-ds--r--md) - 1px);
-    }
-
-    pix-color-scheme-selector label[data-active] {
+    /* Active (dark) state: accent fill, deep-ink icon for WCAG AA contrast
+       on every DS accent (light pastels). */
+    pix-color-scheme-selector [data-color-scheme-toggle][data-active] {
       background: var(--pix-ds-accent-primary);
-      color: light-dark(oklch(1 0 0), oklch(0.96 0.01 75));
+      border-color: color-mix(in srgb, var(--pix-ds-accent-primary) 55%, black);
+      color: oklch(0.15 0.04 255);
     }
 
-    pix-color-scheme-selector label[data-active]:hover {
+    pix-color-scheme-selector [data-color-scheme-toggle][data-active]:hover {
       background: color-mix(in srgb, var(--pix-ds-accent-primary) 88%, black);
+      border-color: color-mix(in srgb, var(--pix-ds-accent-primary) 40%, black);
     }
 
-    pix-color-scheme-selector svg {
+    pix-color-scheme-selector [data-color-scheme-toggle] svg {
       width: 1.25rem;
       height: 1.25rem;
       display: block;
       pointer-events: none;
+      flex-shrink: 0;
     }
 
-    pix-color-scheme-selector input[type='radio'] {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: var(--pix--s--0);
-      margin: var(--pix--s--neg-1px);
-      overflow: hidden;
-      clip: rect(0, 0, 0, 0);
-      border: 0;
+    /* Only the icon for the current scheme is rendered. */
+    pix-color-scheme-selector [data-color-scheme-icon-current] {
+      display: none;
+    }
+
+    pix-color-scheme-selector [data-color-scheme-icon-current][data-visible='true'] {
+      display: block;
     }
 
     pix-color-scheme-selector [data-visually-hidden] {
