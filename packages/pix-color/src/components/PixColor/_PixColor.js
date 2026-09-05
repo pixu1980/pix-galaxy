@@ -41,7 +41,8 @@ function adoptComponentStyles() {
   return componentStyleSheet;
 }
 
-class PixColor extends HTMLElement {
+const ComponentBase = globalThis.HTMLElement ?? class {};
+class PixColor extends ComponentBase {
   static formAssociated = true;
   static observedAttributes = ['value', 'name'];
 
@@ -51,7 +52,10 @@ class PixColor extends HTMLElement {
 
   static {
     this.ensureComponentStyles();
-    if (!globalThis.customElements?.get(ELEMENT_NAME)) {
+    if (
+      typeof globalThis.customElements !== 'undefined' &&
+      !globalThis.customElements.get(ELEMENT_NAME)
+    ) {
       globalThis.customElements.define(ELEMENT_NAME, this);
     }
   }

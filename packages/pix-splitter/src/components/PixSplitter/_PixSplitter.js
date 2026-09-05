@@ -48,7 +48,8 @@ function adoptComponentStyles() {
   return componentStyleSheet;
 }
 
-class PixSplitter extends HTMLElement {
+const ComponentBase = globalThis.HTMLElement ?? class {};
+class PixSplitter extends ComponentBase {
   static observedAttributes = ['orientation', 'min-panel-size'];
 
   static ensureComponentStyles() {
@@ -57,7 +58,10 @@ class PixSplitter extends HTMLElement {
 
   static {
     this.ensureComponentStyles();
-    if (!globalThis.customElements?.get(ELEMENT_NAME)) {
+    if (
+      typeof globalThis.customElements !== 'undefined' &&
+      !globalThis.customElements.get(ELEMENT_NAME)
+    ) {
       globalThis.customElements.define(ELEMENT_NAME, this);
     }
   }

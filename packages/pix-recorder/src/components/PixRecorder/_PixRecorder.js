@@ -41,7 +41,8 @@ function adoptComponentStyles() {
   return componentStyleSheet;
 }
 
-class PixRecorder extends HTMLElement {
+const ComponentBase = globalThis.HTMLElement ?? class {};
+class PixRecorder extends ComponentBase {
   static observedAttributes = ['max-duration', 'format', 'filename'];
 
   static ensureComponentStyles() {
@@ -49,7 +50,10 @@ class PixRecorder extends HTMLElement {
   }
   static {
     this.ensureComponentStyles();
-    if (!globalThis.customElements?.get(ELEMENT_NAME))
+    if (
+      typeof globalThis.customElements !== 'undefined' &&
+      !globalThis.customElements.get(ELEMENT_NAME)
+    )
       globalThis.customElements.define(ELEMENT_NAME, this);
   }
 

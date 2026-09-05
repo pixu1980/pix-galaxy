@@ -387,7 +387,8 @@ function scheduleFrame(callback) {
   globalThis.setTimeout(callback, 0);
 }
 
-class PixA11yPanel extends HTMLElement {
+const ComponentBase = globalThis.HTMLElement ?? class {};
+class PixA11yPanel extends ComponentBase {
   static ensureComponentStyles() {
     return adoptComponentStyles();
   }
@@ -395,7 +396,10 @@ class PixA11yPanel extends HTMLElement {
   static {
     this.ensureComponentStyles();
     applyPreferencesToDocument(readPreferences());
-    if (!globalThis.customElements?.get(ELEMENT_NAME)) {
+    if (
+      typeof globalThis.customElements !== 'undefined' &&
+      !globalThis.customElements.get(ELEMENT_NAME)
+    ) {
       globalThis.customElements.define(ELEMENT_NAME, this);
     }
   }
