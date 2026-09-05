@@ -615,14 +615,7 @@ main {
   font-family: var(--pix-t-display);
 }
 
-/* ─── 13. Accent token setup ───────────────────────────────────── */
-
-:root {
-  --pix-accent-hsl: hsl(var(--pix-accent-h, 200) var(--pix-accent-s, 85%) var(--pix-accent-l, 62%));
-  --pix-accent-primary: var(--pix-accent-hsl);
-}
-
-/* ─── 14. Display preferences (a11y panel) ─────────────────────── */
+/* ─── 13. Display preferences (a11y panel) ─────────────────────── */
 
 :root[data-reduce-motion='true'] *,
 :root[data-reduce-motion='true'] *::before,
@@ -631,19 +624,6 @@ main {
   animation-duration: 0.01ms !important;
   animation-iteration-count: 1 !important;
   scroll-behavior: auto !important;
-}
-
-:root[data-increase-contrast='true'] {
-  --pix-line-soft: light-dark(
-    color-mix(in srgb, var(--pix-ink-950) 36%, white 64%),
-    color-mix(in srgb, var(--pix-ink-050) 60%, transparent)
-  );
-  --pix-text-muted: var(--pix-text-strong);
-}
-
-:root[data-reduce-transparency='true'] {
-  --pix-surface-panel: var(--pix-surface-page);
-  --pix-surface-elevated: var(--pix-surface-page);
 }
 
 /* ─── 15. Reduced motion ───────────────────────────────────────── */

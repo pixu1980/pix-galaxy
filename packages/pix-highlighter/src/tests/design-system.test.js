@@ -3,27 +3,25 @@ import assert from 'node:assert/strict';
 import { test } from 'node:test';
 
 test('defines the shared token groups and consumes them in component and docs styles', async () => {
-  const [tokensCss, componentCss, siteCss] = await Promise.all([
+  const [dsTokens, palettes, componentCss, siteCss] = await Promise.all([
     readFile(new URL('../../../pix-foundations/src/shared/_ds-tokens.css', import.meta.url), 'utf8'),
+    readFile(new URL('../../../pix-foundations/lib/_palettes.css', import.meta.url), 'utf8'),
     readFile(new URL('../components/PixHighlighter/_PixHighlighter.css', import.meta.url), 'utf8'),
     readFile(new URL('../docs/index.css', import.meta.url), 'utf8'),
   ]);
 
-  for (const token of [
-    '--pix-ink-950',
-    '--pix-t-display',
-    '--pix-space-4',
-    '--pix-r-lg',
-    '--pix-e-2',
-    '--pix-m-duration-fast',
-  ]) {
-    assert.ok(tokensCss.includes(token), `missing token ${token}`);
+  for (const token of ['--pix-t-display', '--pix-space-4', '--pix-r-lg', '--pix-e-2', '--pix-m-duration-fast']) {
+    assert.ok(dsTokens.includes(token), `missing token ${token} in ds-tokens`);
+  }
+  for (const token of ['--pix-ink-950', '--pix-surface-page', '--pix-accent-primary']) {
+    assert.ok(palettes.includes(token), `missing token ${token} in palettes`);
   }
 
   // Component defines its own scoped tokens (ADR-012: local primitives
   // live in the component layer; foundations owns global primitives).
   assert.ok(componentCss.includes('var(--pix-highlighter--'));
-  assert.ok(tokensCss.includes('light-dark('));
+  // Palettes are calibrated without light-dark() in custom properties.
+  assert.ok(!palettes.includes('light-dark('));
   // Docs site consumes foundations (structural CSS + tokens from there).
   assert.ok(siteCss.includes("@import '@pix-galaxy/pix-foundations/foundations.css';"));
   assert.ok(siteCss.includes("@import '@pix-galaxy/pix-foundations/ds-tokens.css';"));
