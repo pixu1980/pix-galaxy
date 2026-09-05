@@ -46,7 +46,7 @@
   "devDependencies": {
     "@axe-core/playwright": "4.12.1",
     "@eslint/js": "10.0.1",
-    "@pix-galaxy/pix-a11y-panel": "workspace:*",
+    "@pix-galaxy/pix-a11y": "workspace:*",
     "@pix-galaxy/pix-color-scheme-selector": "workspace:*",
     "@pix-galaxy/pix-foundations": "workspace:*",
     "@playwright/test": "1.62.1",

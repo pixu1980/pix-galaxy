@@ -84,7 +84,7 @@ For every published `@pix-galaxy/*` package:
 
 | Package | Settings URL |
 |---|---|
-| `@pix-galaxy/pix-a11y-panel` | https://www.npmjs.com/package/@pix-galaxy/pix-a11y-panel/settings |
+| `@pix-galaxy/pix-a11y` | https://www.npmjs.com/package/@pix-galaxy/pix-a11y/settings |
 | `@pix-galaxy/pix-accent-color-selector` | https://www.npmjs.com/package/@pix-galaxy/pix-accent-color-selector/settings |
 | `@pix-galaxy/pix-color` | https://www.npmjs.com/package/@pix-galaxy/pix-color/settings |
 | `@pix-galaxy/pix-color-scheme-selector` | https://www.npmjs.com/package/@pix-galaxy/pix-color-scheme-selector/settings |

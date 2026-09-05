@@ -159,7 +159,7 @@ test.describe('Component docs sites', () => {
   test('color scheme selector is present on new-template docs', async ({ page }) => {
     // Old-template sites (accent-color-selector, a11y-panel, highlighter)
     // use inline createDocsSite and don't get the shared color-scheme-selector.
-    const skip = new Set(['pix-accent-color-selector', 'pix-a11y-panel', 'pix-highlighter']);
+    const skip = new Set(['pix-accent-color-selector', 'pix-a11y', 'pix-highlighter']);
     for (const comp of COMPONENTS) {
       if (skip.has(comp)) continue;
       await page.goto(componentUrl(comp));

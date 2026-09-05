@@ -242,7 +242,7 @@ body {
   display: flex;
 }
 
-[data-part='hero'] > pix-a11y-panel {
+[data-part='hero'] > pix-a11y {
   --pix-ds--ctrl--h: 2.5rem; /* match the color-scheme selector height */
   display: flex;
 }
@@ -558,7 +558,7 @@ main {
   text-decoration-thickness: 2px;
 }
 
-/* ─── Display preferences (consumed from pix-a11y-panel) ─── */
+/* ─── Display preferences (consumed from pix-a11y) ─── */
 
 /* Typography follows the panel's font/line-height tokens */
 :root {

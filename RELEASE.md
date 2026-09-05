@@ -57,7 +57,7 @@ This document describes the complete release workflow for all packages in the pi
 | pix-splitter              | `@pix-galaxy/pix-splitter`              | wip                | `packages/pix-splitter/`              |
 | pix-highlighter           | `@pix-galaxy/pix-highlighter`           | Ready              | `packages/pix-highlighter/`           |
 | pix-recorder              | `@pix-galaxy/pix-recorder`              | wip                | `packages/pix-recorder/`              |
-| pix-a11y-panel            | `@pix-galaxy/pix-a11y-panel`            | wip                | `packages/pix-a11y-panel/`            |
+| pix-a11y            | `@pix-galaxy/pix-a11y`            | wip                | `packages/pix-a11y/`            |
 | pix-component-template    | -                                       | Private (template) | `packages/pix-component-template/`    |
 
 ---
@@ -67,7 +67,7 @@ This document describes the complete release workflow for all packages in the pi
 Runtime library dependencies between public packages (devDependencies are build-time only):
 
 ```
-pix-a11y-panel
+pix-a11y
   └── pix-accent-color-selector (bundled into the artifact)
 
 pix-core
@@ -90,7 +90,7 @@ Use **Conventional Commits** - the commit message determines the semver bump:
 ```
 feat(pix-highlighter): add dracula theme           → minor
 fix(pix-accent-color-selector): close on esc       → patch
-feat(pix-a11y-panel): ...                 → minor
+feat(pix-a11y): ...                 → minor
 fix(pix-color-scheme-selector)!: rename API        → major (BREAKING)
 ```
 
@@ -220,7 +220,7 @@ Examples:
 @pix-galaxy/pix-highlighter@0.1.0
 @pix-galaxy/pix-highlighter@0.2.0
 @pix-galaxy/pix-accent-color-selector@0.1.0
-@pix-galaxy/pix-a11y-panel@1.0.0
+@pix-galaxy/pix-a11y@1.0.0
 ```
 
 This avoids tag collisions in the monorepo and allows CI workflows to identify exactly which package to publish.

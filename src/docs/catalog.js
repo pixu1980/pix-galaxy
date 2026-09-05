@@ -20,7 +20,7 @@ export const COMPONENT_ORDER = [
   'pix-splitter',
   'pix-highlighter',
   'pix-recorder',
-  'pix-a11y-panel',
+  'pix-a11y',
 ];
 
 /**

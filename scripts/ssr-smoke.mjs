@@ -13,7 +13,7 @@
  */
 
 const PUBLIC_PACKAGES = [
-  'pix-a11y-panel',
+  'pix-a11y',
   'pix-accent-color-selector',
   'pix-color',
   'pix-color-scheme-selector',
