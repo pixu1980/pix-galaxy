@@ -575,24 +575,6 @@ main {
   text-decoration-thickness: 2px;
 }
 
-/* ─── 11. Interactive element borders ──────────────────────────── */
-
-a,
-button,
-input,
-select,
-textarea,
-[tabindex],
-[role='button'] {
-  border-radius: var(--pix-r-md);
-}
-
-pre,
-pre[is='pix-highlighter'] {
-  border: 1px solid var(--pix-color-border);
-  border-radius: var(--pix-r-md);
-}
-
 [data-part='hero'],
 [data-part='main'],
 [data-part='examples'] {
