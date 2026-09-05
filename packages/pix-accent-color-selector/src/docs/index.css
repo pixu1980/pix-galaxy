@@ -4,7 +4,7 @@
  * SCOPE: File-local selectors and pix-galaxy design tokens.
  */
 @import '@pix-galaxy/pix-foundations/foundations.css';
-@import '../shared/_ds-tokens.css';
+@import '@pix-galaxy/pix-foundations/ds-tokens.css';
 
 /**
  * pix-accent-color-selector documentation site styles.
