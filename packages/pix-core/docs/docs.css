@@ -71,11 +71,45 @@ pre[is='pix-highlighter'] {
   font-weight: 500;
 }
 
-/* ── Hero: mirror the portal header (gradient title + toolbar) ────── */
+/* ── Hero: identical to the portal header ───────────────────────── */
 /* The portal (src/docs) is the visual reference: gradient display title
-   with the theme toggle and a11y panel side by side at the top-right. */
+   with the theme toggle and a11y panel side by side at the top-right,
+   summary and meta pills full-width below. */
 
-[data-part='hero-copy'] h1 span {
+[data-part='hero'] {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: var(--pix-ds-space-4);
+  row-gap: var(--pix-ds-space-3);
+  padding: var(--pix-ds-space-6) var(--pix-ds-space-6) var(--pix-ds-space-7);
+  background: var(--pix-ds-surface-elevated);
+  box-shadow: var(--pix-ds-elevation-2);
+}
+
+[data-part='hero'] > pix-color-scheme-selector {
+  --pix-ds--ctrl--h: 2.5rem; /* compact toolbar controls */
+  margin-inline-start: auto;
+  margin-top: var(--pix--s--2xs);
+  display: flex;
+}
+
+[data-part='hero'] > pix-a11y {
+  --pix-ds--ctrl--h: 2.5rem; /* match the color-scheme selector height */
+  display: flex;
+}
+
+[data-part='hero'] h1 {
+  margin: 0;
+  max-width: 13ch;
+  font-size: clamp(2.75rem, 5.5vw, 4.25rem);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+
+[data-part='hero'] h1 span {
   /* Slight vertical pad so the gradient covers full glyphs (descenders are
      clipped by the tight line-height otherwise); margin cancels the pad. */
   display: inline-block;
@@ -93,16 +127,31 @@ pre[is='pix-highlighter'] {
   background-clip: text;
 }
 
-/* Toolbar row inside the hero panel: theme + a11y side by side,
-   pushed to the trailing edge like the portal header controls. */
-[data-part='hero-toolbar'] {
-  display: flex;
-  justify-content: flex-end;
-  gap: var(--pix-ds-space-2);
+[data-part='hero-summary'] {
+  flex-basis: 100%;
+  margin: 0;
+  color: var(--pix-ds-text-muted);
+  font-size: var(--pix-ds-text-lg);
+  line-height: var(--pix-ds-leading-relaxed);
+  text-wrap: pretty;
 }
 
-[data-part='hero-toolbar'] > pix-color-scheme-selector,
-[data-part='hero-toolbar'] > pix-a11y {
-  --pix-ds--ctrl--h: 2.5rem; /* compact toolbar controls, as in the portal */
+[data-part='hero-meta'] {
+  flex-basis: 100%;
   display: flex;
+  flex-wrap: wrap;
+  gap: var(--pix-ds-space-2);
+  margin-top: var(--pix-ds-space-2);
+}
+
+[data-part='hero-meta'] [data-part='meta-pill'] {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2rem;
+  padding: var(--pix--s--0) var(--pix-ds-space-3);
+  border: 1px solid var(--pix-ds-line-soft);
+  border-radius: var(--pix-ds--r--pill);
+  background: var(--pix-ds-surface-page);
+  color: var(--pix-ds-text-muted);
+  font-size: var(--pix-ds-text-sm);
 }

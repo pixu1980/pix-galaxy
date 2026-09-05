@@ -100,13 +100,6 @@ body {
   border-color: color-mix(in srgb, var(--pix-ds-accent-primary) 18%, var(--pix-ds-line-soft));
 }
 
-[data-part='hero'] {
-  display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(20rem, 0.85fr);
-  gap: var(--pix-ds-space-5);
-  padding: var(--pix-ds-space-5);
-}
-
 [data-part='hero-copy'] h1 {
   margin: var(--pix--s--0);
 }

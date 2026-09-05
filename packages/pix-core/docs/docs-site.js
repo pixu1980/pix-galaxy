@@ -157,29 +157,22 @@ export function createDocsSite({ mount, docs, examples: exampleEntries, meta, af
     mount.innerHTML = `
       <section data-part="shell">
         <header data-part="hero">
-          <section data-part="hero-copy">
-            <p data-part="eyebrow">pix-galaxy suite</p>
-            <h1><span>${escapeHtml(componentName)}</span></h1>
-            <p data-part="summary">
-              ${escapeHtml(meta.description || '')}
-            </p>
-            <p data-part="use-tag">Usage: <code>&lt;${escapeHtml(componentTag)}&gt;</code></p>
-            <section data-part="meta-row">
-              <span data-part="meta-pill" data-site-version>v${escapeHtml(meta.version)}</span>
-              <span data-part="meta-pill">${docs.length} docs pages</span>
-            </section>
-          </section>
-          <section data-part="hero-panel">
-            <section data-part="hero-toolbar">
-              <pix-color-scheme-selector></pix-color-scheme-selector>
-              <pix-a11y></pix-a11y>
-            </section>
-            <section data-part="live-preview">
-              <p data-part="eyebrow">Live component</p>
-              ${meta.liveHtml || `<p style="color:var(--pix-ds-text-muted);font-size:0.875rem;">Live demo unavailable - open the docs site for this package.</p>`}
-            </section>
-          </section>
+          <h1><span>${escapeHtml(componentName)}</span></h1>
+          <pix-color-scheme-selector></pix-color-scheme-selector>
+          <pix-a11y></pix-a11y>
+          <p data-part="hero-summary">
+            ${escapeHtml(meta.description || '')}
+          </p>
+          <p data-part="hero-meta">
+            <span data-part="meta-pill" data-site-version>v${escapeHtml(meta.version)}</span>
+            <span data-part="meta-pill">${docs.length} docs pages</span>
+          </p>
         </header>
+        <section data-part="live-preview">
+          <p data-part="eyebrow">Live component</p>
+          <p data-part="use-tag">Usage: <code>&lt;${escapeHtml(componentTag)}&gt;</code></p>
+          ${meta.liveHtml || `<p style="color:var(--pix-ds-text-muted);font-size:0.875rem;">Live demo unavailable - open the docs site for this package.</p>`}
+        </section>
 
         <main data-part="main">
           <aside data-part="nav">
