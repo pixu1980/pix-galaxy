@@ -41,14 +41,15 @@ function adoptComponentStyles() {
   return componentStyleSheet;
 }
 
-class {%COMPONENT_CLASS%} extends HTMLElement {
+const ComponentBase = globalThis.HTMLElement ?? class {};
+class {%COMPONENT_CLASS%} extends ComponentBase {
   static ensureComponentStyles() {
     return adoptComponentStyles();
   }
 
   static {
     this.ensureComponentStyles();
-    if (!globalThis.customElements?.get(ELEMENT_NAME)) {
+    if (typeof globalThis.customElements !== 'undefined' && !globalThis.customElements.get(ELEMENT_NAME)) {
       globalThis.customElements.define(ELEMENT_NAME, this);
     }
   }

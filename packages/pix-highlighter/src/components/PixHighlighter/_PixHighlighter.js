@@ -177,7 +177,8 @@ function setIconButtonContent(button, iconMarkup, label) {
   button.title = label;
 }
 
-class PixHighlighter extends HTMLPreElement {
+const PreComponentBase = globalThis.HTMLPreElement ?? class {};
+class PixHighlighter extends PreComponentBase {
   static _uid = 0;
   static instances = new Set();
   static KNOWN_TYPES = TOKEN_TYPES;

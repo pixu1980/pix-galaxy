@@ -54,7 +54,8 @@ function adoptComponentStyles() {
   return componentStyleSheet;
 }
 
-class PixToast extends HTMLElement {
+const ComponentBase = globalThis.HTMLElement ?? class {};
+class PixToast extends ComponentBase {
   static observedAttributes = ['variant', 'duration', 'dismissible'];
 
   static ensureComponentStyles() {
@@ -63,7 +64,10 @@ class PixToast extends HTMLElement {
 
   static {
     this.ensureComponentStyles();
-    if (!globalThis.customElements?.get(ELEMENT_NAME)) {
+    if (
+      typeof globalThis.customElements !== 'undefined' &&
+      !globalThis.customElements.get(ELEMENT_NAME)
+    ) {
       globalThis.customElements.define(ELEMENT_NAME, this);
     }
   }

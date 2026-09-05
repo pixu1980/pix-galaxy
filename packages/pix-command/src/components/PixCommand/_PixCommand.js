@@ -128,7 +128,8 @@ function adoptComponentStyles() {
 
 /* ── Component class ────────────────────────────────────────────── */
 
-class PixCommand extends HTMLElement {
+const ComponentBase = globalThis.HTMLElement ?? class {};
+class PixCommand extends ComponentBase {
   static observedAttributes = ['open', 'src'];
 
   static ensureComponentStyles() {
@@ -160,7 +161,10 @@ class PixCommand extends HTMLElement {
 
   static {
     this.ensureComponentStyles();
-    if (!globalThis.customElements?.get(ELEMENT_NAME)) {
+    if (
+      typeof globalThis.customElements !== 'undefined' &&
+      !globalThis.customElements.get(ELEMENT_NAME)
+    ) {
       globalThis.customElements.define(ELEMENT_NAME, this);
     }
     if (typeof document !== 'undefined') {

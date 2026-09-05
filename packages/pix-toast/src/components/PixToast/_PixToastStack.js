@@ -18,12 +18,16 @@ import { PixToast } from './_PixToast.js';
 
 const ELEMENT_NAME = 'pix-toast-stack';
 
-class PixToastStack extends HTMLElement {
+const ComponentBase = globalThis.HTMLElement ?? class {};
+class PixToastStack extends ComponentBase {
   static observedAttributes = ['position', 'max-visible'];
 
   static {
     // Ensure PixToast is registered
-    if (!globalThis.customElements?.get(ELEMENT_NAME)) {
+    if (
+      typeof globalThis.customElements !== 'undefined' &&
+      !globalThis.customElements.get(ELEMENT_NAME)
+    ) {
       globalThis.customElements.define(ELEMENT_NAME, this);
     }
   }

@@ -38,7 +38,8 @@
     "format:check": "prettier --check '**/*.{js,mjs,cjs,css,html,md,json,yml,yaml}'",
     "lint:format": "prettier --check '**/*.{js,mjs,cjs,css,html,md,json,yml,yaml}'",
     "typecheck": "pnpm -r --if-present run typecheck",
-    "quality": "pnpm format:check && pnpm lint && pnpm typecheck"
+    "quality": "pnpm format:check && pnpm lint && pnpm typecheck",
+    "test:ssr": "node scripts/ssr-smoke.mjs",
   },
   "devDependencies": {
     "@axe-core/playwright": "4.12.1",

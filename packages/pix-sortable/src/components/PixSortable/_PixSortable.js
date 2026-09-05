@@ -32,14 +32,18 @@ function adoptComponentStyles() {
   return componentStyleSheet;
 }
 
-class PixSortable extends HTMLElement {
+const ComponentBase = globalThis.HTMLElement ?? class {};
+class PixSortable extends ComponentBase {
   static formAssociated = true;
   static ensureComponentStyles() {
     return adoptComponentStyles();
   }
   static {
     this.ensureComponentStyles();
-    if (!globalThis.customElements?.get(ELEMENT_NAME))
+    if (
+      typeof globalThis.customElements !== 'undefined' &&
+      !globalThis.customElements.get(ELEMENT_NAME)
+    )
       globalThis.customElements.define(ELEMENT_NAME, this);
   }
 
