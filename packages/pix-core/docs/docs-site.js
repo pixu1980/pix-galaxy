@@ -159,7 +159,7 @@ export function createDocsSite({ mount, docs, examples: exampleEntries, meta, af
         <header data-part="hero">
           <section data-part="hero-copy">
             <p data-part="eyebrow">pix-galaxy suite</p>
-            <h1>${escapeHtml(componentName)}</h1>
+            <h1><span>${escapeHtml(componentName)}</span></h1>
             <p data-part="summary">
               ${escapeHtml(meta.description || '')}
             </p>
@@ -170,8 +170,10 @@ export function createDocsSite({ mount, docs, examples: exampleEntries, meta, af
             </section>
           </section>
           <section data-part="hero-panel">
-            <pix-color-scheme-selector></pix-color-scheme-selector>
-            <pix-a11y></pix-a11y>
+            <section data-part="hero-toolbar">
+              <pix-color-scheme-selector></pix-color-scheme-selector>
+              <pix-a11y></pix-a11y>
+            </section>
             <section data-part="live-preview">
               <p data-part="eyebrow">Live component</p>
               ${meta.liveHtml || `<p style="color:var(--pix-ds-text-muted);font-size:0.875rem;">Live demo unavailable - open the docs site for this package.</p>`}

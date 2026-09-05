@@ -70,3 +70,39 @@ pre[is='pix-highlighter'] {
   border: 1px solid color-mix(in srgb, var(--pix-ds-accent-primary) 30%, transparent) !important;
   font-weight: 500;
 }
+
+/* ── Hero: mirror the portal header (gradient title + toolbar) ────── */
+/* The portal (src/docs) is the visual reference: gradient display title
+   with the theme toggle and a11y panel side by side at the top-right. */
+
+[data-part='hero-copy'] h1 span {
+  /* Slight vertical pad so the gradient covers full glyphs (descenders are
+     clipped by the tight line-height otherwise); margin cancels the pad. */
+  display: inline-block;
+  padding-block: 0.13em;
+  margin-block: -0.13em;
+  background: linear-gradient(
+    135deg,
+    var(--pix-ds-color-sky-400),
+    var(--pix-ds-color-mint-400),
+    var(--pix-ds-color-coral-400),
+    var(--pix-ds-color-violet-400)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Toolbar row inside the hero panel: theme + a11y side by side,
+   pushed to the trailing edge like the portal header controls. */
+[data-part='hero-toolbar'] {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--pix-ds-space-2);
+}
+
+[data-part='hero-toolbar'] > pix-color-scheme-selector,
+[data-part='hero-toolbar'] > pix-a11y {
+  --pix-ds--ctrl--h: 2.5rem; /* compact toolbar controls, as in the portal */
+  display: flex;
+}
