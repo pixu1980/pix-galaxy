@@ -49,15 +49,15 @@ This document describes the complete release workflow for all packages in the pi
 | pix-foundations           | `@pix-galaxy/pix-foundations`           | Private (tokens)   | `packages/pix-foundations/`           |
 | pix-color                 | `@pix-galaxy/pix-color`                 | wip                | `packages/pix-color/`                 |
 | pix-vanilla-reactive      | `@pix-galaxy/pix-vanilla-reactive`      | wip                | `packages/pix-vanilla-reactive/`      |
-| pix-color-scheme-selector | `@pix-galaxy/pix-color-scheme-selector` | Ready              | `packages/pix-color-scheme-selector/` |
-| pix-accent-color-selector | `@pix-galaxy/pix-accent-color-selector` | Ready              | `packages/pix-accent-color-selector/` |
+| pix-color-scheme-selector | `@pix-galaxy/pix-color-scheme-selector` | wip                | `packages/pix-color-scheme-selector/` |
+| pix-accent-color-selector | `@pix-galaxy/pix-accent-color-selector` | wip                | `packages/pix-accent-color-selector/` |
 | pix-toast                 | `@pix-galaxy/pix-toast`                 | wip                | `packages/pix-toast/`                 |
 | pix-sortable              | `@pix-galaxy/pix-sortable`              | wip                | `packages/pix-sortable/`              |
 | pix-command               | `@pix-galaxy/pix-command`               | wip                | `packages/pix-command/`               |
 | pix-splitter              | `@pix-galaxy/pix-splitter`              | wip                | `packages/pix-splitter/`              |
 | pix-highlighter           | `@pix-galaxy/pix-highlighter`           | Ready              | `packages/pix-highlighter/`           |
 | pix-recorder              | `@pix-galaxy/pix-recorder`              | wip                | `packages/pix-recorder/`              |
-| pix-a11y-panel            | `@pix-galaxy/pix-a11y-panel`            | Ready              | `packages/pix-a11y-panel/`            |
+| pix-a11y-panel            | `@pix-galaxy/pix-a11y-panel`            | wip                | `packages/pix-a11y-panel/`            |
 | pix-component-template    | -                                       | Private (template) | `packages/pix-component-template/`    |
 
 ---
