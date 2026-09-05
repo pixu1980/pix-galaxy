@@ -66,7 +66,7 @@ export async function loadDocsData() {
       releaseTag: `v${packageJson.version}`,
       componentName: 'pix-color-scheme-selector',
       componentTag: 'pix-color-scheme-selector',
-      description: 'Light / dark / system color scheme toggle.',
+      description: 'Light / dark color scheme toggle; defaults to the system preference.',
       liveHtml: '<pix-color-scheme-selector></pix-color-scheme-selector>',
     }),
   };

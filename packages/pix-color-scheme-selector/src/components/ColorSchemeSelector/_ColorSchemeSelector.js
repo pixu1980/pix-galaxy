@@ -1,15 +1,15 @@
 /**
  * <pix-color-scheme-selector></pix-color-scheme-selector>
  *
- * Color-scheme selector Web Component for the pix-galaxy suite.
- * Manages light, dark, and system color scheme preferences.
+ * Light/dark color-scheme toggle Web Component for the pix-galaxy suite.
+ * Renders as a single switch button that alternates between light and dark.
+ * Defaults to the system preference when nothing is saved.
  * Persists to localStorage, syncs with <meta name="color-scheme">,
  * and sets both data-color-scheme attribute and style.colorScheme on <html>.
  */
 import componentCSS from './_ColorSchemeSelector.css?raw';
 import sunIconSVG from './icons/sun.svg?raw';
 import moonIconSVG from './icons/moon.svg?raw';
-import monitorIconSVG from './icons/monitor.svg?raw';
 
 const STORAGE_KEY = 'pix-color-scheme';
 const SCHEMES = ['light', 'dark', 'system'];
@@ -27,6 +27,11 @@ function getStorage() {
   } catch {
     return null;
   }
+}
+
+function getSystemScheme() {
+  const mq = window.matchMedia?.('(prefers-color-scheme: dark)');
+  return mq?.matches ? 'dark' : 'light';
 }
 
 let componentStyleSheet = null;
@@ -53,21 +58,26 @@ function adoptComponentStyles() {
   return componentStyleSheet;
 }
 
-class PixColorSchemeSelector extends HTMLElement {
+const ComponentBase = globalThis.HTMLElement ?? class {};
+class PixColorSchemeSelector extends ComponentBase {
   static ensureComponentStyles() {
     return adoptComponentStyles();
   }
 
   static {
     this.ensureComponentStyles();
-    if (!globalThis.customElements?.get(ELEMENT_NAME)) {
+    if (
+      typeof globalThis.customElements !== 'undefined' &&
+      !globalThis.customElements.get(ELEMENT_NAME)
+    ) {
       globalThis.customElements.define(ELEMENT_NAME, this);
     }
   }
 
   constructor() {
     super();
-    this._onChange = this._onChange.bind(this);
+    this._onToggle = this._onToggle.bind(this);
+    this._onSystemChange = this._onSystemChange.bind(this);
     this.currentScheme = this.getInitialScheme();
   }
 
@@ -82,47 +92,36 @@ class PixColorSchemeSelector extends HTMLElement {
     this.textContent = '';
 
     template.innerHTML = `
-      <section
-        data-color-scheme-selector
-        aria-label="Color scheme selection"
-        role="radiogroup"
+      <button
+        type="button"
+        data-color-scheme-toggle
+        role="switch"
+        aria-checked="false"
+        aria-label="Toggle dark mode"
+        title="Switch between light and dark"
       >
-        <label data-scheme="light" aria-label="Light mode">
-          <input type="radio" name="color-scheme" value="light" />
-          ${sunIconSVG}
-          <span data-visually-hidden>Light</span>
-        </label>
-
-        <label data-scheme="dark" aria-label="Dark mode">
-          <input type="radio" name="color-scheme" value="dark" />
-          ${moonIconSVG}
-          <span data-visually-hidden>Dark</span>
-        </label>
-
-        <label data-scheme="system" aria-label="System preference">
-          <input type="radio" name="color-scheme" value="system" />
-          ${monitorIconSVG}
-          <span data-visually-hidden>System</span>
-        </label>
-      </section>
+        <span data-color-scheme-icon-current data-icon="sun" data-visible="false">${sunIconSVG}</span>
+        <span data-color-scheme-icon-current data-icon="moon" data-visible="false">${moonIconSVG}</span>
+        <span data-visually-hidden>Dark mode</span>
+      </button>
     `;
 
     this.appendChild(template.content.cloneNode(true));
-    this._inputs = Array.from(this.querySelectorAll('input[name="color-scheme"]'));
-    this._options = Array.from(this.querySelectorAll('label'));
+    this._toggle = this.querySelector('[data-color-scheme-toggle]');
+    // Apply the initial scheme (root attributes, meta, storage) on mount.
     this.applyScheme(this.currentScheme);
   }
 
   attachEventListeners() {
-    this._inputs?.forEach((input) => {
-      input.addEventListener('change', this._onChange);
-    });
+    this._toggle?.addEventListener('click', this._onToggle);
+    this._mq = window.matchMedia?.('(prefers-color-scheme: dark)');
+    this._mq?.addEventListener('change', this._onSystemChange);
   }
 
   disconnectedCallback() {
-    this._inputs?.forEach((input) => {
-      input.removeEventListener('change', this._onChange);
-    });
+    this._toggle?.removeEventListener('click', this._onToggle);
+    this._mq?.removeEventListener('change', this._onSystemChange);
+    this._mq = undefined;
   }
 
   getOrCreateMeta() {
@@ -140,29 +139,25 @@ class PixColorSchemeSelector extends HTMLElement {
     return SCHEMES.includes(saved) ? saved : null;
   }
 
-  getSchemeFromMeta() {
-    const meta = document.querySelector('meta[name="color-scheme"]');
-    const content = meta?.getAttribute('content') || '';
-
-    if (content === 'light') return 'light';
-    if (content === 'dark') return 'dark';
-    return 'system';
-  }
-
   getInitialScheme() {
-    return this.getSavedScheme() || this.getSchemeFromMeta() || 'system';
+    // Default to the system preference unless the user explicitly saved a scheme.
+    return this.getSavedScheme() || 'system';
   }
 
-  updateOptionState() {
-    const current = this.querySelector(`input[value="${this.currentScheme}"]`);
-    if (current) {
-      current.checked = true;
+  isDark() {
+    if (this.currentScheme === 'system') {
+      return getSystemScheme() === 'dark';
     }
+    return this.currentScheme === 'dark';
+  }
 
-    this._options?.forEach((option) => {
-      const input = option.querySelector('input');
-      option.toggleAttribute('data-active', input?.value === this.currentScheme);
-    });
+  updateButtonState() {
+    const dark = this.isDark();
+    this._toggle?.setAttribute('aria-checked', String(dark));
+    this._toggle?.toggleAttribute('data-active', dark);
+
+    this.querySelector('[data-icon="sun"]')?.setAttribute('data-visible', String(!dark));
+    this.querySelector('[data-icon="moon"]')?.setAttribute('data-visible', String(dark));
   }
 
   applyScheme(scheme) {
@@ -182,12 +177,19 @@ class PixColorSchemeSelector extends HTMLElement {
       root.style.colorScheme = this.currentScheme;
     }
 
-    this.updateOptionState();
+    this.updateButtonState();
   }
 
-  _onChange(event) {
-    const value = event.target.value;
-    this.applyScheme(value);
+  _onSystemChange(event) {
+    // Follow the OS while the preference is left on "system".
+    if (this.currentScheme === 'system') {
+      this.updateButtonState();
+    }
+  }
+
+  _onToggle() {
+    const target = this.isDark() ? 'light' : 'dark';
+    this.applyScheme(target);
   }
 }
 
