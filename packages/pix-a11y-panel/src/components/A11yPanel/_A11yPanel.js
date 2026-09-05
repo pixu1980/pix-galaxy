@@ -27,7 +27,7 @@ const RADIUS_PRESET_OPTIONS = [
     label: 'Square',
   },
   {
-    description: 'A restrained 4px radius for the full interface.',
+    description: 'A balanced corner radius for cards and controls.',
     id: 'rounded',
     label: 'Rounded',
   },
