@@ -32,11 +32,13 @@ This log records the significant architectural decisions for pix-galaxy. Each AD
 | [022](0022-branch-strategy.md)                                   | ✅ Accepted                                                        | `develop` trunk, `main` for releases                      |
 | [023](0023-jsdoc-types-strict.md)                                | ✅ Accepted                                                        | JSDoc types + strict typecheck, no TS migration           |
 | [024](0024-migrate-skills-to-mcp.md)                             | ✅ Accepted                                                        | Migrate `.agents` skills to `pix-galaxy-mcp`              |
+| [025](0025-order-portal-cards-by-npm-popularity-surface-wip-packages.md) | ✅ Accepted                                                  | Order portal cards by npm popularity, surface WIP packages |
 | [026](0026-bdfl-governance-95-quality-bar-oss-polish-roadmap.md) | ✅ Accepted                                                        | BDFL governance + 95% quality bar + OSS roadmap           |
+| [027](0027-rename-a11y-panel-to-pix-a11y.md)                     | ✅ Accepted                                                        | Rename `pix-a11y-panel` to `pix-a11y`                      |
 
 ## How to add an ADR
 
-1. Copy the next number (current: **025**).
+1. Copy the next number (current: **027**).
 2. Use the Nygard template (Status / Context / Decision / Consequences).
 3. Add a row to the index table above.
 4. Reference the ADR from code comments or docs when the decision affects them.
