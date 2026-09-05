@@ -4,7 +4,7 @@ import { test } from 'node:test';
 
 test('defines the shared token groups and consumes them in component and docs styles', async () => {
   const [tokensCss, componentCss, siteCss] = await Promise.all([
-    readFile(new URL('../shared/_ds-tokens.css', import.meta.url), 'utf8'),
+    readFile(new URL('../../../pix-foundations/src/shared/_ds-tokens.css', import.meta.url), 'utf8'),
     readFile(new URL('../components/PixHighlighter/_PixHighlighter.css', import.meta.url), 'utf8'),
     readFile(new URL('../docs/index.css', import.meta.url), 'utf8'),
   ]);
@@ -24,7 +24,7 @@ test('defines the shared token groups and consumes them in component and docs st
   // live in the component layer; foundations owns global primitives).
   assert.ok(componentCss.includes('var(--pix-highlighter--'));
   assert.ok(tokensCss.includes('light-dark('));
-  assert.ok(siteCss.includes("@import '../shared/_ds-tokens.css';"));
+  assert.ok(siteCss.includes("@import '@pix-galaxy/pix-foundations/ds-tokens.css';"));
   assert.ok(siteCss.includes('data-site-color-mode'));
   assert.ok(siteCss.includes('var(--pix-ds-accent-primary)'));
 });
