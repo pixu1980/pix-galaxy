@@ -1,10 +1,12 @@
 /**
  * pix-galaxy · Accessibility audit (axe-core)
  *
- * Prerequisite: all 12 dev servers running (pnpm dev:all).
+ * Prerequisite: all dev servers running (pnpm dev:all). Ports are discovered
+ * live from the running servers (see e2e/ports.mjs), so this suite works
+ * whether or not port 3000 is busy.
  *
- * Runs the axe-core engine against the portal and every component docs
- * site, asserting WCAG 2.2 AA compliance (ADR-021).
+ * Runs the axe-core engine against the portal and every non-private package
+ * docs site, asserting WCAG 2.2 AA compliance (ADR-021).
  *
  * Run:
  *   npx playwright test e2e/a11y.spec.mjs
@@ -12,25 +14,31 @@
 
 import { test, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
+import { discoverPorts, requirePorts } from './ports.mjs';
 
-/* ── Component map (kept in sync with portal.spec.mjs) ──────────── */
+/* ── Component map (non-private packages only) ────────────────── */
 
 const COMPONENTS = [
-  { name: 'pix-a11y-panel', port: 3001 },
-  { name: 'pix-accent-color-selector', port: 3002 },
-  { name: 'pix-color', port: 3003 },
-  { name: 'pix-color-scheme-selector', port: 3004 },
-  { name: 'pix-command', port: 3005 },
-  { name: 'pix-foundations', port: 3006 },
-  { name: 'pix-highlighter', port: 3007 },
-  { name: 'pix-recorder', port: 3008 },
-  { name: 'pix-sortable', port: 3009 },
-  { name: 'pix-splitter', port: 3010 },
-  { name: 'pix-toast', port: 3011 },
-  { name: 'pix-vanilla-reactive', port: 3012 },
+  'pix-a11y-panel',
+  'pix-accent-color-selector',
+  'pix-color',
+  'pix-color-scheme-selector',
+  'pix-command',
+  'pix-highlighter',
+  'pix-recorder',
+  'pix-sortable',
+  'pix-splitter',
+  'pix-toast',
+  'pix-vanilla-reactive',
 ];
 
-const PORTAL_URL = 'http://localhost:3000';
+/** @type {Record<string, number>} */
+let PORTS = {};
+
+test.beforeAll(async () => {
+  PORTS = await discoverPorts();
+  requirePorts(['pix_galaxy', ...COMPONENTS], PORTS);
+});
 
 /**
  * Audit a page with axe-core. Fails the test when any violation of
@@ -61,12 +69,12 @@ async function auditPage(page, url) {
 
 test.describe('Accessibility audit (WCAG 2.2 AA, axe-core)', () => {
   test('portal is WCAG 2.2 AA clean', async ({ page }) => {
-    await auditPage(page, PORTAL_URL);
+    await auditPage(page, `http://localhost:${PORTS.pix_galaxy}`);
   });
 
   for (const comp of COMPONENTS) {
-    test(`${comp.name} docs is WCAG 2.2 AA clean`, async ({ page }) => {
-      await auditPage(page, `http://localhost:${comp.port}`);
+    test(`${comp} docs is WCAG 2.2 AA clean`, async ({ page }) => {
+      await auditPage(page, `http://localhost:${PORTS[comp]}`);
     });
   }
 });
