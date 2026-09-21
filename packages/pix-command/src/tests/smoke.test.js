@@ -60,4 +60,28 @@ describe('pix-command', () => {
     assert.ok(!el.hasAttribute('open'), 'open attribute removed');
     el.remove();
   });
+
+  it('exports match helpers without requiring a mounted instance', async () => {
+    const mod = await import('../components/PixCommand/_PixCommand.js');
+    assert.equal(typeof mod.fuzzyScore, 'function');
+    assert.equal(typeof mod.matchCommandItem, 'function');
+    assert.ok(mod.matchCommandItem('gob', { label: 'Goblin', keywords: ['monster'] }) > 0);
+    assert.equal(mod.matchCommandItem('zzz', { label: 'Goblin' }), 0);
+  });
+
+  it('does not steal Mod+K when no instance is mounted', async () => {
+    await import('../components/PixCommand/_PixCommand.js');
+    let prevented = false;
+    const event = new dom.window.KeyboardEvent('keydown', {
+      key: 'k',
+      ctrlKey: true,
+      bubbles: true,
+      cancelable: true,
+    });
+    event.preventDefault = () => {
+      prevented = true;
+    };
+    document.dispatchEvent(event);
+    assert.equal(prevented, false, 'Ctrl+K must stay free for host apps');
+  });
 });

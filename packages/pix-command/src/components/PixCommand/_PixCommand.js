@@ -48,7 +48,15 @@ function fuzzyScore(query, text) {
   return qi === q.length ? score : 0;
 }
 
-function matchLabel(query, item) {
+/**
+ * Score a command item against a query (label, description, keywords).
+ * Exported so host apps can reuse the same ranking without mounting `<pix-command>`.
+ *
+ * @param {string} query
+ * @param {{label?: string, description?: string, keywords?: string[]}} item
+ * @returns {number} Match score; `0` means no match.
+ */
+function matchCommandItem(query, item) {
   const text = [item.label, item.description || '', ...(item.keywords || [])].join(' ');
   return fuzzyScore(query, text);
 }
@@ -140,23 +148,21 @@ class PixCommand extends ComponentBase {
   static #instances = new Set();
 
   static #onGlobalKeyDown = (event) => {
-    // CMD+K / Ctrl+K
-    if (isMetaOrCtrl(event) && event.key === 'k') {
-      event.preventDefault();
-      // Toggle the first (or last-interacted) instance
-      const instances = [...this.#instances];
-      if (instances.length === 0) return;
+    // CMD+K / Ctrl+K — only when at least one instance is mounted, so host apps
+    // can import match helpers (or the package) without stealing their own shortcut.
+    if (!isMetaOrCtrl(event) || event.key !== 'k') return;
+    const instances = [...this.#instances];
+    if (instances.length === 0) return;
 
-      // Try to find the one nearest to the active element
-      let target = instances[0];
-      for (const inst of instances) {
-        if (inst.contains(document.activeElement) || inst === document.activeElement) {
-          target = inst;
-          break;
-        }
+    event.preventDefault();
+    let target = instances[0];
+    for (const inst of instances) {
+      if (inst.contains(document.activeElement) || inst === document.activeElement) {
+        target = inst;
+        break;
       }
-      target.open = !target.open;
     }
+    target.open = !target.open;
   };
 
   static {
@@ -415,7 +421,7 @@ class PixCommand extends ComponentBase {
       this.#filtered = [...this.#items];
     } else {
       const scored = this.#items
-        .map((item) => ({ item, score: matchLabel(query, item) }))
+        .map((item) => ({ item, score: matchCommandItem(query, item) }))
         .filter((entry) => entry.score > 0)
         .sort((a, b) => b.score - a.score);
       this.#filtered = scored.map((entry) => entry.item);
@@ -651,4 +657,4 @@ function highlight(query, text) {
   return result;
 }
 
-export { PixCommand, fuzzyScore };
+export { PixCommand, fuzzyScore, matchCommandItem };
