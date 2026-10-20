@@ -21,6 +21,7 @@ Monorepo for the PixGalaxy ecosystem of zero-runtime-dependency vanilla JS Web C
 - **Explicit Resource Management** - every disposable implements `.dispose()` + feature-detected `[Symbol.dispose]`; framework-owned `DisposableStack`/`AsyncDisposableStack` (use/adopt/defer/move, reverse-order disposal, `.suppressed` error aggregation). `using` works natively on ES2026 engines; Safari 17.5+ uses `.dispose()`.
 
 **Hardening this session (real bugs found & fixed):**
+
 1. XSS in `<for>/<if>` string templates (`{{ }}` now escaped; `| raw` is the explicit trusted-HTML hatch).
 2. Store prototype pollution via `__proto__` paths (blocked with TypeError).
 3. `{{ }}` in attribute values was broken (marker lost) - fixed.
@@ -31,32 +32,32 @@ Monorepo for the PixGalaxy ecosystem of zero-runtime-dependency vanilla JS Web C
 
 ## ADR Log (24)
 
-| # | Status | Title |
-|---|--------|-------|
-| 024 | Accepted | Migrate .agents skills to pix-galaxy-mcp, remove .agents |
-| 023 | Accepted | JSDoc types with strict typecheck, no TypeScript migration |
-| 022 | Accepted | Branch strategy - develop as trunk, main for releases |
-| 021 | Accepted | WCAG 2.2 AA is a non-negotiable requirement |
-| 020 | Accepted | Zero runtime dependencies is an absolute rule |
-| 019 | Accepted | Modern-only browser matrix with light-dark fallback kept |
-| 018 | Accepted | Local release via `commit-and-tag-version`, no CI publish |
-| 017 | Accepted | Validate CSS with a real parser after automated refactors |
-| 016 | Accepted | Root formatting and linting are reproducible scripts |
-| 015 | Accepted | Keep `pix-foundations` independent of `pix-core` |
-| 014 | Accepted | Centralize shared runtime and scripts in `pix-core` |
-| 013 | Accepted | Centralize focus ring in `pix-foundations` |
-| 012 | Accepted | Centralize design-system foundations in `pix-foundations` |
-| 011 | Accepted | Rename `pix-display-preferences` → `pix-a11y-panel` |
-| 010 | Accepted | Single test runner suite over scattered tests |
-| 009 | Superseded | Release via standard-version (superseded by 018) |
-| 008 | Accepted | `ElementInternals` for form association |
-| 007 | Accepted | Shared docs template over per-package duplication |
-| 006 | Accepted | Oklch colour space |
-| 005 | Accepted | Private class fields for internal state |
-| 004 | Accepted | CSS fallback before `light-dark()` |
-| 003 | Accepted | `light-dark()` over CSS custom properties + media query |
-| 002 | Accepted | `adoptedStyleSheets` over `<link>` or `<style>` |
-| 001 | Accepted | Light DOM over Shadow DOM |
+| #   | Status     | Title                                                      |
+| --- | ---------- | ---------------------------------------------------------- |
+| 024 | Accepted   | Migrate .agents skills to pix-galaxy-mcp, remove .agents   |
+| 023 | Accepted   | JSDoc types with strict typecheck, no TypeScript migration |
+| 022 | Accepted   | Branch strategy - develop as trunk, main for releases      |
+| 021 | Accepted   | WCAG 2.2 AA is a non-negotiable requirement                |
+| 020 | Accepted   | Zero runtime dependencies is an absolute rule              |
+| 019 | Accepted   | Modern-only browser matrix with light-dark fallback kept   |
+| 018 | Accepted   | Local release via `commit-and-tag-version`, no CI publish  |
+| 017 | Accepted   | Validate CSS with a real parser after automated refactors  |
+| 016 | Accepted   | Root formatting and linting are reproducible scripts       |
+| 015 | Accepted   | Keep `pix-foundations` independent of `pix-core`           |
+| 014 | Accepted   | Centralize shared runtime and scripts in `pix-core`        |
+| 013 | Accepted   | Centralize focus ring in `pix-foundations`                 |
+| 012 | Accepted   | Centralize design-system foundations in `pix-foundations`  |
+| 011 | Accepted   | Rename `pix-display-preferences` → `pix-a11y-panel`        |
+| 010 | Accepted   | Single test runner suite over scattered tests              |
+| 009 | Superseded | Release via standard-version (superseded by 018)           |
+| 008 | Accepted   | `ElementInternals` for form association                    |
+| 007 | Accepted   | Shared docs template over per-package duplication          |
+| 006 | Accepted   | Oklch colour space                                         |
+| 005 | Accepted   | Private class fields for internal state                    |
+| 004 | Accepted   | CSS fallback before `light-dark()`                         |
+| 003 | Accepted   | `light-dark()` over CSS custom properties + media query    |
+| 002 | Accepted   | `adoptedStyleSheets` over `<link>` or `<style>`            |
+| 001 | Accepted   | Light DOM over Shadow DOM                                  |
 
 ## Working Tree Changes (committed this session)
 
@@ -80,7 +81,7 @@ feat(pix-vanilla-reactive): add reactive framework with store, signals, template
 
 ## Documentation Status
 
-- Roadmap: `docs/plans/execution-plan.md` (modified 2026-08-02)
+- Roadmap: see `docs/plans/release-0.1.0.md` (supersedes execution-plan.md)
 - `docs/HANDOFF.md` (22617B)
 - `docs/HANDOFF-LLM-2026-07-08.md`
 - `docs/adr/` - 24 ADRs + README

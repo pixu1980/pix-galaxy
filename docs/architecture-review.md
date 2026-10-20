@@ -8,14 +8,14 @@
 
 ## Quality Signal: 7213/10000
 
-| Dimension               | Score  | Status                           |
-| ----------------------- | ------ | -------------------------------- |
-| **Acyclicity**          | 0.86   | ⚠️ Good (cycles only in jsdom)  |
-| **Depth**               | 1.0    | ✅ Excellent                     |
-| **Equality**            | 0.25   | 🚨 **GOD FILES** (Gini 0.745)   |
-| **Redundancy**          | 0.89   | ⚠️ 11% dead code                |
-| **Modularity**          | 1.0    | ✅ Excellent                     |
-| **Coverage discipline** | 1.0    | ✅                               |
+| Dimension               | Score | Status                         |
+| ----------------------- | ----- | ------------------------------ |
+| **Acyclicity**          | 0.86  | ⚠️ Good (cycles only in jsdom) |
+| **Depth**               | 1.0   | ✅ Excellent                   |
+| **Equality**            | 0.25  | 🚨 **GOD FILES** (Gini 0.745)  |
+| **Redundancy**          | 0.89  | ⚠️ 11% dead code               |
+| **Modularity**          | 1.0   | ✅ Excellent                   |
+| **Coverage discipline** | 1.0   | ✅                             |
 
 > The quality signal `7213/10000` is dragged down by **extreme inequality** (Gini 0.745) — a few files concentrate most of the complexity.
 
@@ -220,8 +220,8 @@ When the user types, results are filtered but there is no screen reader announce
 
 **Affects:** **All components**
 
-| Component       | Pattern                   | Subclass-accessible |
-| --------------- | ------------------------- | ------------------- |
+| Component        | Pattern                   | Subclass-accessible |
+| ---------------- | ------------------------- | ------------------- |
 | Older components | `this._onChange` (public) | ✅                  |
 | Newer components | `this.#items` (private)   | ❌                  |
 
@@ -287,10 +287,10 @@ Missing `@pix-galaxy/pix-core`, `@pix-galaxy/pix-color-scheme-selector`, `@pix-g
 
 ### 23. Zero test coverage on newer components
 
-| Component                                                                              | Tests |
-| -------------------------------------------------------------------------------------- | ----- |
-| `pix-accent-color-selector`                                                            | ✅ 3  |
-| `pix-highlighter`                                                                      | ✅ 4  |
+| Component                                                                               | Tests |
+| --------------------------------------------------------------------------------------- | ----- |
+| `pix-accent-color-selector`                                                             | ✅ 3  |
+| `pix-highlighter`                                                                       | ✅ 4  |
 | `pix-command`, `pix-color`, `pix-recorder`, `pix-sortable`, `pix-splitter`, `pix-toast` | ❌ 0  |
 
 ### 24. Redundant SSR boilerplate
