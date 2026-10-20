@@ -405,7 +405,7 @@ class PixSplitter extends ComponentBase {
     const step = event.shiftKey ? KEYBOARD_FINE_STEP : KEYBOARD_STEP;
     const isRTL = typeof document !== 'undefined' && document.documentElement.dir === 'rtl';
 
-    let delta = 0;
+    let delta;
 
     switch (event.key) {
       case 'ArrowLeft':

@@ -177,7 +177,7 @@ class PixAccentColorSelector extends ComponentBase {
     const currentIndex = this._buttons.indexOf(event.currentTarget);
     if (currentIndex < 0) return;
 
-    let nextIndex = currentIndex;
+    let nextIndex;
 
     switch (event.key) {
       case 'ArrowRight':
