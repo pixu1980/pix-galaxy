@@ -106,3 +106,8 @@
   background: color-mix(in oklab, var(--pix-accent-primary) 14%, transparent);
   color: var(--pix-text-strong);
 }
+
+/* ─── Portal: catalog wrapper ───────────────────────────────────── */
+[data-part='catalog'] {
+  display: contents;
+}

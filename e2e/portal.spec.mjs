@@ -55,15 +55,15 @@ function componentUrl(name) {
 /* ── 1. Portal smoke tests ──────────────────────────────────────── */
 
 test.describe('Portal', () => {
-  test('loads and shows all component cards', async ({ page }) => {
+  test('loads and shows every catalogued card', async ({ page }) => {
     await page.goto(portalUrl());
     await page.waitForSelector('[data-part="grid"]', { timeout: 8000 });
     const cards = page.locator('[data-part="card"]');
-    // non-private packages + private-but-catalogued (foundations) + placeholder
-    await expect(cards).toHaveCount(COMPONENTS.length + 2);
+    // non-private packages + private-but-catalogued (foundations)
+    await expect(cards).toHaveCount(COMPONENTS.length + 1);
   });
 
-  test('each real card has a valid href pointing to localhost', async ({ page }) => {
+  test('every card links to a real documentation site', async ({ page }) => {
     await page.goto(portalUrl());
     await page.waitForSelector('[data-part="card"]');
     const cards = page.locator('[data-part="card"]');
@@ -71,9 +71,10 @@ test.describe('Portal', () => {
     for (let i = 0; i < count; i++) {
       const href = await cards.nth(i).getAttribute('href');
       expect(href).toBeTruthy();
-      if (href === '#') continue;
+      expect(href).not.toBe('#');
       expect(href).toMatch(/^https?:\/\/localhost/);
     }
+    await expect(page.locator('[data-part="card"][data-state="coming-soon"]')).toHaveCount(0);
   });
 
   test('clicking pix-highlighter card opens its docs page', async ({ page, context }) => {

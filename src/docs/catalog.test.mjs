@@ -2,7 +2,8 @@
  * catalog.test.mjs — unit tests for the portal's catalog logic
  * (src/docs/catalog.js): release-status mapping, card ordering
  * (ready-first, then downloads, then curated), section grouping and
- * hero summaries.
+ * hero summaries. Entries without a documentation homepage never reach
+ * a section.
  */
 
 import assert from 'node:assert/strict';
@@ -18,9 +19,19 @@ import {
   summarize,
 } from './catalog.js';
 
-const ready = (name) => ({ name, packageName: `@pix-galaxy/${name}`, kind: 'component' });
-const library = (name) => ({ name, packageName: `@pix-galaxy/${name}`, kind: 'library' });
-const placeholder = (name) => ({ name });
+const ready = (name) => ({
+  name,
+  packageName: `@pix-galaxy/${name}`,
+  kind: 'component',
+  homepage: `https://example.test/${name}/`,
+});
+const library = (name) => ({
+  name,
+  packageName: `@pix-galaxy/${name}`,
+  kind: 'library',
+  homepage: `https://example.test/${name}/`,
+});
+const undocumented = (name) => ({ name, packageName: '', homepage: '' });
 
 describe('buildReleaseStatus', () => {
   test('maps ready / wip and defaults unmarked packages to wip', () => {
@@ -54,18 +65,12 @@ describe('sortSection', () => {
     ['wip-b', { releaseStatus: 'wip' }],
   ]);
 
-  test('sorts ready first, then wip, then placeholders', () => {
-    const items = [
-      ready('wip-a'),
-      ready('wip-b'),
-      placeholder('soon'),
-      ready('ready-a'),
-      ready('ready-b'),
-    ];
+  test('sorts ready first, then wip', () => {
+    const items = [ready('wip-a'), ready('wip-b'), ready('ready-a'), ready('ready-b')];
     const sorted = sortSection(items, [], status, {});
     assert.deepEqual(
       sorted.map((c) => c.name),
-      ['ready-a', 'ready-b', 'wip-a', 'wip-b', 'soon']
+      ['ready-a', 'ready-b', 'wip-a', 'wip-b']
     );
   });
 
@@ -90,12 +95,12 @@ describe('sortSection', () => {
     );
   });
 
-  test('placeholders sort last even when compared against each other', () => {
-    const items = [ready('wip-a'), placeholder('soon-a'), placeholder('soon-b')];
-    const sorted = sortSection(items, [], status, {});
+  test('keeps unknown packages after known ones when downloads are absent', () => {
+    const items = [ready('zzz-unknown'), ready('wip-a')];
+    const sorted = sortSection(items, ['wip-a'], status, {});
     assert.deepEqual(
       sorted.map((c) => c.name),
-      ['wip-a', 'soon-a', 'soon-b']
+      ['wip-a', 'zzz-unknown']
     );
   });
 });
@@ -129,20 +134,35 @@ describe('groupSections', () => {
       ['portal-components', 'portal-libraries']
     );
   });
+
+  test('drops entries without documentation from every section', () => {
+    const status = buildReleaseStatus([]);
+    const components = [
+      ready('pix-toast'),
+      undocumented('coming-soon'),
+      library('pix-foundations'),
+    ];
+    const sections = groupSections(components, { releaseStatus: status, downloads: {} });
+    assert.deepEqual(
+      sections[0].items.map((c) => c.name),
+      ['pix-toast']
+    );
+    assert.deepEqual(
+      sections[1].items.map((c) => c.name),
+      ['pix-foundations']
+    );
+  });
 });
 
 describe('summarize', () => {
-  test('counts wip packages and total cards, ignoring placeholders', () => {
+  test('counts wip packages and total cards', () => {
     const status = buildReleaseStatus([
       ['a', { releaseStatus: 'ready' }],
       ['b', { releaseStatus: 'wip' }],
       ['c', { releaseStatus: 'wip' }],
     ]);
-    const sections = [
-      { items: [ready('a'), ready('b'), placeholder('soon')] },
-      { items: [library('c')] },
-    ];
-    assert.deepEqual(summarize(sections, status), { wipCount: 2, totalCount: 4 });
+    const sections = [{ items: [ready('a'), ready('b')] }, { items: [library('c')] }];
+    assert.deepEqual(summarize(sections, status), { wipCount: 2, totalCount: 3 });
   });
 
   test('packages missing from the status map are treated as wip', () => {

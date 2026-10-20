@@ -56,7 +56,7 @@ export function makeOrderRank(order) {
 
 /**
  * Sort a section's cards:
- *   1. release-ready (non-WIP) first, WIP second, placeholders last
+ *   1. release-ready (non-WIP) first, WIP second
  *   2. then by npm downloads (descending; absent = -1)
  *   3. then by the curated order
  *
@@ -71,10 +71,7 @@ export function sortSection(items, order, releaseStatus, downloads) {
   const downloadsOf = (comp) => (comp.packageName ? (downloads[comp.packageName] ?? -1) : -1);
 
   return [...items].sort((a, b) => {
-    const statusRank = (comp) => {
-      if (!comp.packageName) return 2;
-      return releaseStatus.get(comp.name) === 'ready' ? 0 : 1;
-    };
+    const statusRank = (comp) => (releaseStatus.get(comp.name) === 'ready' ? 0 : 1);
     const diffStatus = statusRank(a) - statusRank(b);
     if (diffStatus !== 0) return diffStatus;
 
@@ -85,20 +82,23 @@ export function sortSection(items, order, releaseStatus, downloads) {
 
 /**
  * Build the two portal sections (Components first, then Libraries) from the
- * catalog, sorting each with sortSection().
+ * catalog, sorting each with sortSection(). Entries without a documentation
+ * homepage are dropped: the portal lists only what a reader can open.
  *
- * @param {Array<{ name: string, packageName?: string, kind?: string }>} components
+ * @param {Array<{ name: string, packageName?: string, kind?: string, homepage?: string }>} components
  * @param {{ releaseStatus: Map<string, 'ready'|'wip'>, downloads: Record<string, number>, isLibrary?: (comp: any) => boolean }} opts
  * @returns {Array<{ id: string, title: string, items: any[] }>}
  */
 export function groupSections(components, { releaseStatus, downloads, isLibrary }) {
   const library = isLibrary ?? ((comp) => comp.kind === 'library');
+  const documented = components.filter((comp) => Boolean(comp.homepage));
+
   return [
     {
       id: 'portal-components',
       title: 'Components',
       items: sortSection(
-        components.filter((comp) => !library(comp)),
+        documented.filter((comp) => !library(comp)),
         COMPONENT_ORDER,
         releaseStatus,
         downloads
@@ -107,24 +107,24 @@ export function groupSections(components, { releaseStatus, downloads, isLibrary 
     {
       id: 'portal-libraries',
       title: 'Libraries',
-      items: sortSection(components.filter(library), LIBRARY_ORDER, releaseStatus, downloads),
+      items: sortSection(documented.filter(library), LIBRARY_ORDER, releaseStatus, downloads),
     },
   ];
 }
 
 /**
- * Summaries for the hero pills. Placeholder entries (no packageName) are
- * excluded from the WIP count.
+ * Summaries for the hero pills. Every catalogued entry has a package name, so
+ * an entry missing from the status map counts as WIP.
  *
- * @param {Array<{ items: Array<{ name: string, packageName?: string }> }>} sections
+ * @param {Array<{ items: Array<{ name: string }> }>} sections
  * @param {Map<string, 'ready'|'wip'>} releaseStatus
  * @returns {{ wipCount: number, totalCount: number }}
  */
 export function summarize(sections, releaseStatus) {
   const catalogStatus = sections
     .flatMap((s) => s.items)
-    .map((comp) => (comp.packageName ? (releaseStatus.get(comp.name) ?? 'wip') : null))
-    .filter(Boolean);
+    .map((comp) => releaseStatus.get(comp.name) ?? 'wip');
+
   return {
     wipCount: catalogStatus.filter((status) => status === 'wip').length,
     totalCount: sections.reduce((sum, section) => sum + section.items.length, 0),
