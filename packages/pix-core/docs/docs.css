@@ -36,3 +36,22 @@
 [data-part='markdown'] {
   padding: var(--pix-space-5) var(--pix-space-6);
 }
+
+[data-part='markdown']:focus {
+  outline: none;
+}
+
+[data-part='markdown']:focus-visible {
+  outline: 2px solid var(--pix-accent-primary);
+  outline-offset: 2px;
+}
+
+[data-part='live-slot'] {
+  display: contents;
+}
+
+[data-part='live-unavailable'] {
+  margin: 0;
+  color: var(--pix-text-muted);
+  font-size: 0.875rem;
+}

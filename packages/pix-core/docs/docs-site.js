@@ -1,12 +1,23 @@
 /**
  * Shared pix-galaxy documentation site builder.
  *
- * Provides the template functions used by every component's docs site.
- * Each component's src/docs/index.js imports from here and supplies
- * its specific examples and metadata.
+ * Built on `@pix-galaxy/pix-vanilla-reactive` (Store + Signals + html``),
+ * matching the budget-manager app pattern. Navigation updates parts in place
+ * so the live preview and theme controls survive doc switches (DSL-07).
+ *
+ * Relative import to the sibling artifact avoids a pix-core ↔ pix-vanilla-reactive
+ * package cycle (pix-core is private to the monorepo).
  */
 import sharedDocsCSS from './docs.css?raw';
 import { Marked, Renderer } from 'marked';
+import {
+  Store,
+  Signal,
+  html,
+  render,
+  createTickState,
+  repeat,
+} from '../../pix-vanilla-reactive/artifact/index.js';
 
 /* ── Register pix-color-scheme-selector for all docs sites ──────── */
 import '@pix-galaxy/pix-color-scheme-selector';
@@ -27,6 +38,11 @@ import '@pix-galaxy/pix-a11y';
 
 /* ── Helpers ────────────────────────────────────────────────────── */
 
+/**
+ * Escape a value for safe HTML text / attribute interpolation.
+ * @param {unknown} value
+ * @returns {string}
+ */
 function escapeHtml(value) {
   return String(value)
     .replaceAll('&', '&amp;')
@@ -36,15 +52,30 @@ function escapeHtml(value) {
     .replaceAll("'", '&#39;');
 }
 
+/**
+ * Extract a title from the first markdown H1, or return a fallback.
+ * @param {string} markdown
+ * @param {string} fallback
+ * @returns {string}
+ */
 function titleFromMarkdown(markdown, fallback) {
   const match = markdown.match(/^#\s+(.+)$/mu);
   return match?.[1]?.trim() || fallback;
 }
 
+/**
+ * Derive a slug from a markdown source path.
+ * @param {string} path
+ * @returns {string}
+ */
 function slugFromPath(path) {
   return path.split('/').pop().replace(/\.md$/u, '');
 }
 
+/**
+ * Create a Marked instance that emits `pre is="pix-highlighter"` code blocks.
+ * @returns {Marked}
+ */
 function createMarked() {
   const renderer = new Renderer();
 
@@ -79,12 +110,11 @@ export function buildDocsPages(entries) {
 
 /* ── Examples rendering ─────────────────────────────────────────── */
 
-function escapeExampleCode(code) {
-  return escapeHtml(code);
-}
-
 /**
  * Render example cards for component docs pages.
+ *
+ * Kept as a string helper for callers that still need the HTML fragment;
+ * `createDocsSite` uses the reactive `repeat` path instead.
  *
  * @param {Array<{ title: string, description: string, lang: string, code: string }>} exampleEntries Examples to render.
  * @param {string} [cardPartName='example-card'] data-part value for cards.
@@ -99,11 +129,83 @@ export function renderExamples(exampleEntries, cardPartName = 'example-card') {
             <h3>${escapeHtml(example.title)}</h3>
             <p>${escapeHtml(example.description)}</p>
           </section>
-          <pre is="pix-highlighter" tabindex="0" data-lang="${escapeHtml(example.lang)}"><code>${escapeExampleCode(example.code)}</code></pre>
+          <pre is="pix-highlighter" tabindex="0" data-lang="${escapeHtml(example.lang)}"><code>${escapeHtml(example.code)}</code></pre>
         </article>
       `
     )
     .join('');
+}
+
+/**
+ * Render one nav button for the docs sidebar.
+ * @param {{ slug: string, title: string, active: boolean }} doc
+ * @returns {import('../../pix-vanilla-reactive/artifact/index.js').TemplateResult}
+ */
+function NavLink(doc) {
+  const result = html`
+    <button
+      type="button"
+      data-part="nav-link"
+      data-active=${doc.active}
+      aria-current=${doc.active ? 'page' : false}
+      data-site-doc=${doc.slug}
+    >
+      ${doc.title}
+    </button>
+  `;
+  result._context = {};
+  return result;
+}
+
+/**
+ * Render one curated example card.
+ * @param {{ id: string, title: string, description: string, lang: string, code: string }} example
+ * @returns {import('../../pix-vanilla-reactive/artifact/index.js').TemplateResult}
+ */
+function ExampleCard(example) {
+  const result = html`
+    <article data-part="example-card">
+      <section data-part="example-copy">
+        <h3>${example.title}</h3>
+        <p>${example.description}</p>
+      </section>
+      <pre
+        is="pix-highlighter"
+        tabindex="0"
+        data-lang=${example.lang}
+      ><code>${example.code}</code></pre>
+    </article>
+  `;
+  result._context = {};
+  return result;
+}
+
+/**
+ * Inject live preview HTML once into a stable slot so navigations do not
+ * destroy interactive demos (DSL-07).
+ * @param {HTMLElement} mount
+ * @param {string} liveHtml
+ */
+function mountLivePreviewOnce(mount, liveHtml) {
+  const slot = mount.querySelector('[data-part="live-slot"]');
+  if (!slot || slot.childNodes.length > 0) return;
+  if (liveHtml) {
+    slot.innerHTML = liveHtml;
+    return;
+  }
+  slot.innerHTML =
+    '<p data-part="live-unavailable">Live demo unavailable — open the docs site for this package.</p>';
+}
+
+/**
+ * Move focus to the markdown panel after a doc switch (keyboard / SR friendly).
+ * @param {HTMLElement} mount
+ */
+function focusActiveContent(mount) {
+  const panel = mount.querySelector('[data-part="markdown"]');
+  if (!(panel instanceof HTMLElement)) return;
+  if (!panel.hasAttribute('tabindex')) panel.tabIndex = -1;
+  panel.focus({ preventScroll: true });
 }
 
 /* ── Site builder ───────────────────────────────────────────────── */
@@ -120,70 +222,88 @@ export function renderExamples(exampleEntries, cardPartName = 'example-card') {
  * @returns {{ getActiveDoc(): object | null, selectDoc(slug: string): void }} Docs site controller.
  */
 export function createDocsSite({ mount, docs, examples: exampleEntries, meta, afterRender }) {
-  const state = {
+  const store = new Store({
     activeSlug: docs[0]?.slug || '',
-  };
+  });
+  const tick = createTickState(store);
+
+  const examples = exampleEntries.map((example, index) => ({
+    id: `example-${index}-${example.title}`,
+    ...example,
+  }));
+
+  const componentName = meta.componentName || 'pix-*';
+  const componentTag = meta.componentTag || componentName;
+  const description = meta.description || '';
+  const version = meta.version;
+  const liveHtml = meta.liveHtml || '';
+  let liveMounted = false;
+  let lastFocusedSlug = '';
 
   mount.addEventListener('click', (event) => {
-    const docButton = event.target.closest('[data-site-doc]');
-    if (docButton) {
-      state.activeSlug = docButton.dataset.siteDoc;
-      render();
-      return;
-    }
+    const docButton = /** @type {HTMLElement | null} */ (
+      /** @type {HTMLElement} */ (event.target).closest('[data-site-doc]')
+    );
+    if (!docButton) return;
+    const slug = docButton.dataset.siteDoc;
+    if (!slug || slug === store.state.activeSlug) return;
+    store.state.activeSlug = slug;
+    paint({ focusContent: true });
   });
 
-  function render() {
-    const activeDoc = docs.find((doc) => doc.slug === state.activeSlug) || docs[0];
-
-    const docButtons = docs
+  /**
+   * Build the reactive view tree for the current store state.
+   * @returns {import('../../pix-vanilla-reactive/artifact/index.js').TemplateResult}
+   */
+  function DocsApp() {
+    tick.get();
+    const activeSlug = store.state.activeSlug;
+    const activeDoc = docs.find((doc) => doc.slug === activeSlug) || docs[0];
+    const navDocs = docs
       .filter((doc) => doc.slug !== 'examples')
-      .map(
-        (doc) => `
-          <button
-            type="button"
-            data-part="nav-link"${doc.slug === activeDoc.slug ? ' data-active' : ''}
-            data-site-doc="${escapeHtml(doc.slug)}"
-          >
-            ${escapeHtml(doc.title)}
-          </button>
-        `
-      )
-      .join('');
+      .map((doc) => ({
+        id: doc.slug,
+        slug: doc.slug,
+        title: doc.title,
+        active: doc.slug === activeDoc?.slug,
+      }));
 
-    const componentName = meta.componentName || 'pix-*';
-    const componentTag = meta.componentTag || componentName;
-
-    mount.innerHTML = `
+    const result = html`
       <section data-part="shell">
         <header data-part="hero">
-          <h1><span>${escapeHtml(componentName)}</span></h1>
+          <h1><span>${componentName}</span></h1>
           <pix-color-scheme-selector></pix-color-scheme-selector>
           <pix-a11y></pix-a11y>
-          <p data-part="hero-summary">
-            ${escapeHtml(meta.description || '')}
-          </p>
+          <p data-part="hero-summary">${description}</p>
           <p data-part="hero-meta">
-            <span data-part="meta-pill" data-site-version>v${escapeHtml(meta.version)}</span>
+            <span data-part="meta-pill" data-site-version>v${version}</span>
             <span data-part="meta-pill">${docs.length} docs pages</span>
           </p>
         </header>
+
         <section data-part="live-preview">
           <p data-part="eyebrow">Live component</p>
-          <p data-part="use-tag">Usage: <code>&lt;${escapeHtml(componentTag)}&gt;</code></p>
-          ${meta.liveHtml || `<p style="color:var(--pix-text-muted);font-size:0.875rem;">Live demo unavailable - open the docs site for this package.</p>`}
+          <p data-part="use-tag">Usage: <code>&lt;${componentTag}&gt;</code></p>
+          <div data-part="live-slot"></div>
         </section>
 
-        <main data-part="main">
+        <section data-part="main">
           <aside data-part="nav">
             <p data-part="eyebrow">Documentation</p>
-            <section data-part="nav-links">${docButtons}</section>
+            <section data-part="nav-links">
+              ${repeat(
+                navDocs,
+                (doc) => /** @type {{ id: string }} */ (doc).id,
+                (doc) =>
+                  NavLink(/** @type {{ slug: string, title: string, active: boolean }} */ (doc))
+              )}
+            </section>
           </aside>
 
           <section data-part="content-panel">
-            <article data-part="markdown" data-site-doc-content>${activeDoc.html}</article>
+            <article data-part="markdown" data-site-doc-content>{{ activeHtml | raw }}</article>
           </section>
-        </main>
+        </section>
 
         <section data-part="examples">
           <header data-part="content-header">
@@ -191,24 +311,63 @@ export function createDocsSite({ mount, docs, examples: exampleEntries, meta, af
             <span data-part="source-label">curated demo gallery</span>
           </header>
           <section data-part="example-grid">
-            ${renderExamples(exampleEntries)}
+            ${repeat(
+              examples,
+              (example) => /** @type {{ id: string }} */ (example).id,
+              (example) =>
+                ExampleCard(
+                  /** @type {{ id: string, title: string, description: string, lang: string, code: string }} */ (
+                    example
+                  )
+                )
+            )}
           </section>
         </section>
       </section>
     `;
-
-    afterRender?.(mount, activeDoc);
+    result._context = {
+      activeHtml: activeDoc?.html || '',
+    };
+    return result;
   }
 
-  render();
+  const view = new Signal.Computed(() => DocsApp());
+
+  /**
+   * Paint the docs site into the mount element.
+   *
+   * Synchronous (no effect microtask) so `selectDoc` stays await-free for
+   * unit tests and the public controller API.
+   *
+   * @param {{ focusContent?: boolean }} [options]
+   */
+  function paint({ focusContent = false } = {}) {
+    const result = view.get();
+    render(result, mount);
+
+    if (!liveMounted) {
+      mountLivePreviewOnce(mount, liveHtml);
+      liveMounted = true;
+    }
+
+    const activeDoc = docs.find((doc) => doc.slug === store.state.activeSlug) || docs[0] || null;
+    afterRender?.(mount, activeDoc);
+
+    if (focusContent && activeDoc && activeDoc.slug !== lastFocusedSlug) {
+      focusActiveContent(mount);
+    }
+    lastFocusedSlug = activeDoc?.slug || '';
+  }
+
+  paint();
 
   return {
     getActiveDoc() {
-      return docs.find((doc) => doc.slug === state.activeSlug) || docs[0] || null;
+      return docs.find((doc) => doc.slug === store.state.activeSlug) || docs[0] || null;
     },
     selectDoc(slug) {
-      state.activeSlug = slug;
-      render();
+      store.state.activeSlug = slug;
+      paint({ focusContent: true });
     },
   };
 }
