@@ -21,12 +21,12 @@ https://github.com/pixu1980/pix-galaxy/settings/rules
 1. Click **New ruleset** → select **New tag ruleset**
 2. Fill in the fields:
 
-   | Field | Value |
-   |---|---|
-   | Ruleset Name | `Tags only by admins` |
-   | Enforcement status | `Active` |
-   | Bypass list | `Repository admins` |
-   | Target tags | `Include all tags` |
+   | Field              | Value                 |
+   | ------------------ | --------------------- |
+   | Ruleset Name       | `Tags only by admins` |
+   | Enforcement status | `Active`              |
+   | Bypass list        | `Repository admins`   |
+   | Target tags        | `Include all tags`    |
 
 3. Under **Tag rules**, enable **Restrict creations**
 4. Click **Create**
@@ -82,19 +82,19 @@ For every published `@pix-galaxy/*` package:
 
 ### Public package list
 
-| Package | Settings URL |
-|---|---|
-| `@pix-galaxy/pix-a11y` | https://www.npmjs.com/package/@pix-galaxy/pix-a11y/settings |
+| Package                                 | Settings URL                                                                 |
+| --------------------------------------- | ---------------------------------------------------------------------------- |
+| `@pix-galaxy/pix-a11y`                  | https://www.npmjs.com/package/@pix-galaxy/pix-a11y/settings                  |
 | `@pix-galaxy/pix-accent-color-selector` | https://www.npmjs.com/package/@pix-galaxy/pix-accent-color-selector/settings |
-| `@pix-galaxy/pix-color` | https://www.npmjs.com/package/@pix-galaxy/pix-color/settings |
+| `@pix-galaxy/pix-color`                 | https://www.npmjs.com/package/@pix-galaxy/pix-color/settings                 |
 | `@pix-galaxy/pix-color-scheme-selector` | https://www.npmjs.com/package/@pix-galaxy/pix-color-scheme-selector/settings |
-| `@pix-galaxy/pix-command` | https://www.npmjs.com/package/@pix-galaxy/pix-command/settings |
-| `@pix-galaxy/pix-highlighter` | https://www.npmjs.com/package/@pix-galaxy/pix-highlighter/settings |
-| `@pix-galaxy/pix-recorder` | https://www.npmjs.com/package/@pix-galaxy/pix-recorder/settings |
-| `@pix-galaxy/pix-sortable` | https://www.npmjs.com/package/@pix-galaxy/pix-sortable/settings |
-| `@pix-galaxy/pix-splitter` | https://www.npmjs.com/package/@pix-galaxy/pix-splitter/settings |
-| `@pix-galaxy/pix-toast` | https://www.npmjs.com/package/@pix-galaxy/pix-toast/settings |
-| `@pix-galaxy/pix-vanilla-reactive` | https://www.npmjs.com/package/@pix-galaxy/pix-vanilla-reactive/settings |
+| `@pix-galaxy/pix-command`               | https://www.npmjs.com/package/@pix-galaxy/pix-command/settings               |
+| `@pix-galaxy/pix-highlighter`           | https://www.npmjs.com/package/@pix-galaxy/pix-highlighter/settings           |
+| `@pix-galaxy/pix-recorder`              | https://www.npmjs.com/package/@pix-galaxy/pix-recorder/settings              |
+| `@pix-galaxy/pix-sortable`              | https://www.npmjs.com/package/@pix-galaxy/pix-sortable/settings              |
+| `@pix-galaxy/pix-splitter`              | https://www.npmjs.com/package/@pix-galaxy/pix-splitter/settings              |
+| `@pix-galaxy/pix-toast`                 | https://www.npmjs.com/package/@pix-galaxy/pix-toast/settings                 |
+| `@pix-galaxy/pix-vanilla-reactive`      | https://www.npmjs.com/package/@pix-galaxy/pix-vanilla-reactive/settings      |
 
 ### Steps (same for every package):
 

@@ -15,26 +15,26 @@
 
 ## 1. Fatti raccolti (Step 1 read-only della skill)
 
-| Fatto | Valore |
-|---|---|
-| Repo | `pixu1980/pix-galaxy` (account **personale**, non organizzazione) |
-| Trunk | `develop` — `main` riceve solo merge di release (ADR-022) |
-| Package manager | pnpm — root `11.20.0`, CI `11.9.0`, sub-pacchetti `10.33.2` |
-| Cooldown dipendenze | `.npmrc` → `minimumReleaseAge=4320` (**3 giorni**) + `pnpm-workspace.yaml` → `minimumReleaseAgeExclude: vite@8.2.1` |
-| Postinstall dipendenze | pnpm 10/11 li bloccano di default; allowlist `allowBuilds: esbuild` (unico script consentito) |
-| Override vulnerabilità | `brace-expansion` e `js-yaml` forzati a versioni patched via `pnpm-workspace.yaml` |
-| Pacchetti pubblici | **11×** `@pix-galaxy/*` — **nessuno ancora pubblicato** (`npm view` → E404 su tutti) |
-| Pacchetti privati | `@pix-galaxy/pix-core`, `@pix-galaxy/pix-foundations` (`private: true`) + template `pix-component-template` |
-| Modello di release | **Locale** (ADR-018): `scripts/release.mjs` → bump + tag + `npm publish --access public` da macchina dev |
-| Workflow CI | `ci.yml`, `release.yml` (quality gate, non pubblica), `pages.yml`, `check-workflows.yaml` (zizmor) |
-| zizmor (eseguito il 2026-08-12) | ✅ **0 findings** su tutti e 4 i workflow |
-| Tag git | **Nessun tag esistente** — formato previsto `@pix-galaxy/<pkg>@<semver>` |
-| Build | esbuild: `bundle:true`, `platform:'browser'`, `minify`, `target es2020`, format ESM+CJS |
-| Artifact | `artifact/index.js` (ESM) + `artifact/index.cjs` (CJS) + `index.d.ts` — **self-contained** (verificato: 0 import esterni residui) |
-| Source maps | Nessuna emessa ✓ |
-| Provenance | `publishConfig.provenance: true` su 10/11 pacchetti pubblici; `pix-vanilla-reactive` **senza** `publishConfig` |
-| Dipendenze runtime dei pacchetti pubblici | Solo `@pix-galaxy/*` workspace (`workspace:*`), incluse **2 private** (`pix-core`, `pix-foundations`) — inliniate dal bundle |
-| Node built-in / `import.meta.url` / `NODE_ENV` / TLA nel runtime | **Assenti** nei componenti (presenti solo in test/docs non pubblicati) |
+| Fatto                                                            | Valore                                                                                                                            |
+| ---------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| Repo                                                             | `pixu1980/pix-galaxy` (account **personale**, non organizzazione)                                                                 |
+| Trunk                                                            | `develop` — `main` riceve solo merge di release (ADR-022)                                                                         |
+| Package manager                                                  | pnpm — root `11.20.0`, CI `11.9.0`, sub-pacchetti `10.33.2`                                                                       |
+| Cooldown dipendenze                                              | `.npmrc` → `minimumReleaseAge=4320` (**3 giorni**) + `pnpm-workspace.yaml` → `minimumReleaseAgeExclude: vite@8.2.1`               |
+| Postinstall dipendenze                                           | pnpm 10/11 li bloccano di default; allowlist `allowBuilds: esbuild` (unico script consentito)                                     |
+| Override vulnerabilità                                           | `brace-expansion` e `js-yaml` forzati a versioni patched via `pnpm-workspace.yaml`                                                |
+| Pacchetti pubblici                                               | **11×** `@pix-galaxy/*` — **nessuno ancora pubblicato** (`npm view` → E404 su tutti)                                              |
+| Pacchetti privati                                                | `@pix-galaxy/pix-core`, `@pix-galaxy/pix-foundations` (`private: true`) + template `pix-component-template`                       |
+| Modello di release                                               | **Locale** (ADR-018): `scripts/release.mjs` → bump + tag + `npm publish --access public` da macchina dev                          |
+| Workflow CI                                                      | `ci.yml`, `release.yml` (quality gate, non pubblica), `pages.yml`, `check-workflows.yaml` (zizmor)                                |
+| zizmor (eseguito il 2026-08-12)                                  | ✅ **0 findings** su tutti e 4 i workflow                                                                                         |
+| Tag git                                                          | **Nessun tag esistente** — formato previsto `@pix-galaxy/<pkg>@<semver>`                                                          |
+| Build                                                            | esbuild: `bundle:true`, `platform:'browser'`, `minify`, `target es2020`, format ESM+CJS                                           |
+| Artifact                                                         | `artifact/index.js` (ESM) + `artifact/index.cjs` (CJS) + `index.d.ts` — **self-contained** (verificato: 0 import esterni residui) |
+| Source maps                                                      | Nessuna emessa ✓                                                                                                                  |
+| Provenance                                                       | `publishConfig.provenance: true` su 10/11 pacchetti pubblici; `pix-vanilla-reactive` **senza** `publishConfig`                    |
+| Dipendenze runtime dei pacchetti pubblici                        | Solo `@pix-galaxy/*` workspace (`workspace:*`), incluse **2 private** (`pix-core`, `pix-foundations`) — inliniate dal bundle      |
+| Node built-in / `import.meta.url` / `NODE_ENV` / TLA nel runtime | **Assenti** nei componenti (presenti solo in test/docs non pubblicati)                                                            |
 
 ---
 
@@ -42,28 +42,28 @@
 
 ### 2.1 ✅ Già conforme (lato repo — lato GitHub Actions è ~90% allineato)
 
-| Requisito | Stato |
-|---|---|
-| Action di terze parti pinnate per SHA + commento versione (checkout, setup-node, pnpm/action-setup, harden-runner, zizmor, upload/download-artifact, configure/upload/deploy-pages) | ✅ |
-| Lint workflow con zizmor (`check-workflows.yaml`) | ✅ Presente e pulito |
-| Harden Runner (`egress-policy: audit`) | ✅ su `ci.yml`, `release.yml`, `pages.yml` |
-| `--ignore-scripts` su tutti gli install CI | ✅ |
-| `package-manager-cache: false` | ✅ in `release.yml` |
-| Nessun `NPM_TOKEN` in workflow o secrets | ✅ (rimosso da ADR-018) |
-| `persist-credentials: false` sui checkout | ✅ |
-| Cooldown dipendenze (3 giorni = il massimo consigliato; blocca ~94% dei pacchetti malevoli) | ✅ |
-| Postinstall delle dipendenze disabilitati (pnpm 10/11 di default + allowlist) | ✅ |
-| Trigger di release sul formato tag del repo (`@pix-galaxy/*@*`) | ✅ |
-| Superficie d'attacco ridotta: artifact bundled e minificati, browser-only, niente sourcemap | ✅ |
-| `SECURITY.md`, `GOVERNANCE.md`, `CODE_OF_CONDUCT.md`, `SUPPORT.md` | ✅ |
-| Override di versioni vulnerabili transitive (`brace-expansion`, `js-yaml`) | ✅ (extra, ottimo) |
+| Requisito                                                                                                                                                                           | Stato                                      |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------ |
+| Action di terze parti pinnate per SHA + commento versione (checkout, setup-node, pnpm/action-setup, harden-runner, zizmor, upload/download-artifact, configure/upload/deploy-pages) | ✅                                         |
+| Lint workflow con zizmor (`check-workflows.yaml`)                                                                                                                                   | ✅ Presente e pulito                       |
+| Harden Runner (`egress-policy: audit`)                                                                                                                                              | ✅ su `ci.yml`, `release.yml`, `pages.yml` |
+| `--ignore-scripts` su tutti gli install CI                                                                                                                                          | ✅                                         |
+| `package-manager-cache: false`                                                                                                                                                      | ✅ in `release.yml`                        |
+| Nessun `NPM_TOKEN` in workflow o secrets                                                                                                                                            | ✅ (rimosso da ADR-018)                    |
+| `persist-credentials: false` sui checkout                                                                                                                                           | ✅                                         |
+| Cooldown dipendenze (3 giorni = il massimo consigliato; blocca ~94% dei pacchetti malevoli)                                                                                         | ✅                                         |
+| Postinstall delle dipendenze disabilitati (pnpm 10/11 di default + allowlist)                                                                                                       | ✅                                         |
+| Trigger di release sul formato tag del repo (`@pix-galaxy/*@*`)                                                                                                                     | ✅                                         |
+| Superficie d'attacco ridotta: artifact bundled e minificati, browser-only, niente sourcemap                                                                                         | ✅                                         |
+| `SECURITY.md`, `GOVERNANCE.md`, `CODE_OF_CONDUCT.md`, `SUPPORT.md`                                                                                                                  | ✅                                         |
+| Override di versioni vulnerabili transitive (`brace-expansion`, `js-yaml`)                                                                                                          | ✅ (extra, ottimo)                         |
 
 ### 2.2 ❌ Non conforme — il cuore della skill
 
-1. **Release locale, non CI-only (ADR-018).** Regola n.1 dell'articolo: *"The best token is no token"*.
+1. **Release locale, non CI-only (ADR-018).** Regola n.1 dell'articolo: _"The best token is no token"_.
    Le credenziali npm (`npm login` in `release-helpers.mjs`) vivono sulla macchina dello sviluppatore —
    esattamente il vettore descritto dall'articolo (token rubati da plugin IDE, malware in `node_modules`,
-   social engineering "fake job interview"). La skill impone: *"releases can come only from one CI workflow"*.
+   social engineering "fake job interview"). La skill impone: _"releases can come only from one CI workflow"_.
 2. **Niente Staged Publishing.** `npm publish` diretto (non `npm stage publish`) → nessuna approvazione
    umana con 2FA sul contenuto. Lo script si affida solo allo scan malware automatico di npm
    (non è la stessa cosa dell'approvazione staged).
@@ -82,8 +82,8 @@
    `devDependencies` (è **l'opposto** dell'hack `--omit=dev` dell'articolo, che riguarda i build tool).
 6. **`pix-vanilla-reactive` senza `publishConfig`** (manca `access`/`provenance` rispetto agli altri 10).
 7. **Branch stantii con vecchi workflow:** `backup/develop-pre-message-fix`, `backup/develop-pre-rewrite`,
-   `backup/main-pre-rewrite` + branch dependabot obsoleto. L'articolo: *"Remove all old branches after
-   fixing a security issue in your CI workflows"* (vettore d'attacco Nx: PR contro branch vecchi con
+   `backup/main-pre-rewrite` + branch dependabot obsoleto. L'articolo: _"Remove all old branches after
+   fixing a security issue in your CI workflows"_ (vettore d'attacco Nx: PR contro branch vecchi con
    workflow vulnerabili). I backup predatano il pinning SHA.
 8. **Settings GitHub/npmjs non verificabili dal repo** (nessuna `gh` CLI): 2FA, tag ruleset,
    Immutable Releases, disallow tokens → conferma manuale dell'utente richiesta.
@@ -107,22 +107,22 @@
 **Verdetto: eccellente per design.** L'architettura (zero dipendenze runtime, browser-only, ESM nativo,
 artifact bundled) è esattamente ciò che `/ +esm` serve meglio.
 
-| Fix dell'articolo | Rilevanza per pix-galaxy |
-|---|---|
-| `"type": "module"` → `.js` parsato come ESM, niente conversione CJS | ✅ Presente ovunque; `artifact/index.js` è ESM nativo |
-| JSON import attributes | ✅ Nessun import JSON nel runtime |
-| Top-level await | ✅ Assente nei componenti (solo test/docs, non pubblicati) |
-| `NODE_ENV` in più forme (dot/bracket, `global.process`, `globalThis.process`) | ✅ Assente nel runtime |
-| Shebang `#!` | ✅ Non è un CLI |
-| Self-mapping del campo `browser` | ✅ Nessun campo `browser` (entry unica via `exports`) |
-| Long-tail CommonJS (`__exportStar`, lexer combinati, re-export string-literal, esterni ESM) | ✅ Irrilevante: artifact **bundled** ESM/CJS da esbuild, senza helper esterni |
-| Asset relativi via `import.meta.url` (QuickJS, Box2D-WASM) | ✅ Nessun asset runtime; il fix `resolveImportMeta` di jsDelivr coprirebbe usi futuri |
-| Source map (pixi-filters) | ✅ Nessuna sourcemap emessa |
-| Tree-shaking dei built-in Node non supportati | ✅ Nessun Node built-in nel runtime (solo `fetch`, `navigator.clipboard`, `getUserMedia`) |
-| Polyfill layer Node.js (16 fix) | ✅ Non necessario |
-| Minificazione esbuild (file > 4 MiB) | ✅ Già minificati da esbuild |
-| JSX non supportato | ✅ Nessun JSX |
-| Risoluzione dipendenze | ⚠️ Unico neo: le `dependencies` `workspace:*` verso pacchetti privati; spostandole in `devDependencies` la risoluzione `/ +esm` resta pulita (l'artifact non importa nulla) |
+| Fix dell'articolo                                                                           | Rilevanza per pix-galaxy                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `"type": "module"` → `.js` parsato come ESM, niente conversione CJS                         | ✅ Presente ovunque; `artifact/index.js` è ESM nativo                                                                                                                       |
+| JSON import attributes                                                                      | ✅ Nessun import JSON nel runtime                                                                                                                                           |
+| Top-level await                                                                             | ✅ Assente nei componenti (solo test/docs, non pubblicati)                                                                                                                  |
+| `NODE_ENV` in più forme (dot/bracket, `global.process`, `globalThis.process`)               | ✅ Assente nel runtime                                                                                                                                                      |
+| Shebang `#!`                                                                                | ✅ Non è un CLI                                                                                                                                                             |
+| Self-mapping del campo `browser`                                                            | ✅ Nessun campo `browser` (entry unica via `exports`)                                                                                                                       |
+| Long-tail CommonJS (`__exportStar`, lexer combinati, re-export string-literal, esterni ESM) | ✅ Irrilevante: artifact **bundled** ESM/CJS da esbuild, senza helper esterni                                                                                               |
+| Asset relativi via `import.meta.url` (QuickJS, Box2D-WASM)                                  | ✅ Nessun asset runtime; il fix `resolveImportMeta` di jsDelivr coprirebbe usi futuri                                                                                       |
+| Source map (pixi-filters)                                                                   | ✅ Nessuna sourcemap emessa                                                                                                                                                 |
+| Tree-shaking dei built-in Node non supportati                                               | ✅ Nessun Node built-in nel runtime (solo `fetch`, `navigator.clipboard`, `getUserMedia`)                                                                                   |
+| Polyfill layer Node.js (16 fix)                                                             | ✅ Non necessario                                                                                                                                                           |
+| Minificazione esbuild (file > 4 MiB)                                                        | ✅ Già minificati da esbuild                                                                                                                                                |
+| JSX non supportato                                                                          | ✅ Nessun JSX                                                                                                                                                               |
+| Risoluzione dipendenze                                                                      | ⚠️ Unico neo: le `dependencies` `workspace:*` verso pacchetti privati; spostandole in `devDependencies` la risoluzione `/ +esm` resta pulita (l'artifact non importa nulla) |
 
 Dettagli favorevoli: `exports` con condizioni `import`/`require`/`types` + `main`/`module` + `types` +
 `files: ["artifact", …]` → risoluzione `/ +esm` immediata sul file ESM corretto. `sideEffects: true` è
@@ -145,7 +145,7 @@ browser target (Chrome 119+, Safari 17.5+, Firefox 120+).
 
 ---
 
-## 5. Studio di migrazione (come *potrebbe* cambiare — nessuna modifica applicata)
+## 5. Studio di migrazione (come _potrebbe_ cambiare — nessuna modifica applicata)
 
 Obiettivo: allineare il modello di release alla skill, mantenendo il tooling esistente dove possibile.
 
@@ -188,10 +188,10 @@ Obiettivo: allineare il modello di release alla skill, mantenendo il tooling esi
 
 ## 7. Sintesi
 
-| Area | Verdetto |
-|---|---|
-| Lato GitHub Actions (pinning, zizmor, harden-runner, no token, cooldown, ignore-scripts) | ✅ Conforme |
-| Modello di release (locale ADR-018 vs. CI-only + staged) | ❌ Non conforme — è il gap principale |
-| Trusted Publishing / Staged Publishing / 2FA settings | ⏳ Da configurare dopo il primo publish |
-| Packaging (deps `workspace:*` verso pacchetti privati) | ❌ Blocker pre-publish |
-| Compatibilità jsDelivr `/ +esm` | ✅ Eccellente per design |
+| Area                                                                                     | Verdetto                                |
+| ---------------------------------------------------------------------------------------- | --------------------------------------- |
+| Lato GitHub Actions (pinning, zizmor, harden-runner, no token, cooldown, ignore-scripts) | ✅ Conforme                             |
+| Modello di release (locale ADR-018 vs. CI-only + staged)                                 | ❌ Non conforme — è il gap principale   |
+| Trusted Publishing / Staged Publishing / 2FA settings                                    | ⏳ Da configurare dopo il primo publish |
+| Packaging (deps `workspace:*` verso pacchetti privati)                                   | ❌ Blocker pre-publish                  |
+| Compatibilità jsDelivr `/ +esm`                                                          | ✅ Eccellente per design                |

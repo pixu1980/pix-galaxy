@@ -3,7 +3,7 @@
 - **Date**: 2026-08-25
 - **Status**: accepted
 - **Tags**: open-source, governance, quality, release, roadmap
-- **Author**: pix-galaxy-mcp
+- **Author**: Emiliano Pisu <pisuemiliano.1980@gmail.com>
 
 ## Context
 

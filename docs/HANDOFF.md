@@ -4,6 +4,9 @@
 > **Date:** 2026-07-07  
 > **Purpose:** Complete project handoff for another AI session or developer to resume work seamlessly.
 
+> **Latest LLM handoff:** [`HANDOFF-LLM-2026-10-20.md`](./HANDOFF-LLM-2026-10-20.md)  
+> **Active plan (only):** [`plans/release-0.1.0.md`](./plans/release-0.1.0.md)
+
 ---
 
 ## Table of Contents

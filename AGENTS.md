@@ -54,5 +54,5 @@ pnpm release      # local release (commit-and-tag-version)
 
 - Architecture decisions are recorded in `docs/adr/` (Nygard format).
 - Handoff documents live in `docs/` (`HANDOFF.md`, `HANDOFF-LLM-*.md`).
-- Execution plans in `docs/plans/`.
+- Active execution plan: `docs/plans/release-0.1.0.md` (single source; no parallel audits/reviews).
 - Run `pnpm format` before committing; keep commits conventional (`feat:`, `fix:`, `refactor:`, `chore:`, `docs:`).
