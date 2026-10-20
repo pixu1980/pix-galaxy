@@ -89,9 +89,8 @@ async function bootDocsSite() {
 
   const { docsPages, siteMeta } = await loadDocsData();
 
-  const { PIX_HIGHLIGHTER_THEME_OPTIONS, PixHighlighter, enhancePixHighlighters } = await import(
-    '../index.js'
-  );
+  const { PIX_HIGHLIGHTER_THEME_OPTIONS, PixHighlighter, enhancePixHighlighters } =
+    await import('../index.js');
 
   PixHighlighter.applyTheme(PIX_HIGHLIGHTER_THEME_OPTIONS[0]?.value || 'default', {
     persist: false,

@@ -5,7 +5,10 @@ import { describe, test } from 'node:test';
 describe('Design system', () => {
   test('tokens are defined and self-contained across palettes + ds-tokens', async () => {
     const [ds, palettes] = await Promise.all([
-      readFile(new URL('../../../pix-foundations/src/shared/_ds-tokens.css', import.meta.url), 'utf8'),
+      readFile(
+        new URL('../../../pix-foundations/src/shared/_ds-tokens.css', import.meta.url),
+        'utf8'
+      ),
       readFile(new URL('../../../pix-foundations/lib/_palettes.css', import.meta.url), 'utf8'),
     ]);
 
