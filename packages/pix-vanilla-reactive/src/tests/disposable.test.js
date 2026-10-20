@@ -197,9 +197,8 @@ describe('AsyncDisposableStack', () => {
 
 describe('class-level Symbol.dispose aliases', () => {
   it('parts and template instances alias dispose()', async () => {
-    const { Part, TemplateInstance, ChildNodePart } = await import(
-      '../core/template-engine/index.js'
-    );
+    const { Part, TemplateInstance, ChildNodePart } =
+      await import('../core/template-engine/index.js');
     for (const cls of [Part, ChildNodePart, TemplateInstance]) {
       if (typeof DISPOSE === 'symbol') {
         assert.equal(
