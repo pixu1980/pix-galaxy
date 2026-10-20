@@ -88,6 +88,9 @@ async function bootDocsSite() {
       enhancePixHighlighters(root);
 
       const btn = root.querySelector('#demo-toast-btn');
+      if (!btn || btn.dataset.bound === 'true') return;
+      btn.dataset.bound = 'true';
+
       const stack =
         document.querySelector('pix-toast-stack') || document.createElement('pix-toast-stack');
       if (!stack.isConnected) {
@@ -96,7 +99,7 @@ async function bootDocsSite() {
       }
 
       let count = 0;
-      btn?.addEventListener('click', () => {
+      btn.addEventListener('click', () => {
         count++;
         const variants = ['info', 'success', 'warning', 'error'];
         stack.add({

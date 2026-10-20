@@ -15,6 +15,10 @@ globalThis.document = bootDom.window.document;
 globalThis.HTMLElement = bootDom.window.HTMLElement;
 globalThis.customElements = bootDom.window.customElements;
 globalThis.CSSStyleSheet = bootDom.window.CSSStyleSheet;
+globalThis.Node = bootDom.window.Node;
+globalThis.Comment = bootDom.window.Comment;
+globalThis.NodeFilter = bootDom.window.NodeFilter;
+globalThis.MutationObserver = bootDom.window.MutationObserver;
 if (!document.adoptedStyleSheets) document.adoptedStyleSheets = [];
 
 let createDocsSite;
