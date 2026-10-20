@@ -2,6 +2,12 @@ packages:
   - 'packages/*'
   # Scaffold template: contains {%...%} placeholders, not a runnable workspace package.
   - '!packages/pix-component-template'
+# Documentation aggregation creates intentional package cycles (pix-core ↔ pix-a11y,
+# pix-color-scheme-selector ↔ pix-foundations): the edges exist only so each docs site can
+# import the shared template and the sibling examples. Breaking them is tracked as follow-up
+# (ADR-020 / DSL-09); until then recursive tasks run in an arbitrary order.
+ignoreWorkspaceCycles: true
+
 allowBuilds:
   '@vscode/vsce-sign': false
   esbuild: true
