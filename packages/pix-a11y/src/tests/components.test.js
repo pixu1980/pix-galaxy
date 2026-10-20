@@ -68,9 +68,7 @@ let BODY_FONT_OPTIONS,
   readPreferences;
 
 before(async () => {
-  const mod = await import(
-    new URL('../components/A11y/_A11y.js?component-test', import.meta.url)
-  );
+  const mod = await import(new URL('../components/A11y/_A11y.js?component-test', import.meta.url));
   ({
     ACCESSIBILITY_OPTIONS,
     BODY_FONT_OPTIONS,
@@ -237,15 +235,9 @@ describe('PixA11y - document application & persistence', () => {
     assert.equal(document.documentElement.getAttribute('data-increase-contrast'), 'true');
     assert.equal(document.documentElement.getAttribute('data-radius-preset'), 'rounded');
     assert.equal(document.documentElement.style.fontSize, '125%');
-    assert.match(
-      document.documentElement.style.getPropertyValue('--pix-t-display'),
-      /system-ui/i
-    );
+    assert.match(document.documentElement.style.getPropertyValue('--pix-t-display'), /system-ui/i);
     assert.match(document.documentElement.style.getPropertyValue('--pix-t-sans'), /Georgia/i);
-    assert.match(
-      document.documentElement.style.getPropertyValue('--pix-t-mono'),
-      /ui-monospace/i
-    );
+    assert.match(document.documentElement.style.getPropertyValue('--pix-t-mono'), /ui-monospace/i);
   });
 
   test('applies all defaults when no storage is present', () => {
@@ -256,10 +248,7 @@ describe('PixA11y - document application & persistence', () => {
     assert.equal(document.documentElement.hasAttribute('data-increase-contrast'), false);
     assert.equal(document.documentElement.getAttribute('data-radius-preset'), 'rounded');
     assert.equal(document.documentElement.style.fontSize, '');
-    assert.match(
-      document.documentElement.style.getPropertyValue('--pix-t-sans'),
-      /system-ui/i
-    );
+    assert.match(document.documentElement.style.getPropertyValue('--pix-t-sans'), /system-ui/i);
   });
 
   test('updatePreference changes a single preference and persists it', () => {
@@ -312,15 +301,9 @@ describe('PixA11y - document application & persistence', () => {
     assert.equal(saved.bodyFont, 'readable-serif');
     assert.equal(saved.codeFont, 'classic-mono');
     assert.equal('reduceAnimations' in saved, false);
-    assert.match(
-      document.documentElement.style.getPropertyValue('--pix-t-display'),
-      /Optima/i
-    );
+    assert.match(document.documentElement.style.getPropertyValue('--pix-t-display'), /Optima/i);
     assert.match(document.documentElement.style.getPropertyValue('--pix-t-sans'), /Charter/i);
-    assert.match(
-      document.documentElement.style.getPropertyValue('--pix-t-mono'),
-      /Courier New/i
-    );
+    assert.match(document.documentElement.style.getPropertyValue('--pix-t-mono'), /Courier New/i);
     assert.equal(document.documentElement.style.getPropertyValue('--pix-t-leading-normal'), '1.8');
   });
 
@@ -543,10 +526,7 @@ describe('PixA11y - applyPreferencesToDocument', () => {
       /Baskerville/i
     );
     assert.match(document.documentElement.style.getPropertyValue('--pix-t-sans'), /Charter/i);
-    assert.match(
-      document.documentElement.style.getPropertyValue('--pix-t-mono'),
-      /Cascadia/i
-    );
+    assert.match(document.documentElement.style.getPropertyValue('--pix-t-mono'), /Cascadia/i);
   });
 
   test('sets font-scale correctly', () => {
@@ -573,10 +553,7 @@ describe('PixA11y - applyPreferencesToDocument', () => {
       document.documentElement.style.getPropertyValue('--pix-t-display'),
       /OpenDyslexic/
     );
-    assert.match(
-      document.documentElement.style.getPropertyValue('--pix-t-sans'),
-      /OpenDyslexic/
-    );
+    assert.match(document.documentElement.style.getPropertyValue('--pix-t-sans'), /OpenDyslexic/);
   });
 
   test('cleans up legacy data-reduce-animations attribute', () => {

@@ -2,10 +2,10 @@
 
 ## Attributes
 
-| Attribute        | Type          | Default     | Description              |
+| Attribute | Type | Default | Description |
 | ---------------- | ------------- | ----------- | ------------------------ | --------------- |
-| `orientation`    | `"horizontal" | "vertical"` | `"horizontal"`           | Split direction |
-| `min-panel-size` | `number`      | `100`       | Minimum panel size in px |
+| `orientation` | `"horizontal" | "vertical"` | `"horizontal"` | Split direction |
+| `min-panel-size` | `number` | `100` | Minimum panel size in px |
 
 ## Properties
 

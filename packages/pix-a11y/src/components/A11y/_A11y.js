@@ -301,14 +301,8 @@ function applyPreferencesToDocument(preferences) {
     '--pix-t-display',
     findFontOption('headingFont', normalized.headingFont).stack
   );
-  root.style.setProperty(
-    '--pix-t-sans',
-    findFontOption('bodyFont', normalized.bodyFont).stack
-  );
-  root.style.setProperty(
-    '--pix-t-mono',
-    findFontOption('codeFont', normalized.codeFont).stack
-  );
+  root.style.setProperty('--pix-t-sans', findFontOption('bodyFont', normalized.bodyFont).stack);
+  root.style.setProperty('--pix-t-mono', findFontOption('codeFont', normalized.codeFont).stack);
   const lineHeight = findLineHeightOption(normalized.lineHeight).value;
   root.style.setProperty('--pix-t-leading-normal', lineHeight);
   root.style.setProperty('--pix--t--line-height', lineHeight);

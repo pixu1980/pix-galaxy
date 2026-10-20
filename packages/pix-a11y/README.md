@@ -40,7 +40,7 @@ The component self-registers as a custom element. Drop it in your HTML and impor
 
 | Symbol                              | Description                                 |
 | ----------------------------------- | ------------------------------------------- |
-| `PixA11y`                      | Component class (extends `HTMLElement`)     |
+| `PixA11y`                           | Component class (extends `HTMLElement`)     |
 | `DEFAULT_PREFERENCES`               | Default preference values                   |
 | `STORAGE_KEY`                       | The `localStorage` key used for persistence |
 | `ACCESSIBILITY_OPTIONS`             | Array of accessibility toggle definitions   |
@@ -55,11 +55,7 @@ The component self-registers as a custom element. Drop it in your HTML and impor
 ### Programmatic example
 
 ```js
-import {
-  PixA11y,
-  applyPreferencesToDocument,
-  DEFAULT_PREFERENCES,
-} from '@pix-galaxy/pix-a11y';
+import { PixA11y, applyPreferencesToDocument, DEFAULT_PREFERENCES } from '@pix-galaxy/pix-a11y';
 
 // Apply defaults programmatically
 applyPreferencesToDocument(DEFAULT_PREFERENCES);
