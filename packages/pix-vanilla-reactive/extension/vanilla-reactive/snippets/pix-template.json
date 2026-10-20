@@ -23,7 +23,13 @@
   },
   "pix if-else": {
     "prefix": "pix-ifelse",
-    "body": ["<if condition=\"${1:expr}\">", "  ${2:when true}", "<else>", "  ${3:when false}", "</if>"],
+    "body": [
+      "<if condition=\"${1:expr}\">",
+      "  ${2:when true}",
+      "<else>",
+      "  ${3:when false}",
+      "</if>"
+    ],
     "description": "pix <if>/<else>"
   },
   "pix switch": {

@@ -69,8 +69,8 @@ export class ExprPart {
   hasRaw() {
     return Boolean(
       this.parsedExpr &&
-        this.parsedExpr.filters.length > 0 &&
-        this.parsedExpr.filters[this.parsedExpr.filters.length - 1].name === 'raw'
+      this.parsedExpr.filters.length > 0 &&
+      this.parsedExpr.filters[this.parsedExpr.filters.length - 1].name === 'raw'
     );
   }
 

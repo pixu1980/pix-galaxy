@@ -11,9 +11,7 @@ import { DISPOSE } from './_symbols.js';
 /**
  * A cleanup handle: callable-friendly object with `.dispose()` and, on modern
  * engines, `[Symbol.dispose]()`.
- * @typedef {object} DisposableHandle
- * @property {() => void} dispose
- * @property {() => void} [Symbol.dispose]
+ * @typedef {{ dispose: () => void } & { [Symbol.dispose]?: () => void }} DisposableHandle
  */
 
 /**
