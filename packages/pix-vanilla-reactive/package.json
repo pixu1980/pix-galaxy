@@ -31,11 +31,6 @@
     "browser"
   ],
   "sideEffects": false,
-  "engines": {
-    "node": ">=20.11",
-    "pnpm": ">=10"
-  },
-  "packageManager": "pnpm@10.33.2",
   "main": "./artifact/index.cjs",
   "module": "./artifact/index.js",
   "types": "./artifact/index.d.ts",
@@ -74,16 +69,18 @@
     "test:coverage": "c8 --reporter=text --reporter=lcov node --test --import ../pix-core/scripts/register-test-loader.mjs ./src/tests/*.test.js",
     "typecheck": "tsc --project ./tsconfig.types.json --noEmit"
   },
-  "devDependencies": {
-    "@vscode/vsce": "3.9.2",
+  "dependencies": {
     "@pix-galaxy/pix-color-scheme-selector": "workspace:*",
     "@pix-galaxy/pix-core": "workspace:*",
-    "@pix-galaxy/pix-highlighter": "workspace:*",
-    "c8": "11.0.0",
-    "esbuild": "0.28.1",
+    "@pix-galaxy/pix-highlighter": "workspace:*"
+  },
+  "devDependencies": {
+    "@vscode/vsce": "4.0.0",
+    "c8": "12.0.0",
+    "esbuild": "0.28.2",
     "jsdom": "30.0.1",
-    "marked": "18.0.5",
-    "typescript": "6.0.3",
-    "vite": "8.2.1"
+    "marked": "18.0.13",
+    "typescript": "7.0.2",
+    "vite": "8.3.0"
   }
 }

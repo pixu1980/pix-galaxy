@@ -43,25 +43,22 @@
     "test:ssr": "node scripts/ssr-smoke.mjs",
     "test:coverage:portal": "c8 --reporter=text --check-coverage --lines=95 --functions=95 --branches=95 --statements=95 node --test src/docs/catalog.test.mjs"
   },
-  "devDependencies": {
-    "@axe-core/playwright": "4.12.1",
-    "@eslint/js": "10.0.1",
+  "dependencies": {
     "@pix-galaxy/pix-a11y": "workspace:*",
     "@pix-galaxy/pix-color-scheme-selector": "workspace:*",
-    "@pix-galaxy/pix-foundations": "workspace:*",
-    "@playwright/test": "1.62.1",
-    "commit-and-tag-version": "13.1.2",
-    "concurrently": "10.0.4",
-    "eslint": "10.8.0",
+    "@pix-galaxy/pix-foundations": "workspace:*"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "4.13.0",
+    "@eslint/js": "10.0.1",
+    "@playwright/test": "1.63.0",
+    "commit-and-tag-version": "13.2.1",
+    "concurrently": "10.0.5",
+    "eslint": "10.10.0",
     "prettier": "3.9.6",
     "typescript": "7.0.2",
-    "vite": "8.2.1",
+    "vite": "8.3.0",
     "@pix-galaxy/pix-accent-color-selector": "workspace:*",
-    "c8": "11.0.0"
-  },
-  "engines": {
-    "node": ">=20.11",
-    "pnpm": ">=10"
-  },
-  "packageManager": "pnpm@11.20.0"
+    "c8": "12.0.0"
+  }
 }

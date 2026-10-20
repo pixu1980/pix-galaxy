@@ -14,7 +14,7 @@
     "./ds-tokens.css": "./src/shared/_ds-tokens.css"
   },
   "scripts": {},
-  "devDependencies": {
+  "dependencies": {
     "@pix-galaxy/pix-color-scheme-selector": "workspace:*",
     "@pix-galaxy/pix-core": "workspace:*",
     "@pix-galaxy/pix-highlighter": "workspace:*"

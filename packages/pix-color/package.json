@@ -76,17 +76,19 @@
     "typecheck": "tsc --project ./tsconfig.types.json --noEmit",
     "release:dry": "node ../../scripts/release.mjs --dry-run"
   },
-  "devDependencies": {
-    "@pix-galaxy/pix-color-scheme-selector": "workspace:*",
+  "dependencies": {
     "@pix-galaxy/pix-core": "workspace:*",
     "@pix-galaxy/pix-foundations": "workspace:*",
     "@pix-galaxy/pix-highlighter": "workspace:*",
-    "c8": "11.0.0",
-    "concurrently": "10.0.4",
-    "esbuild": "0.28.1",
+    "@pix-galaxy/pix-color-scheme-selector": "workspace:*"
+  },
+  "devDependencies": {
+    "c8": "12.0.0",
+    "concurrently": "10.0.5",
+    "esbuild": "0.28.2",
     "jsdom": "30.0.1",
-    "marked": "18.0.5",
-    "typescript": "6.0.3",
-    "vite": "8.2.1"
+    "marked": "18.0.13",
+    "typescript": "7.0.2",
+    "vite": "8.3.0"
   }
 }

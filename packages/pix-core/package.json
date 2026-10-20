@@ -15,10 +15,12 @@
     "./dom/ssr-safe.js": "./dom/ssr-safe.js"
   },
   "dependencies": {
-    "marked": "18.0.5",
     "@pix-galaxy/pix-color-scheme-selector": "workspace:*",
-    "@pix-galaxy/pix-a11y": "workspace:*",
-    "esbuild": "0.28.1"
+    "@pix-galaxy/pix-a11y": "workspace:*"
+  },
+  "devDependencies": {
+    "marked": "18.0.13",
+    "esbuild": "0.28.2"
   },
   "scripts": {}
 }
