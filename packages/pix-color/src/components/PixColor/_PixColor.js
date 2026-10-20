@@ -360,7 +360,7 @@ class PixColor extends ComponentBase {
   #handleTabKeydown(event, fmt) {
     const tabs = FORMATS;
     const idx = tabs.indexOf(this.#activeFormat);
-    let next = idx;
+    let next;
     switch (event.key) {
       case 'ArrowLeft':
         next = (idx - 1 + tabs.length) % tabs.length;
