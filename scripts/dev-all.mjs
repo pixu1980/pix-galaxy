@@ -92,55 +92,38 @@ function getColor(name, index) {
 }
 
 /**
+ * Probe whether `port` can be bound on `host`.
+ * @returns {Promise<'free' | 'busy' | 'unavailable'>}
+ */
+function probePort(port, host) {
+  return new Promise((resolveStatus) => {
+    const server = createServer();
+    server.once('error', (err) => {
+      resolveStatus(err.code === 'EADDRINUSE' ? 'busy' : 'unavailable');
+    });
+    server.listen(port, host, () => {
+      server.close(() => resolveStatus('free'));
+    });
+  });
+}
+
+/**
  * Find the next free port starting from `start`, one at a time.
  * Sequential calls guarantee no two callers get the same port.
+ *
+ * Checks IPv4 then IPv6 separately (macOS keeps the stacks independent).
+ * If IPv6 is unsupported on the host (common on Linux CI), a free IPv4
+ * port is accepted instead of skipping the whole range.
  */
-function findFreePort(start) {
-  return new Promise((resolve, reject) => {
-    const tryPort = (port) => {
-      if (port > MAX_PORT) {
-        return reject(new Error(`no free port in ${MIN_PORT}-${MAX_PORT}`));
-      }
-      // Dual-stack check: try both IPv4 (127.0.0.1) and IPv6 (::)
-      // On macOS, IPv4 and IPv6 are independent stacks, so a process
-      // listening on [::]:PORT won't be detected by binding to 127.0.0.1 alone
-      let v4ok = false;
-      let v6ok = false;
-      const srv4 = createServer();
-      const srv6 = createServer();
-
-      const closeAll = () => {
-        srv4.close();
-        srv6.close();
-      };
-
-      srv4.on('error', () => {
-        closeAll();
-        tryPort(port + 1);
-      });
-      srv6.on('error', () => {
-        closeAll();
-        tryPort(port + 1);
-      });
-
-      srv4.listen(port, '127.0.0.1', () => {
-        v4ok = true;
-        if (v6ok) {
-          closeAll();
-          resolve(port);
-        }
-      });
-
-      srv6.listen(port, '::', () => {
-        v6ok = true;
-        if (v4ok) {
-          closeAll();
-          resolve(port);
-        }
-      });
-    };
-    tryPort(start);
-  });
+async function findFreePort(start) {
+  for (let port = start; port <= MAX_PORT; port++) {
+    const v4 = await probePort(port, '127.0.0.1');
+    if (v4 !== 'free') continue;
+    const v6 = await probePort(port, '::');
+    if (v6 === 'busy') continue;
+    return port;
+  }
+  throw new Error(`no free port in ${MIN_PORT}-${MAX_PORT}`);
 }
 
 /**

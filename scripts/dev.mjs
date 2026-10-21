@@ -22,52 +22,30 @@ const explicitPort = getFlag('--port');
 const MIN_PORT = 3000;
 const MAX_PORT = 6000;
 
-function findFreePort(start = MIN_PORT) {
-  return new Promise((resolve, reject) => {
-    const tryPort = (port) => {
-      if (port > MAX_PORT) {
-        return reject(new Error(`[${name}] no free port in ${MIN_PORT}-${MAX_PORT}`));
-      }
-      // Dual-stack check: try both IPv4 (127.0.0.1) and IPv6 (::)
-      // On macOS, IPv4 and IPv6 are independent stacks, so a process
-      // listening on [::]:PORT won't be detected by binding to 127.0.0.1 alone
-      let v4ok = false;
-      let v6ok = false;
-      const srv4 = createServer();
-      const srv6 = createServer();
-
-      const closeAll = () => {
-        srv4.close();
-        srv6.close();
-      };
-
-      srv4.on('error', () => {
-        closeAll();
-        tryPort(port + 1);
-      });
-      srv6.on('error', () => {
-        closeAll();
-        tryPort(port + 1);
-      });
-
-      srv4.listen(port, '127.0.0.1', () => {
-        v4ok = true;
-        if (v6ok) {
-          closeAll();
-          resolve(port);
-        }
-      });
-
-      srv6.listen(port, '::', () => {
-        v6ok = true;
-        if (v4ok) {
-          closeAll();
-          resolve(port);
-        }
-      });
-    };
-    tryPort(start);
+/**
+ * @returns {Promise<'free' | 'busy' | 'unavailable'>}
+ */
+function probePort(port, host) {
+  return new Promise((resolveStatus) => {
+    const server = createServer();
+    server.once('error', (err) => {
+      resolveStatus(err.code === 'EADDRINUSE' ? 'busy' : 'unavailable');
+    });
+    server.listen(port, host, () => {
+      server.close(() => resolveStatus('free'));
+    });
   });
+}
+
+async function findFreePort(start = MIN_PORT) {
+  for (let port = start; port <= MAX_PORT; port++) {
+    const v4 = await probePort(port, '127.0.0.1');
+    if (v4 !== 'free') continue;
+    const v6 = await probePort(port, '::');
+    if (v6 === 'busy') continue;
+    return port;
+  }
+  throw new Error(`[${name}] no free port in ${MIN_PORT}-${MAX_PORT}`);
 }
 
 async function main() {

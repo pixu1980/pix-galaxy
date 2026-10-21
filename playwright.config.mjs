@@ -17,9 +17,10 @@ export default defineConfig({
   // Convenience for local runs without a pre-started dev:all. Playwright
   // probes this port; when the server is already up it is reused as-is.
   webServer: {
-    command: 'pnpm dev:all',
+    // CI already runs build:lib; locally prefer the full dev:all (build + servers).
+    command: process.env.CI ? 'node scripts/dev-all.mjs' : 'pnpm dev:all',
     port: 3001,
-    reuseExistingServer: true,
-    timeout: 60_000,
+    reuseExistingServer: !process.env.CI,
+    timeout: 120_000,
   },
 });
