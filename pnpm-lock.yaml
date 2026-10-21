@@ -96,9 +96,6 @@ importers:
 
   packages/pix-accent-color-selector:
     dependencies:
-      '@pix-galaxy/pix-core':
-        specifier: workspace:*
-        version: link:../pix-core
       '@pix-galaxy/pix-foundations':
         specifier: workspace:*
         version: link:../pix-foundations
@@ -106,6 +103,9 @@ importers:
         specifier: workspace:*
         version: link:../pix-highlighter
     devDependencies:
+      '@pix-galaxy/pix-core':
+        specifier: workspace:*
+        version: link:../pix-core
       c8:
         specifier: 12.0.0
         version: 12.0.0
@@ -164,9 +164,6 @@ importers:
 
   packages/pix-color-scheme-selector:
     dependencies:
-      '@pix-galaxy/pix-core':
-        specifier: workspace:*
-        version: link:../pix-core
       '@pix-galaxy/pix-foundations':
         specifier: workspace:*
         version: link:../pix-foundations
@@ -174,6 +171,9 @@ importers:
         specifier: workspace:*
         version: link:../pix-highlighter
     devDependencies:
+      '@pix-galaxy/pix-core':
+        specifier: workspace:*
+        version: link:../pix-core
       c8:
         specifier: 12.0.0
         version: 12.0.0
@@ -260,13 +260,13 @@ importers:
 
   packages/pix-highlighter:
     dependencies:
-      '@pix-galaxy/pix-core':
-        specifier: workspace:*
-        version: link:../pix-core
       '@pix-galaxy/pix-foundations':
         specifier: workspace:*
         version: link:../pix-foundations
     devDependencies:
+      '@pix-galaxy/pix-core':
+        specifier: workspace:*
+        version: link:../pix-core
       c8:
         specifier: 12.0.0
         version: 12.0.0

@@ -320,7 +320,12 @@ for (const pkg of packages) {
     console.log(`   tag: ${tag}`);
 
     const changedFiles = changedFilesSinceTag(tag, pkgRel, exec);
-    const hasChanges = changedFiles !== null && changedFiles.length > 0;
+    if (changedFiles === null) {
+      console.error(`✗ Unable to determine changes for ${pkgRel} since ${tag}.`);
+      process.exit(1);
+    }
+
+    const hasChanges = changedFiles.length > 0;
 
     if (!hasChanges) {
       if (isForced) {

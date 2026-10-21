@@ -79,10 +79,10 @@
     "release:dry": "node ../../scripts/release.mjs --dry-run"
   },
   "dependencies": {
-    "@pix-galaxy/pix-core": "workspace:*",
     "@pix-galaxy/pix-foundations": "workspace:*"
   },
   "devDependencies": {
+    "@pix-galaxy/pix-core": "workspace:*",
     "c8": "12.0.0",
     "concurrently": "10.0.5",
     "esbuild": "0.28.2",

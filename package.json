@@ -19,7 +19,7 @@
     "url": "https://github.com/sponsors/pixu1980"
   },
   "scripts": {
-    "build": "pnpm build:portal && pnpm -r --if-present run build",
+    "build": "pnpm build:lib && pnpm build:portal && pnpm -r --if-present run build",
     "build:lib": "pnpm -r --if-present run build:lib",
     "build:portal": "node scripts/fetch-downloads.mjs && vite build --config ./vite.config.mjs",
     "build:site": "pnpm build:portal && pnpm -r --if-present run build:site",
