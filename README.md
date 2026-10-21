@@ -83,7 +83,7 @@ pnpm release           # bump + CHANGELOG + tag + npm publish (local)
 
 - Working tree must be clean.
 - npm authentication is verified first (`npm whoami` → `npm login`).
-- The script pushes tags to `develop` (ADR-022); tags trigger a **quality
+- The script pushes tags to `main` (ADR-030); tags trigger a **quality
   gate** (`release.yml`) — no CI publish.
 - Use `--verify` to wait for the npm malware scan, `--package <name>` to
   release only one package, `--force` to release without changes.

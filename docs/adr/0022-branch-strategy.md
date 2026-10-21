@@ -2,7 +2,7 @@
 
 ## Status
 
-Accepted
+Superseded by [ADR-030](0030-single-trunk-on-main-retire-develop.md)
 
 ## Context
 

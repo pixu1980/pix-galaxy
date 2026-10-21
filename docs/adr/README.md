@@ -29,7 +29,8 @@ This log records the significant architectural decisions for pix-galaxy. Each AD
 | [019](0019-modern-only-browsers.md)                                      | ✅ Accepted                                                        | Modern-only browser matrix, light-dark fallback kept        |
 | [020](0020-zero-dependencies.md)                                         | ✅ Accepted                                                        | Zero runtime dependencies is absolute                       |
 | [021](0021-wcag-aa-requirement.md)                                       | ✅ Accepted                                                        | WCAG 2.2 AA is non-negotiable                               |
-| [022](0022-branch-strategy.md)                                           | ✅ Accepted                                                        | `develop` trunk, `main` for releases                        |
+| [022](0022-branch-strategy.md)                                           | 🔁 **Superseded** by [030](0030-single-trunk-on-main-retire-develop.md) | `develop` trunk, `main` for releases (retired)         |
+| [030](0030-single-trunk-on-main-retire-develop.md)                       | ✅ Accepted                                                        | Single trunk on `main`; retire `develop`                    |
 | [023](0023-jsdoc-types-strict.md)                                        | ✅ Accepted                                                        | JSDoc types + strict typecheck, no TS migration             |
 | [024](0024-migrate-skills-to-mcp.md)                                     | ✅ Accepted                                                        | Migrate `.agents` skills to `pix-galaxy-mcp`                |
 | [025](0025-order-portal-cards-by-npm-popularity-surface-wip-packages.md) | ✅ Accepted                                                        | Order portal cards by npm popularity, surface WIP packages  |

@@ -141,7 +141,7 @@ The orchestrator (`scripts/release.mjs`):
    - Runs `commit-and-tag-version --tag-prefix "@pix-galaxy/<pkg>@"` (with `--first-release` when no tag exists)
    - Updates `package.json` version + `CHANGELOG.md`
    - Creates a release commit and tag `@pix-galaxy/<pkg>@<version>`
-   - Pushes tags to `develop` (trunk, ADR-022)
+   - Pushes tags to `main` (trunk, ADR-030)
    - Publishes to npm with `npm publish --access public` (local npm auth)
 4. Prints a summary
 
@@ -158,8 +158,8 @@ The orchestrator (`scripts/release.mjs`):
 
 ### 4. Push
 
-The script pushes tags automatically (`git push --follow-tags origin develop`).
-`develop` is the trunk (ADR-022); `main` receives merges only for releases.
+The script pushes tags automatically (`git push --follow-tags origin main`).
+`main` is the only long-lived trunk (ADR-030; ADR-022 superseded).
 
 ### 5. Release quality gate
 

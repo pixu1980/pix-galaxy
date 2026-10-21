@@ -358,9 +358,9 @@ for (const pkg of packages) {
       execIn(pkgPath, standardVersionCommand(ROOT, name, false, firstRelease), {
         stdio: 'inherit',
       });
-      // Push release commit + tag to the trunk (ADR-022: develop). The tag
+      // Push release commit + tag to the trunk (ADR-030: main). The tag
       // triggers the release quality gate (release.yml).
-      execIn(pkgPath, `git push --follow-tags origin develop`, { stdio: 'inherit' });
+      execIn(pkgPath, `git push --follow-tags origin main`, { stdio: 'inherit' });
       // Build the artifact if needed, then publish locally using the user's
       // npm credentials (same local model as pi-coding-agent-extensions: no
       // CI publish, no provenance).
