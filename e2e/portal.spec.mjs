@@ -130,13 +130,30 @@ test.describe('Portal', () => {
     expect(sections.map((s) => s.title)).toEqual(['Components', 'Libraries']);
 
     // Ready (non-WIP) cards come first within Components.
+    // Count must match package.json releaseStatus for documented non-library
+    // packages — not a hardcoded floor (UI-25 / D.3).
+    const catalog = JSON.parse(
+      readFileSync(join(PKGS_DIR, '../src/docs/content/components.json'), 'utf8')
+    );
+    const expectedReady = catalog.filter((comp) => {
+      if (comp.kind === 'library' || !comp.homepage) return false;
+      try {
+        const pkg = JSON.parse(readFileSync(join(PKGS_DIR, comp.name, 'package.json'), 'utf8'));
+        return pkg.releaseStatus === 'ready';
+      } catch {
+        return false;
+      }
+    }).length;
+
     const components = sections[0].cards;
     const badges = components.map((c) => c.wip);
     const firstWip = badges.indexOf(true);
     const readyCount = firstWip === -1 ? badges.length : firstWip;
-    expect(readyCount).toBeGreaterThanOrEqual(4);
+    expect(readyCount).toBe(expectedReady);
     expect(badges.slice(0, readyCount).every((w) => !w)).toBe(true);
-    expect(badges.slice(readyCount).some((w) => w)).toBe(true);
+    if (readyCount < components.length) {
+      expect(badges.slice(readyCount).some((w) => w)).toBe(true);
+    }
 
     // Every WIP card carries the status badge marker.
     for (const card of components.filter((c) => c.wip)) {
@@ -205,10 +222,15 @@ test.describe('Pix Highlighter', () => {
 
   test('theme menu opens and lists options', async ({ page }) => {
     await page.goto(HL());
-    await page.waitForSelector('[data-theme-trigger]', { timeout: 8000 });
-    await page.locator('[data-theme-trigger]').first().click();
-    await page.waitForSelector('[data-theme-option]', { timeout: 3000 });
-    const count = await page.locator('[data-theme-option]').count();
+    const highlighter = page.locator('pre[is="pix-highlighter"]').first();
+    await highlighter.waitFor({ timeout: 8000 });
+    const trigger = highlighter.locator('[data-theme-trigger]');
+    await trigger.click();
+    // Theme list is portaled to <body> as a popover — wait for the open surface,
+    // then count options on that instance only (UI-25 / D.3).
+    const openList = page.locator('[data-theme-list]:popover-open').first();
+    await expect(openList).toBeVisible({ timeout: 5000 });
+    const count = await openList.locator('[data-theme-option]').count();
     expect(count).toBeGreaterThanOrEqual(5);
   });
 });

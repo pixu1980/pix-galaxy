@@ -55,7 +55,7 @@ function urlFor(name) {
  * @param {string} url
  */
 async function gotoAndAudit(page, url) {
-  await page.goto(url, { waitUntil: 'networkidle' });
+  await page.goto(url, { waitUntil: 'load' });
   const results = await new AxeBuilder({ page })
     .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa'])
     .analyze();
@@ -66,7 +66,7 @@ async function gotoAndAudit(page, url) {
 
 test.describe('Component interactions', () => {
   test('color scheme toggle switches to an explicit scheme', async ({ page }) => {
-    await page.goto(urlFor('pix-color-scheme-selector'), { waitUntil: 'networkidle' });
+    await page.goto(urlFor('pix-color-scheme-selector'), { waitUntil: 'load' });
     // Defaults to system; after one click the scheme becomes explicit.
     await page.locator('[data-color-scheme-toggle]').first().click();
     await page.waitForTimeout(200);
@@ -79,17 +79,17 @@ test.describe('Component interactions', () => {
   });
 
   test('accent color selector sets a root CSS variable', async ({ page }) => {
-    await page.goto(urlFor('pix-accent-color-selector'), { waitUntil: 'networkidle' });
+    await page.goto(urlFor('pix-accent-color-selector'), { waitUntil: 'load' });
     const swatch = page.locator('[data-accent-button][data-accent="mint"]').first();
+    await swatch.waitFor({ state: 'visible', timeout: 8000 });
     await swatch.click();
-    const h = await page.evaluate(() =>
-      document.documentElement.style.getPropertyValue('--pix-accent-h')
-    );
-    expect(h).toBeTruthy();
+    await expect
+      .poll(() => page.evaluate(() => document.documentElement.style.getPropertyValue('--pix-accent-h')))
+      .toBeTruthy();
   });
 
   test('pix-color bar toggles the panel on click', async ({ page }) => {
-    await page.goto(urlFor('pix-color'), { waitUntil: 'networkidle' });
+    await page.goto(urlFor('pix-color'), { waitUntil: 'load' });
     const bar = page.locator('[data-part="bar"]').first();
     await bar.click();
     await expect(page.locator('[data-part="panel"]').first()).toBeVisible();
@@ -98,7 +98,7 @@ test.describe('Component interactions', () => {
   });
 
   test('toast stack renders and dismisses a toast', async ({ page }) => {
-    await page.goto(urlFor('pix-toast'), { waitUntil: 'networkidle' });
+    await page.goto(urlFor('pix-toast'), { waitUntil: 'load' });
     const stack = page.locator('pix-toast-stack').first();
     await stack.evaluate((el) => {
       // @ts-ignore -- custom element method
@@ -112,7 +112,7 @@ test.describe('Component interactions', () => {
   });
 
   test('splitter responds to keyboard arrow on the handle', async ({ page }) => {
-    await page.goto(urlFor('pix-splitter'), { waitUntil: 'networkidle' });
+    await page.goto(urlFor('pix-splitter'), { waitUntil: 'load' });
     const handle = page.locator('[data-part="handle"]').first();
     if (await handle.count()) {
       await handle.focus();
@@ -123,7 +123,7 @@ test.describe('Component interactions', () => {
   });
 
   test('sortable moves focus with arrow keys', async ({ page }) => {
-    await page.goto(urlFor('pix-sortable'), { waitUntil: 'networkidle' });
+    await page.goto(urlFor('pix-sortable'), { waitUntil: 'load' });
     const item = page.locator('[data-sortable-item]').first();
     if (await item.count()) {
       await item.focus();
@@ -134,7 +134,7 @@ test.describe('Component interactions', () => {
   test('corner preset previews keep fixed shapes while switching presets', async ({ page }) => {
     // The Corners chooser is the only UI that must NOT follow the selected
     // border-radius preset: its previews and cards stay constant.
-    await page.goto(urlFor('pix-a11y'), { waitUntil: 'networkidle' });
+    await page.goto(urlFor('pix-a11y'), { waitUntil: 'load' });
     const toggle = page.locator('[data-preferences-toggle]').first();
     if (await toggle.count()) {
       await toggle.click();
