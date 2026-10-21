@@ -48,7 +48,7 @@ jobs:
           package-manager-cache: false
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile --ignore-scripts
+        run: pnpm install --frozen-lockfile
 
       # Extract package directory from tag: @pix-galaxy/pix-command@0.2.0 → packages/pix-command
       - name: Extract package
@@ -101,7 +101,7 @@ jobs:
           package-manager-cache: false
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile --ignore-scripts
+        run: pnpm install --frozen-lockfile
 
       # Extract package directory from tag
       - name: Extract package
