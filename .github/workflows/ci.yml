@@ -90,3 +90,13 @@ jobs:
 
       - name: Run e2e tests
         run: pnpm exec playwright test
+
+      - name: Upload Playwright artifacts
+        if: failure()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: playwright-results
+          path: |
+            test-results/
+            e2e/visual.spec.mjs-snapshots/
+          if-no-files-found: ignore

@@ -48,7 +48,7 @@ test.beforeAll(async () => {
  * @param {string} url
  */
 async function auditPage(page, url) {
-  await page.goto(url, { waitUntil: 'networkidle' });
+  await page.goto(url, { waitUntil: 'load' });
 
   const results = await new AxeBuilder({ page })
     .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa'])
