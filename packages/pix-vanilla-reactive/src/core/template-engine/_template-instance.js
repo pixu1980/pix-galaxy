@@ -322,7 +322,7 @@ export class TemplateInstance {
     this.fragment = record.template.content.cloneNode(true);
     /** @type {Map<number, import('./_part.js').Part | EventPart>} */
     this.parts = new Map();
-    /** @type {Array<{ index: number, exprPart: ExprPart | AttributePart | EventPart, parsedExpr: import('./_expression-parser.js').ParsedExpression, isAttr: boolean, partType: string }>} */
+    /** @type {Array<{ index: number, exprPart: ExprPart | AttributePart | PropertyPart | EventPart, parsedExpr: import('./_expression-parser.js').ParsedExpression, isAttr: boolean, partType: string }>} */
     this.exprParts = [];
     /** @type {ForPart[]} */
     this.forParts = [];
@@ -376,16 +376,22 @@ export class TemplateInstance {
         case 'attrExpr': {
           const element = /** @type {Element} */ (/** @type {unknown} */ (node));
           element.removeAttribute(descriptor.rawName ?? descriptor.name ?? '');
-          const isEvent = descriptor.partType === 'event';
-          const exprPart = isEvent
-            ? new EventPart(element, descriptor.name ?? '')
-            : new AttributePart(element, descriptor.name ?? '');
+          const partType = descriptor.partType || 'attribute';
+          /** @type {AttributePart | PropertyPart | EventPart} */
+          let exprPart;
+          if (partType === 'event') {
+            exprPart = new EventPart(element, descriptor.name ?? '');
+          } else if (partType === 'property') {
+            exprPart = new PropertyPart(element, descriptor.name ?? '');
+          } else {
+            exprPart = new AttributePart(element, descriptor.name ?? '');
+          }
           this.exprParts.push({
             index: descriptor.index,
             exprPart,
             parsedExpr: descriptor.parsedExpr || parseExpression(''),
             isAttr: true,
-            partType: isEvent ? 'event' : 'attribute',
+            partType,
           });
           break;
         }
@@ -440,8 +446,10 @@ export class TemplateInstance {
         const value = evaluateExpression(parsedExpr, context);
         if (partType === 'event') {
           /** @type {EventPart} */ (exprPart).setValue(value);
+        } else if (partType === 'property') {
+          /** @type {PropertyPart} */ (exprPart).setValue(value);
         } else {
-          /** @type {AttributePart} */ (exprPart).commit(value);
+          /** @type {AttributePart} */ (exprPart).setValue(value);
         }
       } else {
         exprPart.setValue(parsedExpr, context);

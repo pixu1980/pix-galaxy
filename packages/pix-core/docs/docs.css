@@ -1,10 +1,12 @@
 /* pix-galaxy - shared docs site styles (minimal)
  *
- * Structural CSS is imported from pix-foundations only for docs pages.
- * This file contains nav panel overrides for the shared template.
+ * Structural layout lives in @pix-galaxy/pix-foundations/docs-site.css and
+ * must be imported from Vite-processed entry CSS (portal + package docs).
+ * Do not @import it here: this file is also loaded via ?raw +
+ * CSSStyleSheet.replaceSync(), which rejects @import rules.
+ *
+ * This file only holds nav/content panel overrides for the shared template.
  */
-
-@import '../../pix-foundations/lib/_docs-site.css' layer(pix.foundations.docs);
 
 /* ── Nav panel background ──────────────────────────────────────── */
 

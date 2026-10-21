@@ -10,6 +10,8 @@
     "./foundations": "./lib/foundations.css",
     "./foundations.css": "./lib/foundations.css",
     "./lib/foundations.css": "./lib/foundations.css",
+    "./docs-site": "./lib/_docs-site.css",
+    "./docs-site.css": "./lib/_docs-site.css",
     "./ds-tokens": "./src/shared/_ds-tokens.css",
     "./ds-tokens.css": "./src/shared/_ds-tokens.css"
   },

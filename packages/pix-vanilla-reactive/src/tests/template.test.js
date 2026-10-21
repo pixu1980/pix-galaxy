@@ -87,6 +87,11 @@ describe('render + ${} slots', () => {
     assert.equal(container.querySelector('input').value, 'typed');
   });
 
+  it('sets DOM properties with .prop="{{ value }}" from the template context', () => {
+    const container = withContext({ value: 'from-ctx' })`<input .value="{{ value }}" />`;
+    assert.equal(container.querySelector('input').value, 'from-ctx');
+  });
+
   it('sets attributes and removes them on falsy values', () => {
     const container = mount`<div class=${'box'} data-x=${false}>x</div>`;
     assert.equal(container.querySelector('div').getAttribute('class'), 'box');

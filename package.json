@@ -22,7 +22,7 @@
     "build": "pnpm build:lib && pnpm build:portal && pnpm -r --if-present run build",
     "build:lib": "pnpm -r --if-present run build:lib",
     "build:portal": "node scripts/fetch-downloads.mjs && vite build --config ./vite.config.mjs",
-    "build:site": "pnpm build:portal && pnpm -r --if-present run build:site",
+    "build:site": "pnpm build:lib && pnpm build:portal && pnpm -r --if-present run build:site",
     "build:types": "pnpm -r --if-present run build:types",
     "clean": "pnpm -r --if-present run clean",
     "dev": "pnpm build:lib && node scripts/dev.mjs --config ./vite.config.mjs --name portal",
