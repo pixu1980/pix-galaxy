@@ -36,16 +36,20 @@ jobs:
           version: 11.20.0
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile --ignore-scripts
+        # Do not use --ignore-scripts: esbuild's postinstall provides the native binary
+        # required by build:lib (and by packages that import sibling artifact/ exports).
+        run: pnpm install --frozen-lockfile
+
+      - name: Build all packages
+        # artifact/ is gitignored; tests and typecheck resolve package exports to it
+        # (e.g. pix-a11y → pix-accent-color-selector/artifact/index.js).
+        run: pnpm -r --if-present run build:lib
 
       - name: Run tests
         run: pnpm -r --if-present run test
 
       - name: Run typecheck
         run: pnpm -r --if-present run typecheck
-
-      - name: Build all packages
-        run: pnpm -r --if-present run build:lib
 
       - name: Lint
         run: pnpm -r --if-present run lint
@@ -76,7 +80,10 @@ jobs:
           version: 11.20.0
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile --ignore-scripts
+        run: pnpm install --frozen-lockfile
+
+      - name: Build all packages
+        run: pnpm -r --if-present run build:lib
 
       - name: Install Playwright browsers
         run: pnpm exec playwright install --with-deps chromium

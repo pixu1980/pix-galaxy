@@ -19,4 +19,8 @@ jobs:
       - name: Run zizmor
         uses: zizmorcore/zizmor-action@3dc1ecc9bcb9e94e9b2c709687979e1298497054 # v0.6.2
         with:
+          # Root monorepo workflows only. Per-package `.github/workflows` under
+          # packages/* are scaffold leftovers (unpinned tags) and are not CI entrypoints.
+          inputs: .github/workflows
+          collect: workflows
           advanced-security: false
