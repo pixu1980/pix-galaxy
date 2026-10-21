@@ -97,8 +97,8 @@ class PixColorSchemeSelector extends ComponentBase {
         data-color-scheme-toggle
         role="switch"
         aria-checked="false"
-        aria-label="Toggle dark mode"
-        title="Switch between light and dark"
+        aria-label="Dark mode"
+        title="Toggle between light and dark mode"
       >
         <span data-color-scheme-icon-current data-icon="sun" data-visible="false">${sunIconSVG}</span>
         <span data-color-scheme-icon-current data-icon="moon" data-visible="false">${moonIconSVG}</span>

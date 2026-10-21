@@ -490,7 +490,10 @@ class PixHighlighter extends PreComponentBase {
 
     const themeTrigger = document.createElement('summary');
     themeTrigger.dataset.themeTrigger = '';
-    themeTrigger.setAttribute('aria-label', 'Syntax highlight theme');
+    themeTrigger.setAttribute(
+      'aria-label',
+      `Syntax highlight theme: ${getThemeLabel(PixHighlighter.getCurrentTheme())}`
+    );
 
     const triggerLabel = document.createElement('span');
     triggerLabel.dataset.themeValue = '';
@@ -956,8 +959,12 @@ class PixHighlighter extends PreComponentBase {
   }
 
   _syncThemeControl(theme = PixHighlighter.getCurrentTheme()) {
+    const themeLabel = getThemeLabel(theme);
     if (this._themeTriggerLabel) {
-      this._themeTriggerLabel.textContent = getThemeLabel(theme);
+      this._themeTriggerLabel.textContent = themeLabel;
+    }
+    if (this._themeTrigger) {
+      this._themeTrigger.setAttribute('aria-label', `Syntax highlight theme: ${themeLabel}`);
     }
 
     this._themeOptionButtons.forEach((button) => {

@@ -128,7 +128,7 @@ describe('PixA11y - rendering & structure', () => {
     const element = mountPreferences();
     const toggle = element.querySelector('[data-preferences-toggle]');
     assert.ok(toggle);
-    assert.equal(toggle.getAttribute('aria-label'), 'Open display preferences');
+    assert.equal(toggle.getAttribute('aria-label'), 'A11y display preferences');
     assert.equal(toggle.getAttribute('aria-haspopup'), 'dialog');
     assert.equal(toggle.getAttribute('aria-expanded'), 'false');
   });
