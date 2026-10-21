@@ -7,27 +7,25 @@
   "pix component structure": {
     "prefix": "pix-component",
     "body": [
-      "import { vrComponent, html } from '../core/index.js';",
+      "import { html, render } from '@pix-galaxy/pix-vanilla-reactive';",
       "",
       "export class ${1:MyComponent} extends HTMLElement {",
-      "  static { vrComponent(this, { tag: '${2:my-component}', css: import.meta.url }); }",
+      "  static { customElements.define('${2:my-component}', this); }",
       "",
-      "  ${3:/* @click handlers */}",
-      "",
-      "  context() {",
-      "    return { ${4:data} };",
+      "  connectedCallback() {",
+      "    render(this.render(), this);",
       "  }",
       "",
-      "  render(ctx) {",
+      "  render() {",
       "    return html`",
-      "      <section data-part=\"${5:root}\">",
+      "      <section data-part=\"${3:root}\">",
       "        $0",
       "      </section>",
       "    `;",
       "  }",
       "}"
     ],
-    "description": "pix component with vrComponent"
+    "description": "pix component with native registration and rendering"
   },
   "pix functional component": {
     "prefix": "pix-fn",

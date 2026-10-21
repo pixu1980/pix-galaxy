@@ -1,8 +1,10 @@
 /* pix-galaxy - shared docs site styles (minimal)
  *
- * Structural CSS is in @pix-galaxy/pix-foundations/foundations.css.
+ * Structural CSS is imported from pix-foundations only for docs pages.
  * This file contains nav panel overrides for the shared template.
  */
+
+@import '../../pix-foundations/lib/_docs-site.css' layer(pix.foundations.docs);
 
 /* ── Nav panel background ──────────────────────────────────────── */
 

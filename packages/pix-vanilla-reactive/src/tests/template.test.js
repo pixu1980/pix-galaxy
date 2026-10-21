@@ -73,6 +73,15 @@ describe('render + ${} slots', () => {
     assert.equal(clicks, 1);
   });
 
+  it('binds events with @click="{{ handler }}" from the template context', () => {
+    let clicks = 0;
+    const container = withContext({
+      handler: () => clicks++,
+    })`<button @click="{{ handler }}">go</button>`;
+    container.querySelector('button').click();
+    assert.equal(clicks, 1);
+  });
+
   it('sets DOM properties with .prop=${value}', () => {
     const container = mount`<input .value=${'typed'} />`;
     assert.equal(container.querySelector('input').value, 'typed');
