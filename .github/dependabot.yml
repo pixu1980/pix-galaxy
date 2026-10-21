@@ -1,3 +1,9 @@
+# Dependabot config for pix-galaxy.
+#
+# Note: `package-ecosystem: npm` is correct for this pnpm monorepo.
+# Dependabot has no separate "pnpm" ecosystem key — npm covers npm, yarn, and
+# pnpm. PR titles may still say "npm_and_yarn"; that is Dependabot branding,
+# not evidence of an npm/yarn lockfile. This repo ships only `pnpm-lock.yaml`.
 version: 2
 updates:
   - package-ecosystem: npm
@@ -5,9 +11,23 @@ updates:
     schedule:
       interval: weekly
     open-pull-requests-limit: 5
+    # Nested manifests Dependabot must never touch:
+    # - old-reference: archived Vitest tree, not a workspace package
+    # - pix-component-template: scaffold placeholders ({%...%}), not runnable
+    exclude-paths:
+      - packages/pix-vanilla-reactive/old-reference/**
+      - packages/pix-component-template/**
+    groups:
+      pnpm:
+        patterns:
+          - '*'
 
   - package-ecosystem: github-actions
     directory: /
     schedule:
       interval: weekly
     open-pull-requests-limit: 5
+    groups:
+      github-actions:
+        patterns:
+          - '*'
