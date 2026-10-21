@@ -33,5 +33,6 @@ test('defines the shared token groups and consumes them in component and docs st
   assert.ok(!palettes.includes('light-dark('));
   // Docs site consumes foundations (structural CSS + tokens from there).
   assert.ok(siteCss.includes("@import '@pix-galaxy/pix-foundations/foundations.css';"));
+  assert.ok(siteCss.includes("@import '@pix-galaxy/pix-foundations/docs-site.css';"));
   assert.ok(siteCss.includes("@import '@pix-galaxy/pix-foundations/ds-tokens.css';"));
 });

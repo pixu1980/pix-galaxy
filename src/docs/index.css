@@ -2,9 +2,10 @@
  * FILE: index.css
  * USAGE: Stylesheet for src/docs/index.css (portal).
  * SCOPE: Portal-specific accent overrides only. All structural CSS
- *        is consumed from @pix-galaxy/pix-foundations/foundations.css.
+ *        comes from foundations + docs-site.css.
  */
 @import '@pix-galaxy/pix-foundations/foundations.css';
+@import '@pix-galaxy/pix-foundations/docs-site.css';
 @import '@pix-galaxy/pix-foundations/ds-tokens.css';
 
 /* ─── Portal-specific: section accent colours ──────────────────── */
