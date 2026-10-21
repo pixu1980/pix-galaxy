@@ -12,3 +12,6 @@ pnpm-lock.yaml
 packages/pix-component-template/src/components/ComponentName/_ComponentName.js
 packages/pix-component-template/src/index.types.js
 packages/pix-component-template/src/tests/components.test.js
+
+# Frozen reference copy of an earlier implementation, kept as it was written.
+packages/pix-vanilla-reactive/old-reference/
