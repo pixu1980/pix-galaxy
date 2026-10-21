@@ -36,8 +36,8 @@ pnpm release      # local release (commit-and-tag-version)
 
 ## Branch strategy
 
-- `develop` is the trunk - all work lands here.
-- `main` receives merges only for releases.
+- `main` is the only long-lived branch and the trunk (ADR-030; ADR-022 superseded).
+- Feature/fix branches and PRs target `main`.
 - Releases are tagged per-package (`@pix-galaxy/<pkg>@<version>`) and published from local (`pnpm release`), no CI publish.
 
 ## Release readiness

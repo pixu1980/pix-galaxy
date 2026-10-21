@@ -2,18 +2,15 @@
 
 Thanks for considering a contribution! pix-galaxy is a monorepo of
 zero-runtime-dependency vanilla JS Web Components. This guide describes the
-contribution flow, commands, and review expectations (ADR-022, ADR-026).
+contribution flow, commands, and review expectations (ADR-030, ADR-026).
 
 > Please read [CODE_OF_CONDUCT.md](./CODE_OF_CONDUCT.md) and
 > [GOVERNANCE.md](./GOVERNANCE.md) before contributing.
 
 ## Branch strategy
 
-- **`develop`** is the trunk. All work lands here.
-- **`main`** receives merges only for releases (per-package tags).
-
-Open feature/fix branches from `develop` and target `develop` in the pull
-request.
+- **`main`** is the only long-lived branch and the trunk (ADR-030).
+- Feature/fix branches and pull requests target `main`.
 
 ## Local setup
 
@@ -63,9 +60,9 @@ pnpm --filter @pix-galaxy/pix-color run typecheck
 
 1. **File an issue first** for anything bigger than a one-line fix. This keeps
    design work visible and avoids duplicated effort.
-2. Create a branch from `develop`:
+2. Create a branch from `main`:
    ```sh
-   git checkout develop && git pull
+   git checkout main && git pull
    git checkout -b feat/pix-color-oklch-export
    ```
 3. Keep changes **focused** — no unrelated refactors in the same PR.
@@ -77,7 +74,7 @@ pnpm --filter @pix-galaxy/pix-color run typecheck
    pnpm test
    pnpm --filter @pix-galaxy/<name> run build:lib
    ```
-6. Open a pull request **against `develop`** and fill the template.
+6. Open a pull request **against `main`** and fill the template.
 
 ## Commit style
 
@@ -113,7 +110,7 @@ pnpm release          # local release: bump + CHANGELOG + tag + npm publish
 ```
 
 Releases are **local** (ADR-018): no CI publish, no `NPM_TOKEN`. The script
-pushes `--follow-tags` to `develop`; tags trigger a quality gate
+pushes `--follow-tags` to `main`; tags trigger a quality gate
 (`.github/workflows/release.yml`). Read [RELEASE.md](./RELEASE.md) for details.
 
 ## Governance decisions
