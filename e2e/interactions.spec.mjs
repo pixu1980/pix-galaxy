@@ -80,11 +80,17 @@ test.describe('Component interactions', () => {
 
   test('accent color selector sets a root CSS variable', async ({ page }) => {
     await page.goto(urlFor('pix-accent-color-selector'), { waitUntil: 'load' });
-    const swatch = page.locator('[data-accent-button][data-accent="mint"]').first();
+    // Prefer the live-demo host: the docs chrome also embeds accent inside a
+    // closed <pix-a11y> popover, and that first match is not visible.
+    const swatch = page.locator(
+      '[data-part="live-slot"] [data-accent-button][data-accent="mint"]'
+    );
     await swatch.waitFor({ state: 'visible', timeout: 8000 });
     await swatch.click();
     await expect
-      .poll(() => page.evaluate(() => document.documentElement.style.getPropertyValue('--pix-accent-h')))
+      .poll(() =>
+        page.evaluate(() => document.documentElement.style.getPropertyValue('--pix-accent-h'))
+      )
       .toBeTruthy();
   });
 
@@ -135,15 +141,20 @@ test.describe('Component interactions', () => {
     // The Corners chooser is the only UI that must NOT follow the selected
     // border-radius preset: its previews and cards stay constant.
     await page.goto(urlFor('pix-a11y'), { waitUntil: 'load' });
-    const toggle = page.locator('[data-preferences-toggle]').first();
-    if (await toggle.count()) {
-      await toggle.click();
-      await page.waitForTimeout(200);
-    }
+    const host = page.locator('[data-part="live-slot"] pix-a11y').first();
+    await host.waitFor({ timeout: 8000 });
+    await host.locator('[data-preferences-toggle]').click();
+    const panel = page.locator('[data-preferences-panel]:popover-open').first();
+    await expect(panel).toBeVisible({ timeout: 5000 });
+    await expect(panel.locator('[data-radius-preview="rounded"] span').first()).toBeVisible();
 
     const shapes = () =>
       page.evaluate(() => {
-        const r = (sel) => getComputedStyle(document.querySelector(sel)).borderRadius;
+        const open = document.querySelector('[data-preferences-panel]:popover-open');
+        const r = (sel) => {
+          const el = open?.querySelector(sel);
+          return el ? getComputedStyle(el).borderRadius : '';
+        };
         return {
           rounded: r('[data-radius-preview="rounded"] span'),
           squircle: r('[data-radius-preview="squircle"] span'),
@@ -157,12 +168,10 @@ test.describe('Component interactions', () => {
     );
 
     for (const preset of ['square', 'squircle', 'rounded']) {
-      const label = page
-        .locator(`label[data-preferences-choice]:has(input[value="${preset}"])`)
-        .first();
-      if (await label.count()) {
-        await label.click({ force: true });
-      }
+      const label = panel.locator(
+        `label[data-preferences-choice]:has(input[value="${preset}"])`
+      );
+      await label.click();
       const after = await shapes();
       expect(after.rounded).toBe(baseline.rounded);
       expect(after.squircle).toBe(baseline.squircle);
